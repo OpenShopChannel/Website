@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open Shop Channel - Publish</title>
+    {% include 'includes/header.html' %}
+  </head>
+  <body>
+  {% include 'includes/navigation.html' %}
+  {% include 'includes/alert.html' %}
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Publish Application
+      </h1>
+        <figure class="image is-3by1">
+            <picture>
+                <source srcset="/static/images/spotportaldark.png" media="(prefers-color-scheme: dark)">
+                <img src="/static/images/spotportallight.png">
+            </picture>
+
+</figure>
+
+      <form class="form-horizontal" action="https://send.pageclip.co/sWtBUu4SZLJoQxKnGucABeTxT4LGDqxh/PublishPend" method="post">
+<fieldset>
+
+
+
+<!-- Text input-->
+<div class="field">
+  <label class="label" for="email">Email Address</label>
+  <div class="control">
+    <input id="email" name="email" type="text" placeholder="developer@oscwii.org" class="input " required="">
+    <p class="help"> Best way to contact you.</p>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="field">
+  <label class="label" for="appname">Application Name</label>
+  <div class="control">
+    <input id="appname" name="appname" type="text" class="input " required="">
+    <p class="help">Name of your app.</p>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="field">
+  <label class="label" for="authorname">Author Name</label>
+  <div class="control">
+    <input id="authorname" name="authorname" type="text" placeholder="dhtdht020" class="input " required="">
+    <p class="help">Your name or username.</p>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="field">
+  <label class="label" for="reponame">Type</label>
+  <div class="control">
+    <label class="radio" for="reponame-0">
+      <input type="radio" name="reponame" id="reponame-0" value="App" checked="checked" required="required">
+      App
+    </label>
+    <label class="radio" for="reponame-1">
+      <input type="radio" name="reponame" id="reponame-1" value="Theme" required="required">
+      Theme
+    </label>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="field">
+  <label class="label" for="existingselect">If it is an update to an existing listing, select an existing app:</label>
+  <div class="control">
+  	<div class="select">
+	    <select id="existingselect" name="existingselect" class="">
+                <option>It's a new app</option>
+            {% for package in packages %}
+	            <option>{{ package["display_name"] }}</option>
+            {% endfor %}
+	    </select>
+	</div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="field">
+  <label class="label" for="zipurl">URL to application zip</label>
+  <div class="control">
+    <input id="zipurl" name="zipurl" type="text" placeholder="https://example.com/amazingstuff.zip" class="input " required="">
+
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="field">
+  <label class="label" for="moredetails">More Details</label>
+  <div class="control">
+    <textarea class="textarea" id="moredetails" name="moredetails"></textarea>
+  </div>
+</div>
+
+<!-- Submit Button -->
+<div class="field">
+  <div class="control">
+    <button id="singlebutton-0" name="singlebutton-0" type="submit" class="button is-link">Submit app for moderation</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+    </div>
+  </section>
+
+  <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+  </body>
+</html>

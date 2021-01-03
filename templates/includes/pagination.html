@@ -1,0 +1,8 @@
+<nav class="pagination" role="navigation" aria-label="pagination">
+    {% if page == 1 %}
+        <a class="pagination-previous" disabled>Previous</a>
+    {% else %}
+        <a class="pagination-previous" title="Page {{ page - 1 }}" href="{{ modify_query(p=page - 1) }}">Previous</a>
+    {% endif %}
+        <a class="pagination-next" title="Page {{ page + 1 }}" href="{{ modify_query(p=page + 1) }}">Next page</a>
+</nav>

@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open Shop Channel - {{ package["display_name"] }}</title>
+    {% include 'includes/header.html' %}
+    <meta property="og:title" content="{{ package["display_name"] }}">
+    <meta property="og:site_name" content="Open Shop Channel">
+    <meta property="og:url" content="oscwii.org">
+    <meta property="og:description" content="{{ package["long_description"] }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ package["icon_url"] }}">
+  </head>
+  <body>
+  {% include 'includes/navigation.html' %}
+  {% include 'includes/alert.html' %}
+  <section class="hero is-dark is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        {{ package["display_name"] }}
+      </h1>
+      <h2 class="subtitle">
+          By: <u><b><a href="/library?coder={{ package["coder"] }}">{{ package["coder"] }}</a></b></u>
+      </h2>
+    </div>
+  </div>
+</section>
+  <section class="section">
+    <div class="container">
+      <div class="tile is-ancestor">
+  <div class="tile is-4 is-vertical is-parent">
+    <div class="tile is-child box" style="max-height: 85px!important;">
+      <img src="{{ package["icon_url"] }}" style="vertical-align: middle" alt="Icon for {{ package["display_name"] }}">
+        <h1 class="title" style="float: right">{{ package["category"].title() }}</h1>
+    </div>
+
+    <div class="tile is-child box">
+      <p class="title">Metadata</p>
+        <p><b>Version:</b> {{ package["version"] }}</p>
+        <p><b>Release Date:</b> {{ package["release_date"] }}</p>
+        <p><b>Developer:</b> {{ package["coder"] }}</p>
+      {% include 'includes/peripherals.html' %}
+
+    </div>
+  </div>
+
+  <div class="tile is-parent">
+    <div class="tile is-child">
+        <p class="title">Description</p>
+        <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
+        <p class="title">Files</p>
+
+
+        <div class="card mb-4">
+  <header class="card-header">
+    <p class="card-header-title">
+        {{ package["display_name"] }} (.ZIP)
+    </p>
+      <span style="float: right" class="card-header-icon">
+          <span class="tag is-dark">Recommended</span>
+      </span>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      The application in the form of a ZIP file, containing the app.
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="{{ package["zip_url"] }}" class="card-footer-item">Download File</a>
+  </footer>
+</div>
+
+
+        <div class="card mb-4">
+  <header class="card-header">
+    <p class="card-header-title">
+        {{ package["display_name"] }} (BOOT.{{ package["package_type"].upper() }})
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      The application {{ package["package_type"].upper() }}.
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="https://hbb1.oscwii.org/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}" class="card-footer-item">Download File</a>
+  </footer>
+</div>
+
+
+              <div class="card mb-4">
+  <header class="card-header">
+    <p class="card-header-title">
+        META.XML for {{ package["display_name"] }}
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      The application meta.xml file, containing information specified by the developer such as version, coder, and description.
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="https://hbb1.oscwii.org/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml" class="card-footer-item">View File</a>
+  </footer>
+</div>
+
+
+    </div>
+  </div>
+</div>
+      </div>
+  </section>
+  </body>
+</html>
+
