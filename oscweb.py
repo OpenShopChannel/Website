@@ -43,6 +43,11 @@ def apps():
 
 @app.route("/library/app/<name>")
 def application(name):
+    # error handling in case the app doesn't exist
+    try:
+        category = OpenShopChannel.package_by_name(name)["category"]
+    except Exception:
+        name = "danbo"
     return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name), packages=OpenShopChannel.get_packages())
 
 
