@@ -26,6 +26,11 @@ def feedback():
     return render_template('pages/feedback.html',)
 
 
+@app.route("/about")
+def about():
+    return render_template('pages/about.html',)
+
+
 @app.route("/library")
 def apps():
     # handle pagination
