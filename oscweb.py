@@ -23,12 +23,17 @@ def publish():
 
 @app.route("/feedback")
 def feedback():
-    return render_template('pages/feedback.html',)
+    return render_template('pages/feedback.html')
 
 
 @app.route("/about")
 def about():
-    return render_template('pages/about.html',)
+    return render_template('pages/about.html')
+
+
+@app.route("/beta")
+def beta():
+    return render_template('pages/beta.html')
 
 
 @app.route("/library")

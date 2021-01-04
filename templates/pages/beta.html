@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open Shop Channel</title>
+    {% include 'includes/header.html' %}
+  </head>
+  <body>
+  {% include 'includes/navigation.html' %}
+  {% include 'includes/alert.html' %}
+  <section class="section">
+    <div class="container">
+
+        {% if request.args.get("redirect") == "betasite" %}
+      <div class="notification is-warning">
+        <h1 class="title">
+        Information:
+      </h1>
+      <p class="subtitle">
+        The site at beta.oscwii.org is no longer available. Welcome to our brand new website!
+      </p>
+      <a class="button is-dark is-large" href="/">
+            Go Home
+          </a>
+      </div>
+        {% endif %}
+      <figure class="image is-3by1">
+            <picture>
+                <img style="border-radius: 4px;" src="/static/images/betabanner.png" alt="Beta Banner">
+            </picture>
+      </figure>
+    </div>
+  </section>
+  {% include 'includes/footer.html' %}
+  </body>
+</html>
