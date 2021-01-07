@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 from werkzeug.urls import url_encode
 import config
 
@@ -57,7 +57,7 @@ def application(name):
     try:
         category = OpenShopChannel.package_by_name(name)["category"]
     except Exception:
-        name = "danbo"
+        abort(404)
     return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name), packages=OpenShopChannel.get_packages())
 
 
@@ -69,6 +69,11 @@ def modify_query(**new_values):
         args[key] = value
 
     return '{}?{}'.format(request.path, url_encode(args))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error/404.html')
 
 
 if __name__ == '__main__':
