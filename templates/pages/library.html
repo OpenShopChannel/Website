@@ -1,67 +1,69 @@
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Open Shop Channel - Library</title>
     {% include 'includes/header.html' %}
-  </head>
-  <body>
-  {% include 'includes/navigation.html' %}
-  {% include 'includes/alert.html' %}
-  <section class="section">
+</head>
+<body>
+{% include 'includes/navigation.html' %}
+{% include 'includes/alert.html' %}
+<section class="section">
     <div class="container">
-      <div class="tile is-ancestor">
-  <div class="tile is-4 is-vertical is-parent">
-    <div class="tile is-child box">
-      <p class="title">Library</p>
+        <div class="tile is-ancestor">
+            <div class="tile is-4 is-vertical is-parent">
+                <div class="tile is-child box">
+                    <p class="title">Library</p>
 
-        <p>Viewing page {{ page }}.</p>
-        {% if request.args.get("coder") %}
-            <b>Developer:</b> <span class="tag is-warning">{{ request.args.get("coder") }}</span>
-        {% endif %}
+                    <p>Viewing page {{ page }}.</p>
+                    {% if request.args.get("coder") %}
+                        <b>Developer:</b> <span class="tag is-warning">{{ request.args.get("coder") }}</span>
+                    {% endif %}
 
+                </div>
+            </div>
+            <div class="tile is-parent">
+                <div class="tile is-child">
+                    <div class="notification is-link">
+                        Want to send apps wirelessly to your Wii right from your computer, and browse homebrew channel
+                        themes as well as secondary repositories? <b>Check out OSCDL <a
+                            href="https://github.com/dhtdht020/osc-dl/releases">right here</a></b>.
+                    </div>
+                    {% include 'includes/pagination.html' %}
+                    {% for package in packages %}
+                        <div class="card mb-4">
+                            <a href="/library/app/{{ package["internal_name"] }}">
+                                <header class="card-header">
+                                    <p class="card-header-title">
+                                        {{ package["display_name"] }}
+                                    </p>
+                                    <span style="float: right" class="card-header-icon">
+                                    {{ package["version"] }}
+                                    </span>
+                                </header>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <figure class="image">
+                                                <img src="{{ package["icon_url"] }}" alt="App Icon">
+                                            </figure>
+                                        </div>
+                                        <div class="media-content">
+                                            <p class="title is-4">{{ package["display_name"] }}</p>
+                                            <p class="subtitle is-6">Made by <b>{{ package["coder"] }}</b></p>
+                                            <p class="subtitle is-6">{{ package["short_description"] }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    {% include 'includes/pagination.html' %}
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="tile is-parent">
-    <div class="tile is-child">
-    <div class="notification is-link">
-        Want to send apps wirelessly to your Wii right from your computer, and browse homebrew channel themes as well as secondary repositories? <b>Check out OSCDL <a href="https://github.com/dhtdht020/osc-dl/releases">right here</a></b>.
-    </div>
-{% include 'includes/pagination.html' %}
-      {% for package in packages %}
-          <div class="card mb-4">
-          <a href="/library/app/{{ package["internal_name"] }}">
-  <header class="card-header">
-    <p class="card-header-title">
-        {{ package["display_name"] }}
-    </p>
-      <span style="float: right" class="card-header-icon">
-          {{ package["version"] }}
-      </span>
-  </header>
-  <div class="card-content">
-      <div class="media">
-      <div class="media-left">
-        <figure class="image">
-          <img src="{{ package["icon_url"] }}" alt="App Icon">
-        </figure>
-      </div>
-      <div class="media-content">
-        <p class="title is-4">{{ package["display_name"] }}</p>
-        <p class="subtitle is-6">Made by <b>{{ package["coder"] }}</b></p>
-        <p class="subtitle is-6">{{ package["short_description"] }}</p>
-      </div>
-    </div>
-  </div>
-              </a>
-</div>
-      {% endfor %}
-{% include 'includes/pagination.html' %}
-    </div>
-  </div>
-</div>
-    </div>
-  </section>
-  {% include 'includes/footer.html' %}
-  </body>
+</section>
+{% include 'includes/footer.html' %}
+</body>
 </html>
