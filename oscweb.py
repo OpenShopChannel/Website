@@ -6,6 +6,7 @@ import osc
 
 OpenShopChannel = osc.API()
 OpenShopChannel.load_packages()
+OpenShopChannel.set_package_of_the_day()
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -13,7 +14,7 @@ app.url_map.strict_slashes = False
 
 @app.route("/")
 def home():
-    return render_template('pages/home.html')
+    return render_template('pages/home.html', package=OpenShopChannel.package_of_the_day)
 
 
 @app.route("/publish")
