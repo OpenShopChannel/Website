@@ -32,6 +32,11 @@ def about():
     return render_template('pages/about.html')
 
 
+@app.route("/donate")
+def donate():
+    return render_template('pages/donate.html')
+
+
 @app.route("/beta")
 def beta():
     # return 404 if not betasite redirect
