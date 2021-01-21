@@ -21,7 +21,7 @@
                 {{ package["display_name"] }}
             </h1>
             <h2 class="subtitle">
-                By: <u><b><a href="/library?coder={{ package["coder"] }}">{{ package["coder"] }}</a></b></u>
+                By: <u><b><a href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
             </h2>
         </div>
     </div>
@@ -79,6 +79,7 @@
                         <div class="divider is-left">More Download Options</div>
                     </div>
 
+                    {% if package["package_type"] != "thm" %}
                     <div class="card mb-4">
                         <header class="card-header">
                             <p class="card-header-title">
@@ -91,10 +92,11 @@
                             </div>
                         </div>
                         <footer class="card-footer">
-                            <a href="https://hbb1.oscwii.org/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
+                            <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
                                class="card-footer-item">Download File</a>
                         </footer>
                     </div>
+                    {% endif %}
 
 
                     <div class="card mb-4">
@@ -110,7 +112,7 @@
                             </div>
                         </div>
                         <footer class="card-footer">
-                            <a href="https://hbb1.oscwii.org/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml"
+                            <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml"
                                class="card-footer-item">View File</a>
                         </footer>
                     </div>

@@ -55,19 +55,29 @@ def apps():
         page = 1
     end_index = page * items_per_page
     start_index = end_index - items_per_page
+    # return themes if themes repo selected
+    if request.args.get("repo") == "themes":
+        themes = OpenShopChannel.get_themes(developer=request.args.get("coder"))
+        return render_template('pages/library.html', packages=themes[start_index:end_index], page=page, type="theme")
+
     packages = OpenShopChannel.get_packages(developer=request.args.get("coder"))
+    return render_template('pages/library.html', packages=packages[start_index:end_index], page=page, type="app")
 
-    return render_template('pages/library.html', packages=packages[start_index:end_index], page=page)
 
-
-@app.route("/library/app/<name>")
-def application(name):
+@app.route("/library/<pkg_type>/<name>")
+def application(name, pkg_type):
     # error handling in case the app doesn't exist
     try:
-        category = OpenShopChannel.package_by_name(name)["category"]
+        if pkg_type == "theme":
+            category = OpenShopChannel.theme_by_name(name)["category"]
+            return render_template('pages/app.html', package=OpenShopChannel.theme_by_name(name),
+                                   packages=OpenShopChannel.get_themes(), repo="themes", host="hbb3.oscwii.org")
+        else:
+            category = OpenShopChannel.package_by_name(name)["category"]
+            return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name),
+                                   packages=OpenShopChannel.get_packages(), repo="apps", host="hbb1.oscwii.org")
     except Exception:
         abort(404)
-    return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name), packages=OpenShopChannel.get_packages())
 
 
 @app.template_global()

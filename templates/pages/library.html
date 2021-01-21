@@ -12,15 +12,49 @@
     <div class="container">
         <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
-                <div class="tile is-child box">
-                    <p class="title">Library</p>
 
-                    <p>Viewing page {{ page }}.</p>
+
+                <nav class="panel">
+                    <p class="panel-heading">
+                        <span class="tag is-dark">Beta</span> Library - Page {{ page }}
+                    </p>
+                    <div class="panel-block">
+                        <p class="control has-icons-left">
+                            <input class="input" type="text" placeholder="Search" disabled>
+                            <span class="icon is-left">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <a class="panel-block {% if request.args.get("repo") != 'themes' %}is-active{% endif %}" href="{{ modify_query(repo="apps") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-server" aria-hidden="true"></i>
+                        </span>
+                        Open Shop Channel
+                    </a>
+                    <a class="panel-block {% if request.args.get("repo") == 'themes' %}is-active{% endif %}" href="{{ modify_query(repo="themes") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-server" aria-hidden="true"></i>
+                        </span>
+                        Homebrew Channel Themes
+                    </a>
                     {% if request.args.get("coder") %}
-                        <b>Developer:</b> <span class="tag is-warning">{{ request.args.get("coder") }}</span>
+                    <label class="panel-block">
+                        <input type="checkbox" disabled checked="checked">
+                        <span class="tag is-warning">Developer: {{ request.args.get("coder") }}</span>
+                    </label>
                     {% endif %}
+                    <div class="panel-block">
+                        <a class="button is-link is-outlined is-fullwidth" href="/library">
+                            Reset all filters
+                        </a>
+                    </div>
+                </nav>
 
+
+                <div class="tile is-child box" style="display: none;">
                 </div>
+
             </div>
             <div class="tile is-parent">
                 <div class="tile is-child">
@@ -32,7 +66,7 @@
                     {% include 'includes/pagination.html' %}
                     {% for package in packages %}
                         <div class="card mb-4">
-                            <a href="/library/app/{{ package["internal_name"] }}">
+                            <a href="/library/{{ type }}/{{ package["internal_name"] }}">
                                 <header class="card-header">
                                     <p class="card-header-title">
                                         {{ package["display_name"] }}

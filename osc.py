@@ -7,11 +7,12 @@ import requests
 
 class API:
     packages = None
+    themes_packages = None
     package_of_the_day = None
 
     def __init__(self):
         scheduler = BackgroundScheduler()
-        # Schedule metadata json for refresh once per 30 minutes
+        # Schedule packages list for refresh once per 30 minutes
         scheduler.add_job(func=self.load_packages, trigger="interval", minutes=30)
         # Schedule app of the day for refresh once per day at 2:00
         scheduler.add_job(func=self.set_package_of_the_day, trigger='cron', hour='2', minute='00')
@@ -19,6 +20,7 @@ class API:
 
     def load_packages(self):
         self.packages = json.loads(requests.get(f"https://api.oscwii.org/v2/primary/packages").text)
+        self.themes_packages = json.loads(requests.get(f"https://api.oscwii.org/v2/themes/packages").text)
 
     def get_packages(self, developer=None):
         if developer:
@@ -30,8 +32,28 @@ class API:
 
         return self.packages
 
+    def get_themes(self, developer=None):
+        if developer:
+            newpackages = []
+            for package in self.themes_packages:
+                if package["coder"] == developer:
+                    newpackages.append(package)
+            return newpackages
+
+        return self.themes_packages
+
     def package_by_name(self, name):
         for package in self.packages:
+            if package["internal_name"] == name:
+                try:
+                    package["release_date"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
+                        '%B %e, %Y at %R')
+                except ValueError:
+                    pass
+                return package
+
+    def theme_by_name(self, name):
+        for package in self.themes_packages:
             if package["internal_name"] == name:
                 try:
                     package["release_date"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
