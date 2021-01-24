@@ -26,23 +26,31 @@
                             </span>
                         </p>
                     </div>
-                    <a class="panel-block {% if request.args.get("repo") != 'themes' %}is-active{% endif %}" href="{{ modify_query(repo="apps") }}">
+                    <a class="panel-block {% if request.args.get("repo") != 'themes' %}is-active{% endif %}"
+                       href="{{ modify_query(repo="apps", p="1") }}">
                         <span class="panel-icon">
                             <i class="fas fa-server" aria-hidden="true"></i>
                         </span>
                         Open Shop Channel
                     </a>
-                    <a class="panel-block {% if request.args.get("repo") == 'themes' %}is-active{% endif %}" href="{{ modify_query(repo="themes") }}">
+                    <a class="panel-block {% if request.args.get("repo") == 'themes' %}is-active{% endif %}"
+                       href="{{ modify_query(repo="themes", p="1") }}">
                         <span class="panel-icon">
                             <i class="fas fa-server" aria-hidden="true"></i>
                         </span>
                         Homebrew Channel Themes
                     </a>
                     {% if request.args.get("coder") %}
-                    <label class="panel-block">
-                        <input type="checkbox" disabled checked="checked">
-                        <span class="tag is-warning">Developer: {{ request.args.get("coder") }}</span>
-                    </label>
+                        <div class="panel-block">
+                            <span class="panel-icon">
+                                <i class="fas fa-filter" aria-hidden="true"></i>
+                            </span>
+                            Filters:&nbsp
+                            <div class="tags has-addons">
+                                <span class="tag is-warning">Developer: {{ request.args.get("coder") }}</span>
+                                <a class="tag is-delete" href="{{ modify_query(coder="") }}"></a>
+                            </div>
+                        </div>
                     {% endif %}
                     <div class="panel-block">
                         <a class="button is-link is-outlined is-fullwidth" href="/library">
