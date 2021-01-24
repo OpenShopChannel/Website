@@ -4,5 +4,9 @@
     {% else %}
         <a class="pagination-previous" title="Page {{ page - 1 }}" href="{{ modify_query(p=page - 1) }}">Previous</a>
     {% endif %}
-    <a class="pagination-next" title="Page {{ page + 1 }}" href="{{ modify_query(p=page + 1) }}">Next page</a>
+    {% if packages|length == 10 %}
+        <a class="pagination-next" title="Page {{ page + 1 }}" href="{{ modify_query(p=page + 1) }}">Next page</a>
+    {% else %}
+        <a class="pagination-next" disabled>Next page</a>
+    {% endif %}
 </nav>
