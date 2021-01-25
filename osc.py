@@ -5,6 +5,24 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import requests
 
 
+def filter_packages(packages, developer=None, category=None):
+    newpackages = []
+    for package in packages:
+        if developer:
+            if package["coder"] == developer:
+                newpackages.append(package)
+                if category:
+                    if package["category"] == category:
+                        newpackages.append(package)
+                return newpackages
+        elif category:
+            if package["category"] == category:
+                newpackages.append(package)
+        else:
+            newpackages.append(package)
+
+    return newpackages
+
 class API:
     packages = None
     themes_packages = None
@@ -22,25 +40,11 @@ class API:
         self.packages = json.loads(requests.get(f"https://api.oscwii.org/v2/primary/packages").text)
         self.themes_packages = json.loads(requests.get(f"https://api.oscwii.org/v2/themes/packages").text)
 
-    def get_packages(self, developer=None):
-        if developer:
-            newpackages = []
-            for package in self.packages:
-                if package["coder"] == developer:
-                    newpackages.append(package)
-            return newpackages
+    def get_packages(self, developer=None, category=None):
+        return filter_packages(packages=self.packages, developer=developer, category=category)
 
-        return self.packages
-
-    def get_themes(self, developer=None):
-        if developer:
-            newpackages = []
-            for package in self.themes_packages:
-                if package["coder"] == developer:
-                    newpackages.append(package)
-            return newpackages
-
-        return self.themes_packages
+    def get_themes(self, developer=None, category=None):
+        return filter_packages(packages=self.themes_packages, developer=developer, category=category)
 
     def package_by_name(self, name):
         for package in self.packages:

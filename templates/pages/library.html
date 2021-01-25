@@ -29,20 +29,6 @@
                             </span>
                         </p>
                     </div>
-                    <a class="panel-block {% if request.args.get("repo") != 'themes' %}is-active{% endif %}"
-                       href="{{ modify_query(repo="apps", p="1") }}">
-                        <span class="panel-icon">
-                            <i class="fas fa-server" aria-hidden="true"></i>
-                        </span>
-                        Open Shop Channel
-                    </a>
-                    <a class="panel-block {% if request.args.get("repo") == 'themes' %}is-active{% endif %}"
-                       href="{{ modify_query(repo="themes", p="1") }}">
-                        <span class="panel-icon">
-                            <i class="fas fa-server" aria-hidden="true"></i>
-                        </span>
-                        Homebrew Channel Themes
-                    </a>
                     {% if request.args.get("coder") %}
                         <div class="panel-block">
                             <span class="panel-icon">
@@ -54,6 +40,70 @@
                                 <a class="tag is-delete" href="{{ modify_query(coder="") }}"></a>
                             </div>
                         </div>
+                    {% endif %}
+                    <div class="panel-block">
+                        Repository:
+                    </div>
+                    <a class="panel-block {% if request.args.get("repo") != 'themes' %}is-active{% endif %}"
+                       href="{{ modify_query(repo="apps", p="1") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-server" aria-hidden="true"></i>
+                        </span>
+                        Open Shop Channel
+                    </a>
+                    <a class="panel-block {% if request.args.get("repo") == 'themes' %}is-active{% endif %}"
+                       href="{{ modify_query(repo="themes", p="1", category="") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-server" aria-hidden="true"></i>
+                        </span>
+                        Homebrew Channel Themes
+                    </a>
+                    <div class="panel-block">
+                        Category:
+                    </div>
+                    <a class="panel-block {% if not request.args.get("category") %}is-active{% endif %}"
+                       href="{{ modify_query(category="", p="1") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-list" aria-hidden="true"></i>
+                        </span>
+                        All Apps
+                    </a>
+                    {% if request.args.get("repo") != 'themes' %}
+                        <a class="panel-block {% if request.args.get("category") == 'utilities' %}is-active{% endif %}"
+                           href="{{ modify_query(category="utilities", p="1") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-cog" aria-hidden="true"></i>
+                        </span>
+                            Utilities
+                        </a>
+                        <a class="panel-block {% if request.args.get("category") == 'emulators' %}is-active{% endif %}"
+                           href="{{ modify_query(category="emulators", p="1") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-microchip" aria-hidden="true"></i>
+                        </span>
+                            Emulators
+                        </a>
+                        <a class="panel-block {% if request.args.get("category") == 'games' %}is-active{% endif %}"
+                           href="{{ modify_query(category="games", p="1") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-gamepad" aria-hidden="true"></i>
+                        </span>
+                            Games
+                        </a>
+                        <a class="panel-block {% if request.args.get("category") == 'media' %}is-active{% endif %}"
+                           href="{{ modify_query(category="media", p="1") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-photo-video" aria-hidden="true"></i>
+                        </span>
+                            Media
+                        </a>
+                        <a class="panel-block {% if request.args.get("category") == 'demos' %}is-active{% endif %}"
+                           href="{{ modify_query(category="demos", p="1") }}">
+                        <span class="panel-icon">
+                            <i class="fas fa-vial" aria-hidden="true"></i>
+                        </span>
+                            Demos
+                        </a>
                     {% endif %}
                     <div class="panel-block">
                         <a class="button is-link is-outlined is-fullwidth" href="/library">
@@ -73,6 +123,11 @@
                         Want to send apps wirelessly to your Wii right from your computer, and browse homebrew channel
                         themes as well as secondary repositories? <b>Check out OSCDL <a
                             href="https://github.com/dhtdht020/osc-dl/releases">right here</a></b>.
+                    </div>
+                    <div>
+                        <div class="divider is-left">Viewing results {{ page * 10 - 9 }}-{{ page * 10 }} out
+                            of {{ results }} total results
+                        </div>
                     </div>
                     {% include 'includes/pagination.html' %}
                     {% for package in packages %}

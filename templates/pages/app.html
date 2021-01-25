@@ -31,9 +31,15 @@
         <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
                 <div class="tile is-child box" style="max-height: 85px!important;">
-                    <img src="{{ package["icon_url"] }}" style="vertical-align: middle"
-                         alt="Icon for {{ package["display_name"] }}">
-                    <h1 class="title" style="float: right">{{ package["category"].title() }}</h1>
+                    <div class="columns is-vcentered is-centered">
+                        <div class="column">
+                            <img src="{{ package["icon_url"] }}" style="vertical-align: middle"
+                                 alt="Icon for {{ package["display_name"] }}">
+                        </div>
+                        <div class="column">
+                            <h1 class="title">{{ package["category"].title() }}</h1>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tile is-child box">
@@ -80,22 +86,22 @@
                     </div>
 
                     {% if package["package_type"] != "thm" %}
-                    <div class="card mb-4">
-                        <header class="card-header">
-                            <p class="card-header-title">
-                                {{ package["display_name"] }} (BOOT.{{ package["package_type"].upper() }})
-                            </p>
-                        </header>
-                        <div class="card-content">
-                            <div class="content">
-                                The application {{ package["package_type"].upper() }}.
+                        <div class="card mb-4">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    {{ package["display_name"] }} (BOOT.{{ package["package_type"].upper() }})
+                                </p>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    The application {{ package["package_type"].upper() }}.
+                                </div>
                             </div>
+                            <footer class="card-footer">
+                                <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
+                                   class="card-footer-item">Download File</a>
+                            </footer>
                         </div>
-                        <footer class="card-footer">
-                            <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
-                               class="card-footer-item">Download File</a>
-                        </footer>
-                    </div>
                     {% endif %}
 
 

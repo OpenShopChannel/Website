@@ -57,11 +57,13 @@ def apps():
     start_index = end_index - items_per_page
     # return themes if themes repo selected
     if request.args.get("repo") == "themes":
-        themes = OpenShopChannel.get_themes(developer=request.args.get("coder"))
-        return render_template('pages/library.html', packages=themes[start_index:end_index], page=page, type="theme")
+        themes = OpenShopChannel.get_themes(developer=request.args.get("coder"), category=request.args.get("category"))
+        return render_template('pages/library.html', packages=themes[start_index:end_index], page=page, type="theme",
+                               results=len(themes))
 
-    packages = OpenShopChannel.get_packages(developer=request.args.get("coder"))
-    return render_template('pages/library.html', packages=packages[start_index:end_index], page=page, type="app")
+    packages = OpenShopChannel.get_packages(developer=request.args.get("coder"), category=request.args.get("category"))
+    return render_template('pages/library.html', packages=packages[start_index:end_index], page=page, type="app",
+                           results=len(packages))
 
 
 @app.route("/library/<pkg_type>/<name>")
