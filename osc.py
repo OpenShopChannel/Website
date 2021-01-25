@@ -10,10 +10,11 @@ def filter_packages(packages, developer=None, category=None):
     for package in packages:
         if developer:
             if package["coder"] == developer:
-                newpackages.append(package)
                 if category:
                     if package["category"] == category:
                         newpackages.append(package)
+                        return newpackages
+                newpackages.append(package)
                 return newpackages
         elif category:
             if package["category"] == category:
