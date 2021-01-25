@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Library - Open Shop Channel</title>
     {% include 'includes/header.html' %}
+    {% if ( (request.args.get("p")) or (request.args.get("coder")) ) %}
+        <meta name="robots" content="noindex">
+    {% endif %}
 </head>
 <body>
 {% include 'includes/navigation.html' %}
