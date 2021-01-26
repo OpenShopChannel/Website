@@ -3,26 +3,24 @@ import random
 from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 import requests
+import operator
+from functools import reduce
 
 
-def filter_packages(packages, developer=None, category=None):
-    newpackages = []
+def build_dictionary_filter_from_kwargs(**filter_kwargs):
+    def _filter_fun(field, value):
+        return lambda d: d[field] == value
+    return [_filter_fun(k, v) for k, v in filter_kwargs.items() if v]
+
+
+def filter_packages(packages, **filter_kwargs):
+    new_packages = []
+    filters = build_dictionary_filter_from_kwargs(**filter_kwargs)
     for package in packages:
-        if developer:
-            if package["coder"] == developer:
-                if category:
-                    if package["category"] == category:
-                        newpackages.append(package)
-                        return newpackages
-                newpackages.append(package)
-                return newpackages
-        elif category:
-            if package["category"] == category:
-                newpackages.append(package)
-        else:
-            newpackages.append(package)
+        if len(filters) == 0 or reduce(operator.and_, [filter_(package) for filter_ in filters]):
+            new_packages.append(package)
+    return new_packages
 
-    return newpackages
 
 class API:
     packages = None
@@ -42,10 +40,12 @@ class API:
         self.themes_packages = json.loads(requests.get(f"https://api.oscwii.org/v2/themes/packages").text)
 
     def get_packages(self, developer=None, category=None):
-        return filter_packages(packages=self.packages, developer=developer, category=category)
+        filtered = filter_packages(self.packages, coder=developer, category=category)
+        return filtered
 
     def get_themes(self, developer=None, category=None):
-        return filter_packages(packages=self.themes_packages, developer=developer, category=category)
+        filtered = filter_packages(self.themes_packages, coder=developer, category=category)
+        return filtered
 
     def package_by_name(self, name):
         for package in self.packages:
