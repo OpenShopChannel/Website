@@ -1,12 +1,17 @@
-<nav class="pagination" role="navigation" aria-label="pagination">
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
     {% if page <= 1 %}
-        <a class="pagination-previous" disabled>Previous</a>
+        <a class="pagination-previous" disabled><i class="fas fa-arrow-left fa-fw" aria-hidden="true"></i>Previous</a>
     {% else %}
-        <a class="pagination-previous" title="Page {{ page - 1 }}" href="{{ modify_query(p=page - 1) }}">Previous</a>
+        <a class="pagination-previous" title="Page {{ page - 1 }}" href="{{ modify_query(p=page - 1) }}"><i
+                class="fas fa-arrow-left fa-fw" aria-hidden="true"></i>Previous</a>
     {% endif %}
     {% if packages|length == 10 %}
-        <a class="pagination-next" title="Page {{ page + 1 }}" href="{{ modify_query(p=page + 1) }}">Next page</a>
+        <a class="pagination-next" title="Page {{ page + 1 }}" href="{{ modify_query(p=page + 1) }}">Next page<i
+                class="fas fa-arrow-right fa-fw" aria-hidden="true"></i></a>
     {% else %}
-        <a class="pagination-next" disabled>Next page</a>
+        <a class="pagination-next" disabled>Next page<i class="fas fa-arrow-right fa-fw" aria-hidden="true"></i></a>
     {% endif %}
+    <ul class="pagination-list">
+        <li><span>Page {{ page }}</span></li>
+    </ul>
 </nav>

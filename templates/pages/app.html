@@ -18,10 +18,10 @@
     <div class="hero-body">
         <div class="container">
             <h1 class="title">
-                {{ package["display_name"] }}
+                {% include "includes/categoryicon.html" %}{{ package["display_name"] }}
             </h1>
             <h2 class="subtitle">
-                By: <u><b><a href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
+                Author: <u><b><a href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
             </h2>
         </div>
     </div>
@@ -37,7 +37,7 @@
                                  alt="Icon for {{ package["display_name"] }}">
                         </div>
                         <div class="column">
-                            <h1 class="title">{{ package["category"].title() }}</h1>
+                            <b class="subtitle">{% include "includes/categoryicon.html" %}{{ package["category"].title() }}</b>
                         </div>
                     </div>
                 </div>

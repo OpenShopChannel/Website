@@ -19,7 +19,7 @@
 
                 <nav class="panel">
                     <p class="panel-heading">
-                        <span class="tag is-dark">Beta</span> Library - Page {{ page }}
+                        <span class="tag is-dark">Beta</span> Online Library
                     </p>
                     <div class="panel-block">
                         <p class="control has-icons-left">
@@ -45,7 +45,7 @@
                         Repository:
                     </div>
                     <a class="panel-block {% if request.args.get("repo") != 'themes' %}is-active{% endif %}"
-                       href="{{ modify_query(repo="apps", p="1") }}">
+                       href="{{ modify_query(repo="apps", p="1", category="") }}">
                         <span class="panel-icon">
                             <i class="fas fa-server" aria-hidden="true"></i>
                         </span>
@@ -135,7 +135,7 @@
                             <a href="/library/{{ type }}/{{ package["internal_name"] }}">
                                 <header class="card-header">
                                     <p class="card-header-title">
-                                        {{ package["display_name"] }}
+                                        {% include "includes/categoryicon.html" %} {{ package["display_name"] }}
                                     </p>
                                     <span style="float: right" class="card-header-icon">
                                     {{ package["version"] }}

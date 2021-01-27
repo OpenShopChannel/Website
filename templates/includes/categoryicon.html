@@ -1,0 +1,11 @@
+{% if package["category"] == "utilities" %}
+<i class="fas fa-cog fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+{% elif package["category"] == "emulators" %}
+<i class="fas fa-microchip fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+{% elif package["category"] == "games" %}
+<i class="fas fa-gamepad fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+{% elif package["category"] == "media" %}
+<i class="fas fa-photo-video fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+{% elif package["category"] == "demos" %}
+<i class="fas fa-vial fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+{% endif %}

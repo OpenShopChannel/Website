@@ -14,10 +14,10 @@
             <div class="column">
                 <img src="/static/images/RainbowOpenLogo.png" alt="Open Shop Channel Logo" width="448" height="224">
             </div>
-            <div class="column is-one-third is-hidden-mobile">
+            <div class="column is-one-half is-hidden-mobile">
                 <a href="/library/app/{{ package["internal_name"] }}">
                     <div class="card has-ribbon">
-                        <div class="ribbon is-warning">App of the Day</div>
+                        <div class="ribbon is-warning"><i class="fas fa-star" aria-hidden="true" style="margin-right: .75em"></i> App of the Day</div>
                         <div class="card-content" style="margin-top: 15px;">
                             <div class="media">
                                 <div class="media-left">
@@ -27,10 +27,10 @@
                                 </div>
                                 <div class="media-content">
                                     <p class="title is-4">{{ package["display_name"] }}</p>
-                                    <p class="subtitle is-6">Made by <b>{{ package["coder"] | truncate(11) }}</b></p>
+                                    <p class="subtitle is-6">Made by <b>{{ package["coder"] | truncate(25) }}</b></p>
                                 </div>
                             </div>
-                            <p>{{ package["short_description"] }}</p>
+                            <p>{% include "includes/categoryicon.html" %}{{ package["short_description"] }}</p>
                         </div>
                     </div>
                 </a>
