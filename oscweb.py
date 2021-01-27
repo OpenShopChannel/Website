@@ -50,7 +50,13 @@ def apps():
     # handle pagination
     items_per_page = 10
     if request.args.get("p"):
-        page = int(request.args.get("p"))
+        # Set to page one if page is invalid
+        try:
+            page = int(request.args.get("p"))
+        except ValueError:
+            page = 1
+        if page < 1:
+            page = 1
     else:
         page = 1
     end_index = page * items_per_page
