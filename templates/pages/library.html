@@ -13,6 +13,11 @@
 {% include 'includes/alert.html' %}
 <section class="section">
     <div class="container">
+        <div class="notification is-link">
+                        Want to send apps wirelessly to your Wii right from your computer, and browse homebrew channel
+                        themes as well as secondary repositories? <b>Check out OSCDL <a
+                            href="https://github.com/dhtdht020/osc-dl/releases">right here</a></b>.
+                    </div>
         <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
 
@@ -111,21 +116,11 @@
                         </a>
                     </div>
                 </nav>
-
-
-                <div class="tile is-child box" style="display: none;">
-                </div>
-
             </div>
             <div class="tile is-parent">
                 <div class="tile is-child">
-                    <div class="notification is-link">
-                        Want to send apps wirelessly to your Wii right from your computer, and browse homebrew channel
-                        themes as well as secondary repositories? <b>Check out OSCDL <a
-                            href="https://github.com/dhtdht020/osc-dl/releases">right here</a></b>.
-                    </div>
                     <div>
-                        <div class="divider is-left">Viewing results {{ page * 10 - 9 }} - {{ page * 10 }} out
+                        <div class="divider is-left" style="margin-top: unset;">Viewing results {{ page * 10 - 9 }} - {{ page * 10 }} out
                             of {{ results }} total results
                         </div>
                     </div>
