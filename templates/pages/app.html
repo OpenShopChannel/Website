@@ -37,7 +37,8 @@
                                  alt="Icon for {{ package["display_name"] }}">
                         </div>
                         <div class="column">
-                            <b class="subtitle">{% include "includes/categoryicon.html" %}{{ package["category"].title() }}</b>
+                            <b class="subtitle">
+                                {% include "includes/categoryicon.html" %}{{ package["category"].title() }}</b>
                         </div>
                     </div>
                 </div>
@@ -55,7 +56,12 @@
             <div class="tile is-parent">
                 <div class="tile is-child">
                     <p class="title">Description</p>
-                    <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
+                    {% if package["short_description"] == package["long_description"] %}
+                        <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
+                    {% else %}
+                        <b style="margin-bottom: 1.5rem">{{ package["short_description"] }}</b>
+                        <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
+                    {% endif %}
                     <p class="title">Files</p>
 
                     <div>
@@ -65,7 +71,8 @@
                     <div class="card mb-4">
                         <header class="card-header">
                             <p class="card-header-title">
-                                {{ package["display_name"] }} (.ZIP)
+                                <i class="fas fa-file-archive fa-fw" aria-hidden="true"
+                                   style="margin-right: 5px"></i>{{ package["display_name"] }} (.ZIP)
                             </p>
                             <span style="float: right" class="card-header-icon">
           <span class="tag is-success">Recommended</span>
@@ -77,7 +84,10 @@
                             </div>
                         </div>
                         <footer class="card-footer">
-                            <a href="{{ package["zip_url"] }}" class="card-footer-item">Download File</a>
+                            <a href="{{ package["zip_url"] }}" class="card-footer-item"><i class="fas fa-download fa-fw"
+                                                                                           aria-hidden="true"
+                                                                                           style="margin-right: 5px"></i>Download
+                                File</a>
                         </footer>
                     </div>
 
@@ -89,7 +99,9 @@
                         <div class="card mb-4">
                             <header class="card-header">
                                 <p class="card-header-title">
-                                    {{ package["display_name"] }} (BOOT.{{ package["package_type"].upper() }})
+                                    <i class="fas fa-terminal fa-fw" aria-hidden="true"
+                                       style="margin-right: 5px"></i>{{ package["display_name"] }}
+                                    (BOOT.{{ package["package_type"].upper() }})
                                 </p>
                             </header>
                             <div class="card-content">
@@ -99,7 +111,8 @@
                             </div>
                             <footer class="card-footer">
                                 <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
-                                   class="card-footer-item">Download File</a>
+                                   class="card-footer-item"><i class="fas fa-download fa-fw" aria-hidden="true"
+                                                               style="margin-right: 5px"></i>Download File</a>
                             </footer>
                         </div>
                     {% endif %}
@@ -108,18 +121,20 @@
                     <div class="card mb-4">
                         <header class="card-header">
                             <p class="card-header-title">
-                                META.XML for {{ package["display_name"] }}
+                                <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>META.XML
+                                for {{ package["display_name"] }}
                             </p>
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                The application meta.xml file, containing information specified by the developer such as
+                                The original application meta.xml file, containing information specified by the
+                                developer such as
                                 version, coder, and description.
                             </div>
                         </div>
                         <footer class="card-footer">
                             <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml"
-                               class="card-footer-item">View File</a>
+                               class="card-footer-item"></i>View File</a>
                         </footer>
                     </div>
 
