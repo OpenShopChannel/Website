@@ -19,7 +19,8 @@ def home():
 
 @app.route("/publish")
 def publish():
-    return render_template('pages/publish.html', packages=OpenShopChannel.get_packages())
+    return render_template('pages/publish.html', packages=OpenShopChannel.get_packages(),
+                           themes=OpenShopChannel.get_themes())
 
 
 @app.route("/feedback")

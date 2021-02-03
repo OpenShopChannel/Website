@@ -74,14 +74,21 @@
                 <!-- Select Basic -->
                 <div class="field">
                     <label class="label" for="existingselect">If it is an update to an existing listing, select an
-                        existing app:</label>
+                        existing app / theme:</label>
                     <div class="control">
                         <div class="select">
                             <select id="existingselect" name="existingselect" class="">
                                 <option>It's a new app</option>
-                                {% for package in packages %}
-                                    <option>{{ package["display_name"] }}</option>
-                                {% endfor %}
+                                <optgroup label="Apps">
+                                    {% for package in packages %}
+                                        <option>{{ package["display_name"] }} (App)</option>
+                                    {% endfor %}
+                                </optgroup>
+                                <optgroup label="Themes">
+                                    {% for theme in themes %}
+                                        <option>{{ theme["display_name"] }} (Theme)</option>
+                                    {% endfor %}
+                                </optgroup>
                             </select>
                         </div>
                     </div>
