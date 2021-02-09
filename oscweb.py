@@ -33,6 +33,11 @@ def about():
     return render_template('pages/about.html')
 
 
+@app.route("/faq")
+def faq():
+    return render_template('pages/faq.html')
+
+
 @app.route("/donate")
 def donate():
     return render_template('pages/donate.html')
