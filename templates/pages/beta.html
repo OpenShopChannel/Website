@@ -24,6 +24,21 @@
                 </a>
             </div>
         {% endif %}
+        {% if request.args.get("redirect") == "oscdlbrowser" %}
+            <div class="notification is-warning">
+                <h1 class="title">
+                    APRIL FOOLS! =D
+                </h1>
+                <p class="subtitle">
+                    Still looking to beta test for the Open Shop Channel? We have a few upcoming beta tests and while we will open applications for community beta testing, patrons will always be able to access early software!
+                </p>
+                <a class="button is-dark is-small" href="/">
+                    Go Home
+                </a>
+                <center><img src="/static/images/aprilfools21/trollface.png"
+                     alt="Open Shop Channel Downloader Browser Troll Face"></center>
+            </div>
+        {% endif %}
         <figure class="image is-3by1">
             <picture>
                 <img style="border-radius: 4px;" src="/static/images/betabanner.png" alt="Beta Banner">

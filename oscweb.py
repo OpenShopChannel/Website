@@ -43,11 +43,18 @@ def donate():
     return render_template('pages/donate.html')
 
 
+# april fools 2021 route
+@app.route("/browser")
+def aprilfools21():
+    return render_template('pages/aprilfools21.html')
+
+
 @app.route("/beta")
 def beta():
     # return 404 if not betasite redirect
     if request.args.get("redirect") != "betasite":
-        abort(404)
+        if request.args.get("redirect") != "oscdlbrowser":
+            abort(404)
     return render_template('pages/beta.html')
 
 
