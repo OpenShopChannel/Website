@@ -1,0 +1,177 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Metadata XML Generator - Open Shop Channel</title>
+    {% include 'includes/header.html' %}
+</head>
+<body>
+{% include 'includes/navigation.html' %}
+{% include 'includes/alert.html' %}
+<section class="section">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+            <ul>
+                <li>
+                    <a href="/">
+                <span class="icon is-small">
+                  <i class="fas fa-home" aria-hidden="true"></i>
+                </span>
+                        <span>Open Shop Channel</span>
+                    </a>
+                </li>
+                <li class="is-active">
+                    <a href="#">
+                <span class="icon is-small">
+                  <i class="fas fa-tools" aria-hidden="true"></i>
+                </span>
+                        <span>Developer Tools</span>
+                    </a>
+                </li>
+                <li class="is-active">
+                    <a href="">
+                <span class="icon is-small">
+                  <i class="fas fa-file-signature" aria-hidden="true"></i>
+                </span>
+                        <span>Metadata XML Generator</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="columns">
+            <div class="column">
+                <h1 class="title">
+                    Metadata XML Generator
+                </h1>
+                <p class="subtitle">
+                    Quickly generate a meta.xml file for your Homebrew app.
+                </p>
+            </div>
+            <div class="column">
+                <div class="notification is-link is-light">
+                    JavaScript required. The release date defaults to the time of latest form edit, a date picker will
+                    be added in the future.
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <!-- Text input-->
+                        <div class="field">
+                            <label class="label" for="name">App Name</label>
+                            <div class="control">
+                                <input id="name" name="name" type="text" class="input " required="">
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="field">
+                            <label class="label" for="coder">Coder</label>
+                            <div class="control">
+                                <input id="coder" name="coder" type="text" class="input " required="">
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="field">
+                            <label class="label" for="version">Version</label>
+                            <div class="control">
+                                <input id="version" name="version" type="text" class="input " required="">
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="field">
+                            <label class="label" for="shortdescription">Short Description</label>
+                            <div class="control">
+                                <input id="shortdescription" name="shortdescription" type="text" class="input "
+                                       required="">
+                            </div>
+                        </div>
+
+                        <!-- Textarea -->
+                        <div class="field">
+                            <label class="label" for="longdescription">Long Description</label>
+                            <div class="control">
+                                <textarea class="textarea" id="longdescription" name="longdescription"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+            <div class="column">
+                <textarea class="textarea" readonly id="output" rows="25"></textarea>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+</body>
+<script>
+    // I don't know javascript but I figured this would be straightforward
+    // This is an open source website for those getting excited.
+    const nameElement = document.querySelector('#name');
+    const coderElement = document.querySelector('#coder');
+    const versionElement = document.querySelector('#version');
+    const shortdescriptionElement = document.querySelector('#shortdescription');
+    const longdescriptionElement = document.querySelector('#longdescription');
+
+    var name = ""
+    var coder = ""
+    var version = ""
+    var shortdescription = ""
+    var longdescription = ""
+
+    function pad2(n) {
+        return n < 10 ? '0' + n : n
+    }
+
+    function updateOutput() {
+        // get current date
+        var date = new Date();
+        var formatteddate = date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds())
+
+        const result = document.querySelector('#output');
+        result.textContent = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1">
+	<name>${name}</name>
+	<version>${version}</version>
+	<release_date>${formatteddate}</release_date>
+	<coder>${coder}</coder>
+	<short_description>${shortdescription}</short_description>
+	<long_description>${longdescription}
+</long_description>
+<ahb_access/>
+</app>
+`;
+    }
+
+    nameElement.addEventListener('input', (event) => {
+        name = event.target.value
+        updateOutput()
+    });
+
+    coderElement.addEventListener('input', (event) => {
+        coder = event.target.value
+        updateOutput()
+    });
+
+    versionElement.addEventListener('input', (event) => {
+        version = event.target.value
+        updateOutput()
+    });
+
+    shortdescriptionElement.addEventListener('input', (event) => {
+        shortdescription = event.target.value
+        updateOutput()
+    });
+
+    longdescriptionElement.addEventListener('input', (event) => {
+        longdescription = event.target.value
+        updateOutput()
+    });
+</script>
+</html>

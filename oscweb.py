@@ -58,6 +58,11 @@ def beta():
     return render_template('pages/beta.html')
 
 
+@app.route("/tools/metaxml")
+def metagen():
+    return render_template('pages/metagen.html')
+
+
 @app.route("/library")
 def apps():
     # handle pagination
