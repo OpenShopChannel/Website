@@ -49,7 +49,7 @@ class API:
 
     def package_by_name(self, name):
         for package in self.packages:
-            if package["internal_name"] == name:
+            if package["internal_name"].lower() == name.lower():
                 try:
                     package["release_date"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
                         '%B %e, %Y at %R')
@@ -59,7 +59,7 @@ class API:
 
     def theme_by_name(self, name):
         for package in self.themes_packages:
-            if package["internal_name"] == name:
+            if package["internal_name"].lower() == name.lower():
                 try:
                     package["release_date"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
                         '%B %e, %Y at %R')
