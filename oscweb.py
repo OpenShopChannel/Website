@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, abort
 from werkzeug.urls import url_encode
+import subprocess
 import config
 
 import osc
@@ -10,6 +11,14 @@ OpenShopChannel.set_package_of_the_day()
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+
+# get current git info
+try:
+    site_version = subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('ascii').strip()
+    site_version_name = subprocess.check_output(['git', 'log', '-1', '--pretty=%B']).decode('ascii').strip()
+except Exception:
+    site_version = "No information."
+    site_version_name = "No information."
 
 
 @app.route("/")
@@ -30,7 +39,7 @@ def feedback():
 
 @app.route("/about")
 def about():
-    return render_template('pages/about.html')
+    return render_template('pages/about.html', version=site_version, version_name=site_version_name)
 
 
 @app.route("/faq")
