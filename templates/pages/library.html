@@ -8,7 +8,7 @@
         <title>Library - Open Shop Channel</title>
     {% endif %}
     {% include 'includes/header.html' %}
-    {% if request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] %}
+    {% if request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] and not request.args.get("category") and request.args.get("repo") == "apps" and not request.args.get("p")%}
         <meta name="robots" content="index, follow">
     {% elif ( (request.args.get("p")) or (request.args.get("coder")) ) %}
         <meta name="robots" content="noindex">
