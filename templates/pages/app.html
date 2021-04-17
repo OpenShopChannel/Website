@@ -47,7 +47,7 @@
                     <p class="title">Metadata</p>
                     <p><b>Version:</b> {{ package["version"] }}</p>
                     <p><b>Release Date:</b> {{ package["release_date"] }}</p>
-                    <p><b>Developer:</b> {{ package["coder"] }}</p>
+                    <p><b>Developer:</b> <a href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></p>
                     {% include 'includes/peripherals.html' %}
 
                 </div>
@@ -134,7 +134,7 @@
                         </div>
                         <footer class="card-footer">
                             <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml"
-                               class="card-footer-item"></i>View File</a>
+                               class="card-footer-item">View File</a>
                         </footer>
                     </div>
 
