@@ -1,14 +1,18 @@
+{% if request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] %}
+    {% set devprofile = True %}
+{% endif %}
+
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% if request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] %}
+    {% if devprofile == True %}
         <title>{{ request.args.get("coder") }}'s Developer Profile - Open Shop Channel</title>
     {% else %}
         <title>Library - Open Shop Channel</title>
     {% endif %}
     {% include 'includes/header.html' %}
-    {% if request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] and not request.args.get("category") and request.args.get("repo") == "apps" and not request.args.get("p")%}
+    {% if devprofile == True and not request.args.get("category") and request.args.get("repo") == "apps" and not request.args.get("p")%}
         <meta name="robots" content="index, follow">
     {% elif ( (request.args.get("p")) or (request.args.get("coder")) ) %}
         <meta name="robots" content="noindex">
@@ -17,7 +21,7 @@
 <body>
 {% include 'includes/navigation.html' %}
 {% include 'includes/alert.html' %}
-{% if request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] %}
+{% if devprofile == True %}
     <section class="hero is-info is-bold">
         <div class="hero-body">
             <div class="container">
@@ -33,7 +37,7 @@
 {% endif %}
 <section class="section">
     <div class="container">
-    {% if not request.args.get("coder") %}
+    {% if not devprofile == True %}
         <div class="notification is-link">
             Want to send apps wirelessly to your Wii right from your computer, and browse homebrew channel
             themes as well as secondary repositories? <b>Check out OSCDL <a
@@ -44,12 +48,12 @@
             <div class="tile is-4 is-vertical is-parent">
 
 
-                <nav class="panel">
+                <nav class="panel {% if devprofile == True %}is-info{% else %}is-link{% endif %}">
                     <p class="panel-heading">
-                        {% if request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] %}
+                        {% if devprofile == True %}
                             <i class="fas fa-id-card fa-fw" aria-hidden="true" style="margin-right: 5px"></i> {{ request.args.get("coder") }}'s Apps
                         {% else %}
-                            <span class="tag is-dark">Beta</span> Online Library
+                            <span class="tag is-light">Beta</span> Online Library
                         {% endif %}
                     </p>
                     <div class="panel-block">
