@@ -9,7 +9,7 @@ from functools import reduce
 
 def build_dictionary_filter_from_kwargs(**filter_kwargs):
     def _filter_fun(field, value):
-        return lambda d: d[field] == value
+        return lambda d: d[field].lower() == value.lower()
     return [_filter_fun(k, v) for k, v in filter_kwargs.items() if v]
 
 
