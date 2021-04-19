@@ -14,47 +14,65 @@
 <body>
 {% include 'includes/navigation.html' %}
 {% include 'includes/alert.html' %}
-<section class="hero is-dark is-bold">
+<section class="hero is-success is-bold">
     <div class="hero-body">
         <div class="container">
+            <div class="columns is-vcentered">
+            <div class="column">
             <h1 class="title">
                 {% include "includes/categoryicon.html" %}{{ package["display_name"] }}
             </h1>
             <h2 class="subtitle">
-                Author: <u><b><a href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
+                An homebrew {% if package["package_type"] != "thm" %}application{% else %}theme{% endif %} created by <u><b><a
+                    href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
             </h2>
+            </div>
+            <div class="column is-one-fifth" style="width: unset;">
+                <img src="{{ package["icon_url"] }}" style="vertical-align: middle;"
+                                 alt="Icon for {{ package["display_name"] }}">
+            </div>
+            </div>
         </div>
     </div>
 </section>
 <section class="section">
     <div class="container">
-        <div class="tile is-ancestor">
-            <div class="tile is-4 is-vertical is-parent">
-                <div class="tile is-child box" style="max-height: 85px!important;">
-                    <div class="columns is-vcentered is-centered">
-                        <div class="column">
-                            <img src="{{ package["icon_url"] }}" style="vertical-align: middle"
-                                 alt="Icon for {{ package["display_name"] }}">
-                        </div>
+        <div class="columns">
+            <div class="column is-one-third">
+                <article class="message is-success">
+                    <div class="message-body">
+                        <div class="columns is-vcentered is-centered">
                         <div class="column">
                             <b class="subtitle">
                                 {% include "includes/categoryicon.html" %}{{ package["category"].title() }}</b>
                         </div>
                     </div>
-                </div>
+                    </div>
+                </article>
 
-                <div class="tile is-child box">
-                    <p class="title">Metadata</p>
-                    <p><b>Version:</b> {{ package["version"] }}</p>
-                    <p><b>Release Date:</b> {{ package["release_date"] }}</p>
-                    <p><b>Developer:</b> <a href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></p>
-                    {% include 'includes/peripherals.html' %}
-
-                </div>
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p><i class="fas fa-info fa-fw" aria-hidden="true"></i> Metadata</p>
+                    </div>
+                    <div class="message-body">
+                        <p><b><i class="fas fa-wrench fa-fw" aria-hidden="true"></i> Version:</b> {{ package["version"] }}</p>
+                        <p><b><i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i> Release Date:</b> {{ package["release_date"] }}</p>
+                        <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i> Developer:</b> <a
+                                href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a>
+                        </p>
+                    </div>
+                </article>
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p><i class="fas fa-gamepad fa-fw" aria-hidden="true"></i> Peripherals</p>
+                    </div>
+                    <div class="message-body">
+                        {% include 'includes/peripherals.html' %}
+                    </div>
+                </article>
             </div>
 
-            <div class="tile is-parent">
-                <div class="tile is-child">
+            <div class="column">
                     <p class="title">Description</p>
                     {% if package["short_description"] == package["long_description"] %}
                         <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
@@ -96,7 +114,7 @@
                     </div>
 
                     {% if package["package_type"] != "thm" %}
-                        <div class="card mb-4">
+                        <div class="card mb-4 is-success">
                             <header class="card-header">
                                 <p class="card-header-title">
                                     <i class="fas fa-terminal fa-fw" aria-hidden="true"
@@ -139,7 +157,6 @@
                     </div>
 
 
-                </div>
             </div>
         </div>
     </div>
