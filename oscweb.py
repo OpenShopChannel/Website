@@ -4,6 +4,7 @@ import subprocess
 import config
 
 import osc
+import utils
 
 OpenShopChannel = osc.API()
 OpenShopChannel.load_packages()
@@ -11,6 +12,9 @@ OpenShopChannel.set_package_of_the_day()
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+
+# jinja2 functions
+app.jinja_env.globals.update(file_size=utils.file_size)
 
 # get current git info
 try:
