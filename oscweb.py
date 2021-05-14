@@ -20,7 +20,8 @@ app.jinja_env.globals.update(file_size=utils.file_size)
 try:
     site_version = subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('ascii').strip()
     site_version_name = subprocess.check_output(['git', 'log', '-1', '--pretty=%B']).decode('ascii').strip()
-except Exception:
+except Exception as e:
+    print(e)
     site_version = "No information."
     site_version_name = "No information."
 
