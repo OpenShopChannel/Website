@@ -18,19 +18,20 @@
     <div class="hero-body">
         <div class="container">
             <div class="columns is-vcentered">
-            <div class="column">
-            <h1 class="title">
-                {% include "includes/categoryicon.html" %}{{ package["display_name"] }}
-            </h1>
-            <h2 class="subtitle">
-                An homebrew {% if package["package_type"] != "thm" %}application{% else %}theme{% endif %} created by <u><b><a
-                    href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
-            </h2>
-            </div>
-            <div class="column is-one-fifth" style="width: unset;">
-                <img src="{{ package["icon_url"] }}" style="vertical-align: middle;"
-                                 alt="Icon for {{ package["display_name"] }}">
-            </div>
+                <div class="column">
+                    <h1 class="title">
+                        {% include "includes/categoryicon.html" %}{{ package["display_name"] }}
+                    </h1>
+                    <h2 class="subtitle">
+                        An homebrew {% if package["package_type"] != "thm" %}application{% else %}theme{% endif %}
+                        created by <u><b><a
+                            href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
+                    </h2>
+                </div>
+                <div class="column is-one-fifth" style="width: unset;">
+                    <img src="{{ package["icon_url"] }}" style="vertical-align: middle;"
+                         alt="Icon for {{ package["display_name"] }}">
+                </div>
             </div>
         </div>
     </div>
@@ -42,11 +43,11 @@
                 <article class="message is-success">
                     <div class="message-body">
                         <div class="columns is-vcentered is-centered">
-                        <div class="column">
-                            <b class="subtitle">
-                                {% include "includes/categoryicon.html" %}{{ package["category"].title() }}</b>
+                            <div class="column">
+                                <b class="subtitle">
+                                    {% include "includes/categoryicon.html" %}{{ package["category"].title() }}</b>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </article>
 
@@ -55,10 +56,14 @@
                         <p><i class="fas fa-info fa-fw" aria-hidden="true"></i> Metadata</p>
                     </div>
                     <div class="message-body">
-                        <p><b><i class="fas fa-wrench fa-fw" aria-hidden="true"></i> Version:</b> {{ package["version"] }}</p>
-                        <p><b><i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i> Release Date:</b> {{ package["release_date"] }}</p>
-                        <p><b><i class="fas fa-sd-card fa-fw" aria-hidden="true"></i> App Size:</b> {{ file_size(package["extracted"]) }}</p>
-                        <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i> Developer{% if "," in package["coder"] %}s{% endif %}:</b> <a
+                        <p><b><i class="fas fa-wrench fa-fw" aria-hidden="true"></i>
+                            Version:</b> {{ package["version"] }}</p>
+                        <p><b><i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i> Release
+                            Date:</b> {{ package["release_date"] }}</p>
+                        <p><b><i class="fas fa-sd-card fa-fw" aria-hidden="true"></i> App
+                            Size:</b> {{ file_size(package["extracted"]) }}</p>
+                        <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i> Developer
+                            {% if "," in package["coder"] %}s{% endif %}:</b> <a
                                 href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a>
                         </p>
                     </div>
@@ -71,91 +76,104 @@
                         {% include 'includes/peripherals.html' %}
                     </div>
                 </article>
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p><i class="fas fa-gamepad fa-share-alt" aria-hidden="true"></i> Share</p>
+                    </div>
+                    <div class="message-body">
+                        <b><i class="fas fa-info fa-link" aria-hidden="true"></i> Application URL:</b>
+                        <input class="input is-success" type="text" readonly
+                               value="https://oscwii.org{{ request.path }}">
+                        <b><i class="fas fa-info fa-link" aria-hidden="true"></i> Author URL:</b>
+                        <input class="input is-success" type="text" readonly
+                               value="https://oscwii.org/library?coder={{ package.coder }}&repo={{ repo }}">
+                    </div>
+                </article>
             </div>
 
             <div class="column">
-                    <p class="title">Description</p>
-                    {% if package["short_description"] == package["long_description"] %}
-                        <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
-                    {% else %}
-                        <b style="margin-bottom: 1.5rem">{{ package["short_description"] }}</b>
-                        <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
-                    {% endif %}
-                    <p class="title">Files</p>
+                <p class="title">Description</p>
+                {% if package["short_description"] == package["long_description"] %}
+                    <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
+                {% else %}
+                    <b style="margin-bottom: 1.5rem">{{ package["short_description"] }}</b>
+                    <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
+                {% endif %}
+                <p class="title">Files</p>
 
-                    <div>
-                        <div class="divider is-left">Recommended Download</div>
-                    </div>
+                <div>
+                    <div class="divider is-left">Recommended Download</div>
+                </div>
 
-                    <div class="card mb-4">
-                        <header class="card-header">
-                            <p class="card-header-title">
-                                <i class="fas fa-file-archive fa-fw" aria-hidden="true"
-                                   style="margin-right: 5px"></i>{{ package["display_name"] }} (.ZIP)
-                            </p>
-                            <span style="float: right" class="card-header-icon">
+                <div class="card mb-4">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            <i class="fas fa-file-archive fa-fw" aria-hidden="true"
+                               style="margin-right: 5px"></i>{{ package["display_name"] }} (.ZIP)
+                        </p>
+                        <span style="float: right" class="card-header-icon">
           <span class="tag is-link">{{ file_size(package["zip_size"]) }}</span>
       </span>
-                        </header>
-                        <div class="card-content">
-                            <div class="content">
-                                The application in the form of a ZIP file, containing the app.
-                            </div>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            The application in the form of a ZIP file, containing the app.
                         </div>
-                        <footer class="card-footer">
-                            <a href="{{ package["zip_url"] }}" class="card-footer-item"><i class="fas fa-download fa-fw"
-                                                                                           aria-hidden="true"
-                                                                                           style="margin-right: 5px"></i>Download
-                                File</a>
-                        </footer>
                     </div>
+                    <footer class="card-footer">
+                        <a href="{{ package["zip_url"] }}" class="card-footer-item"><i class="fas fa-download fa-fw"
+                                                                                       aria-hidden="true"
+                                                                                       style="margin-right: 5px"></i>Download
+                            File</a>
+                    </footer>
+                </div>
 
-                    <div>
-                        <div class="divider is-left">More Download Options</div>
-                    </div>
+                <div>
+                    <div class="divider is-left">More Download Options</div>
+                </div>
 
-                    {% if package["package_type"] != "thm" %}
-                        <div class="card mb-4 is-success">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    <i class="fas fa-terminal fa-fw" aria-hidden="true"
-                                       style="margin-right: 5px"></i>{{ package["display_name"] }}
-                                    (BOOT.{{ package["package_type"].upper() }})
-                                </p>
-                            </header>
-                            <div class="card-content">
-                                <div class="content">
-                                    The application {{ package["package_type"].upper() }}.
-                                </div>
-                            </div>
-                            <footer class="card-footer">
-                                <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
-                                   class="card-footer-item"><i class="fas fa-download fa-fw" aria-hidden="true"
-                                                               style="margin-right: 5px"></i>Download File</a>
-                            </footer>
-                        </div>
-                    {% endif %}
-
-
-                    <div class="card mb-4">
+                {% if package["package_type"] != "thm" %}
+                    <div class="card mb-4 is-success">
                         <header class="card-header">
                             <p class="card-header-title">
-                                <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>META.XML
-                                for {{ package["display_name"] }}
+                                <i class="fas fa-terminal fa-fw" aria-hidden="true"
+                                   style="margin-right: 5px"></i>{{ package["display_name"] }}
+                                (BOOT.{{ package["package_type"].upper() }})
                             </p>
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                The original application meta.xml file, containing information specified by the
-                                developer such as
-                                version, coder, and description.
+                                The application {{ package["package_type"].upper() }}.
                             </div>
                         </div>
                         <footer class="card-footer">
-                            <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml"
-                               class="card-footer-item">View File</a>
+                            <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
+                               class="card-footer-item"><i class="fas fa-download fa-fw" aria-hidden="true"
+                                                           style="margin-right: 5px"></i>Download File</a>
                         </footer>
                     </div>
+                {% endif %}
+
+
+                <div class="card mb-4">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>META.XML
+                            for {{ package["display_name"] }}
+                        </p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            The original application meta.xml file, containing information specified by the
+                            developer such as
+                            version, coder, and description.
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml"
+                           class="card-footer-item">View File</a>
+                    </footer>
+                </div>
 
 
             </div>
