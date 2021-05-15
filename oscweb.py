@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, abort
 from werkzeug.urls import url_encode
 import subprocess
 import config
+import pathlib
 
 import osc
 import utils
@@ -18,8 +19,9 @@ app.jinja_env.globals.update(file_size=utils.file_size)
 
 # get current git info
 try:
-    site_version = subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('ascii').strip()
-    site_version_name = subprocess.check_output(['git', 'log', '-1', '--pretty=%B']).decode('ascii').strip()
+    script_path = pathlib.Path(__file__).parent.absolute()
+    site_version = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=script_path).decode('ascii').strip()
+    site_version_name = subprocess.check_output(['git', 'log', '-1', '--pretty=%B'], cwd=script_path).decode('ascii').strip()
 except Exception as e:
     print(e)
     site_version = "No information."
