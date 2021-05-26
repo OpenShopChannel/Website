@@ -26,11 +26,14 @@ class API:
     packages = None
     themes_packages = None
     package_of_the_day = None
+    newest_packages = None
 
     def __init__(self):
         scheduler = BackgroundScheduler()
         # Schedule packages list for refresh once per 30 minutes
         scheduler.add_job(func=self.load_packages, trigger="interval", minutes=30)
+        # Schedule newest app for refresh once per 30 minutes
+        scheduler.add_job(func=self.newest_apps, trigger="interval", minutes=30)
         # Schedule app of the day for refresh once per day at 2:00
         scheduler.add_job(func=self.set_package_of_the_day, trigger='cron', hour='2', minute='00')
         scheduler.start()
@@ -66,6 +69,23 @@ class API:
                 except ValueError:
                     pass
                 return package
+
+    def newest_apps(self):
+        newest_apps = {"newest": None,
+                       "demos": None,
+                       "utilities": None,
+                       "emulators": None,
+                       "games": None,
+                       "media": None}
+        for key, value in newest_apps.items():
+            date = 0
+            for package in self.packages:
+                if (package["category"] == key) or (key == "newest"):
+                    if date < package["release_date"]:
+                        date = package["release_date"]
+                        newest_apps[key] = package
+
+        self.newest_packages = newest_apps
 
     def set_package_of_the_day(self):
         # some quality assurance, some of the apps have covid

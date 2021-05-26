@@ -4,10 +4,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Open Shop Channel</title>
     {% include 'includes/header.html' %}
+    <script src="/static/ticker/ticker.js"></script>
+    <link rel="stylesheet" href="/static/ticker/ticker.css">
 </head>
 <body>
 {% include 'includes/navigation.html' %}
 {% include 'includes/alert.html' %}
+<div class="notification is-link is-light is-hidden-mobile"
+     style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem;">
+    <div class="columns is-vcentered">
+        <div class="column">
+            <div class="ticker-container">
+                <ul>
+                    <div>
+                        <li><span
+                                class="ticker-item"><b><i class="fas fa-newspaper" aria-hidden="true"
+                                                          style="margin-right: .5em"></i>Latest update / addition: </b>"{{ newest_packages["newest"]["display_name"] }} {{ newest_packages["newest"]["version"] }}" by {{ newest_packages["newest"]["coder"] }} - {{ date(newest_packages["newest"]["release_date"]) }} - {{ newest_packages["newest"]["short_description"] }} - <a
+                                href="/library/app/{{ newest_packages["newest"]["internal_name"] }}">Download Now!</a></span>
+                        </li>
+                    </div>
+                    {% if newest_packages["newest"]["category"] != "games" %}
+                        <div>
+                            <li><span
+                                    class="ticker-item"><b><i class="fas fa-gamepad" aria-hidden="true"
+                                                          style="margin-right: .5em"></i>Latest update in Games: </b>"{{ newest_packages["games"]["display_name"] }}" by {{ newest_packages["games"]["coder"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["short_description"] }} - <a
+                                    href="/library/app/{{ newest_packages["games"]["internal_name"] }}">Download Now!</a></span>
+                            </li>
+                        </div>
+                    {% endif %}
+                    {% if newest_packages["newest"]["category"] != "utilities" %}
+                        <div>
+                            <li><span
+                                    class="ticker-item"><b>Latest update in Utilities: </b>"{{ newest_packages["utilities"]["display_name"] }}" by {{ newest_packages["utilities"]["coder"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["short_description"] }} - <a
+                                    href="/library/app/{{ newest_packages["utilities"]["internal_name"] }}">Download Now!</a></span>
+                            </li>
+                        </div>
+                    {% endif %}
+                    {% if newest_packages["newest"]["category"] != "emulators" %}
+                        <div>
+                            <li><span
+                                    class="ticker-item"><b><i class="fas fa-microchip" aria-hidden="true"
+                                                          style="margin-right: .5em"></i>Latest update in Emulators: </b>"{{ newest_packages["emulators"]["display_name"] }}" by {{ newest_packages["emulators"]["coder"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["short_description"] }} - <a
+                                    href="/library/app/{{ newest_packages["emulators"]["internal_name"] }}">Download Now!</a></span>
+                            </li>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <li><span
+                                class="ticker-item"><b><i class="fas fa-star" aria-hidden="true"
+                                                          style="margin-right: .5em"></i>App of the Day: </b> "{{ package["display_name"] }}" ({{ package["category"].capitalize() }}) by {{ package["coder"] }} - {{ package["short_description"] }} - <a
+                                href="/library/app/{{ package["internal_name"] }}">Download Now!</a></span></li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <section class="section">
     <div class="container">
         <div class="columns is-vcentered">
@@ -17,7 +69,9 @@
             <div class="column is-one-half is-hidden-mobile">
                 <a href="/library/app/{{ package["internal_name"] }}">
                     <div class="card has-ribbon">
-                        <div class="ribbon is-warning"><i class="fas fa-star" aria-hidden="true" style="margin-right: .75em"></i> App of the Day</div>
+                        <div class="ribbon is-warning"><i class="fas fa-star" aria-hidden="true"
+                                                          style="margin-right: .75em"></i> App of the Day
+                        </div>
                         <div class="card-content" style="margin-top: 15px;">
                             <div class="media">
                                 <div class="media-left">

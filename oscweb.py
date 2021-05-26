@@ -10,12 +10,14 @@ import utils
 OpenShopChannel = osc.API()
 OpenShopChannel.load_packages()
 OpenShopChannel.set_package_of_the_day()
+OpenShopChannel.newest_apps()
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 # jinja2 functions
 app.jinja_env.globals.update(file_size=utils.file_size)
+app.jinja_env.globals.update(date=utils.date)
 
 # get current git info
 try:
@@ -30,7 +32,8 @@ except Exception as e:
 
 @app.route("/")
 def home():
-    return render_template('pages/home.html', package=OpenShopChannel.package_of_the_day)
+    return render_template('pages/home.html', package=OpenShopChannel.package_of_the_day,
+                           newest_packages=OpenShopChannel.newest_packages)
 
 
 @app.route("/publish")
