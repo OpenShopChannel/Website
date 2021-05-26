@@ -6,11 +6,19 @@
     {% include 'includes/header.html' %}
     <script src="/static/ticker/ticker.js"></script>
     <link rel="stylesheet" href="/static/ticker/ticker.css">
+
+    <noscript>
+        <style>
+            #ticker {
+                display: none;
+            }
+        </style>
+    </noscript>
 </head>
 <body>
 {% include 'includes/navigation.html' %}
 {% include 'includes/alert.html' %}
-<div class="notification is-hidden-mobile"
+<div class="notification is-hidden-mobile" id="ticker"
      style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem;">
     <div class="columns is-vcentered">
         <div class="column">
@@ -27,7 +35,7 @@
                         <div>
                             <li><span
                                     class="ticker-item"><b><i class="fas fa-gamepad" aria-hidden="true"
-                                                          style="margin-right: .5em"></i>Latest update in Games: </b>"{{ newest_packages["games"]["display_name"] }}" by {{ newest_packages["games"]["coder"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["short_description"] }} - <a
+                                                              style="margin-right: .5em"></i>Latest update in Games: </b>"{{ newest_packages["games"]["display_name"] }}" by {{ newest_packages["games"]["coder"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["short_description"] }} - <a
                                     href="/library/app/{{ newest_packages["games"]["internal_name"] }}">Download Now!</a></span>
                             </li>
                         </div>
@@ -44,7 +52,7 @@
                         <div>
                             <li><span
                                     class="ticker-item"><b><i class="fas fa-microchip" aria-hidden="true"
-                                                          style="margin-right: .5em"></i>Latest update in Emulators: </b>"{{ newest_packages["emulators"]["display_name"] }}" by {{ newest_packages["emulators"]["coder"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["short_description"] }} - <a
+                                                              style="margin-right: .5em"></i>Latest update in Emulators: </b>"{{ newest_packages["emulators"]["display_name"] }}" by {{ newest_packages["emulators"]["coder"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["short_description"] }} - <a
                                     href="/library/app/{{ newest_packages["emulators"]["internal_name"] }}">Download Now!</a></span>
                             </li>
                         </div>
