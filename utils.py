@@ -13,4 +13,7 @@ def file_size(length):
 
 # Returns human date
 def date(release_date):
-    return datetime.fromtimestamp(int(release_date)).strftime('%B %e, %Y')
+    try:
+        return datetime.fromtimestamp(int(release_date)).strftime('%B %e, %Y')
+    except ValueError:
+        return release_date
