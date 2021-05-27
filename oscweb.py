@@ -41,6 +41,8 @@ def home():
                 ticker = json.load(f)
         except:
             ticker = []
+    else:
+        ticker = []
 
     return render_template('pages/home.html', package=OpenShopChannel.package_of_the_day,
                            newest_packages=OpenShopChannel.newest_packages, ticker=ticker)
