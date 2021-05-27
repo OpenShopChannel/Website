@@ -1,2 +1,5 @@
 # Set port
 port = 80
+
+# Ticker
+use_ticker_json = False

@@ -35,8 +35,12 @@ except Exception as e:
 @app.route("/")
 def home():
     # load ticker json
-    with open('settings/ticker.json') as f:
-        ticker = json.load(f)
+    if config.use_ticker_json:
+        try:
+            with open('settings/ticker.json') as f:
+                ticker = json.load(f)
+        except:
+            ticker = []
 
     return render_template('pages/home.html', package=OpenShopChannel.package_of_the_day,
                            newest_packages=OpenShopChannel.newest_packages, ticker=ticker)
