@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, render_template, request, abort
 from werkzeug.urls import url_encode
 import subprocess
@@ -32,8 +34,12 @@ except Exception as e:
 
 @app.route("/")
 def home():
+    # load ticker json
+    with open('settings/ticker.json') as f:
+        ticker = json.load(f)
+
     return render_template('pages/home.html', package=OpenShopChannel.package_of_the_day,
-                           newest_packages=OpenShopChannel.newest_packages)
+                           newest_packages=OpenShopChannel.newest_packages, ticker=ticker)
 
 
 @app.route("/publish")

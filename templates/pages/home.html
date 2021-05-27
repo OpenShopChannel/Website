@@ -24,6 +24,17 @@
         <div class="column">
             <div class="ticker-container">
                 <ul>
+                    {% for message in ticker %}
+                        {% if message["first"] == True %}
+                            <div>
+                                <li><span
+                                        class="ticker-item"><b><i class="fas {{ message["icon"] }}" aria-hidden="true"
+                                                                  style="margin-right: .5em"></i>{{ message["title"] }}: </b>{{ message["content"] }} <a
+                                        href="{{ message["link"]["address"] }}">{{ message["link"]["text"] }}</a></span>
+                                </li>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                     <div>
                         <li><span
                                 class="ticker-item"><b><i class="fas fa-newspaper" aria-hidden="true"
@@ -63,6 +74,17 @@
                                                           style="margin-right: .5em"></i>App of the Day: </b> "{{ package["display_name"] }}" ({{ package["category"].capitalize() }}) by {{ package["coder"] }} - {{ package["short_description"] }} - <a
                                 href="/library/app/{{ package["internal_name"] }}">Download Now!</a></span></li>
                     </div>
+                    {% for message in ticker %}
+                        {% if not message["first"] %}
+                            <div>
+                                <li><span
+                                        class="ticker-item"><b><i class="fas {{ message["icon"] }}" aria-hidden="true"
+                                                                  style="margin-right: .5em"></i>{{ message["title"] }}: </b>{{ message["content"] }} <a
+                                        href="{{ message["link"]["address"] }}">{{ message["link"]["text"] }}</a></span>
+                                </li>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>

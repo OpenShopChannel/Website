@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Announcement",
+    "content": "This is an example announcement",
+    "icon": "fa-newspaper",
+    "first": true,
+    "link": {
+      "text": "Learn more",
+      "address": "https://github.com/dhtdht020"
+    }
+  }
+]
