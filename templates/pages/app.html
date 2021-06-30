@@ -62,8 +62,8 @@
                             Date:</b> {{ package["release_date"] }}</p>
                         <p><b><i class="fas fa-sd-card fa-fw" aria-hidden="true"></i> App
                             Size:</b> {{ file_size(package["extracted"]) }}</p>
-                        <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i> Developer
-                            {% if "," in package["coder"] %}s{% endif %}:</b> <a
+                        <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i>
+                            Developer{% if "," in package["coder"] %}s{% endif %}:</b> <a
                                 href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a>
                         </p>
                     </div>
