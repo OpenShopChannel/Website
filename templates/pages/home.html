@@ -54,7 +54,8 @@
                     {% if newest_packages["newest"]["category"] != "utilities" %}
                         <div>
                             <li><span
-                                    class="ticker-item"><b>Latest update in Utilities: </b>"{{ newest_packages["utilities"]["display_name"] }}" by {{ newest_packages["utilities"]["coder"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["short_description"] }} - <a
+                                    class="ticker-item"><b><i class="fas fa-cog" aria-hidden="true"
+                                                              style="margin-right: .5em"></i>Latest update in Utilities: </b>"{{ newest_packages["utilities"]["display_name"] }}" by {{ newest_packages["utilities"]["coder"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["short_description"] }} - <a
                                     href="/library/app/{{ newest_packages["utilities"]["internal_name"] }}">Download Now!</a></span>
                             </li>
                         </div>
