@@ -42,6 +42,14 @@ class API:
         self.packages = json.loads(requests.get(f"https://api.oscwii.org/v2/primary/packages").text)
         self.themes_packages = json.loads(requests.get(f"https://api.oscwii.org/v2/themes/packages").text)
 
+        # add formatted release date
+        for package in self.packages:
+            try:
+                package["release_date_formatted"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
+                    '%B %e, %Y')
+            except ValueError:
+                pass
+
     def get_packages(self, developer=None, category=None):
         filtered = filter_packages(self.packages, coder=developer, category=category)
         return filtered
@@ -53,21 +61,11 @@ class API:
     def package_by_name(self, name):
         for package in self.packages:
             if package["internal_name"].lower() == name.lower():
-                try:
-                    package["release_date"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
-                        '%B %e, %Y')
-                except ValueError:
-                    pass
                 return package
 
     def theme_by_name(self, name):
         for package in self.themes_packages:
             if package["internal_name"].lower() == name.lower():
-                try:
-                    package["release_date"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
-                        '%B %e, %Y')
-                except ValueError:
-                    pass
                 return package
 
     def newest_apps(self):
