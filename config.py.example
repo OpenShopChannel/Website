@@ -3,3 +3,6 @@ port = 80
 
 # Ticker
 use_ticker_json = False
+
+# Sentry
+sentry_dsn = None

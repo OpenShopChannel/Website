@@ -2,3 +2,4 @@ apscheduler~=3.7.0
 Flask~=2.0.0
 requests~=2.25.1
 Werkzeug~=2.0.0
+sentry-sdk[flask]~=1.3.1
