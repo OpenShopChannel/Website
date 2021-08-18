@@ -1,4 +1,4 @@
-{% if request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] %}
+{% if packages and request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] %}
     {% set devprofile = True %}
 {% endif %}
 
