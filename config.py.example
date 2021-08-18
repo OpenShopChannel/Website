@@ -6,3 +6,4 @@ use_ticker_json = False
 
 # Sentry
 sentry_dsn = None
+sample_rate = 1
