@@ -43,7 +43,7 @@ class API:
         self.themes_packages = json.loads(requests.get(f"https://api.oscwii.org/v2/themes/packages").text)
 
         # add formatted release date
-        for package in self.packages:
+        for package in self.packages + self.themes_packages:
             try:
                 package["release_date_formatted"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
                     '%B %e, %Y')
