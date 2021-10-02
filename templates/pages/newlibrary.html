@@ -30,7 +30,15 @@
                                     id: "search",
                                     on: {
                                         "onTimedKeyPress": function () {
+                                            // set category to disabled if search bar has text
                                             var value = this.getValue().toLowerCase();
+                                            if (value)
+                                            {
+                                                $$("category").disable()
+                                                $$("category").setValue("All Apps")
+                                            }
+                                            else
+                                                $$("category").enable()
                                             $$("appsview").filter(function (obj) {
                                                 return obj.display_name.toLowerCase().indexOf(value) != -1;
                                             })
