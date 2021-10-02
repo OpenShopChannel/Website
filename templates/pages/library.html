@@ -39,6 +39,9 @@
 <section class="section">
     <div class="container">
         {% if not devprofile == True %}
+            <div class="notification is-light">
+                Try the new Library experience <b><a href="/beta/library">here</a></b> for search and more!
+            </div>
             <div class="notification is-info">
                 Want to send apps wirelessly to your Wii right from your computer, and browse homebrew channel
                 themes as well as secondary repositories? <b>Check out OSCDL <a
@@ -55,7 +58,7 @@
                             <i class="fas fa-id-card fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
                             {{ request.args.get("coder") }}'s Apps
                         {% else %}
-                            <span class="tag is-light">Beta</span> Online Library
+                            Online Library
                         {% endif %}
                     </p>
                     <div class="panel-block">
@@ -143,7 +146,8 @@
                         </a>
                     {% endif %}
                     <div class="panel-block">
-                        <a class="button {% if devprofile == True %}is-info{% else %}is-link{% endif %} is-outlined is-fullwidth" href="/library">
+                        <a class="button {% if devprofile == True %}is-info{% else %}is-link{% endif %} is-outlined is-fullwidth"
+                           href="/library">
                             Reset all filters
                         </a>
                     </div>
@@ -165,28 +169,29 @@
                     {% endif %}
                     {% for package in packages %}
                         <article class="message {% if devprofile %}is-info{% else %}is-link{% endif %}">
-                        <a href="/library/{{ type }}/{{ package["internal_name"] }}" style="text-decoration: unset;">
-                            <div class="message-header" style="padding: 0 1em;">
-                                <p>{% include "includes/categoryicon.html" %} {{ package["display_name"] }}</p>
-                                <span style="float: right" class="card-header-icon">
+                            <a href="/library/{{ type }}/{{ package["internal_name"] }}"
+                               style="text-decoration: unset;">
+                                <div class="message-header" style="padding: 0 1em;">
+                                    <p>{% include "includes/categoryicon.html" %} {{ package["display_name"] }}</p>
+                                    <span style="float: right" class="card-header-icon">
                                     {{ package["version"] }}
                                     </span>
-                            </div>
-                            <div class="message-body">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <figure class="image">
-                                            <img src="{{ package["icon_url"] }}" alt="App Icon">
-                                        </figure>
-                                    </div>
-                                    <div class="media-content" style="overflow: hidden;">
-                                        <p class="title is-4">{{ package["display_name"] }}</p>
-                                        <p class="subtitle is-6">Made by <b>{{ package["coder"] }}</b></p>
-                                        <p class="subtitle is-6">{{ package["short_description"] }}</p>
+                                </div>
+                                <div class="message-body">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <figure class="image">
+                                                <img src="{{ package["icon_url"] }}" alt="App Icon">
+                                            </figure>
+                                        </div>
+                                        <div class="media-content" style="overflow: hidden;">
+                                            <p class="title is-4">{{ package["display_name"] }}</p>
+                                            <p class="subtitle is-6">Made by <b>{{ package["coder"] }}</b></p>
+                                            <p class="subtitle is-6">{{ package["short_description"] }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
                         </article>
                     {% endfor %}
                     {% include 'includes/pagination.html' %}

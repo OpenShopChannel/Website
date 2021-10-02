@@ -134,6 +134,11 @@ def apps():
                            results=len(packages))
 
 
+@app.route("/beta/library")
+def beta_apps():
+    return render_template('pages/newlibrary.html')
+
+
 @app.route("/library/<pkg_type>/<name>")
 def application(name, pkg_type):
     # error handling in case the app doesn't exist

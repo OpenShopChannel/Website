@@ -16,11 +16,31 @@
 
 <link rel="stylesheet" type="text/css" href="/static/css/bulma-divider.min.css">
 
+<link rel="stylesheet" type="text/css" href="/static/webix/skins/materialshop.css">
+
 <link rel="stylesheet" href="/static/fa/css/all.min.css">
 
 <!--JS -->
 <script src="/static/bulmajs/bulma.js"></script>
 <script src="/static/js/jquery-3.6.0.min.js"></script>
+
+<!-- Load webix contrast skin if dark mode is on -->
+<script>
+    let dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    webix_skin = "material";
+    if(dark){
+        var head  = document.getElementsByTagName('head')[0];
+        var link  = document.createElement('link');
+        link.rel  = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '/static/webix/skins/contrast.min.css';
+        head.appendChild(link);
+    }
+</script>
+
+<!-- More JS -->
+<script src="/static/webix/webix.min.js"></script>
 
 <!-- General Meta tags for SEO -->
 <meta name="language" content="en">

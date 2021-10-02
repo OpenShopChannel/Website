@@ -1,0 +1,90 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open Shop Channel - New Library Beta</title>
+    {% include 'includes/header.html' %}
+</head>
+<body>
+{% include 'includes/navigation.html' %}
+{% include 'includes/alert.html' %}
+<section class="section">
+    <div class="container">
+        <h1 class="title">Online Library <span class="tag is-light">Beta</span></h1>
+        <div id="AppsList"></div>
+        <script type="text/javascript" charset="utf-8">
+            webix.ready(function () {
+                webix.ui({
+                    margin: 10,
+                    container: "AppsList",
+                    responsive: true,
+                    rows: [
+                        {
+                            view: "toolbar",
+                            borderless: false,
+                            responsive: true,
+                            cols: [
+                                {
+                                    view: "search",
+                                    placeholder: "Search application...",
+                                    id: "search",
+                                    width: 300,
+                                },
+                                {
+                                    view: "combo",
+                                    id: "category",
+                                    value: "All Apps",
+                                    disabled: true,
+                                    width: 200,
+                                    options: ["All Apps", "Utilities", "Emulators", "Games", "Media", "Demos"]
+                                },
+                                {view:"label", label: "<a href='/library'>Return to Legacy Library</a>", align:"right"}
+                            ]
+                        },
+                        {
+                            view: "dataview",
+                            id: "appsview",
+                            css: "cropped_text",
+                            responsive: true,
+                            scroll: false,
+                            select: true,
+                            template: "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>#display_name#</div><div style='float: left; height: 100%; margin-right: 10px;'><img src='https://hbb1.oscwii.org/hbb/#internal_name#.png'></div><div><div>#short_description#<br>By #coder#<br></div></div>",
+                            on: {
+                                "onItemClick": function (id) {
+                                    window.location = "/library/app/" + this.getItem(id).internal_name;
+                                }
+                            },
+                            type: {
+                                height: 120,
+                                width: 365,
+                                type: "tiles",
+                            },
+                            borderless: false,
+                            yCount: 8,
+                            url: "https://api.oscwii.org/v2/primary/packages/",
+                            pager: "paginationbar"
+                        },
+                        {
+                            view: "pager",
+                            id: "paginationbar",
+                            size: 24,
+                            group: 8,
+                            template: "{common.first()}{common.prev()}{common.pages()}{common.next()}{common.last()}"
+                        }
+                    ]
+                });
+
+                $$("search").attachEvent("onTimedKeyPress", function () {
+                    //get user input value
+                    var value = this.getValue().toLowerCase();
+                    $$("appsview").filter(function (obj) {
+                        return obj.display_name.toLowerCase().indexOf(value) != -1;
+                    })
+                });
+            });
+        </script>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+</body>
+</html>
