@@ -14,6 +14,7 @@
         <div id="AppsList"></div>
         <script type="text/javascript" charset="utf-8">
             webix.ready(function () {
+                let repository_type = "app"
                 webix.ui({
                     margin: 10,
                     container: "AppsList",
@@ -36,9 +37,13 @@
                                             {
                                                 $$("category").disable()
                                                 $$("category").setValue("All Apps")
+                                                $$("repository").disable()
                                             }
                                             else
+                                            {
                                                 $$("category").enable()
+                                                $$("repository").enable()
+                                            }
                                             $$("appsview").filter(function (obj) {
                                                 return obj.display_name.toLowerCase().indexOf(value) != -1;
                                             })
@@ -66,6 +71,28 @@
                                     options: ["All Apps", "Utilities", "Emulators", "Games", "Media", "Demos"]
                                 },
                                 {
+                                    view: "combo",
+                                    id: "repository",
+                                    value: "Applications",
+                                    on: {
+                                        "onChange": function (repository) {
+                                            $$("appsview").clearAll()
+                                            switch (repository){
+                                                case "Applications":
+                                                    $$("appsview").load("https://api.oscwii.org/v2/primary/packages")
+                                                    repository_type = "app"
+                                                    break;
+                                                case "Themes":
+                                                    $$("appsview").load("https://api.oscwii.org/v2/themes/packages")
+                                                    repository_type = "theme"
+                                                    break;
+                                            }
+                                        }
+                                    },
+                                    width: 200,
+                                    options: ["Applications", "Themes"]
+                                },
+                                {
                                     view: "button",
                                     id: "legacy_library_link",
                                     value: "Return to Legacy Library",
@@ -90,12 +117,12 @@
                                     "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
                                     + obj.display_name + "</div>" +
                                     "<div style='float: left; height: 100%; margin-right: 10px;'>" +
-                                    "<img src='https://hbb1.oscwii.org/hbb/" + obj.internal_name + ".png'></div>" +
+                                    "<img src='" + obj.icon_url + "'></div>" +
                                     "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
                             },
                             on: {
                                 "onItemClick": function (id) {
-                                    window.location = "/library/app/" + this.getItem(id).internal_name;
+                                    window.location = "/library/" + repository_type + "/" + this.getItem(id).internal_name;
                                 }
                             },
                             type: {
