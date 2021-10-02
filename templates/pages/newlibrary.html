@@ -28,13 +28,32 @@
                                     view: "search",
                                     placeholder: "Search application...",
                                     id: "search",
+                                    on: {
+                                        "onTimedKeyPress": function () {
+                                            var value = this.getValue().toLowerCase();
+                                            $$("appsview").filter(function (obj) {
+                                                return obj.display_name.toLowerCase().indexOf(value) != -1;
+                                            })
+                                        }
+                                    },
                                     width: 300,
                                 },
                                 {
                                     view: "combo",
                                     id: "category",
                                     value: "All Apps",
-                                    disabled: true,
+                                    on: {
+                                        "onChange": function (category) {
+                                            if (category === "All Apps")
+                                                category = ""
+                                            else
+                                                category = category.toLowerCase();
+
+                                            $$("appsview").filter(function (obj) {
+                                                return obj.category.toLowerCase().indexOf(category) != -1;
+                                            })
+                                        }
+                                    },
                                     width: 200,
                                     options: ["All Apps", "Utilities", "Emulators", "Games", "Media", "Demos"]
                                 },
@@ -84,6 +103,12 @@
                         {
                             view: "pager",
                             id: "paginationbar",
+                            on: {
+                                "onAfterPageChange": function () {
+                                    // scroll page back up
+                                    window.scrollTo(0, 0)
+                                }
+                            },
                             size: 24,
                             group: 4,
                             template: "{common.first()}{common.prev()}{common.pages()}{common.next()}{common.last()}"
@@ -107,14 +132,6 @@
                             return "fas fa-question fa-fw"
                     }
                 }
-
-                $$("search").attachEvent("onTimedKeyPress", function () {
-                    //get user input value
-                    var value = this.getValue().toLowerCase();
-                    $$("appsview").filter(function (obj) {
-                        return obj.display_name.toLowerCase().indexOf(value) != -1;
-                    })
-                });
             });
         </script>
     </div>
