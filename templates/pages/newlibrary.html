@@ -38,7 +38,17 @@
                                     width: 200,
                                     options: ["All Apps", "Utilities", "Emulators", "Games", "Media", "Demos"]
                                 },
-                                {view:"label", label: "<a href='/library'>Return to Legacy Library</a>", align:"right"}
+                                {
+                                    view: "button",
+                                    id: "legacy_library_link",
+                                    value: "Return to Legacy Library",
+                                    css: "webix_primary",
+                                    inputWidth: 200,
+                                    align: "right",
+                                    click: function () {
+                                        window.location = "/library"
+                                    }
+                                }
                             ]
                         },
                         {
@@ -48,7 +58,14 @@
                             responsive: true,
                             scroll: false,
                             select: true,
-                            template: "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>#display_name#</div><div style='float: left; height: 100%; margin-right: 10px;'><img src='https://hbb1.oscwii.org/hbb/#internal_name#.png'></div><div><div>#short_description#<br>By #coder#<br></div></div>",
+                            template: function (obj) {
+                                return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
+                                    "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
+                                    + obj.display_name + "</div>" +
+                                    "<div style='float: left; height: 100%; margin-right: 10px;'>" +
+                                    "<img src='https://hbb1.oscwii.org/hbb/" + obj.internal_name + ".png'></div>" +
+                                    "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
+                            },
                             on: {
                                 "onItemClick": function (id) {
                                     window.location = "/library/app/" + this.getItem(id).internal_name;
@@ -68,11 +85,28 @@
                             view: "pager",
                             id: "paginationbar",
                             size: 24,
-                            group: 8,
+                            group: 4,
                             template: "{common.first()}{common.prev()}{common.pages()}{common.next()}{common.last()}"
                         }
                     ]
                 });
+
+                function CategoryIcon(category) {
+                    switch (category) {
+                        case "utilities":
+                            return "fas fa-cog fa-fw"
+                        case "emulators":
+                            return "fas fa-microchip fa-fw"
+                        case "games":
+                            return "fas fa-gamepad fa-fw"
+                        case "media":
+                            return "fas fa-photo-video fa-fw"
+                        case "demos":
+                            return "fas fa-vial fa-fw"
+                        default:
+                            return "fas fa-question fa-fw"
+                    }
+                }
 
                 $$("search").attachEvent("onTimedKeyPress", function () {
                     //get user input value
