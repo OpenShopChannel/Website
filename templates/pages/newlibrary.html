@@ -108,6 +108,7 @@
                                     on: {
                                         "onChange": function (repository) {
                                             $$("appsview").clearAll()
+                                            $$("category").setValue("All Apps")
                                             switch (repository) {
                                                 case "Applications":
                                                     $$("appsview").load("https://api.oscwii.org/v2/primary/packages")
