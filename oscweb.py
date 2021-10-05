@@ -136,7 +136,7 @@ def apps():
 
 @app.route("/beta/library")
 def beta_apps():
-    return render_template('pages/newlibrary.html')
+    return render_template('pages/newlibrary.html', newest_packages=OpenShopChannel.newest_packages)
 
 
 @app.route("/library/<pkg_type>/<name>")
