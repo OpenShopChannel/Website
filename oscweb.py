@@ -167,12 +167,12 @@ def modify_query(**new_values):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('error/404.html')
+    return render_template('error/404.html'), 404
 
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    return render_template('error/500.html')
+    return render_template('error/500.html'), 500
 
 
 if __name__ == '__main__':
