@@ -42,11 +42,6 @@
             <div class="notification is-light">
                 Try the new Library experience <b><a href="/beta/library">here</a></b> for search and more!
             </div>
-            <div class="notification is-info">
-                Want to send apps wirelessly to your Wii right from your computer, and browse homebrew channel
-                themes as well as secondary repositories? <b>Check out OSCDL <a
-                    href="https://github.com/dhtdht020/osc-dl/releases">right here</a></b>.
-            </div>
         {% endif %}
         <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
@@ -61,14 +56,14 @@
                             Online Library
                         {% endif %}
                     </p>
-                    <div class="panel-block">
-                        <p class="control has-icons-left">
-                            <input class="input" type="text" placeholder="Search" disabled>
-                            <span class="icon is-left">
-                                <i class="fas fa-search" aria-hidden="true"></i>
-                            </span>
-                        </p>
+                    {% if not devprofile == True %}
+                    <div class="panel-block is-hidden-mobile">
+                        <div class="notification is-warning">
+                            <i class="fas fa-info" aria-hidden="true"></i> For searching, please switch to <b><a href="/beta/library">the beta library experience</a></b>.
+                            <img style="border-radius: 4px; margin-top: 10px" src="/static/images/betabanner.png" alt="Beta Banner">
+                        </div>
                     </div>
+                    {% endif %}
                     {% if request.args.get("coder") %}
                         <div class="panel-block">
                             <span class="panel-icon">
