@@ -119,6 +119,10 @@
                                                     repository_type = "theme"
                                                     break;
                                             }
+                                            // sort appsview when ready
+                                            $$("appsview").attachEvent("onAfterLoad", function () {
+                                                $$("appsview").sort("display_name", "asc")
+                                            })
                                         }
                                     },
                                     width: 200,
@@ -165,6 +169,9 @@
                             borderless: false,
                             yCount: 8,
                             url: "https://api.oscwii.org/v2/primary/packages/",
+                            ready:function() {
+                                this.sort("display_name", "asc");
+                            },
                             pager: "paginationbar"
                         },
                         {

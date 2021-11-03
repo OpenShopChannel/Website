@@ -50,6 +50,9 @@ class API:
             except ValueError:
                 pass
 
+        # sort alphabetically by name
+        self.packages.sort(key=lambda x: x["display_name"])
+
     def get_packages(self, developer=None, category=None):
         filtered = filter_packages(self.packages, coder=developer, category=category)
         return filtered
