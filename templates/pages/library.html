@@ -13,7 +13,7 @@
     {% endif %}
     {% include 'includes/header.html' %}
     {% if devprofile == True and not request.args.get("category") and request.args.get("repo") == "apps" and not request.args.get("p") %}
-        <meta name="robots" content="index, follow">
+        <meta name="robots" content="noindex">
     {% elif ( (request.args.get("p")) or (request.args.get("coder")) ) %}
         <meta name="robots" content="noindex">
     {% endif %}
