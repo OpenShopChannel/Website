@@ -1,8 +1,17 @@
+{% if request.args.get("coder") %}
+    {% set devprofile = True %}
+    {% set querystring = "?coder=" + request.args.get("coder") %}
+{% endif %}
+
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Open Shop Channel - New Library Beta</title>
+    {% if devprofile == True %}
+        <title>{{ request.args.get("coder") }}'s Developer Profile - Open Shop Channel</title>
+    {% else %}
+        <title>New Library Beta - Open Shop Channel</title>
+    {% endif %}
     {% include 'includes/header.html' %}
     <script src="/static/ticker/ticker.js"></script>
     <link rel="stylesheet" href="/static/ticker/ticker.css">
@@ -12,6 +21,7 @@
 {% include 'includes/alert.html' %}
 <section class="section">
     <div class="container">
+        {% if devprofile != True %}
         <div class="notification is-hidden-mobile" id="ticker"
              style="padding: 0.25rem 2.5rem 0.25rem 1.5rem;">
             <div class="columns is-vcentered">
@@ -44,7 +54,14 @@
                 </div>
             </div>
         </div>
+        {% endif %}
+        {% if devprofile == True %}
+        <h1 class="title"><i class="fas fa-id-card fa-fw" aria-hidden="true"
+                       style="margin-right: 5px"></i>{{ request.args.get("coder") }}</h1>
+        <h2 class="subtitle">Developer Profile</h2>
+        {% else %}
         <h1 class="title">Online Library <span class="tag is-light">Beta</span></h1>
+        {% endif %}
         <div id="AppsList"></div>
         <script type="text/javascript" charset="utf-8">
             webix.ready(function () {
@@ -111,11 +128,11 @@
                                             $$("category").setValue("All Apps")
                                             switch (repository) {
                                                 case "Applications":
-                                                    $$("appsview").load("https://api.oscwii.org/v2/primary/packages")
+                                                    $$("appsview").load("https://api.oscwii.org/v2/primary/packages{{ querystring }}")
                                                     repository_type = "app"
                                                     break;
                                                 case "Themes":
-                                                    $$("appsview").load("https://api.oscwii.org/v2/themes/packages")
+                                                    $$("appsview").load("https://api.oscwii.org/v2/themes/packages{{ querystring }}")
                                                     repository_type = "theme"
                                                     break;
                                             }
@@ -168,7 +185,7 @@
                             },
                             borderless: false,
                             yCount: 8,
-                            url: "https://api.oscwii.org/v2/primary/packages/",
+                            url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
                             ready:function() {
                                 this.sort("display_name", "asc");
                             },
