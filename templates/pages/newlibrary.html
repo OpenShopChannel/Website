@@ -22,53 +22,54 @@
 <section class="section">
     <div class="container">
         {% if devprofile != True %}
-        <div class="notification is-hidden-mobile" id="ticker"
-             style="padding: 0.25rem 2.5rem 0.25rem 1.5rem;">
-            <div class="columns is-vcentered">
-                <div class="column">
-                    <div class="ticker-container">
-                        <ul>
-                            <div>
-                                <li><span
-                                        class="ticker-item"><b><i class="fas fa-gamepad" aria-hidden="true"
-                                                                  style="margin-right: .5em"></i>Latest update in Games: </b>"{{ newest_packages["games"]["display_name"] }}" by {{ newest_packages["games"]["coder"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["short_description"] }} - <a
-                                        href="/library/app/{{ newest_packages["games"]["internal_name"] }}">Download Now!</a></span>
-                                </li>
-                            </div>
-                            <div>
-                                <li><span
-                                        class="ticker-item"><b><i class="fas fa-cog" aria-hidden="true"
-                                                                  style="margin-right: .5em"></i>Latest update in Utilities: </b>"{{ newest_packages["utilities"]["display_name"] }}" by {{ newest_packages["utilities"]["coder"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["short_description"] }} - <a
-                                        href="/library/app/{{ newest_packages["utilities"]["internal_name"] }}">Download Now!</a></span>
-                                </li>
-                            </div>
-                            <div>
-                                <li><span
-                                        class="ticker-item"><b><i class="fas fa-microchip" aria-hidden="true"
-                                                                  style="margin-right: .5em"></i>Latest update in Emulators: </b>"{{ newest_packages["emulators"]["display_name"] }}" by {{ newest_packages["emulators"]["coder"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["short_description"] }} - <a
-                                        href="/library/app/{{ newest_packages["emulators"]["internal_name"] }}">Download Now!</a></span>
-                                </li>
-                            </div>
-                        </ul>
+            <div class="notification is-hidden-mobile" id="ticker"
+                 style="padding: 0.25rem 2.5rem 0.25rem 1.5rem;">
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <div class="ticker-container">
+                            <ul>
+                                <div>
+                                    <li><span
+                                            class="ticker-item"><b><i class="fas fa-gamepad" aria-hidden="true"
+                                                                      style="margin-right: .5em"></i>Latest update in Games: </b>"{{ newest_packages["games"]["display_name"] }}" by {{ newest_packages["games"]["coder"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["short_description"] }} - <a
+                                            href="/library/app/{{ newest_packages["games"]["internal_name"] }}">Download Now!</a></span>
+                                    </li>
+                                </div>
+                                <div>
+                                    <li><span
+                                            class="ticker-item"><b><i class="fas fa-cog" aria-hidden="true"
+                                                                      style="margin-right: .5em"></i>Latest update in Utilities: </b>"{{ newest_packages["utilities"]["display_name"] }}" by {{ newest_packages["utilities"]["coder"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["short_description"] }} - <a
+                                            href="/library/app/{{ newest_packages["utilities"]["internal_name"] }}">Download Now!</a></span>
+                                    </li>
+                                </div>
+                                <div>
+                                    <li><span
+                                            class="ticker-item"><b><i class="fas fa-microchip" aria-hidden="true"
+                                                                      style="margin-right: .5em"></i>Latest update in Emulators: </b>"{{ newest_packages["emulators"]["display_name"] }}" by {{ newest_packages["emulators"]["coder"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["short_description"] }} - <a
+                                            href="/library/app/{{ newest_packages["emulators"]["internal_name"] }}">Download Now!</a></span>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         {% endif %}
         {% if devprofile == True %}
-        <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
-            <ul>
-                <li><a href="/beta/library">Library</a></li>
-                <li class="is-active"><a href="" aria-current="page">Developer Profile: {{ request.args.get("coder") }}</a></li>
-            </ul>
-        </nav>
-        <div class="notification is-info hero is-bold">
-        <h1 class="title"><i class="fas fa-id-card fa-fw" aria-hidden="true"
-                       style="margin-right: 5px"></i>{{ request.args.get("coder") }}</h1>
-        <h2 class="subtitle">Developer Profile</h2>
-        </div>
+            <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="/beta/library">Library</a></li>
+                    <li class="is-active"><a href="" aria-current="page">Developer
+                        Profile: {{ request.args.get("coder") }}</a></li>
+                </ul>
+            </nav>
+            <div class="notification is-info hero is-bold">
+                <h1 class="title"><i class="fas fa-id-card fa-fw" aria-hidden="true"
+                                     style="margin-right: 5px"></i>{{ request.args.get("coder") }}</h1>
+                <h2 class="subtitle">Developer Profile</h2>
+            </div>
         {% else %}
-        <h1 class="title">Online Library <span class="tag is-light">Beta</span></h1>
+            <h1 class="title">Online Library <span class="tag is-light">Beta</span></h1>
         {% endif %}
         <div id="AppsList"></div>
         <script type="text/javascript" charset="utf-8">
@@ -129,7 +130,11 @@
                                 {
                                     view: "combo",
                                     id: "repository",
+                                    {% if request.args.get("repo") == "themes" %}
+                                    value: "Themes",
+                                    {% else %}
                                     value: "Applications",
+                                    {% endif %}
                                     on: {
                                         "onChange": function (repository) {
                                             $$("appsview").clearAll()
@@ -193,8 +198,12 @@
                             },
                             borderless: false,
                             yCount: 8,
+                            {% if request.args.get("repo") == "themes" %}
+                            url: "https://api.oscwii.org/v2/themes/packages{{ querystring }}",
+                            {% else %}
                             url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
-                            ready:function() {
+                            {% endif %}
+                            ready: function () {
                                 this.sort("display_name", "asc");
                             },
                             pager: "paginationbar"
