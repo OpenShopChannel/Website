@@ -56,9 +56,17 @@
         </div>
         {% endif %}
         {% if devprofile == True %}
+        <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="/beta/library">Library</a></li>
+                <li class="is-active"><a href="" aria-current="page">Developer Profile: {{ request.args.get("coder") }}</a></li>
+            </ul>
+        </nav>
+        <div class="notification is-info hero is-bold">
         <h1 class="title"><i class="fas fa-id-card fa-fw" aria-hidden="true"
                        style="margin-right: 5px"></i>{{ request.args.get("coder") }}</h1>
         <h2 class="subtitle">Developer Profile</h2>
+        </div>
         {% else %}
         <h1 class="title">Online Library <span class="tag is-light">Beta</span></h1>
         {% endif %}

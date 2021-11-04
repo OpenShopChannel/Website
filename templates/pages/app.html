@@ -14,30 +14,35 @@
 <body>
 {% include 'includes/navigation.html' %}
 {% include 'includes/alert.html' %}
-<section class="hero is-success is-bold">
-    <div class="hero-body">
-        <div class="container">
-            <div class="columns is-vcentered">
-                <div class="column">
-                    <h1 class="title">
-                        {% include "includes/categoryicon.html" %}{{ package["display_name"] }}
-                    </h1>
-                    <h2 class="subtitle">
-                        A homebrew {% if package["package_type"] != "thm" %}application{% else %}theme{% endif %}
-                        created by <u><b><a
-                            href="/beta/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
-                    </h2>
-                </div>
-                <div class="column is-one-fifth" style="width: unset;">
-                    <img src="{{ package["icon_url"] }}" style="vertical-align: middle;"
-                         alt="Icon for {{ package["display_name"] }}">
+<div class="section">
+    <div class="container">
+        <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="/beta/library">Library</a></li>
+                <li class="is-active"><a href="" aria-current="page">{{ package["display_name"] }}</a></li>
+            </ul>
+        </nav>
+        <div class="notification is-success hero is-bold">
+            <div class="container" style="margin: unset;">
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <h1 class="title">
+                            {% include "includes/categoryicon.html" %}{{ package["display_name"] }}
+                        </h1>
+                        <h2 class="subtitle">
+                            A homebrew {% if package["package_type"] != "thm" %}application{% else %}
+                            theme{% endif %}
+                            created by <u><b><a
+                                href="/beta/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
+                        </h2>
+                    </div>
+                    <div class="column is-one-fifth" style="width: unset;">
+                        <img src="{{ package["icon_url"] }}" style="vertical-align: middle;"
+                             alt="Icon for {{ package["display_name"] }}">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
         <div class="columns">
             <div class="column is-one-third">
                 <article class="message is-success">
@@ -179,7 +184,7 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 {% include 'includes/footer.html' %}
 </body>
 </html>
