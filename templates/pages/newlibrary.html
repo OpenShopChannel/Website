@@ -204,6 +204,9 @@
                             url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
                             {% endif %}
                             ready: function () {
+                                {% if request.args.get("repo") == "themes" %}
+                                repository_type = "theme"
+                                {% endif %}
                                 this.sort("display_name", "asc");
                             },
                             pager: "paginationbar"
