@@ -10,7 +10,7 @@
     {% if devprofile == True %}
         <title>{{ request.args.get("coder") }}'s Developer Profile - Open Shop Channel</title>
     {% else %}
-        <title>New Library Beta - Open Shop Channel</title>
+        <title>Library - Open Shop Channel</title>
     {% endif %}
     {% include 'includes/header.html' %}
     <script src="/static/ticker/ticker.js"></script>
@@ -58,7 +58,7 @@
         {% if devprofile == True %}
             <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="/beta/library">Library</a></li>
+                    <li><a href="/library">Library</a></li>
                     <li class="is-active"><a href="" aria-current="page">Developer
                         Profile: {{ request.args.get("coder") }}</a></li>
                 </ul>
@@ -69,7 +69,7 @@
                 <h2 class="subtitle">Developer Profile</h2>
             </div>
         {% else %}
-            <h1 class="title">Online Library <span class="tag is-light">Beta</span></h1>
+            <h1 class="title">Online Library <span class="tag is-success">New Library!</span></h1>
         {% endif %}
         <div id="AppsList"></div>
         <script type="text/javascript" charset="utf-8">
@@ -160,18 +160,6 @@
                                     },
                                     width: 200,
                                     options: ["Applications", "Themes"]
-                                },
-                                {
-                                    view: "button",
-                                    id: "legacy_library_link",
-                                    value: "Return to Legacy Library",
-                                    hidden: ($(window).width() < 480),
-                                    css: "webix_primary",
-                                    inputWidth: 200,
-                                    align: "right",
-                                    click: function () {
-                                        window.location = "/library"
-                                    }
                                 }
                             ]
                         },

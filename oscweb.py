@@ -1,7 +1,7 @@
 import json
 
 import sentry_sdk
-from flask import Flask, render_template, request, abort
+from flask import Flask, render_template, request, abort, redirect
 from sentry_sdk.integrations.flask import FlaskIntegration
 from werkzeug.urls import url_encode
 import subprocess
@@ -109,34 +109,12 @@ def metagen():
 
 @app.route("/library")
 def apps():
-    # handle pagination
-    items_per_page = 10
-    if request.args.get("p"):
-        # Set to page one if page is invalid
-        try:
-            page = int(request.args.get("p"))
-        except ValueError:
-            page = 1
-        if page < 1:
-            page = 1
-    else:
-        page = 1
-    end_index = page * items_per_page
-    start_index = end_index - items_per_page
-    # return themes if themes repo selected
-    if request.args.get("repo") == "themes":
-        themes = OpenShopChannel.get_themes(developer=request.args.get("coder"), category=request.args.get("category"))
-        return render_template('pages/library.html', packages=themes[start_index:end_index], page=page, type="theme",
-                               results=len(themes))
-
-    packages = OpenShopChannel.get_packages(developer=request.args.get("coder"), category=request.args.get("category"))
-    return render_template('pages/library.html', packages=packages[start_index:end_index], page=page, type="app",
-                           results=len(packages))
+    return render_template('pages/newlibrary.html', newest_packages=OpenShopChannel.newest_packages)
 
 
 @app.route("/beta/library")
 def beta_apps():
-    return render_template('pages/newlibrary.html', newest_packages=OpenShopChannel.newest_packages)
+    return redirect("/library")
 
 
 @app.route("/library/<pkg_type>/<name>")
