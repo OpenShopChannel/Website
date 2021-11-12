@@ -106,11 +106,13 @@
                                             })
                                         }
                                     },
-                                    width: 300,
+                                    // properly scale search bar on mobile devices
+                                    width: ($(window).width() < 480) ? $(window).width() - 54 : 300
                                 },
                                 {
                                     view: "combo",
                                     id: "category",
+                                    hidden: ($(window).width() < 480),
                                     value: "All Apps",
                                     on: {
                                         "onChange": function (category) {
@@ -130,10 +132,11 @@
                                 {
                                     view: "combo",
                                     id: "repository",
+                                    hidden: ($(window).width() < 480),
                                     {% if request.args.get("repo") == "themes" %}
-                                    value: "Themes",
+                                        value: "Themes",
                                     {% else %}
-                                    value: "Applications",
+                                        value: "Applications",
                                     {% endif %}
                                     on: {
                                         "onChange": function (repository) {
@@ -162,6 +165,7 @@
                                     view: "button",
                                     id: "legacy_library_link",
                                     value: "Return to Legacy Library",
+                                    hidden: ($(window).width() < 480),
                                     css: "webix_primary",
                                     inputWidth: 200,
                                     align: "right",
@@ -199,13 +203,13 @@
                             borderless: false,
                             yCount: 8,
                             {% if request.args.get("repo") == "themes" %}
-                            url: "https://api.oscwii.org/v2/themes/packages{{ querystring }}",
+                                url: "https://api.oscwii.org/v2/themes/packages{{ querystring }}",
                             {% else %}
-                            url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
+                                url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
                             {% endif %}
                             ready: function () {
                                 {% if request.args.get("repo") == "themes" %}
-                                repository_type = "theme"
+                                    repository_type = "theme"
                                 {% endif %}
                                 this.sort("display_name", "asc");
                             },
