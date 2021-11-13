@@ -93,6 +93,8 @@ body.webix_noselect {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+.danbo_icon {
   background: #191919;
 }
 .webix_clean {
