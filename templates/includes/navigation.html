@@ -98,7 +98,7 @@
     {% with event = events.current_event() %}
         <div class="notification"
              style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem; text-align: center;">
-            <strong><i class="fas {{ event["announcementIcon"] }}" aria-hidden="true"
+            <strong {% if event["announcementColor"] %}style="color: {{ event["announcementColor"] }}"{% endif %}><i class="fas {{ event["announcementIcon"] }}" aria-hidden="true"
                        style="margin-right: .5em; margin-left: .5em"></i>{{ event["announcementText"] }}<i
                     class="fas {{ event["announcementIcon"] }}" aria-hidden="true"
                     style="margin-right: .5em; margin-left: .5em"></i></strong>
