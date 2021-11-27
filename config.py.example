@@ -7,3 +7,6 @@ use_ticker_json = False
 # Sentry
 sentry_dsn = None
 sample_rate = 1
+
+# Events
+enable_events = False

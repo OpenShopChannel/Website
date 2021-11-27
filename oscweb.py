@@ -10,6 +10,7 @@ import pathlib
 
 import osc
 import utils
+import events
 
 if config.sentry_dsn:
     sentry_sdk.init(
@@ -43,6 +44,12 @@ except Exception as e:
     print(e)
     site_version = "No information."
     site_version_name = "No information."
+
+
+@app.context_processor
+def add_imports():
+    # Note: we only define the top-level module names!
+    return dict(events=events, siteconfig=config)
 
 
 @app.route("/")

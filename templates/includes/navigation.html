@@ -2,8 +2,17 @@
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
             <picture>
-                <source srcset="/static/images/open-logo-dark.png" media="(prefers-color-scheme: dark)">
-                <img src="/static/images/open-logo.png" width="92" height="28">
+                {% if siteconfig.enable_events and events.is_event_running() %}
+                    {% with event = events.current_event() %}
+                        <source class="is-hidden-mobile" srcset="{{ event["logoSourceDark"] }}" media="(prefers-color-scheme: dark)">
+                        <img class="is-hidden-mobile" src="{{ event["logoSourceLight"] }}" height="28">
+                        <source class="is-hidden-desktop" srcset="/static/images/open-logo-dark.png" media="(prefers-color-scheme: dark)">
+                        <img class="is-hidden-desktop" src="/static/images/open-logo.png" height="28">
+                    {% endwith %}
+                {% else %}
+                    <source srcset="/static/images/open-logo-dark.png" media="(prefers-color-scheme: dark)">
+                    <img src="/static/images/open-logo.png" height="28">
+                {% endif %}
             </picture>
             <span class="tag is-light" style="display: none">Beta</span>
         </a>
@@ -81,3 +90,10 @@
         </div>
     </div>
 </nav>
+{% if siteconfig.enable_events and events.is_event_running() %}
+    {% with event = events.current_event() %}
+        <div class="notification" style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem; text-align: center;">
+          <strong><i class="fas {{ event["announcementIcon"] }}" aria-hidden="true" style="margin-right: .5em; margin-left: .5em"></i>{{ event["announcementText"] }}<i class="fas {{ event["announcementIcon"] }}" aria-hidden="true" style="margin-right: .5em; margin-left: .5em"></i></strong>
+        </div>
+    {% endwith %}
+{% endif %}

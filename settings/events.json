@@ -1,0 +1,83 @@
+[
+  {
+    "name": "HanukkahDay0",
+    "startTime": 1637964000,
+    "endTime": 1638050400,
+    "announcementText": "Happy Hanukkah tomorrow!",
+    "announcementIcon": "fa-hanukiah",
+    "logoSourceLight": "/static/images/event/hanukkah/logo/light/day0.png",
+    "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day0.png"
+  },
+  {
+    "name": "HanukkahDay1",
+    "startTime": 1638050400,
+    "endTime": 1638136800,
+    "announcementText": "Happy 1st candle of Hanukkah!",
+    "announcementIcon": "fa-hanukiah",
+    "logoSourceLight": "/static/images/event/hanukkah/logo/light/day1.png",
+    "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day1.png"
+  },
+  {
+    "name": "HanukkahDay2",
+    "startTime": 1638136800,
+    "endTime": 1638223200,
+    "announcementText": "Happy 2nd candle of Hanukkah!",
+    "announcementIcon": "fa-hanukiah",
+    "logoSourceLight": "/static/images/event/hanukkah/logo/light/day2.png",
+    "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day2.png"
+  },
+  {
+    "name": "HanukkahDay3",
+    "startTime": 1638223200,
+    "endTime": 1638309600,
+    "announcementText": "Happy 3rd candle of Hanukkah!",
+    "announcementIcon": "fa-hanukiah",
+    "logoSourceLight": "/static/images/event/hanukkah/logo/light/day3.png",
+    "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day3.png"
+  },
+  {
+    "name": "HanukkahDay4",
+    "startTime": 1638309600,
+    "endTime": 1638396000,
+    "announcementText": "Happy 4th candle of Hanukkah!",
+    "announcementIcon": "fa-hanukiah",
+    "logoSourceLight": "/static/images/event/hanukkah/logo/light/day4.png",
+    "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day4.png"
+  },
+  {
+    "name": "HanukkahDay5",
+    "startTime": 1638396000,
+    "endTime": 1638482400,
+    "announcementText": "Happy 5th candle of Hanukkah!",
+    "announcementIcon": "fa-hanukiah",
+    "logoSourceLight": "/static/images/event/hanukkah/logo/light/day5.png",
+    "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day5.png"
+  },
+  {
+    "name": "HanukkahDay6",
+    "startTime": 1638482400,
+    "endTime": 1638568800,
+    "announcementText": "Happy 6th candle of Hanukkah!",
+    "announcementIcon": "fa-hanukiah",
+    "logoSourceLight": "/static/images/event/hanukkah/logo/light/day6.png",
+    "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day6.png"
+  },
+  {
+    "name": "HanukkahDay7",
+    "startTime": 1638568800,
+    "endTime": 1638655200,
+    "announcementText": "Happy 7th candle of Hanukkah!",
+    "announcementIcon": "fa-hanukiah",
+    "logoSourceLight": "/static/images/event/hanukkah/logo/light/day7.png",
+    "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day7.png"
+  },
+  {
+    "name": "HanukkahDay8",
+    "startTime": 1638655200,
+    "endTime": 1638741600,
+    "announcementText": "Happy 8th candle of Hanukkah!",
+    "announcementIcon": "fa-hanukiah",
+    "logoSourceLight": "/static/images/event/hanukkah/logo/light/day8.png",
+    "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day8.png"
+  }
+]
