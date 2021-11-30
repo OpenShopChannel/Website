@@ -15,6 +15,7 @@ def is_event_running():
                 # check if today is before an event's end date
                 if datetime.fromtimestamp(event["endTime"]).date() >= datetime.today().date():
                     return True
+        return False
 
 
 def current_event():
