@@ -12347,6 +12347,7 @@ body.webix_print {
 }
 .webix_view .webix_dt_editor input,
 .webix_view .webix_dt_editor select {
+  color: black;
   border-color: #205bbc;
   border-radius: 2px;
 }

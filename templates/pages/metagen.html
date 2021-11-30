@@ -48,58 +48,49 @@
                 </p>
             </div>
             <div class="column">
-                <div class="notification is-link is-light">
-                    JavaScript required. The release date defaults to the time of latest form edit, a date picker will
-                    be added in the future.
+                <div class="notification is-success is-light">
+                    Metadata XML Generator has recently been rewritten! It is now possible to configure the date and AHB access flag.
                 </div>
             </div>
         </div>
         <div class="columns">
             <div class="column">
-                <form class="form-horizontal">
-                    <fieldset>
-                        <!-- Text input-->
-                        <div class="field">
-                            <label class="label" for="name">App Name</label>
-                            <div class="control">
-                                <input id="name" name="name" type="text" class="input " required="">
-                            </div>
-                        </div>
-
-                        <!-- Text input-->
-                        <div class="field">
-                            <label class="label" for="coder">Coder</label>
-                            <div class="control">
-                                <input id="coder" name="coder" type="text" class="input " required="">
-                            </div>
-                        </div>
-
-                        <!-- Text input-->
-                        <div class="field">
-                            <label class="label" for="version">Version</label>
-                            <div class="control">
-                                <input id="version" name="version" type="text" class="input " required="">
-                            </div>
-                        </div>
-
-                        <!-- Text input-->
-                        <div class="field">
-                            <label class="label" for="shortdescription">Short Description</label>
-                            <div class="control">
-                                <input id="shortdescription" name="shortdescription" type="text" class="input "
-                                       required="">
-                            </div>
-                        </div>
-
-                        <!-- Textarea -->
-                        <div class="field">
-                            <label class="label" for="longdescription">Long Description</label>
-                            <div class="control">
-                                <textarea class="textarea" id="longdescription" name="longdescription"></textarea>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                <div id="properties"></div>
+                <script type="text/javascript" charset="utf-8">
+                    webix.ready(function () {
+                        webix.ui({
+                            margin: 10,
+                            height: 625,
+                            container: "properties",
+                            responsive: true,
+                            rows: [
+                                {
+                                    view: "property",
+                                    id: "sets",
+                                    nameWidth: 200,
+                                    elements: [
+                                        {label: "Metadata", type: "label"},
+                                        {label: "App Name", type: "text", id: "app_name"},
+                                        {label: "Coder", type: "text", id: "app_author"},
+                                        {label: "Version", type: "text", id: "app_version"},
+                                        {label: "Short Description", type: "text", id: "app_short_description"},
+                                        {label: "Long Description", type: "popup", id: "app_long_description"},
+                                        {label: "Release Date", type: "date", id: "app_release_date"},
+                                        {label: "AHB access", type: "checkbox", id: "app_ahb_access"}
+                                    ],
+                                    on: {
+                                        onAfterEditStop: function () {
+                                            update_output()
+                                        },
+                                        onCheck: function () {
+                                            update_output()
+                                        }
+                                    }
+                                }
+                            ]
+                        });
+                    });
+                </script>
 
             </div>
             <div class="column">
@@ -111,67 +102,38 @@
 {% include 'includes/footer.html' %}
 </body>
 <script>
-    // I don't know javascript but I figured this would be straightforward
-    // This is an open source website for those getting excited.
-    const nameElement = document.querySelector('#name');
-    const coderElement = document.querySelector('#coder');
-    const versionElement = document.querySelector('#version');
-    const shortdescriptionElement = document.querySelector('#shortdescription');
-    const longdescriptionElement = document.querySelector('#longdescription');
-
-    var name = ""
-    var coder = ""
-    var version = ""
-    var shortdescription = ""
-    var longdescription = ""
-
     function pad2(n) {
         return n < 10 ? '0' + n : n
     }
 
-    function updateOutput() {
-        // get current date
-        var date = new Date();
-        var formatteddate = date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds())
+    function ahb_access(n) {
+        if (n === true)
+            return "<ahb_access/>";
+        else
+            return "";
+    }
+
+    function update_output() {
+        if ($$("sets").getItem("app_release_date").value) {
+            var date = $$("sets").getItem("app_release_date").value;
+            var formatteddate = date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
+        } else {
+            var formatteddate = "";
+        }
 
         const result = document.querySelector('#output');
         result.textContent = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <app version="1">
-	<name>${name}</name>
-	<version>${version}</version>
+	<name>${$$("sets").getItem("app_name").value}</name>
+	<version>${$$("sets").getItem("app_version").value}</version>
 	<release_date>${formatteddate}</release_date>
-	<coder>${coder}</coder>
-	<short_description>${shortdescription}</short_description>
-	<long_description>${longdescription}
+	<coder>${$$("sets").getItem("app_author").value}</coder>
+	<short_description>${$$("sets").getItem("app_short_description").value}</short_description>
+	<long_description>${$$("sets").getItem("app_long_description").value}
 </long_description>
-<ahb_access/>
+${ahb_access($$("sets").getItem("app_ahb_access").value)}
 </app>
 `;
     }
-
-    nameElement.addEventListener('input', (event) => {
-        name = event.target.value
-        updateOutput()
-    });
-
-    coderElement.addEventListener('input', (event) => {
-        coder = event.target.value
-        updateOutput()
-    });
-
-    versionElement.addEventListener('input', (event) => {
-        version = event.target.value
-        updateOutput()
-    });
-
-    shortdescriptionElement.addEventListener('input', (event) => {
-        shortdescription = event.target.value
-        updateOutput()
-    });
-
-    longdescriptionElement.addEventListener('input', (event) => {
-        longdescription = event.target.value
-        updateOutput()
-    });
 </script>
 </html>
