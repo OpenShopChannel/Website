@@ -182,8 +182,8 @@
                         select: true,
                         template: function (obj) {
                             return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
-                                "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
-                                + obj.display_name + "</div>" +
+                                "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i><b>"
+                                + obj.display_name + "</b> " + obj.version + "</div>" +
                                 "<div style='float: left; height: 100%; margin-right: 10px;'>" +
                                 "<img src='" + obj.icon_url + "'></div>" +
                                 "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>" +
