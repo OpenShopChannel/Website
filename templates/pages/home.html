@@ -135,6 +135,103 @@
             <a class="button is-ghost is-large" href="https://wii.guide/hbb">HBB Install Guide</a>
 
         </div>
+        <div id="newest_apps" class="is-hidden-mobile" style="margin-bottom: 1.5rem;"></div>
+        <script type="text/javascript" charset="utf-8">
+            webix.ui({
+                margin: 10,
+                container: "newest_apps",
+                responsive: true,
+                rows: [
+                    {
+                        view: "toolbar",
+                        borderless: false,
+                        responsive: true,
+                        cols: [
+                            {
+                                view: "template",
+                                template: '<h1 class="subtitle">Recent Additions / Updates</h1>',
+                                borderless: true,
+                                width: ($(window).width() < 480) ? $(window).width() - 54 : 420
+                            },
+                            {},
+                            {
+                                view: "button",
+                                label: "View All Apps",
+                                click: function () {
+                                    window.open("/library", "_self");
+                                },
+                                width: ($(window).width() < 480) ? $(window).width() - 54 : 120
+                            },
+                            {
+                                view: "template",
+                                id: "danbo_icon",
+                                css: "danbo_icon",
+                                hidden: ($(window).width() < 480),
+                                template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
+                                width: 140,
+                                borderless: true
+                            },
+                        ]
+                    },
+                    {
+                        view: "dataview",
+                        id: "appsview",
+                        css: "cropped_text",
+                        responsive: true,
+                        scroll: false,
+                        select: true,
+                        template: function (obj) {
+                            return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
+                                "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
+                                + obj.display_name + "</div>" +
+                                "<div style='float: left; height: 100%; margin-right: 10px;'>" +
+                                "<img src='" + obj.icon_url + "'></div>" +
+                                "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>" +
+                                "<div class='notification is-success' style='padding: unset; margin-top: 5px;'>" + humanDate(obj.release_date) + "</div>";
+                        },
+                        on: {
+                            "onItemClick": function (id) {
+                                window.location = "/library/app/" + this.getItem(id).internal_name;
+                            }
+                        },
+                        type: {
+                            height: 140,
+                            width: 380,
+                            type: "tiles",
+                        },
+                        borderless: false,
+                        yCount: 1,
+                        url: "https://api.oscwii.org/v2/primary/packages",
+                        ready: function () {
+                            this.sort("release_date", "des");
+                        }
+                    }
+                ]
+            });
+
+            function CategoryIcon(category) {
+                switch (category) {
+                    case "utilities":
+                        return "fas fa-cog fa-fw"
+                    case "emulators":
+                        return "fas fa-microchip fa-fw"
+                    case "games":
+                        return "fas fa-gamepad fa-fw"
+                    case "media":
+                        return "fas fa-photo-video fa-fw"
+                    case "demos":
+                        return "fas fa-vial fa-fw"
+                    default:
+                        return "fas fa-question fa-fw"
+                }
+            }
+
+            function humanDate(date) {
+                var d = new Date(date * 1000);
+                var month = d.getMonth() + 1;
+                return d.getDate() + "/" + month + "/" + d.getFullYear();
+            }
+        </script>
         <h1 class="title">
             We are also on Discord!
         </h1>
