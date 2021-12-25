@@ -88,5 +88,15 @@
     "announcementColor": "#e25822",
     "logoSourceLight": "/static/images/event/hanukkah/logo/light/day8.png",
     "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day8.png"
+  },
+  {
+    "name": "XMAS",
+    "startTime": 1640304000,
+    "endTime": 1640476800,
+    "announcementText": "Merry Christmas!",
+    "announcementIcon": "fa-candy-cane",
+    "announcementColor": "#C30F16",
+    "logoSourceLight": "/static/images/open-logo.png",
+    "logoSourceDark": "/static/images/open-logo-dark.png"
   }
 ]
