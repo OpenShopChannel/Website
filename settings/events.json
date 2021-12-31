@@ -90,13 +90,13 @@
     "logoSourceDark": "/static/images/event/hanukkah/logo/dark/day8.png"
   },
   {
-    "name": "XMAS",
-    "startTime": 1640304000,
-    "endTime": 1640476800,
-    "announcementText": "Merry Christmas!",
-    "announcementIcon": "fa-candy-cane",
-    "announcementColor": "#C30F16",
-    "logoSourceLight": "/static/images/open-logo.png",
-    "logoSourceDark": "/static/images/open-logo-dark.png"
+    "name": "NewYears2022",
+    "startTime": 1640908800,
+    "endTime": 1641168000,
+    "announcementText": "Happy New Year's!",
+    "announcementIcon": "fa-glass-cheers",
+    "announcementColor": "#00C489",
+    "logoSourceLight": "/static/images/event/logo/open-logo-2022.png",
+    "logoSourceDark": "/static/images/event/logo/open-logo-2022.png"
   }
 ]
