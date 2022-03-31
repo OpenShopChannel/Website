@@ -72,7 +72,7 @@
                     <div>
                         <li><span
                                 class="ticker-item"><b><i class="fas fa-star" aria-hidden="true"
-                                                          style="margin-right: .5em"></i>App of the Day: </b> "{{ package["display_name"] }}" ({{ package["category"].capitalize() }}) by {{ package["coder"] }} - {{ package["short_description"] }} - <a
+                                                          style="margin-right: .5em"></i>Recommended NFT (Only ${{ determine_price(package) }}): </b> "{{ package["display_name"] }}" ({{ package["category"].capitalize() }}) by {{ package["coder"] }} - {{ package["short_description"] }} - <a
                                 href="/library/app/{{ package["internal_name"] }}">Download Now!</a></span></li>
                     </div>
                     {% for message in ticker %}
@@ -101,7 +101,7 @@
                 <a href="/library/app/{{ package["internal_name"] }}">
                     <div class="card has-ribbon">
                         <div class="ribbon is-warning"><i class="fas fa-star" aria-hidden="true"
-                                                          style="margin-right: .75em"></i> App of the Day
+                                                          style="margin-right: .75em"></i> NFT of the Day (${{ determine_price(package) }}USD)
                         </div>
                         <div class="card-content" style="margin-top: 15px;">
                             <div class="media">

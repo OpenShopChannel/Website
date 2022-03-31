@@ -11,6 +11,7 @@ import pathlib
 import osc
 import utils
 import events
+import april
 
 if config.sentry_dsn:
     sentry_sdk.init(
@@ -34,6 +35,8 @@ app.url_map.strict_slashes = False
 # jinja2 functions
 app.jinja_env.globals.update(file_size=utils.file_size)
 app.jinja_env.globals.update(date=utils.date)
+app.jinja_env.globals.update(determine_price=april.determine_price)
+app.jinja_env.globals.update(all_packages=OpenShopChannel.get_packages())
 
 # get current git info
 try:
@@ -98,6 +101,20 @@ def donate():
 @app.route("/browser")
 def aprilfools21():
     return render_template('pages/aprilfools21.html')
+
+
+# april fools 2022 route
+@app.route("/buy/<application>")
+def buy(application):
+    package = OpenShopChannel.package_by_name(application)
+    return render_template('pages/buy.html', app=package)
+
+
+# april fools 2022 route
+@app.route("/buy/<application>/owner")
+def buy_owner(application):
+    package = OpenShopChannel.package_by_name(application)
+    return render_template('pages/buy2.html', app=package)
 
 
 @app.route("/beta")

@@ -45,51 +45,74 @@
         </div>
         <div id="content"></div>
         <script type="text/javascript" charset="utf-8">
-                webix.ui({
-                    margin: 10,
-                    hidden: ($(window).width() < 480),
-                    container: "content",
-                    responsive: true,
-                    rows: [
-                        {
-                            view: "toolbar",
-                            borderless: false,
-                            responsive: true,
-                            cols: [
-                                {},
-                                {
-                                    view: "button",
-                                    id: "category",
-                                    label: '<i class="fas fa-stopwatch" aria-hidden="true"></i> Report Outdated',
-                                    tooltip: "Report this package as outdated. Requires a GitHub account.",
-                                    css: "webix_danger",
-                                    click: function () {
-                                        window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("{{ package["version"] }}") + "&title=" + encodeURIComponent("{{ package["display_name"] }}"), '_blank');
-                                    },
-                                    width: 160
+            webix.ui({
+                margin: 10,
+                hidden: ($(window).width() < 480),
+                container: "content",
+                responsive: true,
+                rows: [
+                    {
+                        view: "toolbar",
+                        borderless: false,
+                        responsive: true,
+                        cols: [
+                            {},
+                            {% if package["package_type"] != "thm" %}
+                            {
+                                view: "button",
+                                id: "buy",
+                                label: '<i class="fas fa-shopping-cart" aria-hidden="true"></i> Buy as NFT (${{determine_price(package)}})',
+                                tooltip: "Buy this application as a NFT",
+                                css: "webix_info",
+                                click: function () {
+                                    window.open("/buy/{{ package['internal_name'] }}", '_blank');
                                 },
-                                {
-                                    view: "template",
-                                    id: "danbo_icon",
-                                    css: "danbo_icon",
-                                    hidden: ($(window).width() < 480),
-                                    template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
-                                    width: 140,
-                                    borderless: true
+                                width: 250
+                            },
+                            {% endif %}
+                            {
+                                view: "button",
+                                id: "category",
+                                label: '<i class="fas fa-stopwatch" aria-hidden="true"></i> Report Outdated',
+                                tooltip: "Report this package as outdated. Requires a GitHub account.",
+                                css: "webix_danger",
+                                click: function () {
+                                    window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("{{ package["version"] }}") + "&title=" + encodeURIComponent("{{ package["display_name"] }}"), '_blank');
                                 },
-                            ]
-                        }
-                    ]
-                });
+                                width: 160
+                            },
+                            {
+                                view: "template",
+                                id: "danbo_icon",
+                                css: "danbo_icon",
+                                hidden: ($(window).width() < 480),
+                                template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
+                                width: 140,
+                                borderless: true
+                            },
+                        ]
+                    }
+                ]
+            });
         </script>
         <div class="columns" style="padding-top: 10px;">
             <div class="column is-one-third">
+                {% if package["package_type"] != "thm" %}
+                <div class="is-hidden-desktop">
+                    <a class="button is-link" href="/buy/{{ package['internal_name'] }}" style="width: 100%">Buy as NFT (${{determine_price(package)}})</a>
+                    <br><br>
+                </div>
+            {% endif %}
                 <article class="message is-success">
                     <div class="message-body">
                         <div class="columns is-vcentered is-centered">
+
                             <div class="column">
                                 <b class="subtitle">
                                     {% include "includes/categoryicon.html" %}{{ package["category"].title() }}</b>
+                                <figure>
+                                    <img src="/static/images/richbo.png" alt="{{ package["display_name"] }}">
+                                </figure>
                             </div>
                         </div>
                     </div>

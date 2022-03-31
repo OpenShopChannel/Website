@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Open Shop Channel</title>
+    {% include 'includes/header.html' %}
+</head>
+<body>
+{% include 'includes/navigation.html' %}
+{% include 'includes/alert.html' %}
+<div class="section">
+    <div class="container">
+        <h1 class="title">
+            Buy NFT: {{ app["display_name"] }}
+        </h1>
+        <div class="columns">
+            <div class="column is-one-third">
+                <figure>
+                    <img src="/static/images/richbo-money.png">
+                </figure>
+            </div>
+            <div class="column">
+                <h2 class="title">
+                    Payment Details
+                </h2>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="content">
+                            The "{{ app["display_name"] }}" NFT is sold out, and is no longer available for purchase.
+                            <br><br>
+                            <a href="/buy/{{ app["internal_name"] }}/owner" class="button is-warning">Buy from the current owner</a>
+                            <p><small>(Current Value + Direct Transaction Fee: ${{ determine_price(app) + 2022 }}USD)</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% include 'includes/footer.html' %}
+</body>
+</html>
