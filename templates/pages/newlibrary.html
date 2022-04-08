@@ -95,7 +95,6 @@
         {% endif %}
         <div id="AppsList"></div>
         <script type="text/javascript" charset="utf-8">
-            webix.ready(function () {
                 let repository_type = "app"
                 webix.ui({
                     margin: 10,
@@ -214,7 +213,7 @@
                                     "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
                                     + obj.display_name + "</div>" +
                                     "<div style='float: left; height: 100%; margin-right: 10px;'>" +
-                                    "<img src='" + obj.icon_url + "'></div>" +
+                                    "<img src='" + obj.icon_url + "' style='height: 48px'></div>" +
                                     "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
                             },
                             on: {
@@ -224,6 +223,15 @@
                                 "onAfterRender": function () {
                                     // update amount of apps
                                     $$("amount_of_apps").setValue(this.count() + " Apps")
+                                },
+                                "onLoadError": function () {
+                                    this.parse([{
+                                        "display_name": "Error",
+                                        "short_description": "There was an error loading the library.",
+                                        "icon_url": "/static/images/apipaper.png",
+                                        "coder": "Danbo. Click to refresh library.",
+                                        "internal_name": "../"
+                                    }])
                                 }
                             },
                             type: {
@@ -278,7 +286,6 @@
                             return "fas fa-question fa-fw"
                     }
                 }
-            });
         </script>
     </div>
 </section>
