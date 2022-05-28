@@ -5019,18 +5019,18 @@
   .panel-heading,
   .panel-tabs,
   .panel-block {
-    border-bottom: 1px solid #363636;
-    border-left: 1px solid #363636;
-    border-right: 1px solid #363636;
+    border-bottom: 1px solid #363636 !important;
+    border-left: 1px solid #363636 !important;
+    border-right: 1px solid #363636 !important;
   }
   .panel-heading:first-child,
   .panel-tabs:first-child,
   .panel-block:first-child {
-    border-top: 1px solid #363636;
+    border-top: 1px solid #363636 !important;
   }
   .panel-heading {
-    background-color: #242424;
-    color: #dbdbdb;
+    background-color: #242424 !important;
+    color: #dbdbdb !important;
   }
   .panel-tabs a {
     border-bottom: 1px solid #363636;
