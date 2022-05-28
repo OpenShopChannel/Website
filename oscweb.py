@@ -2,7 +2,7 @@ import json
 import os
 
 import sentry_sdk
-from flask import Flask, render_template, request, abort, redirect
+from flask import Flask, render_template, request, abort, redirect, url_for
 from sentry_sdk.integrations.flask import FlaskIntegration
 from werkzeug.urls import url_encode
 import subprocess
@@ -87,7 +87,8 @@ def about():
 
 @app.route("/faq")
 def faq():
-    return render_template('pages/faq.html')
+    # Now a redirect to the new FAQ page
+    return redirect(url_for('help', article='faq'), 301)
 
 
 @app.route("/help")
