@@ -15,9 +15,28 @@
                 {% include 'pages/help/navigation.html' %}
             </div>
             <div class="column">
-                <h1 class="title">
-                    {{ self.title() }}
-                </h1>
+                <nav class="level">
+                    <!-- Left side -->
+                    <div class="level-left">
+                        <div class="level-item">
+                            <h1 class="title">
+                                {{ self.title() }}
+                            </h1>
+                        </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="level-right">
+                        <a class="level-item" aria-label="contribute"
+                           href="https://github.com/OpenShopChannel/Website/tree/master/templates/pages/help/articles/{{ name }}.html"
+                           target=”_blank”>
+                            <span class="icon is-small">
+                                <i class="fas fa-file-pen" aria-hidden="true" style="margin-right: .75em"></i>
+                            </span>
+                            Edit this page on GitHub
+                        </a>
+                    </div>
+                </nav>
                 <p class="subtitle">
                     {% block subtitle %}{% endblock %}
                 </p>
@@ -28,6 +47,19 @@
                 <article class="message">
                     <div class="message-body">
                         Still need help? Join our Discord server: <a href="https://discord.gg/osc">discord.gg/osc</a>
+                    </div>
+                </article>
+                <article class="message">
+                    <div class="message-body">
+                        Managed to solve this issue in a different way? Contribute to this page on GitHub:<br>
+                        <a class="level-item" style="text-decoration: none"
+                           href="https://github.com/OpenShopChannel/Website/tree/master/templates/pages/help/articles/{{ name }}.html"
+                           target=”_blank”>
+                            <span class="icon is-small">
+                                <i class="fas fa-file-pen" aria-hidden="true" style="margin-right: .75em"></i>
+                            </span>
+                            <u>Edit this page on GitHub</u>
+                        </a>
                     </div>
                 </article>
             </div>
