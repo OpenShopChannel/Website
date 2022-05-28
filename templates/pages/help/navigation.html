@@ -1,0 +1,16 @@
+{% macro article(title, id) %}
+    <a class="panel-block{% if id == name %} is-active{% endif %}" href="/help/{{ id }}">
+    <span class="panel-icon">
+      <i class="fas fa-book" aria-hidden="true"></i>
+    </span>
+        {{ title }}
+    </a>
+{% endmacro %}
+
+<article class="panel is-link">
+    <p class="panel-heading">
+        Help & Troubleshooting
+    </p>
+    {{ article("Welcome", "welcome") }}
+    {{ article("Read Error -6", "readerror-6") }}
+</article>

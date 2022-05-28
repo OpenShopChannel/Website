@@ -1,4 +1,5 @@
 import json
+import os
 
 import sentry_sdk
 from flask import Flask, render_template, request, abort, redirect
@@ -87,6 +88,16 @@ def about():
 @app.route("/faq")
 def faq():
     return render_template('pages/faq.html')
+
+
+@app.route("/help")
+@app.route("/help/<article>")
+def help(article="welcome"):
+    # check if article exists
+    print(os.listdir("templates/pages/help/articles"))
+    if article + ".html" not in os.listdir("templates/pages/help/articles"):
+        abort(404)
+    return render_template(f'pages/help/articles/{article}.html', name=article)
 
 
 @app.route("/donate")
