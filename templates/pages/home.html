@@ -39,7 +39,7 @@
                         <li><span
                                 class="ticker-item"><b><i class="fas fa-newspaper" aria-hidden="true"
                                                           style="margin-right: .5em"></i>Latest update / addition: </b>"{{ newest_packages["newest"]["display_name"] }} {{ newest_packages["newest"]["version"] }}" by {{ newest_packages["newest"]["coder"] }} - {{ date(newest_packages["newest"]["release_date"]) }} - {{ newest_packages["newest"]["short_description"] }} - <a
-                                href="/library/app/{{ newest_packages["newest"]["internal_name"] }}">Download Now!</a></span>
+                                href="{{ url_for('application', name=newest_packages["newest"]["internal_name"], pkg_type='app') }}">Download Now!</a></span>
                         </li>
                     </div>
                     {% if newest_packages["newest"]["category"] != "games" %}
@@ -47,7 +47,7 @@
                             <li><span
                                     class="ticker-item"><b><i class="fas fa-gamepad" aria-hidden="true"
                                                               style="margin-right: .5em"></i>Latest update in Games: </b>"{{ newest_packages["games"]["display_name"] }}" by {{ newest_packages["games"]["coder"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["short_description"] }} - <a
-                                    href="/library/app/{{ newest_packages["games"]["internal_name"] }}">Download Now!</a></span>
+                                    href="{{ url_for('application', name=newest_packages["games"]["internal_name"], pkg_type='app') }}">Download Now!</a></span>
                             </li>
                         </div>
                     {% endif %}
@@ -56,7 +56,7 @@
                             <li><span
                                     class="ticker-item"><b><i class="fas fa-cog" aria-hidden="true"
                                                               style="margin-right: .5em"></i>Latest update in Utilities: </b>"{{ newest_packages["utilities"]["display_name"] }}" by {{ newest_packages["utilities"]["coder"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["short_description"] }} - <a
-                                    href="/library/app/{{ newest_packages["utilities"]["internal_name"] }}">Download Now!</a></span>
+                                    href="{{ url_for('application', name=newest_packages["utilities"]["internal_name"], pkg_type='app') }}">Download Now!</a></span>
                             </li>
                         </div>
                     {% endif %}
@@ -65,7 +65,7 @@
                             <li><span
                                     class="ticker-item"><b><i class="fas fa-microchip" aria-hidden="true"
                                                               style="margin-right: .5em"></i>Latest update in Emulators: </b>"{{ newest_packages["emulators"]["display_name"] }}" by {{ newest_packages["emulators"]["coder"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["short_description"] }} - <a
-                                    href="/library/app/{{ newest_packages["emulators"]["internal_name"] }}">Download Now!</a></span>
+                                    href="{{ url_for('application', name=newest_packages["emulators"]["internal_name"], pkg_type='app') }}">Download Now!</a></span>
                             </li>
                         </div>
                     {% endif %}
@@ -73,7 +73,7 @@
                         <li><span
                                 class="ticker-item"><b><i class="fas fa-star" aria-hidden="true"
                                                           style="margin-right: .5em"></i>App of the Day: </b> "{{ package["display_name"] }}" ({{ package["category"].capitalize() }}) by {{ package["coder"] }} - {{ package["short_description"] }} - <a
-                                href="/library/app/{{ package["internal_name"] }}">Download Now!</a></span></li>
+                                href="{{ url_for('application', name=package["internal_name"], pkg_type='app') }}">Download Now!</a></span></li>
                     </div>
                     {% for message in ticker %}
                         {% if not message["first"] %}
@@ -98,7 +98,7 @@
                 <img src="/static/images/RainbowOpenLogo.png" alt="Open Shop Channel Logo" width="448" height="224">
             </div>
             <div class="column is-one-half is-hidden-mobile">
-                <a href="/library/app/{{ package["internal_name"] }}">
+                <a href="{{ url_for('application', name=package["internal_name"], pkg_type='app') }}">
                     <div class="card has-ribbon">
                         <div class="ribbon is-warning"><i class="fas fa-star" aria-hidden="true"
                                                           style="margin-right: .75em"></i> App of the Day
