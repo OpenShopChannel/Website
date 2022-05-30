@@ -38,52 +38,37 @@
             <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
                 <ul>
                     <li><a href="/library">Library</a></li>
-                    <li class="is-active"><a href="" aria-current="page">Home</a></li>
+                    <li class="marquee is-active"><a href="" aria-current="page">Home</a></li>
                 </ul>
             </nav>
             <div class="notification" style="margin-bottom: 10px;">
-                <h1 class="title">Online Library <span class="tag is-success">New Library!</span></h1>
+                <h1 class="title" style="text-align: center;">Open Shop Channel</h1>
                 <div class="columns is-vcentered">
                     <div class="column" style="padding-top: unset; margin-top: -0.8rem;">
                         <div class="ticker-container is-hidden-mobile">
                             <ul>
                                 <div>
-                                    <li><h2 class="subtitle" class="ticker-item"><i class="fas fa-gamepad"
-                                                                                    aria-hidden="true"
-                                                                                    style="margin-right: .5em"></i>Latest
-                                        update in Games: "{{ newest_packages["games"]["display_name"] }}"
+                                    <li><h2 class="subtitle" class="ticker-item"><b>Latest
+                                        update in Games:</b> "{{ newest_packages["games"]["display_name"] }}"
                                         by {{ newest_packages["games"]["coder"] }} -
                                         Version {{ newest_packages["games"]["version"] }}
-                                        - {{ date(newest_packages["games"]["release_date"]) }}
-                                        - <a
-                                                href="/library/app/{{ newest_packages["games"]["internal_name"] }}">Download
-                                            Now!</a></h2>
+                                        - {{ date(newest_packages["games"]["release_date"]) }}</h2>
                                     </li>
                                 </div>
                                 <div>
-                                    <li><h2 class="subtitle" class="ticker-item"><i class="fas fa-cog"
-                                                                                    aria-hidden="true"
-                                                                                    style="margin-right: .5em"></i>Latest
-                                        update in Utilities: "{{ newest_packages["utilities"]["display_name"] }}"
+                                    <li><h2 class="subtitle" class="ticker-item"><b>Latest
+                                        update in Utilities:</b> "{{ newest_packages["utilities"]["display_name"] }}"
                                         by {{ newest_packages["utilities"]["coder"] }} -
                                         Version {{ newest_packages["utilities"]["version"] }}
-                                        - {{ date(newest_packages["utilities"]["release_date"]) }}
-                                        - <a
-                                                href="/library/app/{{ newest_packages["utilities"]["internal_name"] }}">Download
-                                            Now!</a></h2>
+                                        - {{ date(newest_packages["utilities"]["release_date"]) }}</h2>
                                     </li>
                                 </div>
                                 <div>
-                                    <li><h2 class="subtitle" class="ticker-item"><i class="fas fa-microchip"
-                                                                                    aria-hidden="true"
-                                                                                    style="margin-right: .5em"></i>Latest
-                                        update in Emulators: "{{ newest_packages["emulators"]["display_name"] }}"
+                                    <li><h2 class="subtitle" class="ticker-item"><b>Latest
+                                        update in Emulators:</b> "{{ newest_packages["emulators"]["display_name"] }}"
                                         by {{ newest_packages["emulators"]["coder"] }} -
                                         Version {{ newest_packages["emulators"]["version"] }}
-                                        - {{ date(newest_packages["emulators"]["release_date"]) }}
-                                        - <a
-                                                href="/library/app/{{ newest_packages["emulators"]["internal_name"] }}">Download
-                                            Now!</a></h2>
+                                        - {{ date(newest_packages["emulators"]["release_date"]) }}</h2>
                                     </li>
                                 </div>
                             </ul>
