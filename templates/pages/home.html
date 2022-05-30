@@ -182,13 +182,13 @@
                         scroll: false,
                         select: true,
                         template: function (obj) {
-                            return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
-                                "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i><b>"
+                            return "<div class='notification' style='margin-bottom: unset; margin-top: 0.25rem; padding: 0 0.5rem 0 0.5rem; text-align: center;'>"
+                                + humanDate(obj.release_date) + "</div><div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>"
+                                + "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i><b>"
                                 + obj.display_name + "</b> " + obj.version + "</div>" +
                                 "<div style='float: left; height: 100%; margin-right: 10px;'>" +
                                 "<img src='" + obj.icon_url + "'></div>" +
-                                "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>" +
-                                "<div class='notification is-success' style='padding: unset; margin-top: 5px;'>" + humanDate(obj.release_date) + "</div>";
+                                "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
                         },
                         on: {
                             "onItemClick": function (id) {
