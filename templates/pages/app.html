@@ -125,12 +125,19 @@
                         <p><i class="fas fa-gamepad fa-share-alt" aria-hidden="true"></i> Share</p>
                     </div>
                     <div class="message-body">
-                        <b><i class="fas fa-info fa-link" aria-hidden="true"></i> Application URL:</b>
+                        <b><i class="fas fa-info fa-link" aria-hidden="true"></i> Application link:</b>
                         <input class="input is-success" type="text" readonly
                                value="https://oscwii.org{{ request.path }}">
-                        <b><i class="fas fa-info fa-link" aria-hidden="true"></i> Author URL:</b>
+                        <b><i class="fas fa-info fa-link mt-3" aria-hidden="true"></i> Author link:</b>
                         <input class="input is-success" type="text" readonly
                                value="https://oscwii.org/library?coder={{ package.coder }}&repo={{ repo }}">
+                        <b><i class="fas fa-info fa-share mt-3" aria-hidden="true"></i> Social media:</b><br>
+                        <a class="button is-link" href="https://twitter.com/intent/tweet?text={{ package["display_name"] }} on Open Shop Channel: https://oscwii.org{{ request.path }} @openshopwii">
+                            <span class="icon">
+                                <i class="fab fa-twitter"></i>
+                            </span>
+                            <span>Twitter</span>
+                        </a>
                     </div>
                 </article>
             </div>
