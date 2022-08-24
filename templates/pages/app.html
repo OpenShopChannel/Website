@@ -143,18 +143,15 @@
             </div>
 
             <div class="column">
-                <p class="title">Description</p>
+                <div class="divider is-left">Description</div>
                 {% if package["short_description"] == package["long_description"] %}
                     <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
                 {% else %}
                     <b style="margin-bottom: 1.5rem">{{ package["short_description"] }}</b>
                     <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
                 {% endif %}
-                <p class="title">Files</p>
 
-                <div>
-                    <div class="divider is-left">Recommended Download</div>
-                </div>
+                <div class="divider is-left">Recommended Download</div>
 
                 <div class="card mb-4">
                     <header class="card-header">
@@ -168,7 +165,7 @@
                     </header>
                     <div class="card-content">
                         <div class="content">
-                            The application in the form of a ZIP file, containing the app.
+                            A zip file containing the application.
                         </div>
                     </div>
                     <footer class="card-footer">
@@ -180,7 +177,7 @@
                 </div>
 
                 <div>
-                    <div class="divider is-left">More Download Options</div>
+                    <div class="divider is-left">Other Download Options</div>
                 </div>
 
                 {% if package["package_type"] != "thm" %}
@@ -189,12 +186,12 @@
                             <p class="card-header-title">
                                 <i class="fas fa-terminal fa-fw" aria-hidden="true"
                                    style="margin-right: 5px"></i>{{ package["display_name"] }}
-                                (BOOT.{{ package["package_type"].upper() }})
+                                (boot.{{ package["package_type"] }})
                             </p>
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                The application {{ package["package_type"].upper() }}.
+                                The application's binary.
                             </div>
                         </div>
                         <footer class="card-footer">
@@ -209,7 +206,7 @@
                 <div class="card mb-4">
                     <header class="card-header">
                         <p class="card-header-title">
-                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>META.XML
+                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>Metadata file
                             for {{ package["display_name"] }}
                         </p>
                     </header>
