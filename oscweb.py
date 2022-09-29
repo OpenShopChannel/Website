@@ -75,11 +75,6 @@ def publish():
                            themes=OpenShopChannel.get_themes())
 
 
-@app.route("/feedback")
-def feedback():
-    return render_template('pages/feedback.html')
-
-
 @app.route("/about")
 def about():
     return render_template('pages/about.html', version=site_version, version_name=site_version_name)
