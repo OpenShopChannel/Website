@@ -75,21 +75,97 @@
                         </div>
                     </div>
                 </div>
+                <div id="LibraryToolbar" style="margin: -10px;"></div>
             </div>
 
         {% endif %}
         <div id="AppsList"></div>
         <script type="text/javascript" charset="utf-8">
                 let repository_type = "app"
-                webix.ui({
+                library = webix.ui({
                     margin: 10,
                     container: "AppsList",
                     responsive: true,
                     rows: [
                         {
-                            view: "toolbar",
-                            borderless: false,
+                            view: "dataview",
+                            id: "appsview",
+                            css: "cropped_text",
                             responsive: true,
+                            scroll: false,
+                            select: true,
+                            template: function (obj) {
+                                return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
+                                    "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
+                                    + obj.display_name + "</div>" +
+                                    "<div style='float: left; height: 100%; margin-right: 10px;'>" +
+                                    "<img src='" + obj.icon_url + "' style='height: 48px'></div>" +
+                                    "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
+                            },
+                            on: {
+                                "onItemClick": function (id) {
+                                    window.location = "/library/" + repository_type + "/" + this.getItem(id).internal_name;
+                                },
+                                "onAfterRender": function () {
+                                    // update amount of apps
+                                    $$("amount_of_apps").setValue(this.count() + " Apps")
+                                },
+                                "onLoadError": function () {
+                                    this.parse([{
+                                        "display_name": "Error",
+                                        "short_description": "There was an error loading the library.",
+                                        "icon_url": "/static/images/apipaper.png",
+                                        "coder": "Danbo. Click to refresh library.",
+                                        "internal_name": "../"
+                                    }])
+                                }
+                            },
+                            type: {
+                                height: 120,
+                                width: 380,
+                                type: "tiles",
+                            },
+                            borderless: true,
+                            yCount: 8,
+                            {% if request.args.get("repo") == "themes" %}
+                                url: "https://api.oscwii.org/v2/themes/packages{{ querystring }}",
+                            {% else %}
+                                url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
+                            {% endif %}
+                            ready: function () {
+                                {% if request.args.get("repo") == "themes" %}
+                                    repository_type = "theme"
+                                {% endif %}
+                                this.sort("display_name", "asc");
+                            },
+                            pager: "paginationbar"
+                        },
+                        {
+                            view: "pager",
+                            id: "paginationbar",
+                            on: {
+                                "onAfterPageChange": function () {
+                                    // scroll page back up
+                                    window.scrollTo(0, 0)
+                                }
+                            },
+                            size: 24,
+                            group: 4,
+                            template: "{common.first()}{common.prev()}{common.pages()}{common.next()}{common.last()}"
+                        }
+                    ]
+                });
+
+                library_toolbar = webix.ui({
+                    margin: 10,
+                    container: "LibraryToolbar",
+                    responsive: true,
+                    rows: [
+                        {
+                            view: "toolbar",
+                            borderless: true,
+                            responsive: true,
+                            css: {"background-color": "unset"},
                             cols: [
                                 {
                                     view: "search",
@@ -113,7 +189,7 @@
                                         }
                                     },
                                     // properly scale search bar on mobile devices
-                                    width: ($(window).width() < 480) ? $(window).width() - 54 : 300
+                                    width: ($(window).width() < 480) ? $(window).width() - 92 : 300,
                                 },
                                 {
                                     view: "combo",
@@ -178,79 +254,13 @@
                                 {
                                     view: "template",
                                     id: "danbo_icon",
-                                    css: "danbo_icon",
+                                    css: {"background-color": "unset"},
                                     hidden: ($(window).width() < 480),
                                     template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
                                     width: 140,
                                     borderless: true
                                 },
                             ]
-                        },
-                        {
-                            view: "dataview",
-                            id: "appsview",
-                            css: "cropped_text",
-                            responsive: true,
-                            scroll: false,
-                            select: true,
-                            template: function (obj) {
-                                return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
-                                    "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
-                                    + obj.display_name + "</div>" +
-                                    "<div style='float: left; height: 100%; margin-right: 10px;'>" +
-                                    "<img src='" + obj.icon_url + "' style='height: 48px'></div>" +
-                                    "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
-                            },
-                            on: {
-                                "onItemClick": function (id) {
-                                    window.location = "/library/" + repository_type + "/" + this.getItem(id).internal_name;
-                                },
-                                "onAfterRender": function () {
-                                    // update amount of apps
-                                    $$("amount_of_apps").setValue(this.count() + " Apps")
-                                },
-                                "onLoadError": function () {
-                                    this.parse([{
-                                        "display_name": "Error",
-                                        "short_description": "There was an error loading the library.",
-                                        "icon_url": "/static/images/apipaper.png",
-                                        "coder": "Danbo. Click to refresh library.",
-                                        "internal_name": "../"
-                                    }])
-                                }
-                            },
-                            type: {
-                                height: 120,
-                                width: 380,
-                                type: "tiles",
-                            },
-                            borderless: false,
-                            yCount: 8,
-                            {% if request.args.get("repo") == "themes" %}
-                                url: "https://api.oscwii.org/v2/themes/packages{{ querystring }}",
-                            {% else %}
-                                url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
-                            {% endif %}
-                            ready: function () {
-                                {% if request.args.get("repo") == "themes" %}
-                                    repository_type = "theme"
-                                {% endif %}
-                                this.sort("display_name", "asc");
-                            },
-                            pager: "paginationbar"
-                        },
-                        {
-                            view: "pager",
-                            id: "paginationbar",
-                            on: {
-                                "onAfterPageChange": function () {
-                                    // scroll page back up
-                                    window.scrollTo(0, 0)
-                                }
-                            },
-                            size: 24,
-                            group: 4,
-                            template: "{common.first()}{common.prev()}{common.pages()}{common.next()}{common.last()}"
                         }
                     ]
                 });
@@ -271,6 +281,9 @@
                             return "fas fa-question fa-fw"
                     }
                 }
+
+                webix.event(window, "resize", function(){ library.adjust(); })
+                webix.event(window, "resize", function(){ library_toolbar.adjust(); })
         </script>
     </div>
 </section>
