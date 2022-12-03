@@ -61,7 +61,7 @@
                                     view: "button",
                                     id: "category",
                                     label: '<i class="fas fa-stopwatch" aria-hidden="true"></i> Report Outdated',
-                                    tooltip: "Report this package as outdated. Requires a GitHub account.",
+                                    tooltip: "Report this application as outdated. Requires a GitHub account.",
                                     css: "webix_danger",
                                     click: function () {
                                         window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("{{ package["version"] }}") + "&title=" + encodeURIComponent("{{ package["display_name"] }}"), '_blank');
