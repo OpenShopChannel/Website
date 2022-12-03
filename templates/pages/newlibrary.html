@@ -34,6 +34,7 @@
                                      style="margin-right: 5px"></i>{{ request.args.get("coder") }}</h1>
                 <h2 class="subtitle">Developer Profile</h2>
             </div>
+            <div id="LibraryToolbar"></div>
         {% else %}
             <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
                 <ul>
@@ -124,6 +125,15 @@
                                         "coder": "Danbo. Click to refresh library.",
                                         "internal_name": "../"
                                     }])
+                                },
+                                "onBeforeLoad": function() {
+                                    // show loading screen
+                                    webix.extend(this, webix.ProgressBar);
+                                    this.showProgress();
+                                },
+                                "onAfterLoad": function() {
+                                    // hide loading screen
+                                    this.hideProgress();
                                 }
                             },
                             type: {
@@ -132,7 +142,7 @@
                                 type: "tiles",
                             },
                             borderless: true,
-                            yCount: 8,
+                            yCount: 7,
                             {% if request.args.get("repo") == "themes" %}
                                 url: "https://api.oscwii.org/v2/themes/packages{{ querystring }}",
                             {% else %}
