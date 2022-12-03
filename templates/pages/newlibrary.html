@@ -94,6 +94,12 @@
                             responsive: true,
                             scroll: false,
                             select: true,
+                            tooltip: function (obj) {
+                                return "<i class='fas fa-calendar-alt fa-fw' aria-hidden='true' style='margin-right: .25em'></i>"
+                                        + new Date(obj.release_date * 1000).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}) + "<br>" +
+                                        "<i class='fas fa-sd-card fa-fw' aria-hidden='true' style='margin-right: .25em'></i>" + file_size(obj.extracted) + " (Extracted)<br>" +
+                                        "<i class='fas fa-wrench fa-fw' aria-hidden='true' style='margin-right: .25em'></i>Version " + obj.version;
+                            },
                             template: function (obj) {
                                 return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
                                     "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
@@ -121,7 +127,7 @@
                                 }
                             },
                             type: {
-                                height: 120,
+                                height: 150,
                                 width: 380,
                                 type: "tiles",
                             },
@@ -280,6 +286,18 @@
                         default:
                             return "fas fa-question fa-fw"
                     }
+                }
+
+                // convert file length to human-readable units
+                function file_size(length) {
+                    const units = ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z'];
+                    for (let i = 0; i < units.length; i++) {
+                        if (Math.abs(length) < 1000.0) {
+                            return length.toFixed(1) + units[i] + "B";
+                        }
+                        length /= 1000.0;
+                    }
+                    return length.toFixed(1) + 'Yi' + "B";
                 }
 
                 webix.event(window, "resize", function(){ library.adjust(); })
