@@ -138,7 +138,7 @@
         </div>
         <div id="newest_apps" class="is-hidden-mobile" style="margin-bottom: 1.5rem;"></div>
         <script type="text/javascript" charset="utf-8">
-            webix.ui({
+            newest_apps = webix.ui({
                 margin: 10,
                 container: "newest_apps",
                 responsive: true,
@@ -193,6 +193,15 @@
                         on: {
                             "onItemClick": function (id) {
                                 window.location = "/library/app/" + this.getItem(id).internal_name;
+                            },
+                            "onBeforeLoad": function() {
+                                // show loading screen
+                                webix.extend(this, webix.ProgressBar);
+                                this.showProgress();
+                            },
+                            "onAfterLoad": function() {
+                                // hide loading screen
+                                this.hideProgress();
                             }
                         },
                         type: {
@@ -209,6 +218,8 @@
                     }
                 ]
             });
+
+            webix.event(window, "resize", function(){ newest_apps.adjust(); })
 
             function CategoryIcon(category) {
                 switch (category) {
