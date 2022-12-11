@@ -45,9 +45,8 @@
         </div>
         <div id="content"></div>
         <script type="text/javascript" charset="utf-8">
-                webix.ui({
+                toolbar = webix.ui({
                     margin: 10,
-                    hidden: ($(window).width() < 480),
                     container: "content",
                     responsive: true,
                     rows: [
@@ -81,6 +80,7 @@
                         }
                     ]
                 });
+                webix.event(window, "resize", function(){ toolbar.adjust(); })
         </script>
         <div class="columns" style="padding-top: 10px;">
             <div class="column is-one-third">
