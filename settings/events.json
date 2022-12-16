@@ -1,8 +1,8 @@
 [
   {
     "name": "HanukkahDay0",
-    "startTime": 1671228000,
-    "endTime": 1671314400,
+    "startTime": 1671314400,
+    "endTime": 1671400800,
     "announcementText": "Happy Hanukkah tomorrow!",
     "announcementIcon": "fa-hanukiah",
     "announcementColor": "#e25822",
@@ -11,8 +11,8 @@
   },
   {
     "name": "HanukkahDay1",
-    "startTime": 1671314400,
-    "endTime": 1671400800,
+    "startTime": 1671400800,
+    "endTime": 1671487200,
     "announcementText": "Happy 1st night of Hanukkah!",
     "announcementIcon": "fa-hanukiah",
     "announcementColor": "#e25822",
@@ -21,8 +21,8 @@
   },
   {
     "name": "HanukkahDay2",
-    "startTime": 1671400800,
-    "endTime": 1671487200,
+    "startTime": 1671487200,
+    "endTime": 1671573600,
     "announcementText": "Happy 2nd night of Hanukkah!",
     "announcementIcon": "fa-hanukiah",
     "announcementColor": "#e25822",
@@ -31,8 +31,8 @@
   },
   {
     "name": "HanukkahDay3",
-    "startTime": 1671487200,
-    "endTime": 1671573600,
+    "startTime": 1671573600,
+    "endTime": 1671660000,
     "announcementText": "Happy 3rd night of Hanukkah!",
     "announcementIcon": "fa-hanukiah",
     "announcementColor": "#e25822",
@@ -41,8 +41,8 @@
   },
   {
     "name": "HanukkahDay4",
-    "startTime": 1671573600,
-    "endTime": 1671660000,
+    "startTime": 1671660000,
+    "endTime": 1671746400,
     "announcementText": "Happy 4th night of Hanukkah!",
     "announcementIcon": "fa-hanukiah",
     "announcementColor": "#e25822",
@@ -51,8 +51,8 @@
   },
   {
     "name": "HanukkahDay5",
-    "startTime": 1671660000,
-    "endTime": 1671746400,
+    "startTime": 1671746400,
+    "endTime": 1671832800,
     "announcementText": "Happy 5th night of Hanukkah!",
     "announcementIcon": "fa-hanukiah",
     "announcementColor": "#e25822",
@@ -61,8 +61,8 @@
   },
   {
     "name": "HanukkahDay6",
-    "startTime": 1671746400,
-    "endTime": 1671832800,
+    "startTime": 1671832800,
+    "endTime": 1671919200,
     "announcementText": "Happy 6th night of Hanukkah!",
     "announcementIcon": "fa-hanukiah",
     "announcementColor": "#e25822",
@@ -71,8 +71,8 @@
   },
   {
     "name": "HanukkahDay7",
-    "startTime": 1671832800,
-    "endTime": 1671919200,
+    "startTime": 1671919200,
+    "endTime": 1672005600,
     "announcementText": "Happy 7th night of Hanukkah!",
     "announcementIcon": "fa-hanukiah",
     "announcementColor": "#e25822",
@@ -81,8 +81,8 @@
   },
   {
     "name": "HanukkahDay8",
-    "startTime": 1671919200,
-    "endTime": 1672005600,
+    "startTime": 1672005600,
+    "endTime": 1672092000,
     "announcementText": "Happy 8th night of Hanukkah!",
     "announcementIcon": "fa-hanukiah",
     "announcementColor": "#e25822",
