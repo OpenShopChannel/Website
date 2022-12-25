@@ -47,18 +47,13 @@
                     Quickly generate a meta.xml file for your Homebrew app.
                 </p>
             </div>
-            <div class="column">
-                <div class="notification is-success is-light">
-                    Metadata XML Generator has recently been rewritten! It is now possible to configure the date and AHB access flag.
-                </div>
-            </div>
         </div>
         <div class="columns">
-            <div class="column">
+            <div class="column is-one-third">
                 <div id="properties"></div>
                 <script type="text/javascript" charset="utf-8">
                     webix.ready(function () {
-                        webix.ui({
+                        let properties_pane = webix.ui({
                             margin: 10,
                             height: 625,
                             container: "properties",
@@ -89,6 +84,8 @@
                                 }
                             ]
                         });
+
+                        webix.event(window, "resize", function(){ properties_pane.adjust(); })
                     });
                 </script>
 
@@ -108,7 +105,7 @@
 
     function ahb_access(n) {
         if (n === true)
-            return "<ahb_access/>";
+            return "\n<ahb_access/>";
         else
             return "";
     }
@@ -130,8 +127,7 @@
 	<coder>${$$("sets").getItem("app_author").value}</coder>
 	<short_description>${$$("sets").getItem("app_short_description").value}</short_description>
 	<long_description>${$$("sets").getItem("app_long_description").value}
-</long_description>
-${ahb_access($$("sets").getItem("app_ahb_access").value)}
+</long_description>${ahb_access($$("sets").getItem("app_ahb_access").value)}
 </app>
 `;
     }

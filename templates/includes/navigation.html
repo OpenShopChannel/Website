@@ -55,13 +55,11 @@
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
-                    Dev Tools
+                    Tools
                 </a>
 
                 <div class="navbar-dropdown">
-                    <a class="navbar-item" href="/tools/metaxml">
-                        Meta XML Generator
-                    </a>
+                    {{ page("meta.xml Generator", "metagen") }}
                 </div>
             </div>
             {{ page("Donate", "donate") }}
