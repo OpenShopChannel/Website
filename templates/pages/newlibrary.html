@@ -152,6 +152,10 @@
                                 {% if request.args.get("repo") == "themes" %}
                                     repository_type = "theme"
                                 {% endif %}
+                                {% if request.args.get("page") %}
+                                    // navigate to specified page number using pager "paginationbar"
+                                    $$("paginationbar").select({{ request.args.get("page") }} - 1);
+                                {% endif %}
                                 this.sort("display_name", "asc");
                             },
                             pager: "paginationbar"
@@ -163,6 +167,11 @@
                                 "onAfterPageChange": function () {
                                     // scroll page back up
                                     window.scrollTo(0, 0)
+
+                                    // change URL without reloading page, with the new page number
+                                    let url = new URL(window.location.href);
+                                    url.searchParams.set("page", this.config.page + 1);
+                                    window.history.replaceState({}, "", url);
                                 }
                             },
                             size: 24,
