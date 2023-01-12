@@ -45,42 +45,44 @@
         </div>
         <div id="content"></div>
         <script type="text/javascript" charset="utf-8">
-                toolbar = webix.ui({
-                    margin: 10,
-                    container: "content",
-                    responsive: true,
-                    rows: [
-                        {
-                            view: "toolbar",
-                            borderless: false,
-                            responsive: true,
-                            cols: [
-                                {},
-                                {
-                                    view: "button",
-                                    id: "category",
-                                    label: '<i class="fas fa-stopwatch" aria-hidden="true"></i> Report Outdated',
-                                    tooltip: "Report this application as outdated. Requires a GitHub account.",
-                                    css: "webix_danger",
-                                    click: function () {
-                                        window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("{{ package["version"] }}") + "&title=" + encodeURIComponent("{{ package["display_name"] }}"), '_blank');
-                                    },
-                                    width: 160
+            toolbar = webix.ui({
+                margin: 10,
+                container: "content",
+                responsive: true,
+                rows: [
+                    {
+                        view: "toolbar",
+                        borderless: false,
+                        responsive: true,
+                        cols: [
+                            {},
+                            {
+                                view: "button",
+                                id: "category",
+                                label: '<i class="fas fa-stopwatch" aria-hidden="true"></i> Report Outdated',
+                                tooltip: "Report this application as outdated. Requires a GitHub account.",
+                                css: "webix_danger",
+                                click: function () {
+                                    window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("{{ package["version"] }}") + "&title=" + encodeURIComponent("{{ package["display_name"] }}"), '_blank');
                                 },
-                                {
-                                    view: "template",
-                                    id: "danbo_icon",
-                                    css: "danbo_icon",
-                                    hidden: ($(window).width() < 480),
-                                    template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
-                                    width: 140,
-                                    borderless: true
-                                },
-                            ]
-                        }
-                    ]
-                });
-                webix.event(window, "resize", function(){ toolbar.adjust(); })
+                                width: 160
+                            },
+                            {
+                                view: "template",
+                                id: "danbo_icon",
+                                css: "danbo_icon",
+                                hidden: ($(window).width() < 480),
+                                template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
+                                width: 140,
+                                borderless: true
+                            },
+                        ]
+                    }
+                ]
+            });
+            webix.event(window, "resize", function () {
+                toolbar.adjust();
+            })
         </script>
         <div class="columns" style="padding-top: 10px;">
             <div class="column is-one-third">
@@ -132,7 +134,8 @@
                         <input class="input is-success" type="text" readonly
                                value="https://oscwii.org/library?coder={{ package.coder }}&repo={{ repo }}">
                         <b><i class="fas fa-info fa-share mt-3" aria-hidden="true"></i> Social media:</b><br>
-                        <a class="button is-link" href="https://twitter.com/intent/tweet?text={{ package["display_name"] }} on Open Shop Channel: https://oscwii.org{{ request.path }} @openshopwii">
+                        <a class="button is-link"
+                           href="https://twitter.com/intent/tweet?text={{ package["display_name"] }} on Open Shop Channel: https://oscwii.org{{ request.path }} @openshopwii">
                             <span class="icon">
                                 <i class="fab fa-twitter"></i>
                             </span>
@@ -145,11 +148,50 @@
             <div class="column">
                 <div class="divider is-left">Description</div>
                 {% if package["short_description"] == package["long_description"] %}
-                    <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
+                    <div id="description"></div>
                 {% else %}
                     <b style="margin-bottom: 1.5rem">{{ package["short_description"] }}</b>
-                    <p style="margin-bottom: 1.5rem">{{ package["long_description"] }}</p>
+                    <div id="description"></div>
                 {% endif %}
+                <script type="text/javascript" charset="utf-8">
+                    let loading = webix.ui({
+                        container: "description",
+                        borderless: true,
+                        id: "loading",
+                        view: "template",
+                        type: "clean",
+                        autoheight: true,
+                        template: "<i class='fas fa-spinner fa-spin'></i> Loading description...",
+                    });
+                    webix.event(window, "resize", function(){ loading.adjust(); })
+
+                    webix.ready(function () {
+                        webix.ajax().get("https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml", function (text) {
+                            // we will remove html comments, because it breaks the dom parser
+                            text = text.replace(/<!--[\s\S]*?-->/g, '');
+
+                            var parser = new DOMParser();
+                            var xml = parser.parseFromString(text, "text/xml");
+                            var description = xml.getElementsByTagName("long_description")[0].childNodes[0].nodeValue;
+                            webix.ui({
+                                container: "description",
+                                borderless: true,
+                                id: "description_container",
+                                view: "template",
+                                type: "clean",
+                                autoheight: true,
+                                template: "<span>" + description.replace(/\n/g, "<br>") + "</span>",
+                                on: {
+                                    onAfterRender: function () {
+                                        $$("loading").hide();
+                                    }
+                                }
+                            });
+
+                            webix.event(window, "resize", function(){ $$("description_container").adjust(); })
+                        });
+                    });
+                </script>
 
                 <div class="divider is-left">Recommended Download</div>
 
@@ -206,7 +248,8 @@
                 <div class="card mb-4">
                     <header class="card-header">
                         <p class="card-header-title">
-                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>Metadata file
+                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>Metadata
+                            file
                             for {{ package["display_name"] }}
                         </p>
                     </header>
