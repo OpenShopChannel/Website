@@ -169,10 +169,14 @@
                         webix.ajax().get("https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml", function (text) {
                             // we will remove html comments, because it breaks the dom parser
                             text = text.replace(/<!--[\s\S]*?-->/g, '');
-
-                            var parser = new DOMParser();
-                            var xml = parser.parseFromString(text, "text/xml");
-                            var description = xml.getElementsByTagName("long_description")[0].childNodes[0].nodeValue;
+                            try {
+                                var parser = new DOMParser();
+                                var xml = parser.parseFromString(text, "text/xml");
+                                var description = xml.getElementsByTagName("long_description")[0].childNodes[0].nodeValue;
+                            }
+                            catch (e) {
+                                var description = "{{ package["long_description"] }}";
+                            }
                             webix.ui({
                                 container: "description",
                                 borderless: true,
