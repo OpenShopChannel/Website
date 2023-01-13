@@ -164,11 +164,6 @@ def apps():
     yield 'apps', {}
 
 
-@app.route("/beta/library")
-def beta_apps():
-    return redirect("/library")
-
-
 @app.route("/library/<pkg_type>/<name>")
 def application(name, pkg_type):
     # error handling in case the app doesn't exist
