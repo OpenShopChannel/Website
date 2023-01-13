@@ -108,7 +108,6 @@ def faq():
 @app.route("/help/<article>")
 def help(article="welcome"):
     # check if article exists
-    print(os.listdir("templates/pages/help/articles"))
     if article + ".html" not in os.listdir("templates/pages/help/articles"):
         abort(404)
     return render_template(f'pages/help/articles/{article}.html', name=article)
