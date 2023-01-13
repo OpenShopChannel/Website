@@ -3,6 +3,7 @@ import os
 
 import sentry_sdk
 from flask import Flask, render_template, request, abort, redirect, url_for
+from flask_sitemap import Sitemap
 from sentry_sdk.integrations.flask import FlaskIntegration
 from werkzeug.urls import url_encode
 import subprocess
@@ -31,6 +32,8 @@ OpenShopChannel.newest_apps()
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+
+sitemap = Sitemap(app)
 
 # jinja2 functions
 app.jinja_env.globals.update(file_size=utils.file_size)
@@ -69,15 +72,30 @@ def home():
                            newest_packages=OpenShopChannel.newest_packages, ticker=ticker)
 
 
+@sitemap.register_generator
+def home():
+    yield 'home', {}
+
+
 @app.route("/publish")
 def publish():
     return render_template('pages/publish.html', packages=OpenShopChannel.get_packages(),
                            themes=OpenShopChannel.get_themes())
 
 
+@sitemap.register_generator
+def publish():
+    yield 'publish', {}
+
+
 @app.route("/about")
 def about():
     return render_template('pages/about.html', version=site_version, version_name=site_version_name)
+
+
+@sitemap.register_generator
+def about():
+    yield 'about', {}
 
 
 @app.route("/faq")
@@ -96,9 +114,20 @@ def help(article="welcome"):
     return render_template(f'pages/help/articles/{article}.html', name=article)
 
 
+@sitemap.register_generator
+def help():
+    for article in os.listdir("templates/pages/help/articles"):
+        yield 'help', {'article': article.replace(".html", "")}
+
+
 @app.route("/donate")
 def donate():
     return render_template('pages/donate.html')
+
+
+@sitemap.register_generator
+def donate():
+    yield 'donate', {}
 
 
 # april fools 2021 route
@@ -121,9 +150,19 @@ def metagen():
     return render_template('pages/metagen.html')
 
 
+@sitemap.register_generator
+def metagen():
+    yield 'metagen', {}
+
+
 @app.route("/library")
 def apps():
     return render_template('pages/newlibrary.html', newest_packages=OpenShopChannel.newest_packages)
+
+
+@sitemap.register_generator
+def apps():
+    yield 'apps', {}
 
 
 @app.route("/beta/library")
@@ -145,6 +184,13 @@ def application(name, pkg_type):
                                    packages=OpenShopChannel.get_packages(), repo="apps", host="hbb1.oscwii.org")
     except Exception:
         abort(404)
+
+
+@sitemap.register_generator
+def application():
+    for pkg_type in ["apps", "themes"]:
+        for package in OpenShopChannel.get_packages():
+            yield 'application', {'name': package["internal_name"], 'pkg_type': pkg_type}
 
 
 @app.template_global()
