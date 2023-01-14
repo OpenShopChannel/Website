@@ -31,4 +31,26 @@ def application_badges(package):
     if datetime.now().timestamp() - int(package["release_date"]) < 2592000:
         badges["recently-updated"] = "Recently Updated"
 
+    # check if zipped app size is over 100MiB
+    if int(package["zip_size"]) >= 104857600:
+        badges["expensive-delivery"] = "Expensive Delivery"
+
+    # check if the app has a birthday
+    if datetime.fromtimestamp(int(package["release_date"])).strftime('%m%d') == datetime.now().strftime('%m%d'):
+        # verify that it was not added today
+        if datetime.fromtimestamp(int(package["release_date"])).strftime('%Y%m%d') != datetime.now().strftime('%Y%m%d'):
+            # determine app age
+            age = int((datetime.now().timestamp() - int(package["release_date"])) / 31536000)
+
+            # determine st/nd/rd/th
+            if age % 10 == 1 and age % 100 != 11:
+                age = str(age) + "st"
+            elif age % 10 == 2 and age % 100 != 12:
+                age = str(age) + "nd"
+            elif age % 10 == 3 and age % 100 != 13:
+                age = str(age) + "rd"
+            else:
+                age = str(age) + "th"
+            badges["birthday-app"] = f"Happy {age} Birthday, {package['display_name']}!"
+
     return badges
