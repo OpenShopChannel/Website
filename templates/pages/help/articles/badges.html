@@ -1,0 +1,34 @@
+{% extends "pages/help/base.html" %}
+{% block title %}Website Badges{% endblock %}
+{% block subtitle %}{% endblock %}
+{% block content %}
+    Badges are automatically given to applications which meet a certain criteria.<br>
+    They are intended to highlight potentially good-to-know information about an app.<br><br>
+    <table class="table is-fullwidth">
+        <thead>
+        <tr>
+            <th>Badge</th>
+            <th>Name</th>
+            <th>Information</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><img src="/static/images/badges/recently-updated.png" alt="{{ title }}" width="160"></td>
+            <td>Recently Updated</td>
+            <td>Given to applications which were added or updated in the last 30 days.</td>
+        </tr>
+        <tr>
+            <td><img src="/static/images/badges/needs-no-description.png" alt="{{ title }}" width="160"></td>
+            <td>Needs no description</td>
+            <td>Given to applications which lack a description.</td>
+        </tr>
+        <tr>
+            <td><img src="/static/images/badges/all-peripherals.png" alt="{{ title }}" width="160"></td>
+            <td>All Peripherals</td>
+            <td>Given to applications which support every single peripheral Open Shop Channel keeps track of, with the exception of Wii Zapper,
+                which is not included in any application.</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

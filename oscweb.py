@@ -38,6 +38,7 @@ sitemap = Sitemap(app)
 # jinja2 functions
 app.jinja_env.globals.update(file_size=utils.file_size)
 app.jinja_env.globals.update(date=utils.date)
+app.jinja_env.globals.update(application_badges=utils.application_badges)
 
 # get current git info
 try:
