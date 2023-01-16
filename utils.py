@@ -35,6 +35,10 @@ def application_badges(package):
     if int(package["zip_size"]) >= 104857600:
         badges["expensive-delivery"] = "Expensive Delivery"
 
+    # check if extracted app size is under 500KiB
+    if int(package["zip_size"]) <= 512000:
+        badges["free-delivery"] = "Free Delivery"
+
     # check if the app has a birthday
     if datetime.fromtimestamp(int(package["release_date"])).strftime('%m%d') == datetime.now().strftime('%m%d'):
         # verify that it was not added today
