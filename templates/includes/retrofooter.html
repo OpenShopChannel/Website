@@ -1,0 +1,25 @@
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+<script>
+    (function () {
+        _386.magicCursor();
+        _386.scrollLock();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+        $(window).scroll(function () {
+            var top = $(document).scrollTop();
+            if (top > 50)
+                $('#home > .navbar').removeClass('navbar-transparent');
+            else
+                $('#home > .navbar').addClass('navbar-transparent');
+        });
+
+        $("a[href='#']").click(function (e) {
+            e.preventDefault();
+        });
+
+    })();
+</script>

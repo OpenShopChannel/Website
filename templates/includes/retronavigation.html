@@ -1,0 +1,41 @@
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="navbar-brand">Open Shop Channel <i class="text-muted">www.oscwii.org</i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home' )}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('apps' )}}">Library</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="themes">Docs <span
+                            class="caret"></span></a>
+                    <div class="dropdown-menu" aria-labelledby="docs">
+                        <a class="dropdown-item" href="https://docs.oscwii.org/api/">API Documentation</a>
+                        <a class="dropdown-item" href="https://docs.oscwii.org/wii-shop-channel/">WSC Documentation</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="themes">Tools <span
+                            class="caret"></span></a>
+                    <div class="dropdown-menu" aria-labelledby="tools">
+                        <a class="dropdown-item" href="{{ url_for('metagen' )}}">meta.xml Generator</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('donate' )}}">Donate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('about' )}}">About</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>

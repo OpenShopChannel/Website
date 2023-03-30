@@ -125,6 +125,11 @@ def donate():
     return render_template('pages/donate.html')
 
 
+@app.route("/retronav")
+def retronav():
+    return render_template('pages/retronav.html')
+
+
 @sitemap.register_generator
 def donate():
     yield 'donate', {}

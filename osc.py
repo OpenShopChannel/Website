@@ -73,12 +73,11 @@ class API:
                 return package
 
     def newest_apps(self):
-        newest_apps = {"newest": None,
-                       "demos": None,
-                       "utilities": None,
+        newest_apps = {"utilities": None,
                        "emulators": None,
                        "games": None,
-                       "media": None}
+                       "media": None,
+                       "demos": None}
         for key, value in newest_apps.items():
             date = 0
             for package in self.packages:

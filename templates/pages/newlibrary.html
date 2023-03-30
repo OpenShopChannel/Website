@@ -7,323 +7,295 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     {% if devprofile == True %}
         <title>{{ request.args.get("coder") }}'s Developer Profile - Open Shop Channel</title>
     {% else %}
         <title>Library - Open Shop Channel</title>
     {% endif %}
-    {% include 'includes/header.html' %}
+    {% include 'includes/retroheader.html' %}
     <script src="/static/ticker/ticker.js"></script>
-    <link rel="stylesheet" href="/static/ticker/ticker.css">
 </head>
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
-<section class="section">
-    <div class="container">
-        {% if devprofile == True %}
-            <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
-                <ul>
-                    <li><a href="/library">Library</a></li>
-                    <li class="is-active"><a href="" aria-current="page">Developer
-                        Profile: {{ request.args.get("coder") }}</a></li>
-                </ul>
-            </nav>
-            <div class="notification is-info hero is-bold" style="margin-bottom: 10px;">
-                <h1 class="title"><i class="fas fa-id-card fa-fw" aria-hidden="true"
-                                     style="margin-right: 5px"></i>{{ request.args.get("coder") }}</h1>
-                <h2 class="subtitle">Developer Profile</h2>
-            </div>
-            <div id="LibraryToolbar"></div>
-        {% else %}
-            <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
-                <ul>
-                    <li><a href="/library">Library</a></li>
-                    <li class="marquee is-active"><a href="" aria-current="page">Home</a></li>
-                </ul>
-            </nav>
-            <div class="notification" style="margin-bottom: 10px;">
-                <h1 class="title" style="text-align: center;">Open Shop Channel</h1>
-                <div class="columns is-vcentered">
-                    <div class="column" style="padding-top: unset; margin-top: -0.8rem;">
-                        <div class="ticker-container is-hidden-mobile">
-                            <ul>
-                                <div>
-                                    <li><h2 class="subtitle" class="ticker-item"><b>Latest
-                                        update in Games:</b> "{{ newest_packages["games"]["display_name"] }}"
-                                        by {{ newest_packages["games"]["coder"] }} -
-                                        Version {{ newest_packages["games"]["version"] }}
-                                        - {{ date(newest_packages["games"]["release_date"]) }}</h2>
-                                    </li>
-                                </div>
-                                <div>
-                                    <li><h2 class="subtitle" class="ticker-item"><b>Latest
-                                        update in Utilities:</b> "{{ newest_packages["utilities"]["display_name"] }}"
-                                        by {{ newest_packages["utilities"]["coder"] }} -
-                                        Version {{ newest_packages["utilities"]["version"] }}
-                                        - {{ date(newest_packages["utilities"]["release_date"]) }}</h2>
-                                    </li>
-                                </div>
-                                <div>
-                                    <li><h2 class="subtitle" class="ticker-item"><b>Latest
-                                        update in Emulators:</b> "{{ newest_packages["emulators"]["display_name"] }}"
-                                        by {{ newest_packages["emulators"]["coder"] }} -
-                                        Version {{ newest_packages["emulators"]["version"] }}
-                                        - {{ date(newest_packages["emulators"]["release_date"]) }}</h2>
-                                    </li>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div id="LibraryToolbar" style="margin: -10px;"></div>
-            </div>
+{% include 'includes/retronavigation.html' %}
+<div class="container">
+    <div class="bs-component my-4">
+        <h6>APRIL 1ST, 2023 NEWS: WELCOME TO OUR BRAND NEW WEBSITE!</h6>
+    </div>
+    {% if devprofile == True %}
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/library">Library</a></li>
+            <li class="breadcrumb-item"><a href="" aria-current="page">Developer
+                Profile: {{ request.args.get("coder") }}</a></li>
+        </ol>
+        <div class="notification is-info hero is-bold" style="margin-bottom: 10px;">
+            <h1 class="title"><i class="fas fa-id-card fa-fw" aria-hidden="true"
+                                 style="margin-right: 5px"></i> {{ request.args.get("coder") }}</h1>
+            <h2 class="subtitle">Developer Profile</h2>
+        </div>
+        <div id="LibraryToolbar"></div>
+    {% else %}
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/library">Library</a></li>
+            <li class="breadcrumb-item"><a href="" aria-current="page">Home</a></li>
+        </ol>
+        <h1 class="title" style="text-align: center;">Open Shop Channel Online Library</h1>
+        <ul>
+            <li><h2><b>Latest
+                update in Games:</b> "{{ newest_packages["games"]["display_name"] }}"
+                by {{ newest_packages["games"]["coder"] }} -
+                Version {{ newest_packages["games"]["version"] }}
+                - {{ date(newest_packages["games"]["release_date"]) }}</h2>
+            </li>
+            <li><h2><b>Latest
+                update in Utilities:</b> "{{ newest_packages["utilities"]["display_name"] }}"
+                by {{ newest_packages["utilities"]["coder"] }} -
+                Version {{ newest_packages["utilities"]["version"] }}
+                - {{ date(newest_packages["utilities"]["release_date"]) }}</h2>
+            </li>
+            <li><h2><b>Latest
+                update in Emulators:</b> "{{ newest_packages["emulators"]["display_name"] }}"
+                by {{ newest_packages["emulators"]["coder"] }} -
+                Version {{ newest_packages["emulators"]["version"] }}
+                - {{ date(newest_packages["emulators"]["release_date"]) }}</h2>
+            </li>
+        </ul>
+        <div id="LibraryToolbar" style="margin: -10px;"></div>
 
-        {% endif %}
-        <div id="AppsList"></div>
-        <script type="text/javascript" charset="utf-8">
-                let repository_type = "app"
-                library = webix.ui({
-                    margin: 10,
-                    container: "AppsList",
+    {% endif %}
+    <div id="AppsList"></div>
+    <script type="text/javascript" charset="utf-8">
+        let repository_type = "app"
+        library = webix.ui({
+            margin: 10,
+            container: "AppsList",
+            responsive: true,
+            rows: [
+                {
+                    view: "dataview",
+                    id: "appsview",
+                    css: {"background-color": "unset"},
                     responsive: true,
-                    rows: [
+                    scroll: false,
+                    select: true,
+                    template: function (obj) {
+                        return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
+                            "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
+                            + obj.display_name + "</div>" +
+                            "<div style='float: left; height: 100%; margin-right: 10px;'>" +
+                            "<img src='" + obj.icon_url + "' style='height: 48px'></div>" +
+                            "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
+                    },
+                    on: {
+                        "onItemClick": function (id) {
+                            window.location = "/library/" + repository_type + "/" + this.getItem(id).internal_name;
+                        },
+                        "onAfterRender": function () {
+                            // update amount of apps
+                            $$("amount_of_apps").setValue(this.count() + " Apps")
+                        },
+                        "onLoadError": function () {
+                            this.parse([{
+                                "display_name": "Error",
+                                "short_description": "There was an error loading the library.",
+                                "icon_url": "/static/images/apipaper.png",
+                                "coder": "Danbo. Click to refresh library.",
+                                "internal_name": "../"
+                            }])
+                        },
+                        "onBeforeLoad": function () {
+                            // show loading screen
+                            webix.extend(this, webix.ProgressBar);
+                            this.showProgress();
+                        },
+                        "onAfterLoad": function () {
+                            // hide loading screen
+                            this.hideProgress();
+                        }
+                    },
+                    type: {
+                        height: 150,
+                        width: 380,
+                        type: "tiles",
+                    },
+                    borderless: true,
+                    yCount: 7,
+                    {% if request.args.get("repo") == "themes" %}
+                        url: "https://api.oscwii.org/v2/themes/packages{{ querystring }}",
+                    {% else %}
+                        url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
+                    {% endif %}
+                    ready: function () {
+                        {% if request.args.get("repo") == "themes" %}
+                            repository_type = "theme"
+                        {% endif %}
+                        {% if request.args.get("page") %}
+                            // navigate to specified page number using pager "paginationbar"
+                            $$("paginationbar").select({{ request.args.get("page") }} -1);
+                        {% endif %}
+                        this.sort("display_name", "asc");
+                    },
+                    pager: "paginationbar"
+                },
+                {
+                    view: "pager",
+                    id: "paginationbar",
+                    on: {
+                        "onAfterPageChange": function () {
+                            // scroll page back up
+                            window.scrollTo(0, 0)
+
+                            // change URL without reloading page, with the new page number
+                            let url = new URL(window.location.href);
+                            url.searchParams.set("page", this.config.page + 1);
+                            window.history.replaceState({}, "", url);
+                        }
+                    },
+                    size: 24,
+                    group: 4,
+                    template: "{common.first()}{common.prev()}{common.pages()}{common.next()}{common.last()}"
+                }
+            ]
+        });
+
+        library_toolbar = webix.ui({
+            margin: 10,
+            container: "LibraryToolbar",
+            responsive: true,
+            rows: [
+                {
+                    view: "toolbar",
+                    borderless: true,
+                    responsive: true,
+                    css: {"background-color": "unset"},
+                    cols: [
                         {
-                            view: "dataview",
-                            id: "appsview",
-                            css: {"background-color": "unset"},
-                            responsive: true,
-                            scroll: false,
-                            select: true,
-                            tooltip: function (obj) {
-                                return "<i class='fas fa-calendar-alt fa-fw' aria-hidden='true' style='margin-right: .25em'></i>"
-                                        + new Date(obj.release_date * 1000).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}) + "<br>" +
-                                        "<i class='fas fa-sd-card fa-fw' aria-hidden='true' style='margin-right: .25em'></i>" + file_size(obj.extracted) + " (Extracted)<br>" +
-                                        "<i class='fas fa-wrench fa-fw' aria-hidden='true' style='margin-right: .25em'></i>Version " + obj.version;
-                            },
-                            template: function (obj) {
-                                return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
-                                    "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
-                                    + obj.display_name + "</div>" +
-                                    "<div style='float: left; height: 100%; margin-right: 10px;'>" +
-                                    "<img src='" + obj.icon_url + "' style='height: 48px'></div>" +
-                                    "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
-                            },
+                            view: "search",
+                            placeholder: "Search Applications..",
+                            id: "search",
+                            css: "form-control",
                             on: {
-                                "onItemClick": function (id) {
-                                    window.location = "/library/" + repository_type + "/" + this.getItem(id).internal_name;
-                                },
-                                "onAfterRender": function () {
-                                    // update amount of apps
-                                    $$("amount_of_apps").setValue(this.count() + " Apps")
-                                },
-                                "onLoadError": function () {
-                                    this.parse([{
-                                        "display_name": "Error",
-                                        "short_description": "There was an error loading the library.",
-                                        "icon_url": "/static/images/apipaper.png",
-                                        "coder": "Danbo. Click to refresh library.",
-                                        "internal_name": "../"
-                                    }])
-                                },
-                                "onBeforeLoad": function() {
-                                    // show loading screen
-                                    webix.extend(this, webix.ProgressBar);
-                                    this.showProgress();
-                                },
-                                "onAfterLoad": function() {
-                                    // hide loading screen
-                                    this.hideProgress();
+                                "onTimedKeyPress": function () {
+                                    // set category to disabled if search bar has text
+                                    var value = this.getValue().toLowerCase();
+                                    if (value) {
+                                        $$("category").disable()
+                                        $$("category").setValue("All Apps")
+                                        $$("repository").disable()
+                                    } else {
+                                        $$("category").enable()
+                                        $$("repository").enable()
+                                    }
+                                    $$("appsview").filter(function (obj) {
+                                        return obj.display_name.toLowerCase().indexOf(value) != -1;
+                                    })
                                 }
                             },
-                            type: {
-                                height: 150,
-                                width: 380,
-                                type: "tiles",
-                            },
-                            borderless: true,
-                            yCount: 7,
-                            {% if request.args.get("repo") == "themes" %}
-                                url: "https://api.oscwii.org/v2/themes/packages{{ querystring }}",
-                            {% else %}
-                                url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
-                            {% endif %}
-                            ready: function () {
-                                {% if request.args.get("repo") == "themes" %}
-                                    repository_type = "theme"
-                                {% endif %}
-                                {% if request.args.get("page") %}
-                                    // navigate to specified page number using pager "paginationbar"
-                                    $$("paginationbar").select({{ request.args.get("page") }} - 1);
-                                {% endif %}
-                                this.sort("display_name", "asc");
-                            },
-                            pager: "paginationbar"
+                            // properly scale search bar on mobile devices
+                            width: ($(window).width() < 480) ? $(window).width() - 92 : 300,
                         },
                         {
-                            view: "pager",
-                            id: "paginationbar",
+                            view: "combo",
+                            id: "category",
+                            hidden: ($(window).width() < 480),
+                            value: "All Apps",
                             on: {
-                                "onAfterPageChange": function () {
-                                    // scroll page back up
-                                    window.scrollTo(0, 0)
+                                "onChange": function (category) {
+                                    if (category === "All Apps")
+                                        category = ""
+                                    else
+                                        category = category.toLowerCase();
 
-                                    // change URL without reloading page, with the new page number
-                                    let url = new URL(window.location.href);
-                                    url.searchParams.set("page", this.config.page + 1);
-                                    window.history.replaceState({}, "", url);
+                                    $$("appsview").filter(function (obj) {
+                                        return obj.category.toLowerCase().indexOf(category) != -1;
+                                    })
                                 }
                             },
-                            size: 24,
-                            group: 4,
-                            template: "{common.first()}{common.prev()}{common.pages()}{common.next()}{common.last()}"
-                        }
-                    ]
-                });
-
-                library_toolbar = webix.ui({
-                    margin: 10,
-                    container: "LibraryToolbar",
-                    responsive: true,
-                    rows: [
+                            width: 200,
+                            options: ["All Apps", "Utilities", "Emulators", "Games", "Media", "Demos"]
+                        },
                         {
-                            view: "toolbar",
-                            borderless: true,
-                            responsive: true,
-                            css: {"background-color": "unset"},
-                            cols: [
-                                {
-                                    view: "search",
-                                    placeholder: "Search Applications..",
-                                    id: "search",
-                                    on: {
-                                        "onTimedKeyPress": function () {
-                                            // set category to disabled if search bar has text
-                                            var value = this.getValue().toLowerCase();
-                                            if (value) {
-                                                $$("category").disable()
-                                                $$("category").setValue("All Apps")
-                                                $$("repository").disable()
-                                            } else {
-                                                $$("category").enable()
-                                                $$("repository").enable()
-                                            }
-                                            $$("appsview").filter(function (obj) {
-                                                return obj.display_name.toLowerCase().indexOf(value) != -1;
-                                            })
-                                        }
-                                    },
-                                    // properly scale search bar on mobile devices
-                                    width: ($(window).width() < 480) ? $(window).width() - 92 : 300,
-                                },
-                                {
-                                    view: "combo",
-                                    id: "category",
-                                    hidden: ($(window).width() < 480),
-                                    value: "All Apps",
-                                    on: {
-                                        "onChange": function (category) {
-                                            if (category === "All Apps")
-                                                category = ""
-                                            else
-                                                category = category.toLowerCase();
-
-                                            $$("appsview").filter(function (obj) {
-                                                return obj.category.toLowerCase().indexOf(category) != -1;
-                                            })
-                                        }
-                                    },
-                                    width: 200,
-                                    options: ["All Apps", "Utilities", "Emulators", "Games", "Media", "Demos"]
-                                },
-                                {
-                                    view: "combo",
-                                    id: "repository",
-                                    hidden: ($(window).width() < 480),
-                                    {% if request.args.get("repo") == "themes" %}
-                                        value: "Themes",
-                                    {% else %}
-                                        value: "Applications",
-                                    {% endif %}
-                                    on: {
-                                        "onChange": function (repository) {
-                                            $$("appsview").clearAll()
-                                            $$("category").setValue("All Apps")
-                                            switch (repository) {
-                                                case "Applications":
-                                                    $$("appsview").load("https://api.oscwii.org/v2/primary/packages{{ querystring }}")
-                                                    repository_type = "app"
-                                                    break;
-                                                case "Themes":
-                                                    $$("appsview").load("https://api.oscwii.org/v2/themes/packages{{ querystring }}")
-                                                    repository_type = "theme"
-                                                    break;
-                                            }
-                                            // sort appsview when ready
-                                            $$("appsview").attachEvent("onAfterLoad", function () {
-                                                $$("appsview").sort("display_name", "asc")
-                                            })
-                                        }
-                                    },
-                                    width: 200,
-                                    options: ["Applications", "Themes"]
-                                },
-                                {},
-                                {
-                                    view: "label",
-                                    id: "amount_of_apps",
-                                    label: "Loading...",
-                                    hidden: ($(window).width() < 480),
-                                    align: "right"
-                                },
-                                {
-                                    view: "template",
-                                    id: "danbo_icon",
-                                    css: {"background-color": "unset"},
-                                    hidden: ($(window).width() < 480),
-                                    template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
-                                    width: 140,
-                                    borderless: true
-                                },
-                            ]
-                        }
+                            view: "combo",
+                            id: "repository",
+                            hidden: ($(window).width() < 480),
+                            {% if request.args.get("repo") == "themes" %}
+                                value: "Themes",
+                            {% else %}
+                                value: "Applications",
+                            {% endif %}
+                            on: {
+                                "onChange": function (repository) {
+                                    $$("appsview").clearAll()
+                                    $$("category").setValue("All Apps")
+                                    switch (repository) {
+                                        case "Applications":
+                                            $$("appsview").load("https://api.oscwii.org/v2/primary/packages{{ querystring }}")
+                                            repository_type = "app"
+                                            break;
+                                        case "Themes":
+                                            $$("appsview").load("https://api.oscwii.org/v2/themes/packages{{ querystring }}")
+                                            repository_type = "theme"
+                                            break;
+                                    }
+                                    // sort appsview when ready
+                                    $$("appsview").attachEvent("onAfterLoad", function () {
+                                        $$("appsview").sort("display_name", "asc")
+                                    })
+                                }
+                            },
+                            width: 200,
+                            options: ["Applications", "Themes"]
+                        },
+                        {},
+                        {
+                            view: "label",
+                            id: "amount_of_apps",
+                            label: "Loading...",
+                            hidden: ($(window).width() < 480),
+                            align: "right"
+                        },
                     ]
-                });
-
-                function CategoryIcon(category) {
-                    switch (category) {
-                        case "utilities":
-                            return "fas fa-cog fa-fw"
-                        case "emulators":
-                            return "fas fa-microchip fa-fw"
-                        case "games":
-                            return "fas fa-gamepad fa-fw"
-                        case "media":
-                            return "fas fa-photo-video fa-fw"
-                        case "demos":
-                            return "fas fa-vial fa-fw"
-                        default:
-                            return "fas fa-question fa-fw"
-                    }
                 }
+            ]
+        });
 
-                // convert file length to human-readable units
-                function file_size(length) {
-                    const units = ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z'];
-                    for (let i = 0; i < units.length; i++) {
-                        if (Math.abs(length) < 1000.0) {
-                            return length.toFixed(1) + units[i] + "B";
-                        }
-                        length /= 1000.0;
-                    }
-                    return length.toFixed(1) + 'Yi' + "B";
+        function CategoryIcon(category) {
+            switch (category) {
+                case "utilities":
+                    return "fas fa-cog fa-fw"
+                case "emulators":
+                    return "fas fa-microchip fa-fw"
+                case "games":
+                    return "fas fa-gamepad fa-fw"
+                case "media":
+                    return "fas fa-photo-video fa-fw"
+                case "demos":
+                    return "fas fa-vial fa-fw"
+                default:
+                    return "fas fa-question fa-fw"
+            }
+        }
+
+        // convert file length to human-readable units
+        function file_size(length) {
+            const units = ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z'];
+            for (let i = 0; i < units.length; i++) {
+                if (Math.abs(length) < 1000.0) {
+                    return length.toFixed(1) + units[i] + "B";
                 }
+                length /= 1000.0;
+            }
+            return length.toFixed(1) + 'Yi' + "B";
+        }
 
-                webix.event(window, "resize", function(){ library.adjust(); })
-                webix.event(window, "resize", function(){ library_toolbar.adjust(); })
-        </script>
-    </div>
-</section>
-{% include 'includes/footer.html' %}
+        webix.event(window, "resize", function () {
+            library.adjust();
+        })
+        webix.event(window, "resize", function () {
+            library_toolbar.adjust();
+        })
+    </script>
+</div>
 </body>
 </html>
+{% include 'includes/retrofooter.html' %}

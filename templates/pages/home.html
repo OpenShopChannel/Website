@@ -1,329 +1,154 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Open Shop Channel</title>
-    {% include 'includes/header.html' %}
-    <script src="/static/ticker/ticker.js"></script>
-    <link rel="stylesheet" href="/static/ticker/ticker.css">
-
-    <noscript>
-        <style>
-            #ticker {
-                display: none;
-            }
-        </style>
-    </noscript>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    {% include 'includes/retroheader.html' %}
 </head>
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
-<div class="notification is-hidden-mobile" id="ticker"
-     style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem;">
-    <div class="columns is-vcentered">
-        <div class="column">
-            <div class="ticker-container">
-                <ul>
-                    {% for message in ticker %}
-                        {% if message["first"] == True %}
-                            <div>
-                                <li><span
-                                        class="ticker-item"><b><i class="fas {{ message["icon"] }}" aria-hidden="true"
-                                                                  style="margin-right: .5em"></i>{{ message["title"] }}: </b>{{ message["content"] }} <a
-                                        href="{{ message["link"]["address"] }}">{{ message["link"]["text"] }}</a></span>
-                                </li>
+
+{% include 'includes/retronavigation.html' %}
+<div class="container">
+    <div class="bs-component my-4">
+        <h6>APRIL 1ST, 2023 NEWS: WELCOME TO OUR BRAND NEW WEBSITE!</h6>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="bs-component">
+                <div class="jumbotron">
+                    <h3 style="white-space: pre;" class="hidden-mobile"><mark>{% include 'includes/logoascii.html' %}</mark></h3>
+                    <hr class="my-4">
+                    <h1>Open Shop Channel: Homebrew apps library for the Nintendo Wii.</h1>
+                    <hr class="my-4">
+                    <p>Welcome to the Open Shop Channel website, the official website of Open Shop Channel!</p>
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('apps') }}" role="button">Launch Online Library
+                    </a>
+                </div>
+            </div>
+            <div class="my-4">
+                <h1 id="">HOW WOULD YOU LIKE TO USE THE OPEN SHOP CHANNEL?</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="bs-component">
+                        <div class="card mb-3">
+                            <div class="card-header">Homebrew Browser</div>
+                            <div class="card-body">
+                                <h5 class="card-title">By teknecal</h5>
+                                <h6 class="card-subtitle text-muted">for Wii</h6>
                             </div>
-                        {% endif %}
-                    {% endfor %}
-                    <div>
-                        <li><span
-                                class="ticker-item"><b><i class="fas fa-newspaper" aria-hidden="true"
-                                                          style="margin-right: .5em"></i>Latest update / addition: </b>"{{ newest_packages["newest"]["display_name"] }} {{ newest_packages["newest"]["version"] }}" by {{ newest_packages["newest"]["coder"] }} - {{ date(newest_packages["newest"]["release_date"]) }} - {{ newest_packages["newest"]["short_description"] }} - <a
-                                href="{{ url_for('application', name=newest_packages["newest"]["internal_name"], pkg_type='app') }}">Download Now!</a></span>
-                        </li>
-                    </div>
-                    {% if newest_packages["newest"]["category"] != "games" %}
-                        <div>
-                            <li><span
-                                    class="ticker-item"><b><i class="fas fa-gamepad" aria-hidden="true"
-                                                              style="margin-right: .5em"></i>Latest update in Games: </b>"{{ newest_packages["games"]["display_name"] }}" by {{ newest_packages["games"]["coder"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["short_description"] }} - <a
-                                    href="{{ url_for('application', name=newest_packages["games"]["internal_name"], pkg_type='app') }}">Download Now!</a></span>
-                            </li>
-                        </div>
-                    {% endif %}
-                    {% if newest_packages["newest"]["category"] != "utilities" %}
-                        <div>
-                            <li><span
-                                    class="ticker-item"><b><i class="fas fa-cog" aria-hidden="true"
-                                                              style="margin-right: .5em"></i>Latest update in Utilities: </b>"{{ newest_packages["utilities"]["display_name"] }}" by {{ newest_packages["utilities"]["coder"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["short_description"] }} - <a
-                                    href="{{ url_for('application', name=newest_packages["utilities"]["internal_name"], pkg_type='app') }}">Download Now!</a></span>
-                            </li>
-                        </div>
-                    {% endif %}
-                    {% if newest_packages["newest"]["category"] != "emulators" %}
-                        <div>
-                            <li><span
-                                    class="ticker-item"><b><i class="fas fa-microchip" aria-hidden="true"
-                                                              style="margin-right: .5em"></i>Latest update in Emulators: </b>"{{ newest_packages["emulators"]["display_name"] }}" by {{ newest_packages["emulators"]["coder"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["short_description"] }} - <a
-                                    href="{{ url_for('application', name=newest_packages["emulators"]["internal_name"], pkg_type='app') }}">Download Now!</a></span>
-                            </li>
-                        </div>
-                    {% endif %}
-                    <div>
-                        <li><span
-                                class="ticker-item"><b><i class="fas fa-star" aria-hidden="true"
-                                                          style="margin-right: .5em"></i>App of the Day: </b> "{{ package["display_name"] }}" ({{ package["category"].capitalize() }}) by {{ package["coder"] }} - {{ package["short_description"] }} - <a
-                                href="{{ url_for('application', name=package["internal_name"], pkg_type='app') }}">Download Now!</a></span></li>
-                    </div>
-                    {% for message in ticker %}
-                        {% if not message["first"] %}
-                            <div>
-                                <li><span
-                                        class="ticker-item"><b><i class="fas {{ message["icon"] }}" aria-hidden="true"
-                                                                  style="margin-right: .5em"></i>{{ message["title"] }}: </b>{{ message["content"] }} <a
-                                        href="{{ message["link"]["address"] }}">{{ message["link"]["text"] }}</a></span>
-                                </li>
+                            <div class="card-body">
+                                <p class="card-text">Originally developed by <a
+                                        href="https://wiibrew.org/wiki/User:Teknecal">teknecal</a>,
+                                    the
+                                    Homebrew Browser was an app repository for the Wii first released in
+                                    June of 2008.
+                                    <br><br>
+                                    To make it usable 15 years later, we, the Open Shop Channel, modified it to connect
+                                    to our
+                                    servers. While showing its age in many places, it
+                                    is still the most popular way to use the Open Shop Channel, because of the
+                                    convenience of it
+                                    running on the console itself.</p>
                             </div>
-                        {% endif %}
+                            <div class="card-body">
+                                <a href="https://wii.guide/assets/files/homebrew_browser_v0.3.9e.zip"
+                                   class="btn btn-success">Get
+                                    Homebrew Browser</a>
+                                <a href="{{ url_for('help', article='hbb-install-guide') }}" class="card-link">HBB
+                                    Install
+                                    Guide</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Having trouble using the Homebrew Browser? Visit <a href="/help/welcome">Help &
+                                Troubleshooting</a> or our <a href="https://discord.gg/osc">Discord server</a>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="bs-component">
+                        <div class="card mb-3">
+                            <div class="card-header">OSCDL</div>
+                            <div class="card-body">
+                                <h5 class="card-title">By dhtdht020</h5>
+                                <h6 class="card-subtitle text-muted">for Windows, Linux, macOS</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">OSCDL is an open source and modern GUI desktop client for
+                                    downloading apps
+                                    from the Open Shop Channel, developed by
+                                    <a href="https://github.com/dhtdht020">dhtdht020</a>, the lead maintainer of the
+                                    Open Shop
+                                    Channel project.
+                                    <br><br>
+                                    Using OSCDL, apps can be sent to the console over the internet with "Send to Wii" or
+                                    over
+                                    USBGecko.
+                                    OSCDL is cross platform and is available for Windows, Linux, and macOS.</p>
+                            </div>
+                            <div class="card-body">
+                                <a href="https://github.com/dhtdht020/osc-dl/releases" class="btn btn-success">Get
+                                    OSCDL</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <h1 class="mt-0">Recommended Apps</h1>
+            <div class="bs-component">
+                <div class="list-group">
+                    <a href="{{ url_for('application', pkg_type='app', name=package["internal_name"]) }}"
+                       class="list-group-item list-group-item-action flex-column align-items-start active">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1 text-warning">APP OF THE DAY</h5>
+                            <small>{{ package["release_date_formatted"] }}</small>
+                        </div>
+                        <p class="mb-1">
+                            <mark>{{ package["display_name"] }}</mark>
+                            by {{ package["coder"] }}</p>
+                        <br>
+                        <small>{{ package["short_description"] }}</small>
+                    </a>
+                    {% for category in newest_packages %}
+                        <a href="{{ url_for('application', pkg_type='app', name=newest_packages[category]["internal_name"]) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">NEWEST IN {{ category.upper() }}</h5>
+                                <small>{{ newest_packages[category]["release_date_formatted"] }}</small>
+                            </div>
+                            <p class="mb-1">
+                                <mark>{{ newest_packages[category]["display_name"] }}</mark>
+                                by {{ newest_packages[category]["coder"] }}</p>
+                            <br>
+                            <small class="text-muted">{{ newest_packages[category]["short_description"] }}</small>
+                        </a>
                     {% endfor %}
+                </div>
+            </div>
+            <h1>Social Media</h1>
+            <div class="bs-component">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Discord Server
+                        <a href="https://discord.gg/osc" type="button" class="btn btn-outline-info">Join</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Twitter
+                        <a href="https://twitter.com/openshopwii" type="button" class="btn btn-outline-info">Follow</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<section class="section">
-    <div class="container">
-        <div class="columns is-vcentered">
-            <div class="column">
-                <img src="/static/images/RainbowOpenLogo.png" alt="Open Shop Channel Logo" width="448" height="224">
-            </div>
-            <div class="column is-one-half is-hidden-mobile">
-                <a href="{{ url_for('application', name=package["internal_name"], pkg_type='app') }}">
-                    <div class="card has-ribbon">
-                        <div class="ribbon is-warning"><i class="fas fa-star" aria-hidden="true"
-                                                          style="margin-right: .75em"></i> App of the Day
-                        </div>
-                        <div class="card-content" style="margin-top: 15px;">
-                            <div class="media">
-                                <div class="media-left">
-                                    <figure class="image">
-                                        <img src="{{ package["icon_url"] }}" alt="App Icon">
-                                    </figure>
-                                </div>
-                                <div class="media-content">
-                                    <p class="title is-4">{{ package["display_name"] }}</p>
-                                    <p class="subtitle is-6">Made by <b>{{ package["coder"] | truncate(25) }}</b></p>
-                                </div>
-                            </div>
-                            <p>{% include "includes/categoryicon.html" %}{{ package["short_description"] }}</p>
-                        </div>
-                    </div>
-                </a>
-                <small>How is the app of the day determined? <a href="{{ url_for('help', article='appoftheday') }}">Find out here.</a></small>
-            </div>
-        </div>
-        <h1 class="title">
-            Open Shop Channel
-        </h1>
-        <p class="subtitle">
-            Homebrew apps library for the Nintendo Wii.
-        </p>
-        <div class="divider is-center">How would you like to use the Open Shop Channel?</div>
-        <div class="tile is-ancestor">
-            <div class="tile is-parent">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="/static/images/hbb-icon.png" alt="Homebrew Browser Logo">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">Homebrew Browser</p>
-                                <p class="subtitle is-6">Wii <a href="{{ url_for('help', article='hbb-install-guide') }}">(HBB Installation Guide)</a></p>
-                            </div>
-                        </div>
 
-                        <div class="content">
-                            Originally developed by <a href="https://wiibrew.org/wiki/User:Teknecal">teknecal</a>, the
-                            Homebrew Browser was an app repository for the Wii first released in
-                            June of 2008.
-                            <br><br>
-                            To make it usable 15 years later, we, the Open Shop Channel, modified it to connect to our
-                            servers. While showing its age in many places, it
-                            is still the most popular way to use the Open Shop Channel, because of the convenience of it
-                            running on the console itself.
-                        </div>
-                        <a class="button is-link is-large"
-                           href="https://wii.guide/assets/files/homebrew_browser_v0.3.9e.zip">Get
-                            Homebrew Browser</a>
-                        <br>
-                        <small>Having trouble using the Homebrew Browser? Visit <a href="{{ url_for('help', article='welcome') }}">Help & Troubleshooting</a> or our <a href="https://discord.gg/osc">Discord server</a>.</small>
-                    </div>
-                </div>
-            </div>
-            <div class="tile is-parent">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="/static/images/oscdlicon-small.png" alt="OSCDL Logo">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">OSCDL</p>
-                                <p class="subtitle is-6"><i class="fa-brands fa-microsoft fa-fw"></i><i class="fa-brands fa-linux fa-fw"></i><i class="fa-brands fa-apple fa-fw"></i></p>
-                            </div>
-                        </div>
 
-                        <div class="content">
-                            OSCDL is an open source and modern GUI desktop client for downloading apps from the Open Shop Channel, developed by
-                            <a href="https://github.com/dhtdht020">dhtdht020</a>, the lead maintainer of the Open Shop Channel project.
-                            <br><br>
-                            Using OSCDL, apps can be sent to the console over the internet with "Send to Wii" or over USBGecko.
-                            OSCDL is cross platform and is available for Windows, Linux, and macOS.
-                        </div>
-                        <a class="button is-link is-large" href="https://github.com/dhtdht020/osc-dl/releases">Get OSCDL</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="divider is-center">Not enough options? Behold fellow developers!</div>
-        <a href="https://docs.oscwii.org/api/">
-            <div class="card">
-                <div class="card-content has-text-centered">
-                    You can develop your own client with Open Shop Channel's free and open API!
-                </div>
-            </div>
-        </a>
-        <div class="divider is-center is-hidden-mobile">Alternatively, just use the online library!</div>
-        <div id="newest_apps" class="is-hidden-mobile" style="margin-bottom: 1.5rem;"></div>
-        <script type="text/javascript" charset="utf-8">
-            newest_apps = webix.ui({
-                margin: 10,
-                container: "newest_apps",
-                responsive: true,
-                rows: [
-                    {
-                        view: "toolbar",
-                        borderless: false,
-                        responsive: true,
-                        cols: [
-                            {
-                                view: "template",
-                                template: '<h1 class="subtitle">Recent Additions / Updates</h1>',
-                                borderless: true,
-                                width: ($(window).width() < 480) ? $(window).width() - 54 : 420
-                            },
-                            {},
-                            {
-                                view: "button",
-                                label: "View All Apps",
-                                click: function () {
-                                    window.open("/library", "_self");
-                                },
-                                width: ($(window).width() < 480) ? $(window).width() - 54 : 120
-                            },
-                            {
-                                view: "template",
-                                id: "danbo_icon",
-                                css: "danbo_icon",
-                                hidden: ($(window).width() < 480),
-                                template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
-                                width: 140,
-                                borderless: true
-                            },
-                        ]
-                    },
-                    {
-                        view: "dataview",
-                        id: "appsview",
-                        css: "cropped_text",
-                        responsive: true,
-                        scroll: false,
-                        select: true,
-                        template: function (obj) {
-                            return "<div class='notification' style='margin-bottom: unset; margin-top: 0.25rem; padding: 0 0.5rem 0 0.5rem; text-align: center;'>"
-                                + humanDate(obj.release_date) + "</div><div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>"
-                                + "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i><b>"
-                                + obj.display_name + "</b> " + obj.version + "</div>" +
-                                "<div style='float: left; height: 100%; margin-right: 10px;'>" +
-                                "<img src='" + obj.icon_url + "'></div>" +
-                                "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
-                        },
-                        on: {
-                            "onItemClick": function (id) {
-                                window.location = "/library/app/" + this.getItem(id).internal_name;
-                            },
-                            "onBeforeLoad": function() {
-                                // show loading screen
-                                webix.extend(this, webix.ProgressBar);
-                                this.showProgress();
-                            },
-                            "onAfterLoad": function() {
-                                // hide loading screen
-                                this.hideProgress();
-                            }
-                        },
-                        type: {
-                            height: 160,
-                            width: 380,
-                            type: "tiles",
-                        },
-                        borderless: false,
-                        yCount: 1,
-                        url: "https://api.oscwii.org/v2/primary/packages",
-                        ready: function () {
-                            this.sort("release_date", "des");
-                        }
-                    }
-                ]
-            });
-
-            webix.event(window, "resize", function(){ newest_apps.adjust(); })
-
-            function CategoryIcon(category) {
-                switch (category) {
-                    case "utilities":
-                        return "fas fa-cog fa-fw"
-                    case "emulators":
-                        return "fas fa-microchip fa-fw"
-                    case "games":
-                        return "fas fa-gamepad fa-fw"
-                    case "media":
-                        return "fas fa-photo-video fa-fw"
-                    case "demos":
-                        return "fas fa-vial fa-fw"
-                    default:
-                        return "fas fa-question fa-fw"
-                }
-            }
-
-            function humanDate(date) {
-                var d = new Date(date * 1000);
-                var month = d.getMonth() + 1;
-                return d.getDate() + "/" + month + "/" + d.getFullYear();
-            }
-        </script>
-        <div class="divider is-center">Awesome, where can I talk all about this stuff?</div>
-        <div class="card">
-            <div class="card-content has-text-centered">
-                <h1 class="title">
-                    We are on Discord!
-                </h1>
-                <p class="subtitle">
-                    Get support from other community members and directly contact project maintainers by joining our Discord server!
-                </p>
-                <a class="button is-link is-medium" style="background-color: #5865F2"
-                   href="https://discord.gg/osc">Join our
-                    Discord Server</a>
-            </div>
-        </div>
-
-    </div>
-</section>
-{% include 'includes/footer.html' %}
 </body>
 </html>
+{% include 'includes/retrofooter.html' %}

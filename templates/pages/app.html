@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ package["display_name"] }} - Open Shop Channel</title>
-    {% include 'includes/header.html' %}
+    {% include 'includes/retroheader.html' %}
     <meta property="og:title" content="{{ package["display_name"] }}">
     <meta property="og:site_name" content="Open Shop Channel">
     <meta property="og:url" content="oscwii.org">
@@ -12,287 +12,186 @@
     <meta property="og:image" content="{{ package["icon_url"] }}">
 </head>
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
-<div class="section">
+{% include 'includes/retronavigation.html' %}
+<div class="container">
+    <div class="bs-component my-4">
+        <h6>APRIL 1ST, 2023 NEWS: WELCOME TO OUR BRAND NEW WEBSITE!</h6>
+    </div>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/library">Library</a></li>
+        <li class="breadcrumb-item"><a href="" aria-current="page">{{ package["display_name"] }}</a></li>
+    </ol>
     <div class="container">
-        <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
-            <ul>
-                <li><a href="/library">Library</a></li>
-                <li class="is-active"><a href="" aria-current="page">{{ package["display_name"] }}</a></li>
-            </ul>
-        </nav>
-        <div class="notification is-success hero is-bold" style="margin-bottom: 10px;">
-            <div class="container" style="margin: unset;">
-                <div class="columns is-vcentered">
-                    <div class="column">
-                        <h1 class="title">
-                            {% include "includes/categoryicon.html" %}{{ package["display_name"] }}
-                        </h1>
-                        <h2 class="subtitle">
-                            A homebrew {% if package["package_type"] != "thm" %}application{% else %}
-                            theme{% endif %}
-                            created by <u><b><a
-                                href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
-                        </h2>
-                    </div>
-                    <div class="column is-one-fifth" style="width: unset;">
-                        <img src="{{ package["icon_url"] }}" style="vertical-align: middle;"
-                             alt="Icon for {{ package["display_name"] }}">
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-3" style="width: unset;">
+                <img src="{{ package["icon_url"] }}" style="margin: 10px;"
+                     alt="Icon for {{ package["display_name"] }}">
+            </div>
+            <div class="col-9">
+                <h1>
+                    <mark>[{{ package["category"].upper() }}]</mark>
+                    {{ package["display_name"] }}
+                </h1>
+                <h2>
+                    A homebrew {% if package["package_type"] != "thm" %}application{% else %}
+                    theme{% endif %}
+                    created by <u><b><a
+                        href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
+                </h2>
             </div>
         </div>
-        <div id="content"></div>
-        <script type="text/javascript" charset="utf-8">
-            toolbar = webix.ui({
-                margin: 10,
-                container: "content",
-                responsive: true,
-                rows: [
-                    {
-                        view: "toolbar",
-                        borderless: false,
-                        responsive: true,
-                        cols: [
-                            {},
-                            {
-                                view: "button",
-                                id: "category",
-                                label: '<i class="fas fa-stopwatch" aria-hidden="true"></i> Report Outdated',
-                                tooltip: "Report this application as outdated. Requires a GitHub account.",
-                                css: "webix_danger",
-                                click: function () {
-                                    window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("{{ package["version"] }}") + "&title=" + encodeURIComponent("{{ package["display_name"] }}"), '_blank');
-                                },
-                                width: 160
-                            },
-                            {
-                                view: "template",
-                                id: "danbo_icon",
-                                css: "danbo_icon",
-                                hidden: ($(window).width() < 480),
-                                template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
-                                width: 140,
-                                borderless: true
-                            },
-                        ]
-                    }
-                ]
-            });
-            webix.event(window, "resize", function () {
-                toolbar.adjust();
-            })
-        </script>
-        <div class="columns" style="padding-top: 10px;">
-            <div class="column is-one-third">
-                <article class="message is-success">
-                    <div class="message-body">
-                        <div class="columns is-vcentered is-centered">
-                            <div class="column">
-                                <b class="subtitle">
-                                    {% include "includes/categoryicon.html" %}{{ package["category"].title() }}</b>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="message is-success">
-                    <div class="message-header">
-                        <p><i class="fas fa-info fa-fw" aria-hidden="true"></i> Information </p>
-                    </div>
-                    <div class="message-body">
-                        <p><b><i class="fas fa-wrench fa-fw" aria-hidden="true"></i>
-                            Version:</b> {{ package["version"] }}</p>
-                        <p><b><i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i> Release
-                            Date:</b> {{ package["release_date_formatted"] }}</p>
-                        <p><b><i class="fas fa-sd-card fa-fw" aria-hidden="true"></i> App
-                            Size:</b> {{ file_size(package["extracted"]) }}</p>
-                        <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i>
-                            Developer{% if "," in package["coder"] %}s{% endif %}:</b> <a
-                                href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a>
-                        </p>
-                    </div>
-                </article>
-                <article class="message is-success">
-                    <div class="message-header">
-                        <p><i class="fas fa-gamepad fa-fw" aria-hidden="true"></i> Peripherals</p>
-                    </div>
-                    <div class="message-body">
-                        {% include 'includes/peripherals.html' %}
-                    </div>
-                </article>
-                {% if application_badges(package) %}
-                <article class="message is-success is-hidden-mobile">
-                    <div class="message-header">
-                        <p><i class="fas fa-award fa-fw" aria-hidden="true"></i> Badges</p>
-                    </div>
-                    <div class="message-body">
-                        <div class="columns is-multiline">
-                            {% for badge, title in application_badges(package).items() %}
-                                <div class="column is-one-quarter has-tooltip-bottom" data-tooltip="{{ title }}">
-                                    <img src="/static/images/badges/{{ badge }}.png" alt="{{ title }}">
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <small>How are badges awarded? Find out <a href="{{ url_for("help", article="badges") }}">here</a>.</small>
-                    </div>
-                </article>
-                {% endif %}
-                <article class="message is-success">
-                    <div class="message-header">
-                        <p><i class="fas fa-gamepad fa-share-alt" aria-hidden="true"></i> Share</p>
-                    </div>
-                    <div class="message-body">
-                        <b><i class="fas fa-info fa-link" aria-hidden="true"></i> Application link:</b>
-                        <input class="input is-success" type="text" readonly
-                               value="https://oscwii.org{{ request.path }}">
-                        <b><i class="fas fa-info fa-link mt-3" aria-hidden="true"></i> Author link:</b>
-                        <input class="input is-success" type="text" readonly
-                               value="https://oscwii.org/library?coder={{ package.coder }}&repo={{ repo }}">
-                        <b><i class="fas fa-info fa-share mt-3" aria-hidden="true"></i> Social media:</b><br>
-                        <a class="button is-link"
-                           href="https://twitter.com/intent/tweet?text={{ package["display_name"] }} on Open Shop Channel: https://oscwii.org{{ request.path }} @openshopwii">
-                            <span class="icon">
-                                <i class="fab fa-twitter"></i>
-                            </span>
-                            <span>Twitter</span>
-                        </a>
-                    </div>
-                </article>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header bg-success">Catalog Category</div>
+                <div class="card-body">
+                    <b class="subtitle">
+                        {{ package["category"].title() }}
+                    </b>
+                </div>
+            </div>
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header bg-success">Information</div>
+                <div class="card-body">
+                    <p>Version: {{ package["version"] }}</p>
+                    <p>Release Date: {{ package["release_date_formatted"] }}</p>
+                    <p>App Size: {{ file_size(package["extracted"]) }}</p>
+                    <p>Developer{% if "," in package["coder"] %}s{% endif %}: <a
+                            href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header bg-success">Peripherals</div>
+                <div class="card-body">
+                    {% include 'includes/peripherals.html' %}
+                </div>
             </div>
 
-            <div class="column">
-                <div class="divider is-left">Description</div>
-                {% if package["short_description"] == package["long_description"] %}
-                    <div id="description"></div>
-                {% else %}
-                    <b style="margin-bottom: 1.5rem">{{ package["short_description"] }}</b>
-                    <div id="description"></div>
-                {% endif %}
-                <script type="text/javascript" charset="utf-8">
-                    let loading = webix.ui({
-                        container: "description",
-                        borderless: true,
-                        id: "loading",
-                        view: "template",
-                        type: "clean",
-                        autoheight: true,
-                        template: "<i class='fas fa-spinner fa-spin'></i> Loading description...",
-                    });
-                    webix.event(window, "resize", function(){ loading.adjust(); })
 
-                    webix.ready(function () {
-                        webix.ajax().get("https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml", function (text) {
-                            // we will remove html comments, because it breaks the dom parser
-                            text = text.replace(/<!--[\s\S]*?-->/g, '');
-                            try {
-                                var parser = new DOMParser();
-                                var xml = parser.parseFromString(text, "text/xml");
-                                var description = xml.getElementsByTagName("long_description")[0].childNodes[0].nodeValue;
-                            }
-                            catch (e) {
-                                var description = "{{ package["long_description"] }}";
-                            }
-                            webix.ui({
-                                container: "description",
-                                borderless: true,
-                                id: "description_container",
-                                view: "template",
-                                type: "clean",
-                                autoheight: true,
-                                template: "<span>" + description.replace(/\n/g, "<br>") + "</span>",
-                                on: {
-                                    onAfterRender: function () {
-                                        $$("loading").hide();
-                                    }
+            {% if application_badges(package) %}
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header bg-success">Badges</div>
+                    <div class="card-body">
+                        {% for badge, title in application_badges(package).items() %}
+                            <p><b>{{ title }}</b></p>
+                        {% endfor %}
+                        How are badges awarded? Find out <a
+                            href="{{ url_for("help", article="badges") }}">here</a>.
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header bg-success">Share</div>
+                <div class="card-body">
+                    <b>Application link:</b>
+                    <input class="form-control" type="text" readonly
+                           value="https://oscwii.org{{ request.path }}"><br>
+                    <b>Author link:</b>
+                    <input class="form-control" type="text" readonly
+                           value="https://oscwii.org/library?coder={{ package.coder }}&repo={{ repo }}"><br>
+                    <b>Social media:</b><br>
+                    <a class="btn btn-info"
+                       href="https://twitter.com/intent/tweet?text={{ package["display_name"] }} on Open Shop Channel: https://oscwii.org{{ request.path }} @openshopwii">
+                        <span>Twitter</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-9">
+            <h3 class="divider is-left">Description</h3>
+            {% if package["short_description"] == package["long_description"] %}
+                <div id="description"></div>
+            {% else %}
+                <h4>{{ package["short_description"] }}</h4>
+                <div id="description"></div>
+            {% endif %}
+            <script type="text/javascript" charset="utf-8">
+                let loading = webix.ui({
+                    container: "description",
+                    borderless: true,
+                    id: "loading",
+                    view: "template",
+                    type: "clean",
+                    autoheight: true,
+                    template: "<i class='fas fa-spinner fa-spin'></i> Loading description...",
+                });
+                webix.event(window, "resize", function () {
+                    loading.adjust();
+                })
+
+                webix.ready(function () {
+                    webix.ajax().get("https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml", function (text) {
+                        // we will remove html comments, because it breaks the dom parser
+                        text = text.replace(/<!--[\s\S]*?-->/g, '');
+                        try {
+                            var parser = new DOMParser();
+                            var xml = parser.parseFromString(text, "text/xml");
+                            var description = xml.getElementsByTagName("long_description")[0].childNodes[0].nodeValue;
+                        } catch (e) {
+                            var description = "{{ package["long_description"] }}";
+                        }
+                        webix.ui({
+                            container: "description",
+                            borderless: true,
+                            id: "description_container",
+                            view: "template",
+                            type: "clean",
+                            autoheight: true,
+                            template: "<span>" + description.replace(/\n/g, "<br>") + "</span>",
+                            on: {
+                                onAfterRender: function () {
+                                    $$("loading").hide();
                                 }
-                            });
-
-                            webix.event(window, "resize", function(){ $$("description_container").adjust(); })
+                            }
                         });
+
+                        webix.event(window, "resize", function () {
+                            $$("description_container").adjust();
+                        })
                     });
-                </script>
+                });
+            </script>
 
-                <div class="divider is-left">Recommended Download</div>
+            <h3>Recommended Download</h3>
 
-                <div class="card mb-4">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            <i class="fas fa-file-archive fa-fw" aria-hidden="true"
-                               style="margin-right: 5px"></i>{{ package["display_name"] }} (.ZIP)
-                        </p>
-                        <span style="float: right" class="card-header-icon">
-          <span class="tag is-link">{{ file_size(package["zip_size"]) }}</span>
-      </span>
-                    </header>
-                    <div class="card-content">
-                        <div class="content">
-                            A zip file containing the application.
-                        </div>
-                    </div>
-                    <footer class="card-footer">
-                        <a href="{{ package["zip_url"] }}" class="card-footer-item"><i class="fas fa-download fa-fw"
-                                                                                       aria-hidden="true"
-                                                                                       style="margin-right: 5px"></i>Download
-                            File</a>
-                    </footer>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ package["display_name"] }} (.ZIP)</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ file_size(package["zip_size"]) }}</h6>
+                    <p class="card-text">A zip file containing the application.</p>
+                    <a href="{{ package["zip_url"] }}" class="btn btn-outline-danger">Download File</a>
                 </div>
+            </div>
 
-                <div>
-                    <div class="divider is-left">Other Download Options</div>
-                </div>
+            <h3 class="divider is-left">Other Download Options</h3>
 
-                {% if package["package_type"] != "thm" %}
-                    <div class="card mb-4 is-success">
-                        <header class="card-header">
-                            <p class="card-header-title">
-                                <i class="fas fa-terminal fa-fw" aria-hidden="true"
-                                   style="margin-right: 5px"></i>{{ package["display_name"] }}
-                                (boot.{{ package["package_type"] }})
-                            </p>
-                        </header>
-                        <div class="card-content">
-                            <div class="content">
-                                The application's binary.
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
-                               class="card-footer-item"><i class="fas fa-download fa-fw" aria-hidden="true"
-                                                           style="margin-right: 5px"></i>Download File</a>
-                        </footer>
+            {% if package["package_type"] != "thm" %}
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ package["display_name"] }} (boot.{{ package["package_type"] }})</h4>
+                        <p class="card-text">The application's binary.</p>
+                        <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
+                           class="btn btn-outline-danger">Download File</a>
                     </div>
-                {% endif %}
-
-
-                <div class="card mb-4">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>Metadata
-                            file
-                            for {{ package["display_name"] }}
-                        </p>
-                    </header>
-                    <div class="card-content">
-                        <div class="content">
-                            The original application meta.xml file, containing information specified by the
-                            developer such as
-                            version, coder, and description.
-                        </div>
-                    </div>
-                    <footer class="card-footer">
-                        <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml"
-                           class="card-footer-item">View File</a>
-                    </footer>
                 </div>
-
-
+            {% endif %}
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Metadata file for {{ package["display_name"] }}</h4>
+                    <p class="card-text">The original application meta.xml file, containing information specified by the
+                        developer such as version, coder, and description.</p>
+                    <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/meta.xml"
+                       class="btn btn-outline-warning">View File</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
-{% include 'includes/footer.html' %}
 </body>
 </html>
-
+{% include 'includes/retrofooter.html' %}
