@@ -80,8 +80,7 @@ def home():
 
 @app.route("/publish")
 def publish():
-    return render_template('pages/publish.html', packages=OpenShopChannel.get_packages(),
-                           themes=OpenShopChannel.get_themes())
+    return render_template('pages/publish.html', packages=OpenShopChannel.get_packages())
 
 
 @sitemap.register_generator
@@ -139,9 +138,8 @@ def aprilfools21():
 @app.route("/beta")
 def beta():
     # return 404 if not betasite redirect
-    if request.args.get("redirect") != "betasite":
-        if request.args.get("redirect") != "oscdlbrowser":
-            abort(404)
+    if request.args.get("redirect") not in ["betasite", "oscdlbrowser", "theme"]:
+        abort(404)
     return render_template('pages/beta.html')
 
 
@@ -165,27 +163,25 @@ def apps():
     yield 'apps', {}
 
 
-@app.route("/library/<pkg_type>/<name>")
-def application(name, pkg_type):
-    # error handling in case the app doesn't exist
+@app.route("/library/app/<name>")
+def application(name):
     try:
-        if pkg_type == "theme":
-            category = OpenShopChannel.theme_by_name(name)["category"]
-            return render_template('pages/app.html', package=OpenShopChannel.theme_by_name(name),
-                                   packages=OpenShopChannel.get_themes(), repo="themes", host="hbb3.oscwii.org")
-        else:
-            category = OpenShopChannel.package_by_name(name)["category"]
-            return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name),
-                                   packages=OpenShopChannel.get_packages(), repo="apps", host="hbb1.oscwii.org")
+        category = OpenShopChannel.package_by_name(name)["category"]
+        return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name),
+                               packages=OpenShopChannel.get_packages(), repo="apps", host="hbb1.oscwii.org")
     except Exception:
         abort(404)
 
 
+@app.route("/library/theme/<name>")
+def theme(name):
+    return redirect(url_for('beta', redirect="theme"))
+
+
 @sitemap.register_generator
 def application():
-    for pkg_type in ["apps", "themes"]:
-        for package in OpenShopChannel.get_packages():
-            yield 'application', {'name': package["internal_name"], 'pkg_type': pkg_type}
+    for package in OpenShopChannel.get_packages():
+        yield 'application', {'name': package["internal_name"]}
 
 
 @app.template_global()

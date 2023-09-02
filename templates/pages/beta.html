@@ -25,6 +25,19 @@
                 </a>
             </div>
         {% endif %}
+        {% if request.args.get("redirect") == "theme" %}
+            <div class="notification is-warning">
+                <h1 class="title">
+                    Information:
+                </h1>
+                <p class="subtitle">
+                    Homebrew Channel Themes are no longer available on the Open Shop Channel website.
+                </p>
+                <a class="button is-dark is-small" href="/">
+                    Go Home
+                </a>
+            </div>
+        {% endif %}
         {% if request.args.get("redirect") == "oscdlbrowser" %}
             <div class="notification is-warning">
                 <h1 class="title">

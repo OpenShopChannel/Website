@@ -40,10 +40,9 @@ class API:
 
     def load_packages(self):
         self.packages = json.loads(requests.get(f"https://api.oscwii.org/v2/primary/packages").text)
-        self.themes_packages = json.loads(requests.get(f"https://api.oscwii.org/v2/themes/packages").text)
 
         # add formatted release date
-        for package in self.packages + self.themes_packages:
+        for package in self.packages:
             try:
                 package["release_date_formatted"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
                     '%B %e, %Y')
@@ -52,23 +51,13 @@ class API:
 
         # sort alphabetically by name
         self.packages.sort(key=lambda x: x["display_name"])
-        self.themes_packages.sort(key=lambda x: x["display_name"])
 
     def get_packages(self, developer=None, category=None):
         filtered = filter_packages(self.packages, coder=developer, category=category)
         return filtered
 
-    def get_themes(self, developer=None, category=None):
-        filtered = filter_packages(self.themes_packages, coder=developer, category=category)
-        return filtered
-
     def package_by_name(self, name):
         for package in self.packages:
-            if package["internal_name"].lower() == name.lower():
-                return package
-
-    def theme_by_name(self, name):
-        for package in self.themes_packages:
             if package["internal_name"].lower() == name.lower():
                 return package
 

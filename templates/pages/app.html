@@ -30,10 +30,8 @@
                             {% include "includes/categoryicon.html" %}{{ package["display_name"] }}
                         </h1>
                         <h2 class="subtitle">
-                            A homebrew {% if package["package_type"] != "thm" %}application{% else %}
-                            theme{% endif %}
-                            created by <u><b><a
-                                href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
+                            Homebrew application created by <u><b>
+                            <a href="/library?coder={{ package["coder"] }}&repo={{ repo }}">{{ package["coder"] }}</a></b></u>
                         </h2>
                     </div>
                     <div class="column is-one-fifth" style="width: unset;">
@@ -243,27 +241,25 @@
                     <div class="divider is-left">Other Download Options</div>
                 </div>
 
-                {% if package["package_type"] != "thm" %}
-                    <div class="card mb-4 is-success">
-                        <header class="card-header">
-                            <p class="card-header-title">
-                                <i class="fas fa-terminal fa-fw" aria-hidden="true"
-                                   style="margin-right: 5px"></i>{{ package["display_name"] }}
-                                (boot.{{ package["package_type"] }})
-                            </p>
-                        </header>
-                        <div class="card-content">
-                            <div class="content">
-                                The application's binary.
-                            </div>
+                <div class="card mb-4 is-success">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            <i class="fas fa-terminal fa-fw" aria-hidden="true"
+                               style="margin-right: 5px"></i>{{ package["display_name"] }}
+                            (boot.{{ package["package_type"] }})
+                        </p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            The application's binary.
                         </div>
-                        <footer class="card-footer">
-                            <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
-                               class="card-footer-item"><i class="fas fa-download fa-fw" aria-hidden="true"
-                                                           style="margin-right: 5px"></i>Download File</a>
-                        </footer>
                     </div>
-                {% endif %}
+                    <footer class="card-footer">
+                        <a href="https://{{ host }}/unzipped_apps/{{ package["internal_name"] }}/apps/{{ package["internal_name"] }}/boot.{{ package["package_type"] }}"
+                           class="card-footer-item"><i class="fas fa-download fa-fw" aria-hidden="true"
+                                                       style="margin-right: 5px"></i>Download File</a>
+                    </footer>
+                </div>
 
 
                 <div class="card mb-4">

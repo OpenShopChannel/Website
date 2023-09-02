@@ -82,7 +82,6 @@
         {% endif %}
         <div id="AppsList"></div>
         <script type="text/javascript" charset="utf-8">
-                let repository_type = "app"
                 library = webix.ui({
                     margin: 10,
                     container: "AppsList",
@@ -111,7 +110,7 @@
                             },
                             on: {
                                 "onItemClick": function (id) {
-                                    window.location = "/library/" + repository_type + "/" + this.getItem(id).internal_name;
+                                    window.location = "/library/app/" + this.getItem(id).internal_name;
                                 },
                                 "onAfterRender": function () {
                                     // update amount of apps
@@ -143,15 +142,8 @@
                             },
                             borderless: true,
                             yCount: 7,
-                            {% if request.args.get("repo") == "themes" %}
-                                url: "https://api.oscwii.org/v2/themes/packages{{ querystring }}",
-                            {% else %}
-                                url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
-                            {% endif %}
+                            url: "https://api.oscwii.org/v2/primary/packages{{ querystring }}",
                             ready: function () {
-                                {% if request.args.get("repo") == "themes" %}
-                                    repository_type = "theme"
-                                {% endif %}
                                 {% if request.args.get("page") %}
                                     // navigate to specified page number using pager "paginationbar"
                                     $$("paginationbar").select({{ request.args.get("page") }} - 1);
@@ -203,10 +195,8 @@
                                             if (value) {
                                                 $$("category").disable()
                                                 $$("category").setValue("All Apps")
-                                                $$("repository").disable()
                                             } else {
                                                 $$("category").enable()
-                                                $$("repository").enable()
                                             }
                                             $$("appsview").filter(function (obj) {
                                                 return obj.display_name.toLowerCase().indexOf(value) != -1;
@@ -235,38 +225,6 @@
                                     },
                                     width: 200,
                                     options: ["All Apps", "Utilities", "Emulators", "Games", "Media", "Demos"]
-                                },
-                                {
-                                    view: "combo",
-                                    id: "repository",
-                                    hidden: ($(window).width() < 480),
-                                    {% if request.args.get("repo") == "themes" %}
-                                        value: "Themes",
-                                    {% else %}
-                                        value: "Applications",
-                                    {% endif %}
-                                    on: {
-                                        "onChange": function (repository) {
-                                            $$("appsview").clearAll()
-                                            $$("category").setValue("All Apps")
-                                            switch (repository) {
-                                                case "Applications":
-                                                    $$("appsview").load("https://api.oscwii.org/v2/primary/packages{{ querystring }}")
-                                                    repository_type = "app"
-                                                    break;
-                                                case "Themes":
-                                                    $$("appsview").load("https://api.oscwii.org/v2/themes/packages{{ querystring }}")
-                                                    repository_type = "theme"
-                                                    break;
-                                            }
-                                            // sort appsview when ready
-                                            $$("appsview").attachEvent("onAfterLoad", function () {
-                                                $$("appsview").sort("display_name", "asc")
-                                            })
-                                        }
-                                    },
-                                    width: 200,
-                                    options: ["Applications", "Themes"]
                                 },
                                 {},
                                 {
