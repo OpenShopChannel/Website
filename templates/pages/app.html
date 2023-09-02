@@ -53,10 +53,28 @@
                         borderless: false,
                         responsive: true,
                         cols: [
-                            {},
+                            {
+                                view: "label",
+                                label: "Hello! Interested in seeing how Open Shop Channel obtains and distributes this application? Press \"View Manifest\"!",
+                                hidden: ($(window).width() < 1380),
+                            },
+                            {
+                                hidden: !($(window).width() < 1380)
+                            },
                             {
                                 view: "button",
-                                id: "category",
+                                id: "view_manifest",
+                                label: '<i class="fas fa-file-contract" aria-hidden="true"></i> View Manifest',
+                                tooltip: "View app manifest on GitHub",
+                                css: "webix_primary",
+                                click: function () {
+                                    window.open("https://github.com/OpenShopChannel/Apps/blob/master/contents/" + encodeURIComponent("{{ package["slug"] }}") + ".oscmeta", '_blank');
+                                },
+                                width: 145
+                            },
+                            {
+                                view: "button",
+                                id: "report_outdated",
                                 label: '<i class="fas fa-stopwatch" aria-hidden="true"></i> Report Outdated',
                                 tooltip: "Report this application as outdated. Requires a GitHub account.",
                                 css: "webix_danger",
