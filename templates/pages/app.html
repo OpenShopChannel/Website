@@ -102,8 +102,10 @@
                     <div class="message-body">
                         <p><b><i class="fas fa-wrench fa-fw" aria-hidden="true"></i>
                             Version:</b> {{ package["version"] }}</p>
+                        {% if package["release_date"] != 0 %}
                         <p><b><i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i> Release
                             Date:</b> {{ package["release_date_formatted"] }}</p>
+                        {% endif %}
                         <p><b><i class="fas fa-sd-card fa-fw" aria-hidden="true"></i> App
                             Size:</b> {{ file_size(package["file_size"]["zip_uncompressed"]) }}</p>
                         <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i>
