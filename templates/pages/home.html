@@ -55,8 +55,8 @@
                         <div>
                             <li><span
                                     class="ticker-item"><b><i class="fas fa-cog" aria-hidden="true"
-                                                              style="margin-right: .5em"></i>Latest update in Utilities: </b>"{{ newest_packages["utilities"]["display_name"] }}" by {{ newest_packages["utilities"]["coder"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["short_description"] }} - <a
-                                    href="{{ url_for('application', name=newest_packages["utilities"]["internal_name"]) }}">Download Now!</a></span>
+                                                              style="margin-right: .5em"></i>Latest update in Utilities: </b>"{{ newest_packages["utilities"]["name"] }}" by {{ newest_packages["utilities"]["author"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["description"]["short"] }} - <a
+                                    href="{{ url_for('application', name=newest_packages["utilities"]["slug"]) }}">Download Now!</a></span>
                             </li>
                         </div>
                     {% endif %}
@@ -64,15 +64,15 @@
                         <div>
                             <li><span
                                     class="ticker-item"><b><i class="fas fa-microchip" aria-hidden="true"
-                                                              style="margin-right: .5em"></i>Latest update in Emulators: </b>"{{ newest_packages["emulators"]["display_name"] }}" by {{ newest_packages["emulators"]["coder"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["short_description"] }} - <a
-                                    href="{{ url_for('application', name=newest_packages["emulators"]["internal_name"]) }}">Download Now!</a></span>
+                                                              style="margin-right: .5em"></i>Latest update in Emulators: </b>"{{ newest_packages["emulators"]["name"] }}" by {{ newest_packages["emulators"]["author"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["description"]["short"] }} - <a
+                                    href="{{ url_for('application', name=newest_packages["emulators"]["slug"]) }}">Download Now!</a></span>
                             </li>
                         </div>
                     {% endif %}
                     <div>
                         <li><span
                                 class="ticker-item"><b><i class="fas fa-star" aria-hidden="true"
-                                                          style="margin-right: .5em"></i>App of the Day: </b> "{{ package["display_name"] }}" ({{ package["category"].capitalize() }}) by {{ package["coder"] }} - {{ package["short_description"] }} - <a
+                                                          style="margin-right: .5em"></i>App of the Day: </b> "{{ package["name"] }}" ({{ package["category"].capitalize() }}) by {{ package["author"] }} - {{ package["description"]["short"] }} - <a
                                 href="{{ url_for('application', name=package["internal_name"]) }}">Download Now!</a></span></li>
                     </div>
                     {% for message in ticker %}
