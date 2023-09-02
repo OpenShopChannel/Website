@@ -1,4 +1,5 @@
-{% if "wwww" in package["controllers"] %}
+{% for peripheral in package["peripherals"] %}
+{% if peripheral == "Wii Remote" %}
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -17,65 +18,9 @@
             </div>
         </article>
     </div>
-{% elif "www" in package["controllers"] %}
-    <div style="max-height: 100px; margin-bottom: 0.5rem;">
-        <article class="media">
-            <div class="media-left">
-                <figure class="image is-64x64">
-                    <img src="/static/images/controllericon/3WiiRemote.png" alt="Wii Remote">
-                </figure>
-            </div>
-            <div class="media-content">
-                <div class="content">
-                    <p>
-                        <strong>3 Wii Remotes</strong>
-                        <br>
-                        <small>Can be used with up to 3 Wii Remotes.</small>
-                    </p>
-                </div>
-            </div>
-        </article>
-    </div>
-{% elif "ww" in package["controllers"] %}
-    <div style="max-height: 100px; margin-bottom: 0.5rem;">
-        <article class="media">
-            <div class="media-left">
-                <figure class="image is-64x64">
-                    <img src="/static/images/controllericon/2WiiRemote.png" alt="Wii Remote">
-                </figure>
-            </div>
-            <div class="media-content">
-                <div class="content">
-                    <p>
-                        <strong>2 Wii Remotes</strong>
-                        <br>
-                        <small>Can be used with up to 2 Wii Remotes.</small>
-                    </p>
-                </div>
-            </div>
-        </article>
-    </div>
-{% elif "w" in package["controllers"] %}
-    <div style="max-height: 100px; margin-bottom: 0.5rem;">
-        <article class="media">
-            <div class="media-left">
-                <figure class="image is-64x64">
-                    <img src="/static/images/controllericon/1WiiRemote.png" alt="Wii Remote">
-                </figure>
-            </div>
-            <div class="media-content">
-                <div class="content">
-                    <p>
-                        <strong>Wii Remote</strong>
-                        <br>
-                        <small>Can be used with a single Wii Remote.</small>
-                    </p>
-                </div>
-            </div>
-        </article>
-    </div>
 {% endif %}
-{% if "n" in package["controllers"] %}
+{% endfor %}
+{% if "Nunchuk" in package["peripherals"] %}
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -95,7 +40,7 @@
         </article>
     </div>
 {% endif %}
-{% if "c" in package["controllers"] %}
+{% if "Classic Controller" in package["peripherals"] %}
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -115,7 +60,7 @@
         </article>
     </div>
 {% endif %}
-{% if "g" in package["controllers"] %}
+{% if "GameCube Controller" in package["peripherals"] %}
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -135,7 +80,7 @@
         </article>
     </div>
 {% endif %}
-{% if "z" in package["controllers"] %}
+{% if "Wii Zapper" in package["peripherals"] %}
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -155,7 +100,7 @@
         </article>
     </div>
 {% endif %}
-{% if "k" in package["controllers"] %}
+{% if "USB Keyboard" in package["peripherals"] %}
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -175,7 +120,7 @@
         </article>
     </div>
 {% endif %}
-{% if "s" in package["controllers"] %}
+{% if "SDHC" in package["peripherals"] %}
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">

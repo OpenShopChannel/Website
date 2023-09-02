@@ -165,12 +165,9 @@ def apps():
 
 @app.route("/library/app/<name>")
 def application(name):
-    try:
-        category = OpenShopChannel.package_by_name(name)["category"]
-        return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name),
-                               packages=OpenShopChannel.get_packages(), repo="apps", host="hbb1.oscwii.org")
-    except Exception:
-        abort(404)
+    category = OpenShopChannel.package_by_name(name)["category"]
+    return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name),
+                           packages=OpenShopChannel.get_packages(), repo="apps", host="hbb1.oscwii.org")
 
 
 @app.route("/library/theme/<name>")

@@ -39,7 +39,7 @@ class API:
         scheduler.start()
 
     def load_packages(self):
-        self.packages = json.loads(requests.get(f"https://api.oscwii.org/v2/primary/packages").text)
+        self.packages = json.loads(requests.get(f"https://hbb1.oscwii.org/api/v3/contents").text)
 
         # add formatted release date
         for package in self.packages:
@@ -50,7 +50,7 @@ class API:
                 pass
 
         # sort alphabetically by name
-        self.packages.sort(key=lambda x: x["display_name"])
+        self.packages.sort(key=lambda x: x["name"])
 
     def get_packages(self, developer=None, category=None):
         filtered = filter_packages(self.packages, coder=developer, category=category)
@@ -58,7 +58,7 @@ class API:
 
     def package_by_name(self, name):
         for package in self.packages:
-            if package["internal_name"].lower() == name.lower():
+            if package["slug"].lower() == name.lower():
                 return package
 
     def newest_apps(self):
@@ -83,16 +83,16 @@ class API:
         while True:
             package = random.choice(self.packages)
             # they do not have covid, just did not specify a description
-            if package["short_description"] == "No description provided.":
+            if package["description"]["short"] == "No description provided.":
                 continue
             # they do not have covid, just simply a demo and we can't have that
             if package["category"] == "demos":
                 continue
             # they do not have covid, but don't support wii remotes
-            if "w" not in package["controllers"]:
+            if "Wii Remote" not in package["peripherals"]:
                 continue
             # they do not have covid, but the developer is Danbo
-            if package["coder"] == "Danbo":
+            if package["author"] == "Danbo":
                 continue
             break
         self.package_of_the_day = package

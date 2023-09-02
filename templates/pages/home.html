@@ -38,16 +38,16 @@
                     <div>
                         <li><span
                                 class="ticker-item"><b><i class="fas fa-newspaper" aria-hidden="true"
-                                                          style="margin-right: .5em"></i>Latest update / addition: </b>"{{ newest_packages["newest"]["display_name"] }} {{ newest_packages["newest"]["version"] }}" by {{ newest_packages["newest"]["coder"] }} - {{ date(newest_packages["newest"]["release_date"]) }} - {{ newest_packages["newest"]["short_description"] }} - <a
-                                href="{{ url_for('application', name=newest_packages["newest"]["internal_name"]) }}">Download Now!</a></span>
+                                                          style="margin-right: .5em"></i>Latest update / addition: </b>"{{ newest_packages["newest"]["name"] }} {{ newest_packages["newest"]["version"] }}" by {{ newest_packages["newest"]["author"] }} - {{ date(newest_packages["newest"]["release_date"]) }} - {{ newest_packages["newest"]["description"]["short"] }} - <a
+                                href="{{ url_for('application', name=newest_packages["newest"]["slug"]) }}">Download Now!</a></span>
                         </li>
                     </div>
                     {% if newest_packages["newest"]["category"] != "games" %}
                         <div>
                             <li><span
                                     class="ticker-item"><b><i class="fas fa-gamepad" aria-hidden="true"
-                                                              style="margin-right: .5em"></i>Latest update in Games: </b>"{{ newest_packages["games"]["display_name"] }}" by {{ newest_packages["games"]["coder"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["short_description"] }} - <a
-                                    href="{{ url_for('application', name=newest_packages["games"]["internal_name"]) }}">Download Now!</a></span>
+                                                              style="margin-right: .5em"></i>Latest update in Games: </b>"{{ newest_packages["games"]["name"] }}" by {{ newest_packages["games"]["author"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["description"]["short"] }} - <a
+                                    href="{{ url_for('application', name=newest_packages["games"]["slug"]) }}">Download Now!</a></span>
                             </li>
                         </div>
                     {% endif %}
@@ -98,7 +98,7 @@
                 <img src="/static/images/RainbowOpenLogo.png" alt="Open Shop Channel Logo" width="448" height="224">
             </div>
             <div class="column is-one-half is-hidden-mobile">
-                <a href="{{ url_for('application', name=package["internal_name"]) }}">
+                <a href="{{ url_for('application', name=package["slug"]) }}">
                     <div class="card has-ribbon">
                         <div class="ribbon is-warning"><i class="fas fa-star" aria-hidden="true"
                                                           style="margin-right: .75em"></i> App of the Day
@@ -107,15 +107,15 @@
                             <div class="media">
                                 <div class="media-left">
                                     <figure class="image">
-                                        <img src="{{ package["icon_url"] }}" alt="App Icon">
+                                        <img src="{{ package["url"]["icon"] }}" alt="App Icon">
                                     </figure>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-4">{{ package["display_name"] }}</p>
-                                    <p class="subtitle is-6">Made by <b>{{ package["coder"] | truncate(25) }}</b></p>
+                                    <p class="title is-4">{{ package["name"] }}</p>
+                                    <p class="subtitle is-6">Made by <b>{{ package["author"] | truncate(25) }}</b></p>
                                 </div>
                             </div>
-                            <p>{% include "includes/categoryicon.html" %}{{ package["short_description"] }}</p>
+                            <p>{% include "includes/categoryicon.html" %}{{ package["description"]["short"] }}</p>
                         </div>
                     </div>
                 </a>
