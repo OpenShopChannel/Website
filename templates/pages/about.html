@@ -1,3 +1,22 @@
+{% macro credits_entry(name, title, avatar_image, url, url_text) %}
+    <div>
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img src="/static/images/credits/{{ avatar_image }}" alt="Profile Picture">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">{{ name }}</p>
+                    <p class="subtitle is-6">{{ title }}{% if url %} - <a
+                            href="{{ url }}">{{ url_text }}</a>{% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,153 +39,21 @@
             The Open Shop Channel was started in March 2018, with the goal to revive the Wii Shop Channel before its
             planned discontinuation.
             The original plan for the project was to make a Wii Shop Channel replacement,
-            But over time, our focus went towards providing a general open source repository of apps, with the Homebrew
-            Browser and OSCDL to make use of it, as well as the public and open API later on.
-            An additional service was planned called Club Spot, which gave you perks for using the Open Shop Channel.
-
-            What we originally envisioned the Open Shop Channel to be was ambitious. But we keep working on it and
-            hoping to share results soon.
+            But over time, our focus went towards providing a general open source repository of apps.
         </p>
         <div class="columns">
             <div class="column">
                 <p class="subtitle" style="text-align: center">
                     <b>Credits</b>
                 </p>
-                <p>
-                    Below are the people who helped shape the Open Shop Channel open source project to what is is today:
-                </p>
 
-
-                <div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="/static/images/credits/dhtdht020.png" alt="Profile Picture">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">dhtdht020</p>
-                                <p class="subtitle is-6"><a href="https://twitter.com/dhtdht020">@dhtdht020</a></p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            Project Lead. Original developer of the Open Shop Channel API and website. Working alongside
-                            the rest of the team in the direction and planning of the project. Also taking part in Wii
-                            Shop Channel
-                            and backend development, and repository maintenance.
-                        </div>
-                    </div>
-                </div>
-
-
-                <div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="/static/images/credits/DarkOK.png" alt="Profile Picture">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">DarkOK</p>
-                                <p class="subtitle is-6"><a
-                                        href="https://twitter.com/darkphoenix10ok">@darkphoenix10ok</a></p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            Project Maintainer. JavaScript god and a kind stranger. Working on Wii Shop Channel research
-                            and development.
-                            Has contributed to the OSC's Homebrew Browser fork.
-                        </div>
-                    </div>
-                </div>
-
-
-                <div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="/static/images/credits/ramblecube.png" alt="Profile Picture">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">ramblecube</p>
-                                <p class="subtitle is-6"><a href="https://github.com/ramblecube">@ramblecube</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            Contributor. Works on the Wii Shop Channel. Designed our Wii Shop Channel frontend and
-                            offered significant
-                            help.
-                        </div>
-                    </div>
-                </div>
-
-
-                <div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="/static/images/credits/Spotlight.png" alt="Profile Picture">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">Spotlight</p>
-                                <p class="subtitle is-6"><a href="https://joscomputing.space/">joscomputing.space</a></p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            Former project Maintainer. Worked on Wii Shop Channel research and development. Also, took party in development of Danbo Shop Server,
-                            the new Open Shop Channel backend, as well as SOAP.
-                        </div>
-                    </div>
-                </div>
-
-
-                <div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="/static/images/credits/PuppercinoK.png" alt="Profile Picture">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">Puppercino</p>
-                                <p class="subtitle is-6"><a href="https://twitter.com/PuppercinoK">@PuppercinoK</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            Former project maintainer. Created graphics, branding and designs for the Open Shop Channel project. Major contributions to SOAP.
-                        </div>
-                    </div>
-                </div>
-
-
-                <div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="/static/images/credits/Larsenv.png" alt="Profile Picture">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">Larsenv</p>
-                                <p class="subtitle is-6"><a href="https://twitter.com/Larsenv_293">@Larsenv_293</a></p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            Contributor. Regularly takes care of app updates, and repository maintenance.
-                        </div>
-                    </div>
-                </div>
-
+                {{ credits_entry("dhtdht020", "Project Lead", "dhtdht020.png", "https://twitter.com/dhtdht020", "@dhtdht020") }}
+                {{ credits_entry("DarkOK", "Maintainer", "DarkOK.png", "https://twitter.com/darkphoenix10ok", "@darkphoenix10ok") }}
+                {{ credits_entry("ramblecube", "Maintainer", "ramblecube.png", "https://github.com/ramblecube", "@ramblecube") }}
+                {{ credits_entry("Spotlight", "Former Maintainer", "Spotlight.png", "https://joscomputing.space/", "joscomputing.space") }}
+                {{ credits_entry("Puppercino", "Former Designer", "PuppercinoK.png") }}
+                {{ credits_entry("Icons8", "Provided some of the iconography used in this website", "icons8.png", "https://icons8.com", "icons8.com") }}
+                {{ credits_entry("JetBrains", "Sponsoring IDEs used by the team", "jetbrains.png", "https://www.jetbrains.com/", "www.jetbrains.com") }}
 
                 <div>
                     <div class="card-content">
