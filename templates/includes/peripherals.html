@@ -1,25 +1,29 @@
+{% set remote_count = [] %}
 {% for peripheral in package["peripherals"] %}
 {% if peripheral == "Wii Remote" %}
-    <div style="max-height: 100px; margin-bottom: 0.5rem;">
+{% set __ = remote_count.append(1) %}
+{% endif %}
+{% endfor %}
+{% if "Wii Remote" in package["peripherals"] %}
+<div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
                 <figure class="image is-64x64">
-                    <img src="/static/images/controllericon/4WiiRemote.png" alt="Wii Remote">
+                    <img src="/static/images/controllericon/{{ remote_count|length }}WiiRemote.png" alt="Wii Remote">
                 </figure>
             </div>
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong>4 Wii Remotes</strong>
+                        <strong>Wii Remote</strong>
                         <br>
-                        <small>Can be used with up to 4 Wii Remotes.</small>
+                        <small>Can be used with a Wii Remote. Up to {{ remote_count|length }}.</small>
                     </p>
                 </div>
             </div>
         </article>
     </div>
 {% endif %}
-{% endfor %}
 {% if "Nunchuk" in package["peripherals"] %}
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
