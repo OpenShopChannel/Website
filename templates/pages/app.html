@@ -22,7 +22,7 @@
                 <li class="is-active"><a href="" aria-current="page">{{ package["display_name"] }}</a></li>
             </ul>
         </nav>
-        <div class="notification is-success hero is-bold" style="margin-bottom: 10px;">
+        <div class="notification is-link hero is-bold" style="margin-bottom: 10px;">
             <div class="container" style="margin: unset;">
                 <div class="columns is-vcentered">
                     <div class="column">
@@ -84,7 +84,7 @@
         </script>
         <div class="columns" style="padding-top: 10px;">
             <div class="column is-one-third">
-                <article class="message is-success">
+                <article class="message is-link">
                     <div class="message-body">
                         <div class="columns is-vcentered is-centered">
                             <div class="column">
@@ -95,7 +95,7 @@
                     </div>
                 </article>
 
-                <article class="message is-success">
+                <article class="message is-link">
                     <div class="message-header">
                         <p><i class="fas fa-info fa-fw" aria-hidden="true"></i> Information </p>
                     </div>
@@ -112,7 +112,7 @@
                         </p>
                     </div>
                 </article>
-                <article class="message is-success">
+                <article class="message is-link">
                     <div class="message-header">
                         <p><i class="fas fa-gamepad fa-fw" aria-hidden="true"></i> Peripherals</p>
                     </div>
@@ -121,7 +121,7 @@
                     </div>
                 </article>
                 {% if application_badges(package) %}
-                <article class="message is-success is-hidden-mobile">
+                <article class="message is-link is-hidden-mobile">
                     <div class="message-header">
                         <p><i class="fas fa-award fa-fw" aria-hidden="true"></i> Badges</p>
                     </div>
@@ -137,16 +137,16 @@
                     </div>
                 </article>
                 {% endif %}
-                <article class="message is-success">
+                <article class="message is-link">
                     <div class="message-header">
                         <p><i class="fas fa-gamepad fa-share-alt" aria-hidden="true"></i> Share</p>
                     </div>
                     <div class="message-body">
                         <b><i class="fas fa-info fa-link" aria-hidden="true"></i> Application link:</b>
-                        <input class="input is-success" type="text" readonly
+                        <input class="input is-link" type="text" readonly
                                value="https://oscwii.org{{ request.path }}">
                         <b><i class="fas fa-info fa-link mt-3" aria-hidden="true"></i> Author link:</b>
-                        <input class="input is-success" type="text" readonly
+                        <input class="input is-link" type="text" readonly
                                value="https://oscwii.org/library?coder={{ package.coder }}&repo={{ repo }}">
                         <b><i class="fas fa-info fa-share mt-3" aria-hidden="true"></i> Social media:</b><br>
                         <a class="button is-link"
@@ -241,7 +241,7 @@
                     <div class="divider is-left">Other Download Options</div>
                 </div>
 
-                <div class="card mb-4 is-success">
+                <div class="card mb-4 is-link">
                     <header class="card-header">
                         <p class="card-header-title">
                             <i class="fas fa-terminal fa-fw" aria-hidden="true"
