@@ -178,7 +178,7 @@ def theme(name):
 @sitemap.register_generator
 def application():
     for package in OpenShopChannel.get_packages():
-        yield 'application', {'name': package["internal_name"]}
+        yield 'application', {'name': package["slug"]}
 
 
 @app.template_global()
