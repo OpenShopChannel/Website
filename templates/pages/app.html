@@ -42,7 +42,11 @@
                 </div>
             </div>
         </div>
-        <div id="content"></div>
+        <article class="message is-{{ color }}">
+            <div class="message-body" style="padding: unset;">
+                <div id="content"></div>
+            </div>
+        </article>
         <script type="text/javascript" charset="utf-8">
             toolbar = webix.ui({
                 margin: 10,
@@ -51,6 +55,7 @@
                 rows: [
                     {
                         view: "toolbar",
+                        css: {"background-color": "unset !important"},
                         borderless: true,
                         responsive: true,
                         cols: [
@@ -65,7 +70,7 @@
                             {
                                 view: "button",
                                 id: "view_manifest",
-                                label: '<i class="fas fa-file-contract" aria-hidden="true"></i> View Manifest',
+                                label: '<span style="color: white;"><i class="fas fa-file-contract" aria-hidden="true"></i> View Manifest</span>',
                                 tooltip: "View app manifest on GitHub",
                                 css: "webix_primary",
                                 click: function () {
@@ -87,7 +92,7 @@
                             {
                                 view: "template",
                                 id: "danbo_icon",
-                                css: "danbo_icon",
+                                css: {"background-color": "unset !important"},
                                 hidden: ($(window).width() < 480),
                                 template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
                                 width: 140,
