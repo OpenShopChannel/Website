@@ -178,7 +178,7 @@ def application(name):
         elif category == "media":
             color = "warning"
         return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name),
-                               packages=OpenShopChannel.get_packages(), repo="apps", host="hbb1.oscwii.org", color=color)
+                               packages=OpenShopChannel.get_packages(), color=color)
     return abort(404)
 
 
