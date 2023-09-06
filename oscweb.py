@@ -166,8 +166,17 @@ def apps():
 @app.route("/library/app/<name>")
 def application(name):
     category = OpenShopChannel.package_by_name(name)["category"]
+    color = "info"
+    if category == "utilities":
+        color = "info"
+    elif category == "emulators":
+        color = "success"
+    elif category == "games":
+        color = "danger"
+    elif category == "media":
+        color = "warning"
     return render_template('pages/app.html', package=OpenShopChannel.package_by_name(name),
-                           packages=OpenShopChannel.get_packages(), repo="apps", host="hbb1.oscwii.org")
+                           packages=OpenShopChannel.get_packages(), repo="apps", host="hbb1.oscwii.org", color=color)
 
 
 @app.route("/library/theme/<name>")

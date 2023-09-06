@@ -3,7 +3,7 @@
         {{ title }}
     </a>
 {% endmacro %}
-<nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main navigation">
+<nav class="navbar is-spaced is-light" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
             {% if siteconfig.enable_events and events.is_event_running() %}
@@ -13,13 +13,13 @@
                         <img src="{{ event["logoSourceLight"] }}" height="28">
                     </picture>
                     <picture class="is-hidden-desktop">
-                        <source srcset="/static/images/open-logo-dark.png" media="(prefers-color-scheme: dark)">
+                        <source srcset="/static/images/open-logo.png" media="(prefers-color-scheme: dark)">
                         <img src="/static/images/open-logo.png" height="28">
                     </picture>
                 {% endwith %}
             {% else %}
                 <picture>
-                    <source srcset="/static/images/open-logo-dark.png" media="(prefers-color-scheme: dark)">
+                    <source srcset="/static/images/open-logo.png" media="(prefers-color-scheme: dark)">
                     <img src="/static/images/open-logo.png" height="28">
                 </picture>
             {% endif %}
@@ -73,21 +73,21 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-light is-hidden-widescreen-only is-hidden-desktop-only" style="background-color: #00ACEE; color:white;"
+                    <a class="button is-hidden-widescreen-only is-hidden-desktop-only" style="color: #00ACEE"
                        href="https://twitter.com/openshopwii">
                         <span class="icon">
                             <i class="fab fa-twitter"></i>
                         </span>
                         <span>Follow on Twitter!</span>
                     </a>
-                    <a class="button is-light is-hidden-widescreen-only is-hidden-desktop-only" style="background-color: #5865F2; color:white;"
+                    <a class="button is-hidden-widescreen-only is-hidden-desktop-only" style="color: #5865F2"
                        href="https://discord.gg/by6mR5N">
                         <span class="icon">
                             <i class="fab fa-discord"></i>
                         </span>
                         <span>Join our Discord!</span>
                     </a>
-                    <a class="button is-light is-hidden-widescreen-only is-hidden-desktop-only" style="background-color: #333; color:white;"
+                    <a class="button is-hidden-widescreen-only is-hidden-desktop-only"
                        href="https://github.com/OpenShopChannel">
                         <span class="icon">
                             <i class="fab fa-github"></i>

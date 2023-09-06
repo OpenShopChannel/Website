@@ -1,13 +1,3 @@
-* {
-	margin: 0;
-	padding: 0;
-	font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.ticker-item {
-	font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
 .ticker-container {
 	height: 60px;
 	width: 100%;
@@ -48,7 +38,7 @@
 	transition: 0.25s ease-in-out;
 }
 .ticker-container ul div.ticker-active {
-	top: 30px;
+	top: 40px;
 }
 .ticker-container ul div.not-active {
 	top: 60px;
@@ -62,7 +52,7 @@
 
 @media (min-width: 500px) {
 	.ticker-container {
-		height: 30px;
+		height: 40px;
 		text-align: left;
 	}
 	.ticker-container .ticker-caption {
@@ -85,10 +75,10 @@
 		top: 0;
 	}
 	.ticker-container ul div.not-active {
-		top: 30px;
+		top: 40px;
 	}
 	.ticker-container ul div.remove {
-		top: -30px;
+		top: -40px;
 	}
 }
 
