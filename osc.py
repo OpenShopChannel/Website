@@ -60,6 +60,7 @@ class API:
         for package in self.packages:
             if package["slug"].lower() == name.lower():
                 return package
+        return None
 
     def newest_apps(self):
         newest_apps = {"newest": None,
