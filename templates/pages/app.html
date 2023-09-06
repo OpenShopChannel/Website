@@ -202,7 +202,7 @@
                     webix.event(window, "resize", function(){ loading.adjust(); })
 
                     webix.ready(function () {
-                        webix.ajax().get("https://{{ host }}/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/meta.xml", function (text) {
+                        webix.ajax().get("https://hbb1.oscwii.org/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/meta.xml", function (text) {
                             // we will remove html comments, because it breaks the dom parser
                             text = text.replace(/<!--[\s\S]*?-->/g, '');
                             try {
@@ -276,7 +276,7 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a href="https://{{ host }}/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/boot.{{ package["package_type"] }}"
+                        <a href="https://hbb1.oscwii.org/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/boot.{{ package["package_type"] }}"
                            class="card-footer-item has-text-{{ color }}"><i class="fas fa-download fa-fw" aria-hidden="true"
                                                        style="margin-right: 5px"></i>Download File</a>
                     </footer>
@@ -299,7 +299,7 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a href="https://{{ host }}/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/meta.xml"
+                        <a href="https://hbb1.oscwii.org/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/meta.xml"
                            class="card-footer-item has-text-{{ color }}">View File</a>
                     </footer>
                 </div>
