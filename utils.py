@@ -21,20 +21,9 @@ def date(release_date):
 
 def application_badges(package):
     badges = {}
-    if package["description"]["short"] == "No description provided.":
-        badges["needs-no-description"] = "Needs no description"
-
     # check if added in the past 30 days
     if datetime.now().timestamp() - int(package["release_date"]) < 2592000:
         badges["recently-updated"] = "Recently Updated"
-
-    # check if zipped app size is over 100MiB
-    if int(package["file_size"]["zip_compressed"]) >= 104857600:
-        badges["expensive-delivery"] = "Expensive Delivery"
-
-    # check if zipped app size is under 500KiB
-    if int(package["file_size"]["zip_compressed"]) <= 512000:
-        badges["free-delivery"] = "Free Delivery"
 
     # check if the app has a birthday
     if datetime.fromtimestamp(int(package["release_date"])).strftime('%m%d') == datetime.now().strftime('%m%d'):

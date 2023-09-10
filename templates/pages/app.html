@@ -119,6 +119,21 @@
                     </div>
                 </article>
 
+                {% if application_badges(package) %}
+                <article class="message is-{{ color }} is-hidden-mobile">
+                    <div class="message-body">
+                        <div class="columns is-multiline">
+                            {% for badge, title in application_badges(package).items() %}
+                                <div class="column is-one-quarter has-tooltip-bottom" data-tooltip="{{ title }}">
+                                    <img src="/static/images/badges/{{ badge }}.png" alt="{{ title }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <small>What are these? Find out <a href="{{ url_for("help", article="badges") }}">here</a>.</small>
+                    </div>
+                </article>
+                {% endif %}
+
                 <article class="message is-{{ color }}">
                     <div class="message-header">
                         <p><i class="fas fa-info fa-fw" aria-hidden="true"></i> Information </p>
@@ -146,23 +161,6 @@
                         {% include 'includes/peripherals.html' %}
                     </div>
                 </article>
-                {% if application_badges(package) %}
-                <article class="message is-{{ color }} is-hidden-mobile">
-                    <div class="message-header">
-                        <p><i class="fas fa-award fa-fw" aria-hidden="true"></i> Badges</p>
-                    </div>
-                    <div class="message-body">
-                        <div class="columns is-multiline">
-                            {% for badge, title in application_badges(package).items() %}
-                                <div class="column is-one-quarter has-tooltip-bottom" data-tooltip="{{ title }}">
-                                    <img src="/static/images/badges/{{ badge }}.png" alt="{{ title }}">
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <small>How are badges awarded? Find out <a href="{{ url_for("help", article="badges") }}">here</a>.</small>
-                    </div>
-                </article>
-                {% endif %}
                 <article class="message is-{{ color }}">
                     <div class="message-header">
                         <p><i class="fas fa-gamepad fa-share-alt" aria-hidden="true"></i> Share</p>
