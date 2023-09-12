@@ -226,9 +226,11 @@
                     <header class="card-header">
                         <p class="card-header-title">
                             <i class="fas fa-terminal fa-fw" aria-hidden="true"
-                               style="margin-right: 5px"></i>{{ package["name"] }}
-                            (boot.{{ package["package_type"] }})
+                               style="margin-right: 5px"></i>boot.{{ package["package_type"] }}
                         </p>
+                        <span style="float: right" class="card-header-icon">
+          <span class="tag is-{{ color }}">{{ file_size(package["file_size"]["binary"]) }}</span>
+      </span>
                     </header>
                     <div class="card-content">
                         <div class="content">
@@ -237,25 +239,22 @@
                     </div>
                     <footer class="card-footer">
                         <a href="https://hbb1.oscwii.org/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/boot.{{ package["package_type"] }}"
-                           class="card-footer-item has-text-{{ color }}"><i class="fas fa-download fa-fw" aria-hidden="true"
-                                                       style="margin-right: 5px"></i>Download File</a>
+                           class="card-footer-item has-text-{{ color }}"><i class="fas fa-download fa-fw"
+                                                                            aria-hidden="true"
+                                                                            style="margin-right: 5px"></i>Download File</a>
                     </footer>
                 </div>
-
 
                 <div class="card mb-4">
                     <header class="card-header">
                         <p class="card-header-title">
-                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>Metadata
-                            file
-                            for {{ package["name"] }}
+                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>meta.xml
                         </p>
                     </header>
                     <div class="card-content">
                         <div class="content">
-                            The original application meta.xml file, containing information specified by the
-                            developer such as
-                            version, coder, and description.
+                            The meta.xml provided with the application, containing information specified by the
+                            developer such as version, coder, and description.
                         </div>
                     </div>
                     <footer class="card-footer">
@@ -264,6 +263,25 @@
                     </footer>
                 </div>
 
+                <div class="card mb-4">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            <i class="fas fa-image fa-fw" aria-hidden="true" style="margin-right: 5px"></i>icon.png
+                        </p>
+                        <span style="float: right" class="card-header-icon">
+          <span class="tag is-{{ color }}">{{ file_size(package["file_size"]["icon"]) }}</span>
+      </span>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            The application icon image.
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="{{ package["url"]["icon"] }}"
+                           class="card-footer-item has-text-{{ color }}">View File</a>
+                    </footer>
+                </div>
 
             </div>
         </div>
