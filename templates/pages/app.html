@@ -7,7 +7,7 @@
     <meta property="og:title" content="{{ package["name"] }}">
     <meta property="og:site_name" content="Open Shop Channel">
     <meta property="og:url" content="oscwii.org">
-    <meta property="og:description" content="{{ package["description"]["long"] }}">
+    <meta property="og:description" content="{{ package["description"]["short"] }}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{{ package["url"]["icon"] }}">
 </head>
@@ -189,52 +189,9 @@
                 {% if package["description"]["short"] == package["description"]["long"] %}
                     <div id="description"></div>
                 {% else %}
-                    <b style="margin-bottom: 1.5rem">{{ package["description"]["short"] }}</b>
-                    <div id="description"></div>
+                    <pre><b>{{ package["description"]["short"] }}</b></pre>
+                    <pre style="white-space: pre-wrap">{{ package["description"]["long"] }}</pre>
                 {% endif %}
-                <script type="text/javascript" charset="utf-8">
-                    let loading = webix.ui({
-                        container: "description",
-                        borderless: true,
-                        id: "loading",
-                        view: "template",
-                        type: "clean",
-                        autoheight: true,
-                        template: "<i class='fas fa-spinner fa-spin'></i> Loading description...",
-                    });
-                    webix.event(window, "resize", function(){ loading.adjust(); })
-
-                    webix.ready(function () {
-                        webix.ajax().get("https://hbb1.oscwii.org/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/meta.xml", function (text) {
-                            // we will remove html comments, because it breaks the dom parser
-                            text = text.replace(/<!--[\s\S]*?-->/g, '');
-                            try {
-                                var parser = new DOMParser();
-                                var xml = parser.parseFromString(text, "text/xml");
-                                var description = xml.getElementsByTagName("long_description")[0].childNodes[0].nodeValue;
-                            }
-                            catch (e) {
-                                var description = "{{ package["long_description"] }}";
-                            }
-                            webix.ui({
-                                container: "description",
-                                borderless: true,
-                                id: "description_container",
-                                view: "template",
-                                type: "clean",
-                                autoheight: true,
-                                template: "<span>" + description.replace(/\n/g, "<br>") + "</span>",
-                                on: {
-                                    onAfterRender: function () {
-                                        $$("loading").hide();
-                                    }
-                                }
-                            });
-
-                            webix.event(window, "resize", function(){ $$("description_container").adjust(); })
-                        });
-                    });
-                </script>
 
                 <div class="divider is-left">Recommended Download</div>
 
