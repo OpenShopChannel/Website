@@ -32,8 +32,8 @@ class API:
         scheduler = BackgroundScheduler()
         # Schedule packages list for refresh once per 30 minutes
         scheduler.add_job(func=self.load_packages, trigger="interval", minutes=30)
-        # Schedule newest app for refresh once per 30 minutes
-        scheduler.add_job(func=self.newest_apps, trigger="interval", minutes=30)
+        # Schedule newest app for refresh once per 10 minutes
+        scheduler.add_job(func=self.newest_apps, trigger="interval", minutes=10)
         # Schedule app of the day for refresh once per day at 2:00
         scheduler.add_job(func=self.set_package_of_the_day, trigger='cron', hour='2', minute='00')
         scheduler.start()
