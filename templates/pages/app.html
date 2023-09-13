@@ -147,10 +147,23 @@
                         {% endif %}
                         <p><b><i class="fas fa-sd-card fa-fw" aria-hidden="true"></i> App
                             Size:</b> {{ file_size(package["file_size"]["zip_uncompressed"]) }}</p>
-                        <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i>
+                        <p><b><i class="fas fa-user fa-fw" aria-hidden="true"></i>
                             Developer{% if "," in package["author"] %}s{% endif %}:</b> <a
                                 href="/library?coder={{ package["author"] }}">{{ package["author"] }}</a>
                         </p>
+                    </div>
+                </article>
+                <article class="message is-{{ color }}">
+                    <div class="message-header">
+                        <p><i class="fas fa-info fa-fw" aria-hidden="true"></i> Technical Information </p>
+                    </div>
+                    <div class="message-body">
+                        <p><b><i class="fas fa-file-contract fa-fw" aria-hidden="true"></i>
+                            Manifest:</b> <a href="https://github.com/OpenShopChannel/Apps/blob/master/contents/{{ package["slug"] }}.oscmeta">{{ package["slug"] }}.oscmeta</a></p>
+                        <p><b><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>
+                            Title Version:</b> {{ package["shop"]["title_version"] }}</p>
+                        <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i>
+                            Title ID:</b> {{ package["shop"]["title_id"] }}</p>
                     </div>
                 </article>
                 <article class="message is-{{ color }}">
