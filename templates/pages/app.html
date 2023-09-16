@@ -199,6 +199,11 @@
 
             <div class="column">
                 <div class="divider is-left">Description</div>
+                {% if "writes_to_nand" in package["flags"] %}
+                    <div class="notification is-{{ color }} is-bold" style="margin-bottom: 10px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b> This homebrew application makes permanent changes to the system's NAND, thus, this application should be used with caution. (And generally, you should always use homebrew applications with caution!)
+                    </div>
+                {% endif %}
                 {% if package["description"]["short"] == package["description"]["long"] %}
                     <div id="description"></div>
                 {% else %}
