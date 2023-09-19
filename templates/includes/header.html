@@ -53,7 +53,7 @@
 <meta name="subject" content="Wii Homebrew">
 <meta name="keywords" content="Wii, Homebrew, Shop, Browser, OSC">
 {% if request.endpoint == "application" and package %}
-<meta name="description" content="Download {{ package["display_name"] }} from the Open Shop Channel applications repository. {{ package["long_description"] }}">
+<meta name="description" content="Download {{ package["name"] }} from the Open Shop Channel applications repository. {{ package["description"]["short"] }}">
 {% elif request.endpoint == "help" %}
 <meta name="description" content="Help with Open Shop Channel. Troubleshoot issues with the Homebrew Browser.">
 {% elif request.endpoint == "library" and request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] %}
