@@ -41,6 +41,6 @@ def application_badges(package):
                 age = str(age) + "rd"
             else:
                 age = str(age) + "th"
-            badges["birthday-app"] = f"Happy {age} Birthday, {package['display_name']}!"
+            badges["birthday-app"] = f"Happy {age} Birthday, {package['name']}!"
 
     return badges
