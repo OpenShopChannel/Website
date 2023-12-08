@@ -204,6 +204,21 @@
                         <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b> This homebrew application makes permanent changes to the system's NAND, thus, this application should be used with caution. (And generally, you should always use homebrew applications with caution!)
                     </div>
                 {% endif %}
+                {% if "wii_only" in package["flags"] %}
+                    <div class="notification is-{{ color }} is-bold" style="margin-bottom: 10px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b> This homebrew application is compatible JUST with the regular Wii systems. This application might fail on other consoles such as vWii or Wii mini.
+                    </div>
+                {% endif %}
+                {% if "vwii_only" in package["flags"] %}
+                    <div class="notification is-{{ color }} is-bold" style="margin-bottom: 10px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b> This homebrew application is compatible JUST with the regular Wii U's vWii systems. This application might fail on other consoles such as Wii or Wii mini.
+                    </div>
+                {% endif %}
+                {% if "wii_mini_only" in package["flags"] %}
+                    <div class="notification is-{{ color }} is-bold" style="margin-bottom: 10px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b> This homebrew application is compatible JUST with the Wii mini systems. This application might fail on other consoles such as vWii or regular Wii.
+                    </div>
+                {% endif %}
                 {% if package["description"]["short"] == package["description"]["long"] %}
                     <div id="description"></div>
                 {% else %}
