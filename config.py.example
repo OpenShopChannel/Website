@@ -10,3 +10,6 @@ sample_rate = 1
 
 # Events
 enable_events = False
+
+# RepoManager
+REPOMAN_HOST = "https://hbb1.oscwii.org"

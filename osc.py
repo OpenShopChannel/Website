@@ -6,6 +6,8 @@ import requests
 import operator
 from functools import reduce
 
+import config
+
 
 def build_dictionary_filter_from_kwargs(**filter_kwargs):
     def _filter_fun(field, value):
@@ -39,7 +41,7 @@ class API:
         scheduler.start()
 
     def load_packages(self):
-        self.packages = json.loads(requests.get(f"https://hbb1.oscwii.org/api/v3/contents").text)
+        self.packages = json.loads(requests.get(f"{config.REPOMAN_HOST}/api/v3/contents").text)
 
         # add formatted release date
         for package in self.packages:
