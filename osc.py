@@ -1,5 +1,4 @@
 import json
-import random
 from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 import requests
@@ -34,10 +33,8 @@ class API:
         scheduler = BackgroundScheduler()
         # Schedule packages list for refresh once per 30 minutes
         scheduler.add_job(func=self.load_packages, trigger="interval", minutes=30)
-        # Schedule newest app for refresh once per 10 minutes
+        # Schedule the newest app for refresh once per 10 minutes
         scheduler.add_job(func=self.newest_apps, trigger="interval", minutes=10)
-        # Schedule app of the day for refresh once per day at 2:00
-        scheduler.add_job(func=self.set_package_of_the_day, trigger='cron', hour='2', minute='00')
         scheduler.start()
 
     def load_packages(self):
@@ -46,10 +43,12 @@ class API:
         # add formatted release date
         for package in self.packages:
             try:
-                package["release_date_formatted"] = datetime.fromtimestamp(int(package["release_date"])).strftime(
-                    '%B %e, %Y')
+                package["release_date_formatted"] = datetime.fromtimestamp(int(package["release_date"])).strftime('%B %e, %Y')
             except ValueError:
                 pass
+
+        # Retrieve the package of the day
+        self.set_package_of_the_day()
 
         # sort alphabetically by name
         self.packages.sort(key=lambda x: x["name"])
@@ -82,20 +81,5 @@ class API:
         self.newest_packages = newest_apps
 
     def set_package_of_the_day(self):
-        # some quality assurance, some of the apps have covid
-        while True:
-            package = random.choice(self.packages)
-            # they do not have covid, just did not specify a description
-            if package["description"]["short"] == "No description provided.":
-                continue
-            # they do not have covid, just simply a demo and we can't have that
-            if package["category"] == "demos":
-                continue
-            # they do not have covid, but don't support wii remotes
-            if "Wii Remote" not in package["peripherals"]:
-                continue
-            # they do not have covid, but the developer is Danbo
-            if package["author"] == "Danbo":
-                continue
-            break
+        package = json.loads(requests.get(f"{config.REPOMAN_HOST}/api/v3/featured-app").text)
         self.package_of_the_day = package

@@ -27,7 +27,6 @@ if config.sentry_dsn:
 
 OpenShopChannel = osc.API()
 OpenShopChannel.load_packages()
-OpenShopChannel.set_package_of_the_day()
 OpenShopChannel.newest_apps()
 
 app = Flask(__name__)
