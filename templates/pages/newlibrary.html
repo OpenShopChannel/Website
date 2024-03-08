@@ -101,17 +101,14 @@
                                         "<i class='fas fa-wrench fa-fw' aria-hidden='true' style='margin-right: .25em'></i>Version " + obj.version;
                             },
                             template: function (obj) {
-                                return "<div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
+                                return "<a href='/library/app/" + obj.internal_name + "' style='color:inherit;'><div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>" +
                                     "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i>"
                                     + obj.display_name + "</div>" +
                                     "<div style='float: left; height: 100%; margin-right: 10px;'>" +
                                     "<img src='" + obj.icon_url + "' style='height: 48px'></div>" +
-                                    "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
+                                    "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div></a>";
                             },
                             on: {
-                                "onItemClick": function (id) {
-                                    window.location = "/library/app/" + this.getItem(id).internal_name;
-                                },
                                 "onAfterRender": function () {
                                     // update amount of apps
                                     $$("amount_of_apps").setValue(this.count() + " Apps")
