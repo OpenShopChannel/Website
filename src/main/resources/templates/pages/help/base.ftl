@@ -1,18 +1,19 @@
+<#import "../../includes/header.ftl" as header>
+
+<#macro page title subtitle>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Help & Troubleshooting: "{% block title %}{% endblock %}" - Open Shop Channel</title>
-    {% include 'includes/header.html' %}
-</head>
+<@header.header title="Help & Troubleshooting: " + title>
+    <meta name="description" content="Help with Open Shop Channel.">
+</@header.header>
+
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
+<#include "../../includes/navigation.ftl">
+<#--{% include 'includes/alert.html' %}-->
 <div class="section">
     <div class="container">
         <div class="columns">
             <div class="column is-one-quarter">
-                {% include 'pages/help/navigation.html' %}
+                <#include "navigation.ftl">
             </div>
             <div class="column">
                 <nav class="level">
@@ -20,7 +21,7 @@
                     <div class="level-left">
                         <div class="level-item">
                             <h1 class="title">
-                                {{ self.title() }}
+                                ${title}
                             </h1>
                         </div>
                     </div>
@@ -28,7 +29,7 @@
                     <!-- Right side -->
                     <div class="level-right">
                         <a class="level-item" aria-label="contribute"
-                           href="https://github.com/OpenShopChannel/Website/tree/master/templates/pages/help/articles/{{ name }}.html"
+                           href="https://github.com/OpenShopChannel/Website/tree/master/src/main/resources/templates/pages/help/articles/${name}.ftl"
                            target=”_blank”>
                             <span class="icon is-small">
                                 <i class="fas fa-file-pen" aria-hidden="true" style="margin-right: .75em"></i>
@@ -38,11 +39,11 @@
                     </div>
                 </nav>
                 <p class="subtitle">
-                    {% block subtitle %}{% endblock %}
+                    ${subtitle}
                 </p>
                 <hr>
                 <div class="content">
-                    {% block content %}{% endblock %}
+                    <#nested>
                 </div>
                 <hr>
                 <article class="message">
@@ -54,7 +55,7 @@
                     <div class="message-body">
                         Managed to solve this issue in a different way? Contribute to this page on GitHub:<br>
                         <a class="level-item" style="text-decoration: none"
-                           href="https://github.com/OpenShopChannel/Website/tree/master/templates/pages/help/articles/{{ name }}.html"
+                           href="https://github.com/OpenShopChannel/Website/tree/master/src/main/resources/templates/pages/help/articles/${name}.html"
                            target=”_blank”>
                             <span class="icon is-small">
                                 <i class="fas fa-file-pen" aria-hidden="true" style="margin-right: .75em"></i>
@@ -67,6 +68,7 @@
         </div>
     </div>
 </div>
-{% include 'includes/footer.html' %}
+<#include "../../includes/footer.ftl">
 </body>
 </html>
+</#macro>

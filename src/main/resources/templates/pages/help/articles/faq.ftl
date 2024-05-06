@@ -1,7 +1,7 @@
-{% extends "pages/help/base.html" %}
-{% block title %}Frequently Asked Questions{% endblock %}
-{% block subtitle %}Below are answers for several questions we get asked frequently, to save you time:{% endblock %}
-{% block content %}
+<#import "../base.ftl" as base>
+
+<@base.page title="Frequently Asked Questions"
+    subtitle="Below are answers for several questions we get asked frequently, to save you time:">
     <article class="message is-info">
         <div class="message-body">
             Most of the information on this page will eventually be moved to dedicated pages.
@@ -40,4 +40,4 @@
         our Discord in the appropriate channel.
         <b>Please do not contact RiiConnect24 support.</b>
     </p>
-{% endblock %}
+</@base.page>

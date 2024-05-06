@@ -1,7 +1,6 @@
-{% extends "pages/help/base.html" %}
-{% block title %}Website Badges{% endblock %}
-{% block subtitle %}{% endblock %}
-{% block content %}
+<#import "../base.ftl" as base>
+
+<@base.page title="Website Badges" subtitle="">
     Badges are automatically given to applications which meet a certain criteria.<br>
     They are intended to highlight potentially useful information about an app.<br><br>
     <table class="table is-fullwidth">
@@ -25,4 +24,4 @@
         </tr>
         </tbody>
     </table>
-{% endblock %}
+</@base.page>

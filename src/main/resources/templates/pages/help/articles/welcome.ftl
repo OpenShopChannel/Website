@@ -1,7 +1,6 @@
-{% extends "pages/help/base.html" %}
-{% block title %}Welcome!{% endblock %}
-{% block subtitle %}Open Shop Channel Help & Troubleshooting{% endblock %}
-{% block content %}
+<#import "../base.ftl" as base>
+
+<@base.page title="Welcome!" subtitle="Open Shop Channel Help & Troubleshooting">
     <figure class="image is-128x128" style="float: right;">
         <img src="/static/images/help/danbo-help-desk.png" alt="Danbo Help Desk">
     </figure>
@@ -46,4 +45,4 @@
             You can create an issue on our GitHub to suggest improvements or new pages.
         </div>
     </article>
-{% endblock %}
+</@base.page>

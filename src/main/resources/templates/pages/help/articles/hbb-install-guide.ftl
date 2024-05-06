@@ -1,7 +1,7 @@
-{% extends "pages/help/base.html" %}
-{% block title %}Homebrew Browser Installation Guide{% endblock %}
-{% block subtitle %}Links to a bunch of guides and tutorials created by the community!{% endblock %}
-{% block content %}
+<#import "../base.ftl" as base>
+
+<@base.page title="Homebrew Browser Installation Guide"
+    subtitle="Links to a bunch of guides and tutorials created by the community!">
     <div class="notification">
         Compiled in this page are some <b>unofficial</b> guides we have found.<br><br> Want to add your own guide/tutorial? Maybe remove an outdated one? Simply click the
         "Edit this page on GitHub" button at the top of the page and the rest is straightforward!
@@ -71,4 +71,4 @@
         </tr>
         </tbody>
     </table>
-{% endblock %}
+</@base.page>

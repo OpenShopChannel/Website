@@ -1,51 +1,51 @@
-{% macro credits_entry(name, title, avatar_image, url, url_text) %}
+<#import "../includes/header.ftl" as header>
+
+<#macro creditsEntry name title avatarImage url="" urlText="">
     <div>
         <div class="card-content">
             <div class="media">
                 <div class="media-left">
                     <figure class="image is-48x48">
-                        <img src="/static/images/credits/{{ avatar_image }}" alt="Profile Picture">
+                        <img src="/static/images/credits/${avatarImage}" alt="Profile Picture">
                     </figure>
                 </div>
                 <div class="media-content">
-                    <p class="title is-4">{{ name }}</p>
-                    <p class="subtitle is-6">{{ title }}{% if url %} - <a
-                            href="{{ url }}">{{ url_text }}</a>{% endif %}
+                    <p class="title is-4">${name}</p>
+                    <p class="subtitle is-6">${title}<#if url?has_content> - <a href="${url}">${urlText}</a></#if>
                     </p>
                 </div>
             </div>
         </div>
     </div>
-{% endmacro %}
-{% macro timeline_entry(content, date, image, url, url_text) %}
+</#macro>
+
+<#macro timelineEntry content date image url="" urlText="">
     <div class="timeline-item">
         <div class="timeline-marker is-image is-32x32"
              style="background: none; border: none; border-radius: unset;">
-            <img src="/static/images/{{ image }}">
+            <img src="/static/images/${image}">
         </div>
         <div class="timeline-content">
-            <p class="heading">{{ date }}</p>
+            <p class="heading">${date}</p>
             <p>
-                {{ content }}
+                ${content}
             </p>
-            {% if url %}
+            <#if url?has_content>
                 <br>
-                <a href="{{ url }}"
-                   class="button is-fullwidth">{{ url_text }}</a>
-            {% endif %}
+                <a href="${url}" class="button is-fullwidth">${urlText}</a>
+            </#if>
         </div>
     </div>
-{% endmacro %}
+</#macro>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About - Open Shop Channel</title>
-    {% include 'includes/header.html' %}
-</head>
+<@header.header title="About">
+    <meta name="description" content="Official website for the Open Shop Channel open source homebrew apps repository.">
+</@header.header>
+
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
+<#include "../includes/navigation.ftl">
+<#--{% include 'includes/alert.html' %}-->
 <div class="section">
     <div class="container">
         <h1 class="title">
@@ -67,14 +67,14 @@
                     <b>Credits</b>
                 </p>
                 
-                {{ credits_entry("Artuto", "Project Lead", "Artuto.png", "https://github.com/Artuto", "@Artuto") }}
-                {{ credits_entry("dhtdht020", "Former Project Lead", "dhtdht020.png", "https://twitter.com/dhtdht020", "@dhtdht020") }}
-                {{ credits_entry("DarkOK", "Maintainer", "DarkOK.png", "https://twitter.com/darkphoenix10ok", "@darkphoenix10ok") }}
-                {{ credits_entry("ramblecube", "Maintainer", "ramblecube.png", "https://github.com/ramblecube", "@ramblecube") }}
-                {{ credits_entry("Spotlight", "Former Maintainer", "Spotlight.png", "https://joscomputing.space/", "joscomputing.space") }}
-                {{ credits_entry("Puppercino", "Former Designer", "PuppercinoK.png") }}
-                {{ credits_entry("Icons8", "Provided some of the iconography used in this website", "icons8.png", "https://icons8.com", "icons8.com") }}
-                {{ credits_entry("JetBrains", "Sponsoring IDEs used by the team", "jetbrains.png", "https://www.jetbrains.com/", "www.jetbrains.com") }}
+                <@creditsEntry "Artuto" "Project Lead" "Artuto.png" "https://github.com/Artuto" "@Artuto"/>
+                <@creditsEntry "dhtdht020" "Former Project Lead" "dhtdht020.png" "https://twitter.com/dhtdht020" "@dhtdht020"/>
+                <@creditsEntry "DarkOK" "Maintainer" "DarkOK.png" "https://twitter.com/darkphoenix10ok" "@darkphoenix10ok"/>
+                <@creditsEntry "ramblecube" "Maintainer" "ramblecube.png" "https://github.com/ramblecube" "@ramblecube"/>
+                <@creditsEntry "Spotlight" "Former Maintainer" "Spotlight.png" "https://joscomputing.space/" "joscomputing.space"/>
+                <@creditsEntry "Puppercino" "Former Designer" "PuppercinoK.png"/>
+                <@creditsEntry "Icons8" "Provided some of the iconography used in this website" "icons8.png" "https://icons8.com" "icons8.com"/>
+                <@creditsEntry "JetBrains" "Sponsoring IDEs used by the team" "jetbrains.png" "https://www.jetbrains.com/" "www.jetbrains.com"/>
 
                 <div>
                     <div class="card-content">
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div class="content">
-                            Thank you to all project contributors and donators, which helped us create the Open Shop
+                            Thank you to all project contributors and donors, which helped us create the Open Shop
                             Channel!
                         </div>
                     </div>
@@ -98,15 +98,15 @@
                     <header class="timeline-header">
                         <span class="tag is-medium is-link">2018</span>
                     </header>
-                    {{ timeline_entry("The Open Shop Channel project is launched, with the goal to restore functionality of the Wii Shop Channel.", "March 2018", "oldlogo.png") }}
-                    {{ timeline_entry("The Open Shop Channel begins providing a repository to replace the one in the Homebrew Browser, with more up to date applications and a larger variety of content.", "August 2019", "hbb-icon.png", "/library/app/homebrew_browser", "Download Homebrew Browser") }}
-                    {{ timeline_entry("Open Shop Channel Downloader, also known as OSCDL, was released. It allows downloading content from the Open Shop Channel on desktop computers, as well as wirelessly sending apps to Wii systems on the same network.", "April 2020", "oscdlicon-small.png", "https://github.com/dhtdht020/osc-dl/releases", "Download OSCDL") }}
-                    {{ timeline_entry("The public Open Shop Channel API has been released, allowing everyone to make use of Open Shop Channel's services and library directly, and provide custom services and clients making use of it.", "October 2020", "apipaper.png", "https://docs.oscwii.org/repository-manager/api", "View Documentation") }}
-                    {{ timeline_entry("The Open Shop Channel release a new online library, making use of its public API to provide a convenient location to download apps from the Open Shop Channel.", "November 2021", "dlbrowsericon.png", url_for("apps"), "Browse Library") }}
-                    {{ timeline_entry("Our new infrastructure, backend and repository system, \"Repository Manager\", is released, fully open sourcing the repository's contents'.", "August 2023", "repository-manager-logo.png", "https://docs.oscwii.org/repository-manager", "View Documentation") }}
+                    <@timelineEntry "The Open Shop Channel project is launched, with the goal to restore functionality of the Wii Shop Channel." "March 2018" "oldlogo.png"/>
+                    <@timelineEntry "The Open Shop Channel begins providing a repository to replace the one in the Homebrew Browser, with more up to date applications and a larger variety of content." "August 2019" "hbb-icon.png" "/library/app/homebrew_browser" "Download Homebrew Browser"/>
+                    <@timelineEntry "Open Shop Channel Downloader, also known as OSCDL, was released. It allows downloading content from the Open Shop Channel on desktop computers, as well as wirelessly sending apps to Wii systems on the same network." "April 2020" "oscdlicon-small.png" "https://github.com/dhtdht020/osc-dl/releases" "Download OSCDL"/>
+                    <@timelineEntry "The public Open Shop Channel API has been released, allowing everyone to make use of Open Shop Channel's services and library directly, and provide custom services and clients making use of it." "October 2020" "apipaper.png" "https://docs.oscwii.org/repository-manager/api" "View Documentation"/>
+                    <@timelineEntry "The Open Shop Channel release a new online library, making use of its public API to provide a convenient location to download apps from the Open Shop Channel." "November 2021" "dlbrowsericon.png" "/library" "Browse Library"/>
+                    <@timelineEntry "Our new infrastructure, backend and repository system, \"Repository Manager\", is released, fully open sourcing the repository's contents'." "August 2023" "repository-manager-logo.png" "https://docs.oscwii.org/repository-manager" "View Documentation"/>
 
                     <div class="timeline-header">
-                        <span class="tag is-medium is-link">2023</span>
+                        <span class="tag is-medium is-link">${.now?string('yyyy')}</span>
                     </div>
                 </div>
             </div>
@@ -154,13 +154,13 @@
                 <div class="control">
                     <div class="tags has-addons">
                         <span class="tag is-dark">Website Version</span>
-                        <span class="tag is-light">{{ version }}</span>
+                        <span class="tag is-light">${version}</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% include 'includes/footer.html' %}
+<#include "../includes/footer.ftl">
 </body>
 </html>

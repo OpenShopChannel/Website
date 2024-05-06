@@ -1,7 +1,6 @@
-{% extends "pages/help/base.html" %}
-{% block title %}Read Error -6{% endblock %}
-{% block subtitle %}Usually a connection error{% endblock %}
-{% block content %}
+<#import "../base.ftl" as base>
+
+<@base.page title="Read Error -6" subtitle="Usually a connection error">
     To use the Homebrew Browser, your Wii needs an internet connection.
     <br><br>
     <b>Perform a connection test:</b>
@@ -27,4 +26,4 @@
         </li>
         <li>Verify through a computer that you are able to write to your SD card.</li>
     </ul>
-{% endblock %}
+</@base.page>

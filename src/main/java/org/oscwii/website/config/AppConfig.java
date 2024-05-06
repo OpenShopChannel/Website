@@ -50,7 +50,7 @@ public class AppConfig
     public void setupSentry(Optional<GitProperties> gitProperties)
     {
         String rel = gitProperties.isEmpty() ? "DEV" : gitProperties.get().getCommitId();
-        System.setProperty("repoman.release", rel);
+        System.setProperty("oscweb.release", rel);
         System.setProperty("sentry.release", rel);
         System.setProperty("sentry.stacktrace.app.packages", "org.oscwii");
     }

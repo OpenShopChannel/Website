@@ -1,5 +1,5 @@
 <#macro page title route>
-    <a class="navbar-item<#if request.getServletPath() == route || (request.getServletPath() == "application" && route == "apps")> is-active</#if>" href="/${route}">
+    <a class="navbar-item<#if request.getServletPath() == route || (request.getServletPath() == "application" && route == "apps")> is-active</#if>" href="${route}">
         ${title}
     </a>
 </#macro>
@@ -37,8 +37,8 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-            <@page title="Home" route=""/>
-            <@page title="Library" route="apps"/>
+            <@page title="Home" route="/"/>
+            <@page title="Library" route="/apps"/>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" tabindex="0">
@@ -61,15 +61,15 @@
                 </a>
 
                 <div class="navbar-dropdown">
-                    <@page title="meta.xml Generator" route="tools/metaxml"/>
+                    <@page title="meta.xml Generator" route="/tools/metaxml"/>
                 </div>
             </div>
             <a class="navbar-item" href="https://github.com/OpenShopChannel/apps">
                 Repository
             </a>
-            <@page title="Donate" route="donate"/>
-            <@page title="Help" route="help"/>
-            <@page title="About" route="about"/>
+            <@page title="Donate" route="/donate"/>
+            <@page title="Help" route="/help"/>
+            <@page title="About" route="/about"/>
         </div>
 
         <div class="navbar-end">
