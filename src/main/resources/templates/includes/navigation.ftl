@@ -1,12 +1,14 @@
-{% macro page(title, route) %}
-    <a class="navbar-item{% if (request.endpoint == route) or (request.endpoint == "application" and route == "apps") %} is-active{% endif %}" href="{{ url_for(route) }}">
-        {{ title }}
+<#macro page title route>
+    <a class="navbar-item<#if request.getServletPath() == route || (request.getServletPath() == "application" && route == "apps")> is-active</#if>" href="/${route}">
+        ${title}
     </a>
-{% endmacro %}
+</#macro>
+
 <nav class="navbar is-spaced is-light" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            {% if siteconfig.enable_events and events.is_event_running() %}
+            <#-- TODO events -->
+            <!--{% if siteconfig.enable_events and events.is_event_running() %}
                 {% with event = events.current_event() %}
                     <picture class="is-hidden-mobile">
                         <source srcset="{{ event["logoSourceDark"] }}" media="(prefers-color-scheme: dark)">
@@ -17,12 +19,12 @@
                         <img src="/static/images/open-logo.png" height="28">
                     </picture>
                 {% endwith %}
-            {% else %}
+            {% else %}-->
                 <picture>
                     <source srcset="/static/images/open-logo.png" media="(prefers-color-scheme: dark)">
                     <img src="/static/images/open-logo.png" height="28">
                 </picture>
-            {% endif %}
+            <#--{% endif %}-->
             <span class="tag is-light" style="display: none">Beta</span>
         </a>
 
@@ -35,8 +37,8 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-            {{ page("Home", "home") }}
-            {{ page("Library", "apps") }}
+            <@page title="Home" route=""/>
+            <@page title="Library" route="apps"/>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" tabindex="0">
@@ -59,15 +61,15 @@
                 </a>
 
                 <div class="navbar-dropdown">
-                    {{ page("meta.xml Generator", "metagen") }}
+                    <@page title="meta.xml Generator" route="tools/metaxml"/>
                 </div>
             </div>
             <a class="navbar-item" href="https://github.com/OpenShopChannel/apps">
                 Repository
             </a>
-            {{ page("Donate", "donate") }}
-            {{ page("Help", "help") }}
-            {{ page("About", "about") }}
+            <@page title="Donate" route="donate"/>
+            <@page title="Help" route="help"/>
+            <@page title="About" route="about"/>
         </div>
 
         <div class="navbar-end">
@@ -81,7 +83,7 @@
                         <span>Follow on Twitter!</span>
                     </a>
                     <a class="button is-hidden-widescreen-only is-hidden-desktop-only" style="color: #5865F2"
-                       href="https://discord.gg/by6mR5N">
+                       href="https://discord.gg/osc">
                         <span class="icon">
                             <i class="fab fa-discord"></i>
                         </span>
@@ -99,7 +101,8 @@
         </div>
     </div>
 </nav>
-{% if siteconfig.enable_events and events.is_event_running() %}
+<#-- TODO events -->
+<#--{% if siteconfig.enable_events and events.is_event_running() %}
     {% with event = events.current_event() %}
         <div class="notification"
              style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem; text-align: center;">
@@ -109,4 +112,4 @@
                     style="margin-right: .5em; margin-left: .5em"></i></strong>
         </div>
     {% endwith %}
-{% endif %}
+{% endif %}-->

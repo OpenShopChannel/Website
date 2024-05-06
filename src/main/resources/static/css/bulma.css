@@ -10280,7 +10280,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 
 .footer {
   background-color: hsl(0, 0%, 98%);
-  padding: 3rem 1.5rem 6rem;
+  padding: 2rem 1.5rem 2rem;
 }
 
 /* Bulma Utilities */

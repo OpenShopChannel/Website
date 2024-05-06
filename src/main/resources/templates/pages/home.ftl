@@ -1,9 +1,10 @@
+<#import "../includes/header.ftl" as header>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Open Shop Channel</title>
-    {% include 'includes/header.html' %}
+<@header.header>
+    <meta name="description" content="Official website for the Open Shop Channel open source homebrew apps repository.">
+
+    <script src="/static/js/newest_apps.js" async></script>
     <script src="/static/ticker/ticker.js"></script>
     <link rel="stylesheet" href="/static/ticker/ticker.css">
 
@@ -14,17 +15,19 @@
             }
         </style>
     </noscript>
-</head>
+</@header.header>
+
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
+<#include "../includes/navigation.ftl">
+<#--{% include 'includes/alert.html' %}-->
 <div class="notification is-hidden-mobile" id="ticker"
      style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem;">
     <div class="columns is-vcentered">
         <div class="column">
             <div class="ticker-container">
                 <ul>
-                    {% for message in ticker %}
+                    <#-- TODO ticker -->
+                    <#--{% for message in ticker %}
                         {% if message["first"] == True %}
                             <div>
                                 <li><span
@@ -85,7 +88,7 @@
                                 </li>
                             </div>
                         {% endif %}
-                    {% endfor %}
+                    {% endfor %}-->
                 </ul>
             </div>
         </div>
@@ -98,7 +101,8 @@
                 <img src="/static/images/RainbowOpenLogo.png" alt="Open Shop Channel Logo" width="448" height="224">
             </div>
             <div class="column is-one-half is-hidden-mobile">
-                <a href="{{ url_for('application', name=package["slug"]) }}">
+                <#-- TODO app -->
+                <a href="/library/app/slug">
                     <article class="message is-warning">
                         <div class="message-header">
                             <p><i class="fas fa-star" aria-hidden="true"
@@ -109,7 +113,8 @@
                             <div class="media">
                                 <div class="media-left">
                                     <figure class="image">
-                                        <img src="{{ package["url"]["icon"] }}" alt="App Icon">
+                                        <#-- TODO icon -->
+                                        <img src="{{ package[url][icon] }}" alt="App Icon">
                                     </figure>
                                 </div>
                                 <div class="media-content">
@@ -122,7 +127,7 @@
                         </div>
                     </article>
                 </a>
-                <small>How is the app of the day determined? <a href="{{ url_for('help', article='appoftheday') }}">Find out here.</a></small>
+                <small>How is the app of the day determined? <a href="/help/appoftheday">Find out here.</a></small>
             </div>
         </div>
         <h1 class="title">
@@ -144,14 +149,14 @@
                             </div>
                             <div class="media-content">
                                 <p class="title is-4">Homebrew Browser</p>
-                                <p class="subtitle is-6">Wii <a href="{{ url_for('help', article='hbb-install-guide') }}">(HBB Installation Guide)</a></p>
+                                <p class="subtitle is-6">Wii <a href="/help/hbb-install-guide">(HBB Installation Guide)</a></p>
                             </div>
                         </div>
 
                         <div class="content">
                             Originally developed by <a href="https://wiibrew.org/wiki/User:Teknecal">teknecal</a>, the
                             Homebrew Browser was an app repository for the Wii first released in
-                            June of 2008.
+                            June 2008.
                             <br><br>
                             To make it usable 15 years later, we, the Open Shop Channel, modified it to connect to our
                             servers. While showing its age in many places, it
@@ -162,7 +167,7 @@
                            href="/library/app/homebrew_browser">Get
                             Homebrew Browser</a>
                         <br><br>
-                        <small>Having trouble using the Homebrew Browser? Visit <a href="{{ url_for('help', article='welcome') }}">Help & Troubleshooting</a> or our <a href="https://discord.gg/osc">Discord server</a>.</small>
+                        <small>Having trouble using the Homebrew Browser? Visit <a href="/help/welcome">Help & Troubleshooting</a> or our <a href="https://discord.gg/osc">Discord server</a>.</small>
                     </div>
                 </div>
             </div>
@@ -183,10 +188,10 @@
 
                         <div class="content">
                             OSCDL is an open source and modern GUI desktop client for downloading apps from the Open Shop Channel, developed by
-                            <a href="https://github.com/dhtdht020">dhtdht020</a>, the lead maintainer of the Open Shop Channel project.
+                            <a href="https://github.com/dhtdht020">dhtdht020</a>, the former lead maintainer of the Open Shop Channel project.
                             <br><br>
                             Using OSCDL, apps can be sent to the console over the internet with "Send to Wii" or over USBGecko.
-                            OSCDL is cross platform and is available for Windows, Linux, and macOS.
+                            OSCDL is cross-platform and is available for Windows, Linux, and macOS.
                         </div>
                         <a class="button is-link is-large" href="https://github.com/dhtdht020/osc-dl/releases">Get OSCDL</a>
                     </div>
@@ -195,115 +200,6 @@
         </div>
         <div class="divider is-center is-hidden-mobile">Alternatively, just use the online library!</div>
         <div id="newest_apps" class="is-hidden-mobile card" style="margin-bottom: 1.5rem;"></div>
-        <script type="text/javascript" charset="utf-8">
-            newest_apps = webix.ui({
-                margin: 10,
-                container: "newest_apps",
-                responsive: true,
-                rows: [
-                    {
-                        view: "toolbar",
-                        css: {"background-color": "unset !important"},
-                        borderless: true,
-                        responsive: true,
-                        cols: [
-                            {
-                                view: "template",
-                                css: {"background-color": "unset !important"},
-                                template: '<h1 class="subtitle">Recent Additions / Updates</h1>',
-                                borderless: true,
-                                width: ($(window).width() < 480) ? $(window).width() - 54 : 420
-                            },
-                            {},
-                            {
-                                view: "button",
-                                label: "View All Apps",
-                                click: function () {
-                                    window.open("/library", "_self");
-                                },
-                                width: ($(window).width() < 480) ? $(window).width() - 54 : 120
-                            },
-                            {
-                                view: "template",
-                                id: "danbo_icon",
-                                css: {"background-color": "unset !important"},
-                                hidden: ($(window).width() < 480),
-                                template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
-                                width: 140,
-                                borderless: true
-                            },
-                        ]
-                    },
-                    {
-                        view: "dataview",
-                        id: "appsview",
-                        css: {"background-color": "unset !important"},
-                        responsive: true,
-                        scroll: false,
-                        select: true,
-                        template: function (obj) {
-                            return "<div class='notification' style='margin-bottom: unset; margin-top: 0.25rem; padding: 0 0.5rem 0 0.5rem; text-align: center;'>"
-                                + humanDate(obj.release_date) + "</div><div style='line-height:35px; height:42px; white-space:nowrap; overflow:hidden;'>"
-                                + "<i class='" + CategoryIcon(obj.category) + "' aria-hidden='true' style='margin-right: .75em'></i><b>"
-                                + obj.display_name + "</b> " + obj.version + "</div>" +
-                                "<div style='float: left; height: 100%; margin-right: 10px;'>" +
-                                "<img src='" + obj.icon_url + "'></div>" +
-                                "<div><div>" + obj.short_description + "<br>By " + obj.coder + "<br></div></div>";
-                        },
-                        on: {
-                            "onItemClick": function (id) {
-                                window.location = "/library/app/" + this.getItem(id).internal_name;
-                            },
-                            "onBeforeLoad": function() {
-                                // show loading screen
-                                webix.extend(this, webix.ProgressBar);
-                                this.showProgress();
-                            },
-                            "onAfterLoad": function() {
-                                // hide loading screen
-                                this.hideProgress();
-                            }
-                        },
-                        type: {
-                            height: 180,
-                            width: 380,
-                            type: "tiles",
-                        },
-                        borderless: true,
-                        yCount: 1,
-                        url: "https://api.oscwii.org/v2/primary/packages",
-                        ready: function () {
-                            this.sort("release_date", "des");
-                        }
-                    }
-                ]
-            });
-
-            webix.event(window, "resize", function(){ newest_apps.adjust(); })
-
-            function CategoryIcon(category) {
-                switch (category) {
-                    case "utilities":
-                        return "fas fa-cog fa-fw"
-                    case "emulators":
-                        return "fas fa-microchip fa-fw"
-                    case "games":
-                        return "fas fa-gamepad fa-fw"
-                    case "media":
-                        return "fas fa-photo-video fa-fw"
-                    case "demos":
-                        return "fas fa-vial fa-fw"
-                    default:
-                        return "fas fa-question fa-fw"
-                }
-            }
-
-            function humanDate(date) {
-                var d = new Date(date * 1000);
-                var month = d.getMonth() + 1;
-                return d.getDate() + "/" + month + "/" + d.getFullYear();
-            }
-        </script>
         <div class="divider is-center">Awesome, where can I talk all about this stuff?</div>
         <div class="card">
             <div class="card-content has-text-centered">
@@ -321,6 +217,6 @@
 
     </div>
 </section>
-{% include 'includes/footer.html' %}
+<#include "../includes/footer.ftl">
 </body>
 </html>
