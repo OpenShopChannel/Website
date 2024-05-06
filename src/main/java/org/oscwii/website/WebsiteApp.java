@@ -16,23 +16,43 @@
 package org.oscwii.website;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 @Controller
 @ConfigurationPropertiesScan(value = "org.oscwii.website.config")
 public class WebsiteApp
 {
+    private final Logger logger = LogManager.getLogger(WebsiteApp.class);
+
+    @Autowired
+    private OSCAPI api;
+
     @GetMapping("/")
     public String home(Model model, HttpServletRequest request)
     {
-        model.addAttribute("request", request);
+        model.addAttribute("request", request)
+                .addAttribute("featuredPackage", api.getFeaturedApp());
         return "pages/home";
+    }
+
+    @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.HOURS)
+    public void refreshCatalog()
+    {
+        api.loadPackages();
+        api.retrieveFeaturedApp();
+        logger.info("Fetched {} packages from the catalog", api.getPackages().size());
     }
 
     public static void main(String[] args)
