@@ -16,15 +16,13 @@
 package org.oscwii.website.utils;
 
 import org.oscwii.website.Package;
+import org.oscwii.website.Package.Asset;
 
 public class AssetUtil
 {
-    public static Package.Asset getIcon(Package app)
+    public static Asset getIcon(Package app)
     {
-        return app.assets().stream()
-                .filter(asset -> asset.type().equals(ICON_TYPE))
-                .findFirst()
-                .orElseThrow();
+        return app.assets().get(Asset.Type.ICON);
     }
 
     private static final String ICON_TYPE = "icon";

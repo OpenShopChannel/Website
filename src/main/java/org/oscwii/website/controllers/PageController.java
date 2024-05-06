@@ -43,6 +43,7 @@ public class PageController
         model.addAttribute("name", article);
         if(optArticle.isPresent() && getClass().getResource("/templates/pages/help/articles/" + article + ".ftl") == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        //noinspection SpringMVCViewInspection
         return "pages/help/articles/" + article;
     }
 
