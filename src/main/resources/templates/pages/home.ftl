@@ -1,4 +1,6 @@
 <#import "../includes/header.ftl" as header>
+<#import "../includes/category_icon.ftl" as categoryIcon>
+<#assign AssetUtil=statics['org.oscwii.website.utils.AssetUtil']>
 
 <html>
 <@header.header>
@@ -101,8 +103,7 @@
                 <img src="/static/images/RainbowOpenLogo.png" alt="Open Shop Channel Logo" width="448" height="224">
             </div>
             <div class="column is-one-half is-hidden-mobile">
-                <#-- TODO app -->
-                <a href="/library/app/slug">
+                <a href="/library/app/${featuredPackage.slug()}">
                     <article class="message is-warning">
                         <div class="message-header">
                             <p><i class="fas fa-star" aria-hidden="true"
@@ -113,16 +114,18 @@
                             <div class="media">
                                 <div class="media-left">
                                     <figure class="image">
-                                        <#-- TODO icon -->
-                                        <img src="{{ package[url][icon] }}" alt="App Icon">
+                                        <img src="${AssetUtil.getIcon(featuredPackage).url()}" alt="App Icon">
                                     </figure>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-4">{{ package["name"] }}</p>
-                                    <p class="subtitle is-6">Made by <b>{{ package["author"] | truncate(25) }}</b></p>
+                                    <p class="title is-4">${featuredPackage.name()}</p>
+                                    <p class="subtitle is-6">Made by <b>${featuredPackage.author()?truncate(15)}</b></p>
                                 </div>
                             </div>
-                            <p>{% include "includes/categoryicon.html" %}{{ package["description"]["short"] }}</p>
+                            <p>
+                                <@categoryIcon.icon package=featuredPackage/>
+                                ${featuredPackage.description().shortDesc()}
+                            </p>
                         </div>
                         </div>
                     </article>
