@@ -3,7 +3,6 @@
  */
 
 const params = new URLSearchParams(window.location.search);
-const querystring = params.has("coder") ? ("?coder=" + params.get("coder")) : "";
 
 const library = webix.ui({
     margin: 10,
@@ -67,11 +66,16 @@ const library = webix.ui({
             borderless: true,
             yCount: 7,
             // TODO API v4
-            url: "https://api.oscwii.org/v2/primary/packages" + querystring,
+            url: "https://api.oscwii.org/v2/primary/packages",
             ready: function () {
                 if (params.has("page")) {
                     // navigate to specified page number using pager "paginationbar"
                     $$("paginationbar").select(params.get("page") - 1);
+                }
+                if (params.has("coder")) {
+                    this.filter(function (obj) {
+                        return obj.coder !== params.get("coder");
+                    });
                 }
                 this.sort("display_name", "asc");
             },
@@ -124,7 +128,7 @@ library_toolbar = webix.ui({
                                 $$("category").enable()
                             }
                             $$("appsview").filter(function (obj) {
-                                return obj.display_name.toLowerCase().indexOf(value) != -1;
+                                return obj.display_name.toLowerCase().indexOf(value) !== -1;
                             })
                         }
                     },
@@ -144,7 +148,7 @@ library_toolbar = webix.ui({
                                 category = category.toLowerCase();
 
                             $$("appsview").filter(function (obj) {
-                                return obj.category.toLowerCase().indexOf(category) != -1;
+                                return obj.category.toLowerCase().indexOf(category) !== -1;
                             })
                         }
                     },
