@@ -22,8 +22,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -36,6 +38,34 @@ public class PageController
         return "pages/about";
     }
 
+    @GetMapping("/beta")
+    public String beta(@RequestParam(required = false) String redirect, Model model)
+    {
+        if(!List.of("betasite", "oscdlbrowser", "theme").contains(redirect))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        model.addAttribute("redirect", redirect);
+        return "pages/beta";
+    }
+
+    // April's Fools 2021
+    @GetMapping("/browser")
+    public String browserAF21()
+    {
+        return "pages/aprilfools21";
+    }
+
+    @GetMapping("/donate")
+    public String donate()
+    {
+        return "pages/donate";
+    }
+
+    @GetMapping("/faq")
+    public String faq()
+    {
+        return "redirect:/help/faq";
+    }
+
     @GetMapping({"/help", "/help/{article}"})
     public String help(Model model, @PathVariable(value = "article", required = false) Optional<String> optArticle)
     {
@@ -45,6 +75,18 @@ public class PageController
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         //noinspection SpringMVCViewInspection
         return "pages/help/articles/" + article;
+    }
+
+    @GetMapping("/tools/metaxml")
+    public String metaGen()
+    {
+        return "pages/metagen";
+    }
+
+    @GetMapping("/publish")
+    public String publish()
+    {
+        return "pages/publish";
     }
 
     @ModelAttribute("request")

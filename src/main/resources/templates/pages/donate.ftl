@@ -1,14 +1,11 @@
+<#import "../includes/header.ftl" as header>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Donate - Open Shop Channel</title>
-    {% include 'includes/header.html' %}
-    <meta name="robots" content="noindex">
-</head>
+<@header.header title="Donate"/>
+
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
+<#include "../includes/navigation.ftl">
+<#--{% include 'includes/alert.html' %}-->
 <section class="section">
     <div class="container">
         <h1 class="title">
@@ -138,6 +135,6 @@
 
     </div>
 </section>
-{% include 'includes/footer.html' %}
+<#include "../includes/footer.ftl">
 </body>
 </html>

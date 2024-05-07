@@ -1,13 +1,11 @@
+<#import "../includes/header.ftl" as header>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Publish - Open Shop Channel</title>
-    {% include 'includes/header.html' %}
-</head>
+<@header.header title="Publish"/>
+
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
+<#include "../includes/navigation.ftl">
+<#--{% include 'includes/alert.html' %}-->
 <section class="section">
     <div class="container">
         <h1 class="title">
@@ -103,7 +101,7 @@
                         <div class="select">
                             <select id="existingselect" name="existingselect" class="" disabled>
                                 <option>It's a new app</option>
-                                <optgroup label="Apps">
+                                <#--<optgroup label="Apps">
                                     {% for package in packages %}
                                         <option>{{ package["display_name"] }} (App)</option>
                                     {% endfor %}
@@ -112,7 +110,7 @@
                                     {% for theme in themes %}
                                         <option>It's a theme</option>
                                     {% endfor %}
-                                </optgroup>
+                                </optgroup>-->
                             </select>
                         </div>
                     </div>
@@ -151,6 +149,6 @@
 </section>
 
 <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
-{% include 'includes/footer.html' %}
+<#include "../includes/footer.ftl">
 </body>
 </html>

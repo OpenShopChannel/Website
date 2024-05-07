@@ -1,18 +1,16 @@
+<#import "../includes/header.ftl" as header>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Open Shop Channel</title>
-    {% include 'includes/header.html' %}
+<@header.header>
     <meta name="robots" content="noindex">
-</head>
+</@header.header>
+
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
+<#include "../includes/navigation.ftl">
+<#--{% include 'includes/alert.html' %}-->
 <section class="section">
     <div class="container">
-
-        {% if request.args.get("redirect") == "betasite" %}
+        <#if redirect == "betasite">
             <div class="notification is-warning">
                 <h1 class="title">
                     Information:
@@ -24,8 +22,7 @@
                     Go Home
                 </a>
             </div>
-        {% endif %}
-        {% if request.args.get("redirect") == "theme" %}
+        <#elseif redirect == "theme">
             <div class="notification is-warning">
                 <h1 class="title">
                     Information:
@@ -37,8 +34,7 @@
                     Go Home
                 </a>
             </div>
-        {% endif %}
-        {% if request.args.get("redirect") == "oscdlbrowser" %}
+        <#elseif redirect == "oscdlbrowser">
             <div class="notification is-warning">
                 <h1 class="title">
                     APRIL FOOLS! =D
@@ -52,7 +48,7 @@
                 <center><img src="/static/images/aprilfools21/trollface.png"
                      alt="Open Shop Channel Downloader Browser Troll Face"></center>
             </div>
-        {% endif %}
+        </#if>
         <figure class="image is-3by1">
             <picture>
                 <img style="border-radius: 4px;" src="/static/images/betabanner.png" alt="Beta Banner">
@@ -60,6 +56,6 @@
         </figure>
     </div>
 </section>
-{% include 'includes/footer.html' %}
+<#include "../includes/footer.ftl">
 </body>
 </html>

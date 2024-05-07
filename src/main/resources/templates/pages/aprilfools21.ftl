@@ -1,9 +1,7 @@
+<#import "../includes/header.ftl" as header>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OSCDL Web Browser - Open Shop Channel</title>
-    {% include 'includes/header.html' %}
+<@header.header title="OSCDL Web Browser">
     <script src="/static/images/aprilfools21/confetti.min.js"></script>
     <meta property="og:title" content="Open Shop Channel Downloader Web Browser">
     <meta property="og:site_name" content="OSCDL Web Browser">
@@ -11,38 +9,40 @@
     <meta property="og:description" content="The Open Shop Channel Downloader Web Browser is the most advanced web browser in the wor...">
     <meta property="og:type" content="website">
     <meta name="robots" content="noindex">
-</head>
+
+    <style>
+        .bruh {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Page content */
+        .content {
+            padding: 16px;
+        }
+
+        /* The sticky class is added to the header with JS when it reaches its scroll position */
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index:1000;
+            padding: 0.25rem 2.5rem 0.25rem 1.5rem
+        }
+
+        /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+        .sticky + .content {
+            padding-top: 102px;
+        }
+    </style>
+</@header.header>
+
 <body>
 <div class="notification is-primary is-light" style="margin-bottom: 0;">
     <button class="delete"></button>
     <b>Information:</b> This is an archived web page of Open Shop Channel's April Fools 2021 prank.
 </div>
-{% include 'includes/navigation.html' %}
-<style>
-    .bruh {
-        display: flex;
-        align-items: center;
-    }
-
-    /* Page content */
-    .content {
-        padding: 16px;
-    }
-
-    /* The sticky class is added to the header with JS when it reaches its scroll position */
-    .sticky {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index:1000;
-        padding: 0.25rem 2.5rem 0.25rem 1.5rem
-    }
-
-    /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
-    .sticky + .content {
-        padding-top: 102px;
-    }
-</style>
+<#include "../includes/navigation.ftl">
 
 <div class="notification is-link is-light bruh" style="margin-bottom: unset; border-radius: unset;" id="Header">
     <figure class="image is-32x32">
@@ -137,7 +137,7 @@
         </div>
     </div>
 </section>
-{% include 'includes/footer.html' %}
+<#include "../includes/footer.ftl">
 </body>
 <script>
     confetti.start()
