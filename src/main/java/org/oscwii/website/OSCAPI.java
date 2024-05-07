@@ -30,7 +30,9 @@ import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class OSCAPI
@@ -67,6 +69,31 @@ public class OSCAPI
             .filter(pkg -> category == null || pkg.category().equals(category))
             .filter(pkg -> name == null || pkg.name().contains(name))
             .toList();
+    }
+
+    public Map<String, Package> getNewestPackages()
+    {
+        Map<String, Package> packages = new HashMap<>();
+
+        for(Category category : categories)
+        {
+            long date = 0;
+            Package selected = null;
+            List<Package> filtered = filterPackages(category.name(), null);
+
+            for(Package app : filtered)
+            {
+                if(date < app.releaseDate())
+                {
+                    date = app.releaseDate();
+                    selected = app;
+                }
+            }
+
+            packages.put(category.name(), selected);
+        }
+
+        return packages;
     }
 
     public Package getFeaturedApp()

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021-2024 Open Shop Channel - All rights reserved.
+ */
+
 function pad2(n) {
     return n < 10 ? '0' + n : n
 }

@@ -6,6 +6,7 @@
 <@header.header>
     <meta name="description" content="Official website for the Open Shop Channel open source homebrew apps repository.">
 
+    <script src="/static/js/app_category.js"></script>
     <script src="/static/js/newest_apps.js" async></script>
     <script src="/static/ticker/ticker.js"></script>
     <link rel="stylesheet" href="/static/ticker/ticker.css">

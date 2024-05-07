@@ -1,4 +1,8 @@
-var newest_apps = webix.ui({
+/*
+ * Copyright (c) 2021-2024 Open Shop Channel - All rights reserved.
+ */
+
+const newest_apps = webix.ui({
     margin: 10,
     container: "newest_apps",
     responsive: true,
@@ -86,25 +90,8 @@ webix.event(window, "resize", function () {
     newest_apps.adjust();
 })
 
-function CategoryIcon(category) {
-    switch (category) {
-        case "utilities":
-            return "fas fa-cog fa-fw"
-        case "emulators":
-            return "fas fa-microchip fa-fw"
-        case "games":
-            return "fas fa-gamepad fa-fw"
-        case "media":
-            return "fas fa-photo-video fa-fw"
-        case "demos":
-            return "fas fa-vial fa-fw"
-        default:
-            return "fas fa-question fa-fw"
-    }
-}
-
 function humanDate(date) {
-    var d = new Date(date * 1000);
-    var month = d.getMonth() + 1;
+    let d = new Date(date * 1000);
+    let month = d.getMonth() + 1;
     return d.getDate() + "/" + month + "/" + d.getFullYear();
 }
