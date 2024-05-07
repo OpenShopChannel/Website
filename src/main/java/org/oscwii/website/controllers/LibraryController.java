@@ -38,7 +38,7 @@ public class LibraryController extends BaseController
     private OSCAPI api;
 
     @GetMapping
-    public String library(@RequestParam(required = false) Optional<String> optCoder, Model model)
+    public String library(@RequestParam(value = "coder", required = false) Optional<String> optCoder, Model model)
     {
         model.addAttribute("coder", optCoder.orElse(""))
                 .addAttribute("newestPackages", api.getNewestPackages());

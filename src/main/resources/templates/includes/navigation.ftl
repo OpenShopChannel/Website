@@ -20,10 +20,10 @@
                     </picture>
                 {% endwith %}
             {% else %}-->
-                <picture>
-                    <source srcset="/static/images/open-logo.png" media="(prefers-color-scheme: dark)">
-                    <img src="/static/images/open-logo.png" height="28">
-                </picture>
+            <picture>
+                <source srcset="/static/images/open-logo.png" media="(prefers-color-scheme: dark)">
+                <img src="/static/images/open-logo.png" height="28">
+            </picture>
             <#--{% endif %}-->
             <span class="tag is-light" style="display: none">Beta</span>
         </a>
