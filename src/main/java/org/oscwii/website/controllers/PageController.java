@@ -15,6 +15,9 @@
 
 package org.oscwii.website.controllers;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class PageController extends BaseController
+public class PageController extends BaseController implements ErrorController
 {
     @GetMapping("/about")
     public String about(Model model)
@@ -56,6 +59,16 @@ public class PageController extends BaseController
     public String donate()
     {
         return "pages/donate";
+    }
+
+    @GetMapping("/error")
+    public String handleError(HttpServletRequest request)
+    {
+        Object code = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+        if(code != null)
+            if((int) code == 404)
+                return "error/404";
+        return "error/500";
     }
 
     @GetMapping("/faq")

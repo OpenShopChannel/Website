@@ -1,26 +1,27 @@
+<#import "../includes/header.ftl" as header>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Open Shop Channel</title>
-    {% include 'includes/header.html' %}
+<@header.header>
     <meta property="og:title" content="404 - Page Not Found">
     <meta property="og:site_name" content="Open Shop Channel">
     <meta property="og:url" content="oscwii.org">
     <meta property="og:description" content="This page is not present on the Open Shop Channel website.">
     <meta property="og:type" content="website">
-</head>
+</@header.header>
+
 <body>
-{% include "includes/navigation.html" %}
-{% include 'includes/alert.html' %}
+<#include "../includes/navigation.ftl">
+<#--{% include 'includes/alert.html' %}-->
 <section class="section">
     <div class="container">
+
         <div class="notification is-danger">
             <h1 class="title">
-                Error 500: Internal Server Error.
+                Error 404: Not Found.
             </h1>
             <p class="subtitle">
-                A critical server-side error has occurred. Please report this event.
+                The requested page is not a part of the Open Shop Channel website, or it has been removed. If you
+                entered the URL manually, please check your spelling and try again. If this is a page for a new application, it might take some time to show up.
             </p>
             <a class="button is-dark is-small" href="/">
                 Go Home
@@ -28,11 +29,11 @@
         </div>
         <figure class="image is-3by1">
             <picture>
-                <img style="border-radius: 4px;" src="/static/images/error500banner.png" alt="Error Banner">
+                <img style="border-radius: 4px;" src="/static/images/errorbanner.png" alt="Error Banner">
             </picture>
         </figure>
     </div>
 </section>
-{% include "includes/footer.html" %}
+<#include "../includes/footer.ftl">
 </body>
 </html>
