@@ -1,17 +1,18 @@
-{% set remote_count = [] %}
-{% for peripheral in package["peripherals"] %}
-{% if peripheral == "Wii Remote" %}
-{% set __ = remote_count.append(1) %}
-{% endif %}
-{% endfor %}
-{% if "Wii Remote" in package["peripherals"] %}
+<#assign remoteCount = 0>
+<#list package.peripherals() as peripheral>
+    <#if peripheral == "wii_remote">
+        <#assign remoteCount = remoteCount + 1>
+    </#if>
+</#list>
+
+<#if package.peripherals()?seq_contains("wii_remote")>
 <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
                 <figure class="image is-64x64">
                     <picture>
-                        <source srcset="/static/images/controllericon/dark/{{ remote_count|length }}WiiRemote.png" media="(prefers-color-scheme: dark)">
-                        <img src="/static/images/controllericon/light/{{ remote_count|length }}WiiRemote.png" alt="Wii Remote {{ remote_count|length }}">
+                        <source srcset="/static/images/controllericon/dark/${remoteCount}WiiRemote.png" media="(prefers-color-scheme: dark)">
+                        <img src="/static/images/controllericon/light/${remoteCount}WiiRemote.png" alt="Wii Remote ${remoteCount}">
                     </picture>
                 </figure>
             </div>
@@ -20,14 +21,14 @@
                     <p>
                         <strong>Wii Remote</strong>
                         <br>
-                        <small>Can be used with a Wii Remote. Up to {{ remote_count|length }}.</small>
+                        <small>Can be used with a Wii Remote. Up to ${remoteCount}.</small>
                     </p>
                 </div>
             </div>
         </article>
     </div>
-{% endif %}
-{% if "Nunchuk" in package["peripherals"] %}
+</#if>
+<#if package.peripherals()?seq_contains("nunchuk")>
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -49,8 +50,8 @@
             </div>
         </article>
     </div>
-{% endif %}
-{% if "Classic Controller" in package["peripherals"] %}
+</#if>
+<#if package.peripherals()?seq_contains("classic_controller")>
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -72,8 +73,8 @@
             </div>
         </article>
     </div>
-{% endif %}
-{% if "GameCube Controller" in package["peripherals"] %}
+</#if>
+<#if package.peripherals()?seq_contains("gamecube_controller")>
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -95,8 +96,8 @@
             </div>
         </article>
     </div>
-{% endif %}
-{% if "Wii Zapper" in package["peripherals"] %}
+</#if>
+<#if package.peripherals()?seq_contains("wii_zapper")>
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -118,8 +119,8 @@
             </div>
         </article>
     </div>
-{% endif %}
-{% if "USB Keyboard" in package["peripherals"] %}
+</#if>
+<#if package.peripherals()?seq_contains("usb_keyboard")>
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -141,8 +142,8 @@
             </div>
         </article>
     </div>
-{% endif %}
-{% if "SDHC" in package["peripherals"] %}
+</#if>
+<#if package.peripherals()?seq_contains("sdhc")>
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -164,4 +165,4 @@
             </div>
         </article>
     </div>
-{% endif %}
+</#if>

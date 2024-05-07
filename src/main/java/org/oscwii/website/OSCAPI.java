@@ -16,6 +16,8 @@
 package org.oscwii.website;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -38,6 +40,7 @@ public class OSCAPI
     private final String apiHost;
 
     private String featuredApp;
+    private List<Category> categories;
     private List<Package> packages;
 
     @Autowired
@@ -46,6 +49,11 @@ public class OSCAPI
         this.gson = gson;
         this.httpClient = httpClient;
         this.apiHost = config.repoManHost();
+    }
+
+    public List<Category> getCategories()
+    {
+        return categories;
     }
 
     public List<Package> getPackages()
@@ -67,6 +75,26 @@ public class OSCAPI
             .filter(pkg -> pkg.slug().equals(featuredApp))
             .findFirst()
             .orElseThrow(() -> new IllegalStateException("Featured app not found!"));
+    }
+
+    public Package getBySlug(String slug)
+    {
+        return packages.stream()
+            .filter(pkg -> pkg.slug().equals(slug))
+            .findFirst()
+            .orElse(null);
+    }
+
+    public void retrieveInformation()
+    {
+        Request request = new Request.Builder()
+            .url(API_ENDPOINT.formatted(apiHost, "information"))
+            .header("User-Agent", "OSC Website Server")
+            .build();
+
+        JsonObject obj = doRequest(request, TypeToken.get(JsonObject.class));
+        JsonArray availableCategories = obj.getAsJsonArray("available_categories");
+        this.categories = gson.fromJson(availableCategories, new TypeToken<>(){});
     }
 
     public void loadPackages()

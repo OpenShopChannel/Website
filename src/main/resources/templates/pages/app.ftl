@@ -1,48 +1,55 @@
+<#import "../includes/header.ftl" as header>
+<#import "../includes/category_icon.ftl" as categoryIcon>
+<#assign AssetUtil=statics['org.oscwii.website.utils.AssetUtil']>
+<#assign FormatUtil=statics['org.oscwii.website.utils.FormatUtil']>
+<#assign packageIcon=AssetUtil.getIcon(package)>
+<#assign archive=AssetUtil.getArchive(package)>
+<#assign binary=AssetUtil.getBinary(package)>
+<#assign metaXml=AssetUtil.getMetaXml(package)>
+<#assign badges=FormatUtil.applicationBadges(package)>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ package["name"] }} - Open Shop Channel</title>
-    {% include 'includes/header.html' %}
-    <meta property="og:title" content="{{ package["name"] }}">
+<@header.header title=package.name()>
+    <meta property="og:title" content="${package.name()}">
     <meta property="og:site_name" content="Open Shop Channel">
     <meta property="og:url" content="oscwii.org">
-    <meta property="og:description" content="{{ package["description"]["short"] }}">
+    <meta property="og:description" content="${package.description().shortDesc()}">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="{{ package["url"]["icon"] }}">
-</head>
+    <meta property="og:image" content="${packageIcon.url()}">
+</@header.header>
+
 <body>
-{% include 'includes/navigation.html' %}
-{% include 'includes/alert.html' %}
+<#include "../includes/navigation.ftl">
+<#--{% include 'includes/alert.html' %}-->
 <div class="section">
     <div class="container">
         <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
             <ul>
-                <li><b><a href="/library" class="has-text-{{ color }}">Library</a></b></li>
-                <li><span class="tag mx-2 is-{{ color }}"><b>{{ package["category"].upper() }}</b></span></li>
-                <li class="is-active"><a href="" aria-current="page">{{ package["name"] }}</a></li>
+                <li><b><a href="/library" class="has-text-${color}">Library</a></b></li>
+                <li><span class="tag mx-2 is-${color}"><b>${package.category()?upper_case}</b></span></li>
+                <li class="is-active"><a href="" aria-current="page">${package.name()}</a></li>
             </ul>
         </nav>
-        <div class="notification is-{{ color }} is-bold" style="margin-bottom: 10px;">
+        <div class="notification is-${color} is-bold" style="margin-bottom: 10px;">
             <div class="container" style="margin: unset;">
                 <div class="columns is-vcentered">
                     <div class="column">
                         <h1 class="title">
-                            {% include "includes/categoryicon.html" %}{{ package["name"] }}
+                            <@categoryIcon.icon package/>${package.name()}
                         </h1>
                         <h2 class="subtitle">
                             Homebrew application created by <u><b>
-                            <a href="/library?coder={{ package["author"] }}">{{ package["author"] }}</a></b></u>
+                            <a href="/library?coder=${package.author()}">${package.author()}</a></b></u>
                         </h2>
                     </div>
                     <div class="column is-one-fifth" style="width: unset;">
-                        <img src="{{ package["url"]["icon"] }}" style="vertical-align: middle;"
-                             alt="Icon for {{ package["name"] }}">
+                        <img src="${packageIcon.url()}" style="vertical-align: middle;"
+                             alt="Icon for ${package.name()}">
                     </div>
                 </div>
             </div>
         </div>
-        <article class="message is-{{ color }}">
+        <article class="message is-${color}">
             <div class="message-body" style="padding: unset;">
                 <div id="content"></div>
             </div>
@@ -74,7 +81,7 @@
                                 tooltip: "View app manifest on GitHub",
                                 css: "webix_primary",
                                 click: function () {
-                                    window.open("https://github.com/OpenShopChannel/Apps/blob/master/contents/" + encodeURIComponent("{{ package["slug"] }}") + ".oscmeta", '_blank');
+                                    window.open("https://github.com/OpenShopChannel/Apps/blob/master/contents/" + encodeURIComponent("${package.slug()}") + ".oscmeta", '_blank');
                                 },
                                 width: 145
                             },
@@ -85,7 +92,7 @@
                                 tooltip: "Report this application as outdated. Requires a GitHub account.",
                                 css: "webix_danger",
                                 click: function () {
-                                    window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("{{ package["version"] }}") + "&title=" + encodeURIComponent("{{ package["name"] }}"), '_blank');
+                                    window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("${package.version()}") + "&title=" + encodeURIComponent("${package.name()}"), '_blank');
                                 },
                                 width: 160
                             },
@@ -108,94 +115,93 @@
         </script>
         <div class="columns" style="padding-top: 10px;">
             <div class="column is-one-third">
-                <article class="message is-{{ color }}">
+                <article class="message is-${color}">
                     <div class="message-body">
                         <div class="columns is-vcentered is-centered">
                             <div class="column">
                                 <b class="subtitle">
-                                    {% include "includes/categoryicon.html" %}{{ package["category"].title() }}</b>
+                                    <@categoryIcon.icon package/>${categoryDisplay}</b>
                             </div>
                         </div>
                     </div>
                 </article>
 
-                {% if application_badges(package) %}
-                <article class="message is-{{ color }} is-hidden-mobile">
+                <#if badges?has_content>
+                <article class="message is-${color} is-hidden-mobile">
                     <div class="message-body">
                         <div class="columns is-multiline">
-                            {% for badge, title in application_badges(package).items() %}
-                                <div class="column is-one-quarter has-tooltip-bottom" data-tooltip="{{ title }}">
-                                    <img src="/static/images/badges/{{ badge }}.png" alt="{{ title }}">
+                            <#list badges as badge, title>
+                                <div class="column is-one-quarter has-tooltip-bottom" data-tooltip="${title}">
+                                    <img src="/static/images/badges/${badge}.png" alt="${title}">
                                 </div>
-                            {% endfor %}
+                            </#list>
                         </div>
-                        <small>What are these? Find out <a href="{{ url_for("help", article="badges") }}">here</a>.</small>
+                        <small>What are these? Find out <a href="/help/badges">here</a>.</small>
                     </div>
                 </article>
-                {% endif %}
+                </#if>
 
-                <article class="message is-{{ color }}">
+                <article class="message is-${color}">
                     <div class="message-header">
                         <p><i class="fas fa-info fa-fw" aria-hidden="true"></i> Information </p>
                     </div>
                     <div class="message-body">
                         <p><b><i class="fas fa-wrench fa-fw" aria-hidden="true"></i>
-                            Version:</b> {{ package["version"] }}</p>
-                        {% if package["release_date"] != 0 %}
+                            Version:</b> ${package.version()}</p>
+                        <#if package.releaseDate() != 0>
                         <p><b><i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i> Release
-                            Date:</b> {{ package["release_date_formatted"] }}</p>
-                        {% endif %}
+                            Date:</b> ${FormatUtil.date(package.releaseDate())}</p>
+                        </#if>
                         <p><b><i class="fas fa-sd-card fa-fw" aria-hidden="true"></i> App
-                            Size:</b> {{ file_size(package["file_size"]["zip_uncompressed"]) }}</p>
-                        <p><b><i class="fas fa-user fa-fw" aria-hidden="true"></i>
-                            Developer{% if "," in package["author"] %}s{% endif %}:</b> <a
-                                href="/library?coder={{ package["author"] }}">{{ package["author"] }}</a>
+                            Size:</b> ${FormatUtil.fileSize(package.uncompressedSize())}</p>
+                        <p><b><i class="fas fa-user fa-fw" aria-hidden="true"></i> Author:</b>
+                            <a href="/library?coder=${package.author()}">${package.author()}</a>
                         </p>
                     </div>
                 </article>
-                <article class="message is-{{ color }}">
+                <article class="message is-${color}">
                     <div class="message-header">
                         <p><i class="fas fa-info fa-fw" aria-hidden="true"></i> Technical Information </p>
                     </div>
                     <div class="message-body">
                         <p><b><i class="fas fa-file-contract fa-fw" aria-hidden="true"></i>
-                            Manifest:</b> <a href="https://github.com/OpenShopChannel/Apps/blob/master/contents/{{ package["slug"] }}.oscmeta">{{ package["slug"] }}.oscmeta</a></p>
+                            Manifest:</b> <a href="https://github.com/OpenShopChannel/Apps/blob/master/contents/${package.slug()}.oscmeta">${package.slug()}.oscmeta</a></p>
                         <p><b><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>
-                            Title Version:</b> {{ package["shop"]["title_version"] }}</p>
+                            Title Version:</b> ${package.titleInfo().titleVersion()}</p>
                         <p><b><i class="fas fa-id-card fa-fw" aria-hidden="true"></i>
-                            Title ID:</b> {{ package["shop"]["title_id"] }}</p>
+                            Title ID:</b> ${package.titleInfo().titleId()}</p>
                     </div>
                 </article>
-                <article class="message is-{{ color }}">
+                <article class="message is-${color}">
                     <div class="message-header">
                         <p><i class="fas fa-gears fa-fw" aria-hidden="true"></i> Supported Platforms</p>
                     </div>
                     <div class="message-body">
-                        {% include 'includes/platforms.html' %}
+                        <#include "../includes/platforms.ftl">
                     </div>
                 </article>
-                <article class="message is-{{ color }}">
+                <article class="message is-${color}">
                     <div class="message-header">
                         <p><i class="fas fa-gamepad fa-fw" aria-hidden="true"></i> Peripherals</p>
                     </div>
                     <div class="message-body">
-                        {% include 'includes/peripherals.html' %}
+                        <#include "../includes/peripherals.ftl">
                     </div>
                 </article>
-                <article class="message is-{{ color }}">
+                <article class="message is-${color}">
                     <div class="message-header">
                         <p><i class="fas fa-gamepad fa-share-alt" aria-hidden="true"></i> Share</p>
                     </div>
                     <div class="message-body">
                         <b><i class="fas fa-info fa-link" aria-hidden="true"></i> Application link:</b>
-                        <input class="input is-{{ color }}" type="text" readonly
-                               value="https://oscwii.org{{ request.path }}">
+                        <input class="input is-${color}" type="text" readonly
+                               value="https://oscwii.org${request.servletPath}">
                         <b><i class="fas fa-info fa-link mt-3" aria-hidden="true"></i> Author link:</b>
-                        <input class="input is-{{ color }}" type="text" readonly
-                               value="https://oscwii.org/library?coder={{ package.author }}">
+                        <input class="input is-${color}" type="text" readonly
+                               value="https://oscwii.org/library?coder=${package.author()}">
                         <b><i class="fas fa-info fa-share mt-3" aria-hidden="true"></i> Social media:</b><br>
-                        <a class="button is-{{ color }}"
-                           href="https://twitter.com/intent/tweet?text={{ package["name"] }} on Open Shop Channel: https://oscwii.org{{ request.path }} @openshopwii">
+                        <a class="button is-${color}"
+                           href="https://twitter.com/intent/tweet?text=${package.name()} on Open Shop Channel: https://oscwii.org${request.servletPath} @openshopwii">
                             <span class="icon">
                                 <i class="fab fa-twitter"></i>
                             </span>
@@ -207,29 +213,29 @@
 
             <div class="column">
                 <div class="divider is-left">Description</div>
-                {% if "writes_to_nand" in package["flags"] %}
-                    <div class="notification is-{{ color }} is-bold" style="margin-bottom: 10px;">
+                <#if package.flags()?seq_contains(WRITES_TO_NAND) >
+                    <div class="notification is-${color} is-bold" style="margin-bottom: 10px;">
                         <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b> This homebrew application makes permanent changes to the system's NAND, thus, this application should be used with caution. (And generally, you should always use homebrew applications with caution!)
                     </div>
-                {% endif %}
-                {% if package["description"]["short"] == package["description"]["long"] %}
+                </#if>
+                <#if package.description().shortDesc() == package.description().longDesc()>
                     <div id="description"></div>
-                {% else %}
-                    <pre><b>{{ package["description"]["short"] }}</b></pre>
-                    <pre style="white-space: pre-wrap">{{ package["description"]["long"] }}</pre>
-                {% endif %}
+                <#else>
+                    <pre><b>${package.description().shortDesc()}</b></pre>
+                    <pre style="white-space: pre-wrap">${package.description().longDesc()}</pre>
+                </#if>
 
                 <div class="divider is-left">Recommended Download</div>
 
                 <div class="card mb-4">
                     <header class="card-header">
                         <p class="card-header-title">
-                            <i class="fas fa-file-archive fa-fw" aria-hidden="true"
-                               style="margin-right: 5px"></i>{{ package["name"] }} (.ZIP)
+                            <i class="fas fa-file-archive fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+                            ${package.name()} (.ZIP)
                         </p>
                         <span style="float: right" class="card-header-icon">
-          <span class="tag is-{{ color }}">{{ file_size(package["file_size"]["zip_compressed"]) }}</span>
-      </span>
+                            <span class="tag is-${color}">${FormatUtil.fileSize(archive.size())}</span>
+                        </span>
                     </header>
                     <div class="card-content">
                         <div class="content">
@@ -237,10 +243,10 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a href="{{ package["url"]["zip"] }}" class="card-footer-item has-text-{{ color }}"><i class="fas fa-download fa-fw"
-                                                                                       aria-hidden="true"
-                                                                                       style="margin-right: 5px"></i>Download
-                            File</a>
+                        <a href="${archive.url()}" class="card-footer-item has-text-${color}">
+                            <i class="fas fa-download fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+                            Download File
+                        </a>
                     </footer>
                 </div>
 
@@ -248,15 +254,15 @@
                     <div class="divider is-left">Other Download Options</div>
                 </div>
 
-                <div class="card mb-4 is-{{ color }}">
+                <div class="card mb-4 is-${color}">
                     <header class="card-header">
                         <p class="card-header-title">
-                            <i class="fas fa-terminal fa-fw" aria-hidden="true"
-                               style="margin-right: 5px"></i>boot.{{ package["package_type"] }}
+                            <i class="fas fa-terminal fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+                            boot.${package.packageType()}
                         </p>
                         <span style="float: right" class="card-header-icon">
-          <span class="tag is-{{ color }}">{{ file_size(package["file_size"]["binary"]) }}</span>
-      </span>
+                            <span class="tag is-${color}">${FormatUtil.fileSize(binary.size())}</span>
+                        </span>
                     </header>
                     <div class="card-content">
                         <div class="content">
@@ -264,17 +270,18 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a href="https://hbb1.oscwii.org/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/boot.{{ package["package_type"] }}"
-                           class="card-footer-item has-text-{{ color }}"><i class="fas fa-download fa-fw"
-                                                                            aria-hidden="true"
-                                                                            style="margin-right: 5px"></i>Download File</a>
+                        <a href="${binary.url()}" class="card-footer-item has-text-${color}">
+                            <i class="fas fa-download fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+                            Download File
+                        </a>
                     </footer>
                 </div>
 
                 <div class="card mb-4">
                     <header class="card-header">
                         <p class="card-header-title">
-                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>meta.xml
+                            <i class="fas fa-file-signature fa-fw" aria-hidden="true" style="margin-right: 5px"></i>
+                            meta.xml
                         </p>
                     </header>
                     <div class="card-content">
@@ -284,8 +291,8 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a href="https://hbb1.oscwii.org/unzipped_apps/{{ package["slug"] }}/apps/{{ package["slug"] }}/meta.xml"
-                           class="card-footer-item has-text-{{ color }}">View File</a>
+                        <a href="${metaXml.url()}"
+                           class="card-footer-item has-text-${color}">View File</a>
                     </footer>
                 </div>
 
@@ -295,8 +302,8 @@
                             <i class="fas fa-image fa-fw" aria-hidden="true" style="margin-right: 5px"></i>icon.png
                         </p>
                         <span style="float: right" class="card-header-icon">
-          <span class="tag is-{{ color }}">{{ file_size(package["file_size"]["icon"]) }}</span>
-      </span>
+                            <span class="tag is-${color}">${FormatUtil.fileSize(packageIcon.size())}</span>
+                        </span>
                     </header>
                     <div class="card-content">
                         <div class="content">
@@ -304,8 +311,7 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a href="{{ package["url"]["icon"] }}"
-                           class="card-footer-item has-text-{{ color }}">View File</a>
+                        <a href="${packageIcon.url()}" class="card-footer-item has-text-${color}">View File</a>
                     </footer>
                 </div>
 
@@ -313,7 +319,7 @@
         </div>
     </div>
 </div>
-{% include 'includes/footer.html' %}
+<#include "../includes/footer.ftl">
 </body>
 </html>
 

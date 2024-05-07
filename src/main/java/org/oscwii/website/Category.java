@@ -13,33 +13,9 @@
  * program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.oscwii.website.utils;
+package org.oscwii.website;
 
-import org.oscwii.website.Package;
-import org.oscwii.website.Package.Asset;
+import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
-public class AssetUtil
-{
-    public static Asset getArchive(Package app)
-    {
-        return app.assets().get(Asset.Type.ARCHIVE);
-    }
-
-    public static Asset getBinary(Package app)
-    {
-        return app.assets().get(Asset.Type.BINARY);
-    }
-
-    public static Asset getIcon(Package app)
-    {
-        return app.assets().get(Asset.Type.ICON);
-    }
-
-    public static Asset getMetaXml(Package app)
-    {
-        return app.assets().get(Asset.Type.META);
-    }
-
-    private static final String ICON_TYPE = "icon";
-}
+public record Category(String name, @SerializedName("display_name") String displayName)
+{}

@@ -15,12 +15,10 @@
 
 package org.oscwii.website.controllers;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class PageController
+public class PageController extends BaseController
 {
     @GetMapping("/about")
     public String about(Model model)
@@ -87,11 +85,5 @@ public class PageController
     public String publish()
     {
         return "pages/publish";
-    }
-
-    @ModelAttribute("request")
-    private HttpServletRequest getRequest(HttpServletRequest request)
-    {
-        return request;
     }
 }

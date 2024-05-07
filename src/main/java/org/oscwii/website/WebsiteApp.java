@@ -50,6 +50,7 @@ public class WebsiteApp
     @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.HOURS)
     public void refreshCatalog()
     {
+        api.retrieveInformation();
         api.loadPackages();
         api.retrieveFeaturedApp();
         logger.info("Fetched {} packages from the catalog", api.getPackages().size());

@@ -8,8 +8,11 @@ import java.util.Map;
 
 public record Package(String slug, String name, String author, String category,
                       Description description, Map<Asset.Type, Asset> assets, EnumSet<Flag> flags,
-                      String packageType, List<String> peripherals, int releaseDate,
-                      List<String> supportedPlatforms, String version)
+                      @SerializedName("package_type") String packageType, List<String> peripherals,
+                      @SerializedName("release_date") int releaseDate,
+                      @SerializedName("shop") ShopTitle titleInfo,
+                      @SerializedName("supported_platforms") List<String> supportedPlatforms,
+                      @SerializedName("uncompressed_size") long uncompressedSize, String version)
 {
     public record Asset(String url, String hash, long size)
     {
@@ -25,6 +28,8 @@ public record Package(String slug, String name, String author, String category,
             META
         }
     }
+
+    public record ShopTitle(@SerializedName("title_id") String titleId, @SerializedName("title_version") int titleVersion) {}
 
     public enum Flag
     {

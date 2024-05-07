@@ -1,4 +1,4 @@
-{% if "wii" in package["supported_platforms"] %}
+<#if package.supportedPlatforms()?seq_contains("wii")>
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -20,8 +20,8 @@
             </div>
         </article>
     </div>
-{% endif %}
-{% if "vwii" in package["supported_platforms"] %}
+</#if>
+<#if package.supportedPlatforms()?seq_contains("vwii")>
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -43,8 +43,8 @@
             </div>
         </article>
     </div>
-{% endif %}
-{% if "wii_mini" in package["supported_platforms"] %}
+</#if>
+<#if package.supportedPlatforms()?seq_contains("wii_mini")>
     <div style="max-height: 100px; margin-bottom: 0.5rem;">
         <article class="media">
             <div class="media-left">
@@ -66,4 +66,4 @@
             </div>
         </article>
     </div>
-{% endif %}
+</#if>
