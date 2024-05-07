@@ -19,6 +19,7 @@ import org.oscwii.website.Category;
 import org.oscwii.website.OSCAPI;
 import org.oscwii.website.Package;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,9 +39,11 @@ public class LibraryController extends BaseController
     private OSCAPI api;
 
     @GetMapping
-    public String library(@RequestParam(value = "coder", required = false) Optional<String> optCoder, Model model)
+    public String library(@RequestParam(value = "coder", required = false) Optional<String> optCoder,
+                          Model model, @Value("${osc-web.repoman-host}") String apiHost)
     {
-        model.addAttribute("coder", optCoder.orElse(""))
+        model.addAttribute("apiHost", apiHost)
+                .addAttribute("coder", optCoder.orElse(""))
                 .addAttribute("newestPackages", api.getNewestPackages());
         return "pages/newlibrary";
     }

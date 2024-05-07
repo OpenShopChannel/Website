@@ -4,7 +4,7 @@
 <html>
 <@header.header title=(coder?has_content)?then(coder + "'s Developer Profile", "Library")>
     <script src="/static/js/app_category.js"></script>
-    <script src="/static/js/app_library.js" async></script>
+    <script src="/static/js/app_library.js"></script>
     <script src="/static/ticker/ticker.js"></script>
     <link rel="stylesheet" href="/static/ticker/ticker.css">
 </@header.header>
@@ -78,6 +78,7 @@
             </div>
         </#if>
         <div id="AppsList"></div>
+        <script>library("${apiHost}");</script>
     </div>
 </section>
 <#include "../includes/footer.ftl">

@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -40,10 +41,11 @@ public class WebsiteApp
     private OSCAPI api;
 
     @GetMapping("/")
-    public String home(Model model, HttpServletRequest request)
+    public String home(Model model, HttpServletRequest request, @Value("${osc-web.repoman-host}") String apiHost)
     {
-        model.addAttribute("request", request)
-                .addAttribute("featuredPackage", api.getFeaturedApp());
+        model.addAttribute("apiHost", apiHost)
+                .addAttribute("featuredPackage", api.getFeaturedApp())
+                .addAttribute("request", request);
         return "pages/home";
     }
 

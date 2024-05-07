@@ -7,7 +7,7 @@
     <meta name="description" content="Official website for the Open Shop Channel open source homebrew apps repository.">
 
     <script src="/static/js/app_category.js"></script>
-    <script src="/static/js/newest_apps.js" async></script>
+    <script src="/static/js/newest_apps.js"></script>
     <script src="/static/ticker/ticker.js"></script>
     <link rel="stylesheet" href="/static/ticker/ticker.css">
 
@@ -204,6 +204,7 @@
         </div>
         <div class="divider is-center is-hidden-mobile">Alternatively, just use the online library!</div>
         <div id="newest_apps" class="is-hidden-mobile card" style="margin-bottom: 1.5rem;"></div>
+        <script>newest_apps("${apiHost}");</script>
         <div class="divider is-center">Awesome, where can I talk all about this stuff?</div>
         <div class="card">
             <div class="card-content has-text-centered">
