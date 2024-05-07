@@ -38,7 +38,7 @@
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
             <@page title="Home" route="/"/>
-            <@page title="Library" route="/apps"/>
+            <@page title="Library" route="/library"/>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" tabindex="0">
@@ -64,7 +64,7 @@
                     <@page title="meta.xml Generator" route="/tools/metaxml"/>
                 </div>
             </div>
-            <a class="navbar-item" href="https://github.com/OpenShopChannel/apps">
+            <a class="navbar-item" href="https://github.com/OpenShopChannel/Apps">
                 Repository
             </a>
             <@page title="Donate" route="/donate"/>
