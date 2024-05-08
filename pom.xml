@@ -123,6 +123,13 @@
             <groupId>io.sentry</groupId>
             <artifactId>sentry-okhttp</artifactId>
         </dependency>
+
+        <!-- Sitemap -->
+        <dependency>
+            <groupId>cz.jiripinkas</groupId>
+            <artifactId>jsitemapgenerator</artifactId>
+            <version>4.5</version>
+        </dependency>
     </dependencies>
 
     <build>
