@@ -24,6 +24,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.jetbrains.annotations.Nullable;
 import org.oscwii.website.config.OSCWebConfig;
+import org.oscwii.website.model.Category;
+import org.oscwii.website.model.Package;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -74,25 +76,10 @@ public class OSCAPI
     public Map<String, Package> getNewestPackages()
     {
         Map<String, Package> packages = new HashMap<>();
+        packages.put("newest", getNewest(getPackages()));
 
         for(Category category : categories)
-        {
-            long date = 0;
-            Package selected = null;
-            List<Package> filtered = filterPackages(category.name(), null);
-
-            for(Package app : filtered)
-            {
-                if(date < app.releaseDate())
-                {
-                    date = app.releaseDate();
-                    selected = app;
-                }
-            }
-
-            packages.put(category.name(), selected);
-        }
-
+            packages.put(category.name(), getNewest(filterPackages(category.name(), null)));
         return packages;
     }
 
@@ -142,6 +129,23 @@ public class OSCAPI
             .build();
 
         this.featuredApp = doRequest(request, TypeToken.get(Package.class)).slug();
+    }
+
+    private Package getNewest(List<Package> selection)
+    {
+        long date = 0;
+        Package selected = null;
+
+        for(Package app : selection)
+        {
+            if(date < app.releaseDate())
+            {
+                date = app.releaseDate();
+                selected = app;
+            }
+        }
+
+        return selected;
     }
 
     private <T> T doRequest(Request request, TypeToken<T> type)

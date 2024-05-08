@@ -18,6 +18,7 @@ package org.oscwii.website;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.oscwii.website.services.TickerList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -39,13 +40,17 @@ public class WebsiteApp
 
     @Autowired
     private OSCAPI api;
+    @Autowired
+    private TickerList tickers;
 
     @GetMapping("/")
     public String home(Model model, HttpServletRequest request, @Value("${osc-web.repoman-host}") String apiHost)
     {
         model.addAttribute("apiHost", apiHost)
                 .addAttribute("featuredPackage", api.getFeaturedApp())
-                .addAttribute("request", request);
+                .addAttribute("newestPackages", api.getNewestPackages())
+                .addAttribute("request", request)
+                .addAttribute("tickers", tickers.getTickers());
         return "pages/home";
     }
 

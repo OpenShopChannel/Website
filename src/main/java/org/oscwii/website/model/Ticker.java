@@ -13,33 +13,9 @@
  * program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.oscwii.website.utils;
+package org.oscwii.website.model;
 
-import org.oscwii.website.model.Package;
-import org.oscwii.website.model.Package.Asset;
-
-@SuppressWarnings("unused")
-public class AssetUtil
+public record Ticker(String title, String content, String icon, boolean first, Link link)
 {
-    public static Asset getArchive(Package app)
-    {
-        return app.assets().get(Asset.Type.ARCHIVE);
-    }
-
-    public static Asset getBinary(Package app)
-    {
-        return app.assets().get(Asset.Type.BINARY);
-    }
-
-    public static Asset getIcon(Package app)
-    {
-        return app.assets().get(Asset.Type.ICON);
-    }
-
-    public static Asset getMetaXml(Package app)
-    {
-        return app.assets().get(Asset.Type.META);
-    }
-
-    private static final String ICON_TYPE = "icon";
+    public record Link(String text, String address) {}
 }

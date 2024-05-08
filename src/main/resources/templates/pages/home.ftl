@@ -1,6 +1,7 @@
 <#import "../includes/header.ftl" as header>
 <#import "../includes/category_icon.ftl" as categoryIcon>
 <#assign AssetUtil=statics['org.oscwii.website.utils.AssetUtil']>
+<#assign FormatUtil=statics['org.oscwii.website.utils.FormatUtil']>
 
 <html>
 <@header.header>
@@ -29,69 +30,92 @@
         <div class="column">
             <div class="ticker-container">
                 <ul>
-                    <#-- TODO ticker -->
-                    <#--{% for message in ticker %}
-                        {% if message["first"] == True %}
+                    <#list tickers as ticker>
+                        <#if ticker.first()>
                             <div>
-                                <li><span
-                                        class="ticker-item tag is-light is-medium"><b><i class="fas {{ message["icon"] }}" aria-hidden="true"
-                                                                  style="margin-right: .5em"></i>{{ message["title"] }}:&nbsp;</b>{{ message["content"] }}&nbsp;<a
-                                        href="{{ message["link"]["address"] }}">{{ message["link"]["text"] }}</a></span>
+                                <li>
+                                    <span class="ticker-item tag is-light is-medium"><b>
+                                            <i class="fas ${ticker.icon()}" aria-hidden="true" style="margin-right: .5em"></i>
+                                            ${ticker.title()}:&nbsp;</b>${ticker.content()}&nbsp;
+                                        <a href="${ticker.link().address()}">${ticker.link().text()}</a>
+                                    </span>
                                 </li>
                             </div>
-                        {% endif %}
-                    {% endfor %}
+                        </#if>
+                    </#list>
+                    <#if newestPackages["newest"]??>
+                        <div>
+                            <li>
+                                <span class="ticker-item tag is-light is-medium"><b>
+                                        <i class="fas fa-newspaper" aria-hidden="true" style="margin-right: .5em"></i>
+                                        Latest update / addition:&nbsp;</b>"${newestPackages["newest"].name()}
+                                        ${newestPackages["newest"].version()}" by ${newestPackages["newest"].author()} -
+                                        ${FormatUtil.date(newestPackages["newest"].releaseDate())} - ${newestPackages["newest"].description().shortDesc()} -&nbsp;
+                                    <a href="/library/app/${newestPackages["newest"].slug()}">Download Now!</a>
+                                </span>
+                            </li>
+                        </div>
+                        <#if newestPackages["games"]?? && newestPackages["newest"].category() != "games">
+                        <div>
+                            <li>
+                                <span class="ticker-item tag is-danger is-medium"><b>
+                                        <i class="fas fa-gamepad" aria-hidden="true" style="margin-right: .5em"></i>
+                                        Latest update in Games:&nbsp;</b>"${newestPackages["games"].name()}" by
+                                        ${newestPackages["games"].author()} - Version ${newestPackages["games"].version()}
+                                        - ${FormatUtil.date(newestPackages["games"].releaseDate())} - ${newestPackages["games"].description().shortDesc()} -&nbsp;
+                                    <a href="/library/app/${newestPackages["games"].slug()}">Download Now!</a>
+                                </span>
+                            </li>
+                        </div>
+                        </#if>
+                        <#if newestPackages["utilities"]?? && newestPackages["newest"].category() != "utilities">
+                        <div>
+                            <li>
+                                <span class="ticker-item tag is-info is-medium"><b>
+                                        <i class="fas fa-cog" aria-hidden="true" style="margin-right: .5em"></i>
+                                        Latest update in Utilities:&nbsp;</b>"${newestPackages["utilities"].name()}" by
+                                        ${newestPackages["utilities"].author()} - Version ${newestPackages["utilities"].version()}
+                                        - ${FormatUtil.date(newestPackages["utilities"].releaseDate())} - ${newestPackages["utilities"].description().shortDesc()} -&nbsp;
+                                    <a href="/library/app/${newestPackages["utilities"].slug()}">Download Now!</a>
+                                </span>
+                            </li>
+                        </div>
+                        </#if>
+                        <#if newestPackages["emulators"]?? && newestPackages["newest"].category() != "emulators">
+                        <div>
+                            <span class="ticker-item tag is-success is-medium"><b>
+                                    <i class="fas fa-microchip" aria-hidden="true" style="margin-right: .5em"></i>
+                                    Latest update in Emulators:&nbsp;</b>"${newestPackages["emulators"].name()}" by
+                                    ${newestPackages["emulators"].author()} - Version ${newestPackages["emulators"].version()}
+                                    - ${FormatUtil.date(newestPackages["emulators"].releaseDate())} - ${newestPackages["emulators"].description().shortDesc()} -&nbsp;
+                                <a href="/library/app/${newestPackages["emulators"].slug()}">Download Now!</a>
+                            </span>
+                        </div>
+                        </#if>
+                    </#if>
                     <div>
-                        <li><span
-                                class="ticker-item tag is-light is-medium"><b><i class="fas fa-newspaper" aria-hidden="true"
-                                                          style="margin-right: .5em"></i>Latest update / addition:&nbsp;</b>"{{ newest_packages["newest"]["name"] }} {{ newest_packages["newest"]["version"] }}" by {{ newest_packages["newest"]["author"] }} - {{ date(newest_packages["newest"]["release_date"]) }} - {{ newest_packages["newest"]["description"]["short"] }} -&nbsp;<a
-                                href="{{ url_for('application', name=newest_packages["newest"]["slug"]) }}">Download Now!</a></span>
+                        <li>
+                            <span class="ticker-item tag is-warning is-medium"><b>
+                                    <i class="fas fa-star" aria-hidden="true" style="margin-right: .5em"></i>
+                                    App of the Day:&nbsp;</b> "${featuredPackage.name()}" (${featuredPackage.category()?capitalize})
+                                    by ${featuredPackage.author()} - ${featuredPackage.description().shortDesc()} -&nbsp;
+                                <a href="/library/app/${featuredPackage.slug()}">Download Now!</a>
+                            </span>
                         </li>
                     </div>
-                    {% if newest_packages["newest"]["category"] != "games" %}
-                        <div>
-                            <li><span
-                                    class="ticker-item tag is-danger is-medium"><b><i class="fas fa-gamepad" aria-hidden="true"
-                                                              style="margin-right: .5em"></i>Latest update in Games:&nbsp;</b>"{{ newest_packages["games"]["name"] }}" by {{ newest_packages["games"]["author"] }} - Version {{ newest_packages["games"]["version"] }} - {{ date(newest_packages["games"]["release_date"]) }} - {{ newest_packages["games"]["description"]["short"] }} -&nbsp;<a
-                                    href="{{ url_for('application', name=newest_packages["games"]["slug"]) }}">Download Now!</a></span>
-                            </li>
-                        </div>
-                    {% endif %}
-                    {% if newest_packages["newest"]["category"] != "utilities" %}
-                        <div>
-                            <li><span
-                                    class="ticker-item tag is-info is-medium"><b><i class="fas fa-cog" aria-hidden="true"
-                                                              style="margin-right: .5em"></i>Latest update in Utilities:&nbsp;</b>"{{ newest_packages["utilities"]["name"] }}" by {{ newest_packages["utilities"]["author"] }} - Version {{ newest_packages["utilities"]["version"] }} - {{ date(newest_packages["utilities"]["release_date"]) }} - {{ newest_packages["utilities"]["description"]["short"] }} -&nbsp;<a
-                                    href="{{ url_for('application', name=newest_packages["utilities"]["slug"]) }}">Download Now!</a></span>
-                            </li>
-                        </div>
-                    {% endif %}
-                    {% if newest_packages["newest"]["category"] != "emulators" %}
-                        <div>
-                            <li><span
-                                    class="ticker-item tag is-success is-medium"><b><i class="fas fa-microchip" aria-hidden="true"
-                                                              style="margin-right: .5em"></i>Latest update in Emulators:&nbsp;</b>"{{ newest_packages["emulators"]["name"] }}" by {{ newest_packages["emulators"]["author"] }} - Version {{ newest_packages["emulators"]["version"] }} - {{ date(newest_packages["emulators"]["release_date"]) }} - {{ newest_packages["emulators"]["description"]["short"] }} -&nbsp;<a
-                                    href="{{ url_for('application', name=newest_packages["emulators"]["slug"]) }}">Download Now!</a></span>
-                            </li>
-                        </div>
-                    {% endif %}
-                    <div>
-                        <li><span
-                                class="ticker-item tag is-warning is-medium"><b><i class="fas fa-star" aria-hidden="true"
-                                                          style="margin-right: .5em"></i>App of the Day:&nbsp;</b> "{{ package["name"] }}" ({{ package["category"].capitalize() }}) by {{ package["author"] }} - {{ package["description"]["short"] }} -&nbsp;<a
-                                href="{{ url_for('application', name=package["internal_name"]) }}">Download Now!</a></span></li>
-                    </div>
-                    {% for message in ticker %}
-                        {% if not message["first"] %}
+                    <#list tickers as ticker>
+                        <#if !ticker.first()>
                             <div>
-                                <li><span
-                                        class="ticker-item tag is-light is-medium"><b><i class="fas {{ message["icon"] }}" aria-hidden="true"
-                                                                  style="margin-right: .5em"></i>{{ message["title"] }}:&nbsp;</b>{{ message["content"] }}&nbsp;<a
-                                        href="{{ message["link"]["address"] }}">{{ message["link"]["text"] }}</a></span>
+                                <li>
+                                    <span class="ticker-item tag is-light is-medium"><b>
+                                            <i class="fas ${ticker.icon()}" aria-hidden="true" style="margin-right: .5em"></i>
+                                            ${ticker.title()}:&nbsp;</b>${ticker.content()}&nbsp;
+                                        <a href="${ticker.link().address()}">${ticker.link().text()}</a>
+                                    </span>
                                 </li>
                             </div>
-                        {% endif %}
-                    {% endfor %}-->
+                        </#if>
+                    </#list>
                 </ul>
             </div>
         </div>
@@ -107,8 +131,7 @@
                 <a href="/library/app/${featuredPackage.slug()}">
                     <article class="message is-warning">
                         <div class="message-header">
-                            <p><i class="fas fa-star" aria-hidden="true"
-                                                          style="margin-right: .75em"></i> App of the Day</p>
+                            <p><i class="fas fa-star" aria-hidden="true" style="margin-right: .75em"></i> App of the Day</p>
                         </div>
                         <div class="message-body">
                             <div class="card-content" style="padding: 0;">

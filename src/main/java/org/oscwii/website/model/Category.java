@@ -13,7 +13,7 @@
  * program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.oscwii.website;
+package org.oscwii.website.model;
 
 import com.google.gson.annotations.SerializedName;
 

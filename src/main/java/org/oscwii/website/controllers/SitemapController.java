@@ -19,7 +19,7 @@ import cz.jiripinkas.jsitemapgenerator.ChangeFreq;
 import cz.jiripinkas.jsitemapgenerator.WebPage;
 import cz.jiripinkas.jsitemapgenerator.generator.SitemapGenerator;
 import org.oscwii.website.OSCAPI;
-import org.oscwii.website.Package;
+import org.oscwii.website.model.Package;
 import org.oscwii.website.config.OSCWebConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

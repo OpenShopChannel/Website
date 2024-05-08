@@ -15,9 +15,9 @@
 
 package org.oscwii.website.controllers;
 
-import org.oscwii.website.Category;
+import org.oscwii.website.model.Category;
 import org.oscwii.website.OSCAPI;
-import org.oscwii.website.Package;
+import org.oscwii.website.model.Package;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

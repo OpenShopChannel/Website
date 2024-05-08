@@ -15,7 +15,7 @@
 
 package org.oscwii.website.utils;
 
-import org.oscwii.website.Package;
+import org.oscwii.website.model.Package;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
