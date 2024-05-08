@@ -58,13 +58,5 @@
     <meta name="keywords" content="Wii, Homebrew, Shop, Browser, OSC">
     <meta name="classification" content="Official website for the Open Shop Channel open source homebrew apps repository.">
     <#nested>
-    <#-- TODO per page description -->
-    <#--{% if request.endpoint == "application" and package %}
-    <meta name="description" content="Download {{ package["name"] }} from the Open Shop Channel applications repository. {{ package["description"]["short"] }}">
-    {% elif request.endpoint == "help" %}
-    {% elif request.endpoint == "library" and request.args.get("coder") and results > 0 and request.args.get("coder") == packages[0]["coder"] %}
-    <meta name="description" content="Download and list apps made by {{ request.args.get("coder") }} from the Open Shop Channel applications repository.">
-    {% else %}
-    {% endif %}-->
 </head>
 </#macro>

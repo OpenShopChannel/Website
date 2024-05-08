@@ -16,6 +16,7 @@
     <meta property="og:description" content="${package.description().shortDesc()}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="${packageIcon.url()}">
+    <meta name="description" content="Download ${package.name()} from the Open Shop Channel applications repository. ${package.description().shortDesc()}">
 </@header.header>
 
 <body>

@@ -3,6 +3,10 @@
 
 <html>
 <@header.header title=(coder?has_content)?then(coder + "'s Developer Profile", "Library")>
+    <#if coder?has_content>
+        <meta name="description" content="Download and list apps made by ${coder} from the Open Shop Channel applications repository.">
+    </#if>
+
     <script src="/static/js/app_category.js"></script>
     <script src="/static/js/app_library.js"></script>
     <script src="/static/ticker/ticker.js"></script>
