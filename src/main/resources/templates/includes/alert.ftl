@@ -1,0 +1,4 @@
+<div class="notification is-link is-light bruh" style="margin-bottom: unset; border-radius: unset; display: none;">
+    <span>Open Shop Channel team is proud to announce the next revolution in web technology. </span><b>
+    <a href="/browser">Learn more</a></b>.
+</div>

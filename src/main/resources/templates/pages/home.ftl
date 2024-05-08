@@ -23,7 +23,7 @@
 
 <body>
 <#include "../includes/navigation.ftl">
-<#--{% include 'includes/alert.html' %}-->
+<#include "../includes/alert.ftl">
 <div class="notification is-hidden-mobile" id="ticker"
      style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem;">
     <div class="columns is-vcentered">

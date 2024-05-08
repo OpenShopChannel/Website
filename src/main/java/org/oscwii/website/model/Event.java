@@ -13,10 +13,10 @@
  * program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.oscwii.website.config;
+package org.oscwii.website.model;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-@ConfigurationProperties(prefix = "osc-web")
-public record OSCWebConfig(String baseUrl, boolean enableEvents, String repoManHost)
-{}
+public record Event(String name, long startTime, long endTime, String announcementText,
+                    String announcementIcon, String announcementColor, String logoSourceLight,
+                    String logoSourceDark)
+{
+}

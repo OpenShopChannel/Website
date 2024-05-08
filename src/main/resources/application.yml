@@ -13,6 +13,7 @@ spring:
 
 osc-web:
   base-url: "http://localhost:8080"
+  enable-events: false
   repoman-host: "https://hbb1.oscwii.org"
 
 logging:

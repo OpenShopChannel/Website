@@ -45,7 +45,7 @@
 
 <body>
 <#include "../includes/navigation.ftl">
-<#--{% include 'includes/alert.html' %}-->
+<#include "../includes/alert.ftl">
 <div class="section">
     <div class="container">
         <h1 class="title">

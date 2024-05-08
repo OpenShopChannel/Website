@@ -18,9 +18,10 @@ package org.oscwii.website;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.oscwii.website.config.OSCWebConfig;
+import org.oscwii.website.services.Events;
 import org.oscwii.website.services.TickerList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -36,17 +37,28 @@ import java.util.concurrent.TimeUnit;
 @ConfigurationPropertiesScan(value = "org.oscwii.website.config")
 public class WebsiteApp
 {
-    private final Logger logger = LogManager.getLogger(WebsiteApp.class);
+    private final Events events;
+    private final Logger logger;
+    private final OSCAPI api;
+    private final OSCWebConfig config;
+    private final TickerList tickers;
 
     @Autowired
-    private OSCAPI api;
-    @Autowired
-    private TickerList tickers;
+    public WebsiteApp(Events events, OSCAPI api, OSCWebConfig config, TickerList tickers)
+    {
+        this.events = events;
+        this.logger = LogManager.getLogger(WebsiteApp.class);
+        this.api = api;
+        this.config = config;
+        this.tickers = tickers;
+    }
 
     @GetMapping("/")
-    public String home(Model model, HttpServletRequest request, @Value("${osc-web.repoman-host}") String apiHost)
+    public String home(Model model, HttpServletRequest request)
     {
-        model.addAttribute("apiHost", apiHost)
+        model.addAttribute("apiHost", config.repoManHost())
+                .addAttribute("enabledEvents", config.enableEvents())
+                .addAttribute("events", events)
                 .addAttribute("featuredPackage", api.getFeaturedApp())
                 .addAttribute("newestPackages", api.getNewestPackages())
                 .addAttribute("request", request)

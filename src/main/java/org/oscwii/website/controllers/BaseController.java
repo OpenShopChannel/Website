@@ -16,13 +16,33 @@
 package org.oscwii.website.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.oscwii.website.config.OSCWebConfig;
+import org.oscwii.website.services.Events;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 public abstract class BaseController
 {
+    @Autowired
+    private Events events;
+    @Autowired
+    private OSCWebConfig config;
+
     @ModelAttribute("request")
     protected HttpServletRequest getRequest(HttpServletRequest request)
     {
         return request;
+    }
+
+    @ModelAttribute("enabledEvents")
+    private boolean enabledEvents()
+    {
+        return config.enableEvents();
+    }
+
+    @ModelAttribute("events")
+    private Events getEvents()
+    {
+        return events;
     }
 }

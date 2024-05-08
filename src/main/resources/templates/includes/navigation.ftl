@@ -8,23 +8,22 @@
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
             <#-- TODO events -->
-            <!--{% if siteconfig.enable_events and events.is_event_running() %}
-                {% with event = events.current_event() %}
-                    <picture class="is-hidden-mobile">
-                        <source srcset="{{ event["logoSourceDark"] }}" media="(prefers-color-scheme: dark)">
-                        <img src="{{ event["logoSourceLight"] }}" height="28">
-                    </picture>
-                    <picture class="is-hidden-desktop">
-                        <source srcset="/static/images/open-logo.png" media="(prefers-color-scheme: dark)">
-                        <img src="/static/images/open-logo.png" height="28">
-                    </picture>
-                {% endwith %}
-            {% else %}-->
-            <picture>
-                <source srcset="/static/images/open-logo.png" media="(prefers-color-scheme: dark)">
-                <img src="/static/images/open-logo.png" height="28">
-            </picture>
-            <#--{% endif %}-->
+            <#if enabledEvents && events.isEventRunning()>
+                <#assign event=events.getCurrentEvent()>
+                <picture class="is-hidden-mobile">
+                    <source srcset="${event.logoSourceDark()}" media="(prefers-color-scheme: dark)">
+                    <img src="${event.logoSourceLight()}" height="28">
+                </picture>
+                <picture class="is-hidden-desktop">
+                    <source srcset="/static/images/open-logo.png" media="(prefers-color-scheme: dark)">
+                    <img src="/static/images/open-logo.png" height="28">
+                </picture>
+            <#else>
+                <picture>
+                    <source srcset="/static/images/open-logo.png" media="(prefers-color-scheme: dark)">
+                    <img src="/static/images/open-logo.png" height="28">
+                </picture>
+            </#if>
             <span class="tag is-light" style="display: none">Beta</span>
         </a>
 
@@ -101,15 +100,13 @@
         </div>
     </div>
 </nav>
-<#-- TODO events -->
-<#--{% if siteconfig.enable_events and events.is_event_running() %}
-    {% with event = events.current_event() %}
-        <div class="notification"
-             style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem; text-align: center;">
-            <strong {% if event["announcementColor"] %}style="color: {{ event["announcementColor"] }}"{% endif %}><i class="fas {{ event["announcementIcon"] }}" aria-hidden="true"
-                       style="margin-right: .5em; margin-left: .5em"></i>{{ event["announcementText"] }}<i
-                    class="fas {{ event["announcementIcon"] }}" aria-hidden="true"
-                    style="margin-right: .5em; margin-left: .5em"></i></strong>
-        </div>
-    {% endwith %}
-{% endif %}-->
+<#if enabledEvents && events.isEventRunning()>
+    <div class="notification"
+         style="margin-bottom: unset; border-radius: unset; padding: 0.25rem 2.5rem 0.25rem 1.5rem; text-align: center;">
+        <strong <#if event.announcementColor()??>style="color: ${event.announcementColor()}"</#if>>
+            <i class="fas ${event.announcementIcon()}" aria-hidden="true" style="margin-right: .5em; margin-left: .5em"></i>
+            ${event.announcementText()}
+            <i class="fas ${event.announcementIcon()}" aria-hidden="true" style="margin-right: .5em; margin-left: .5em"></i>
+        </strong>
+    </div>
+</#if>

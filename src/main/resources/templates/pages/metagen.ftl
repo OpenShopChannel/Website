@@ -7,7 +7,7 @@
 
 <body>
 <#include "../includes/navigation.ftl">
-<#--{% include 'includes/alert.html' %}-->
+<#include "../includes/alert.ftl">
 <section class="section">
     <div class="container">
         <nav class="breadcrumb" aria-label="breadcrumbs">
