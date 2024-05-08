@@ -2,6 +2,7 @@
 <#import "../includes/category_icon.ftl" as categoryIcon>
 <#assign AssetUtil=statics['org.oscwii.website.utils.AssetUtil']>
 <#assign FormatUtil=statics['org.oscwii.website.utils.FormatUtil']>
+<#assign Flags=statics['org.oscwii.website.model.Package$Flag']>
 <#assign packageIcon=AssetUtil.getIcon(package)>
 <#assign archive=AssetUtil.getArchive(package)>
 <#assign binary=AssetUtil.getBinary(package)>
@@ -214,9 +215,19 @@
 
             <div class="column">
                 <div class="divider is-left">Description</div>
-                <#if package.flags()?seq_contains(WRITES_TO_NAND) >
-                    <div class="notification is-${color} is-bold" style="margin-bottom: 10px;">
-                        <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b> This homebrew application makes permanent changes to the system's NAND, thus, this application should be used with caution. (And generally, you should always use homebrew applications with caution!)
+                <#if package.flags()?seq_contains(Flags.DEPRECATED) >
+                    <div class="notification is-warning is-bold" style="margin-bottom: 10px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b>
+                        This homebrew application is deprecated, and should only be used when a better alternative
+                        is not available.
+                    </div>
+                </#if>
+                <#if package.flags()?seq_contains(Flags.WRITES_TO_NAND) >
+                    <div class="notification is-danger is-bold" style="margin-bottom: 10px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b>
+                        This homebrew application makes permanent changes to the system's NAND, thus,
+                        this application should be used with caution. (And generally, you should always use homebrew
+                        applications with caution!)
                     </div>
                 </#if>
                 <#if package.description().shortDesc() == package.description().longDesc()>

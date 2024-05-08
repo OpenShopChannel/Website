@@ -48,6 +48,9 @@ public record Package(String slug, String name, String author, String category,
 
     public enum Flag
     {
+        @SerializedName("deprecated")
+        DEPRECATED,
+        @SerializedName("writes_to_nand")
         WRITES_TO_NAND
     }
 
