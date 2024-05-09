@@ -165,6 +165,7 @@
         </p>
         <div class="divider is-center">How would you like to use the Open Shop Channel?</div>
         <div class="tile is-ancestor">
+            <!-- HBB -->
             <div class="tile is-parent">
                 <div class="card">
                     <div class="card-content">
@@ -190,14 +191,48 @@
                             is still the most popular way to use the Open Shop Channel, because of the convenience of it
                             running on the console itself.
                         </div>
-                        <a class="button is-link is-large"
-                           href="/library/app/homebrew_browser">Get
-                            Homebrew Browser</a>
+                        <a class="button is-link is-large" href="/library/app/homebrew_browser">Get Homebrew Browser</a>
                         <br><br>
-                        <small>Having trouble using the Homebrew Browser? Visit <a href="/help/welcome">Help & Troubleshooting</a> or our <a href="https://discord.gg/osc">Discord server</a>.</small>
+                        <small>Having trouble using the Homebrew Browser? Visit <a href="/help/welcome">Help & Troubleshooting</a>
+                            or our <a href="https://discord.gg/osc">Discord server</a>.</small>
                     </div>
                 </div>
             </div>
+            <!-- LibreShop -->
+            <div class="tile is-parent">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img src="/static/images/libreshop.png" alt="LibreShop Logo">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">LibreShop</p>
+                                <p class="subtitle is-6">Wii</p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            LibreShop is an open source text-based alternative to the old Homebrew Browser, actively maintained
+                            by the <a href="https://github.com/OpenShopChannel/libreshop-client/graphs/contributors">LibreShop team</a>,
+                            now under the Open Shop Channel's umbrella.
+                            <br><br>
+                            LibreShop combines the convenience of the Homebrew Browser with the modernity of an app coded from the
+                            ground up.
+                            <br><br>
+                        </div>
+                        <a class="button is-link is-large" href="/library/app/libreshop">Get LibreShop</a>
+                        <br><br>
+                        <small>Having trouble using the LibreShop client? Visit <a href="/help/welcome">Help & Troubleshooting</a>
+                            or our <a href="https://discord.gg/osc">Discord server</a>.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-ancestor">
+            <!-- OSC-DL -->
             <div class="tile is-parent">
                 <div class="card">
                     <div class="card-content">

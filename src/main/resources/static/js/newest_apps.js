@@ -69,15 +69,6 @@ function newest_apps(apiHost) {
                     "onAfterLoad": function () {
                         // hide loading screen
                         this.hideProgress();
-                    },
-                    "onLoadError": function () {
-                        this.parse([{
-                            "display_name": "Error",
-                            "short_description": "There was an error loading the library.",
-                            "icon_url": "/static/images/apipaper.png",
-                            "coder": "Danbo. Click to refresh library.",
-                            "internal_name": "../"
-                        }])
                     }
                 },
                 type: {
