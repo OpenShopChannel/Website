@@ -1,5 +1,7 @@
 <#macro page title route>
-    <a class="navbar-item<#if request.getServletPath() == route || (request.getServletPath() == "application" && route == "apps")> is-active</#if>" href="${route}">
+    <a class="navbar-item<#if request.getServletPath() == route ||
+    (request.getServletPath()?starts_with("/library/app/") && route == "/library") ||
+    (request.getServletPath()?starts_with("/help/") && route == "/help")> is-active</#if>" href="${route}">
         ${title}
     </a>
 </#macro>
