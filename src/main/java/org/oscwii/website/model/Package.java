@@ -21,10 +21,10 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-public record Package(String slug, String name, String author, String category,
-                      Description description, Map<Asset.Type, Asset> assets, EnumSet<Flag> flags,
-                      @SerializedName("package_type") String packageType, List<String> peripherals,
-                      @SerializedName("release_date") int releaseDate,
+public record Package(String slug, String name, String author, String[] authors, String category,
+                      String[] contributors, Description description, Map<Asset.Type, Asset> assets,
+                      EnumSet<Flag> flags, @SerializedName("package_type") String packageType,
+                      List<String> peripherals, @SerializedName("release_date") int releaseDate,
                       @SerializedName("shop") ShopTitle titleInfo,
                       @SerializedName("supported_platforms") List<String> supportedPlatforms,
                       @SerializedName("uncompressed_size") long uncompressedSize, String version)

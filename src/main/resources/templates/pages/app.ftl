@@ -150,7 +150,7 @@
                     <div class="message-body">
                         <p><b><i class="fas fa-wrench fa-fw" aria-hidden="true"></i>
                             Version:</b> ${package.version()}</p>
-                        <#if package.releaseDate() != 0>
+                        <#if package.releaseDate() gt 0>
                         <p><b><i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i> Release
                             Date:</b> ${FormatUtil.date(package.releaseDate())}</p>
                         </#if>
@@ -159,6 +159,14 @@
                         <p><b><i class="fas fa-user fa-fw" aria-hidden="true"></i> Author:</b>
                             <a href="/library?coder=${package.author()}">${package.author()}</a>
                         </p>
+                        <#if package.authors()?size gt 0>
+                        <p><b><i class="fas fa-users fa-fw" aria-hidden="true"></i> Developers:</b>
+                            ${package.authors()?join(", ")}</p>
+                        </#if>
+                        <#if package.contributors()?size gt 0>
+                        <p><b><i class="fas fa-star fa-fw" aria-hidden="true"></i> Contributors:</b>
+                            ${package.contributors()?join(", ")}</p>
+                        </#if>
                     </div>
                 </article>
                 <article class="message is-${color}">

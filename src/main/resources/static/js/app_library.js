@@ -74,7 +74,7 @@ function library(apiHost) {
                     }
                     if (params.has("coder")) {
                         this.filter(function (obj) {
-                            return obj.author === params.get("coder");
+                            return obj.author === params.get("coder") || obj.authors.includes(params.get("coder"));
                         });
                     }
                     this.sort("name", "asc");
