@@ -259,7 +259,8 @@
                     </header>
                     <div class="card-content">
                         <div class="content">
-                            A zip file containing the application.
+                            A zip file containing the application.<br>
+                            <small>MD5 Checksum: <code>${archive.hash()}</code></small>
                         </div>
                     </div>
                     <footer class="card-footer">
@@ -286,7 +287,8 @@
                     </header>
                     <div class="card-content">
                         <div class="content">
-                            The application's binary.
+                            The application's binary.<br>
+                            <small>MD5 Checksum: <code>${binary.hash()}</code></small>
                         </div>
                     </div>
                     <footer class="card-footer">
