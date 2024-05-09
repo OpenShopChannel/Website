@@ -1,12 +1,51 @@
 <#import "../base.ftl" as base>
 
 <@base.page title="Homebrew Browser Installation Guide"
-    subtitle="Links to a bunch of guides and tutorials created by the community!">
+    subtitle="Learn how to install the Homebrew Browser">
+    <h1 class="title">Requirements</h1>
+    To use the Homebrew Browser you need the following:
+    <br>
+    <ul>
+        <li>
+            A Homebrewed Wii with Internet Access
+            <ul>
+                <li>If your Wii is not homebrewed, visit
+                    <a href="https://wii.hacks.guide/get-started" target="_blank">this guide</a>, and then come back.</li>
+            </ul>
+        </li>
+        <li>An SD Card</li>
+    </ul>
+
+    <h1 class="title">Instructions</h1>
+    <ol>
+        <li>
+            Go to <a href="/library/app/homebrew_browser" target="_blank">this page</a> to download the Homebrew Browser.
+            <br>
+            Scroll down to the "Recommended Download" section and click "Download File".<br><br>
+            <img src="/static/images/guide/hbb1.png">
+        </li>
+        <li>Connect your SD Card to your computer and extract the contents of the .ZIP file you just downloaded into
+            the <a href="/static/images/guide/wherestheroot.png" target="_blank">root</a> folder.</li>
+        <li>
+            Extract the SD Card from your computer and insert it into the Wii, load the Homebrew Channel and
+            you should see the Homebrew Browser.
+            <ul><li>If you don't see the Homebrew Browser you did Step 2 wrong. Check the linked image for reference.</li></ul>
+            <img src="/static/images/guide/hbb2.png">
+        </li>
+        <br>
+        <div class="notification is-warning is-bold" style="margin-bottom: 10px;">
+            <i class="fa-solid fa-triangle-exclamation"></i> <b>Notice:</b>
+            Ensure your SD card is <b>NOT</b> <a href="/static/images/guide/sdcard.png" target="_blank">write-protected!</a>
+            Homebrew Browser will not start if it is.
+        </div>
+    </ol>
+
+    <h1 class="title">Unofficial Guides</h1>
     <div class="notification">
         Compiled in this page are some <b>unofficial</b> guides we have found.<br><br> Want to add your own guide/tutorial? Maybe remove an outdated one? Simply click the
         "Edit this page on GitHub" button at the top of the page and the rest is straightforward!
     </div>
-    <h1 class="title">Text Guides</h1>
+    <h2 class="title">Text Guides</h2>
     Read step-by-step instructions on installation of the Homebrew Browser:<br><br>
     <table class="table is-fullwidth">
         <thead>
@@ -20,11 +59,11 @@
         <tr>
             <td>Wii Guide</td>
             <td>Multiple</td>
-            <td><a href="https://wii.guide/hbb">https://wii.guide/hbb</a></td>
+            <td><a href="https://wii.guide/osc">https://wii.guide/osc</a></td>
         </tr>
         </tbody>
     </table>
-    <h1 class="title">Video Guides</h1>
+    <h2 class="title">Video Guides</h2>
     Watch the installation process of the Homebrew Browser:<br><br>
     <table class="table is-fullwidth">
         <thead>

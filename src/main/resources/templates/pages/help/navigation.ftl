@@ -24,4 +24,6 @@
     <@article "Installation Guide" "hbb-install-guide"/>
     <@article "Read Error -6" "readerror-6"/>
     <@article "Wii U Wii Mode Support (vWii)" "vwii-support"/>
+    <@category "LibreShop"/>
+    <@article "Installation Guide" "libreshop-install-guide"/>
 </article>
