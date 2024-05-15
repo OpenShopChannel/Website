@@ -1,0 +1,21 @@
+/*
+ * Copyright (c) 2021-2024 Open Shop Channel - All rights reserved.
+ */
+
+.footer {
+    padding: 0 !important;
+}
+
+.footer .contents {
+    padding: 2rem 1.5rem 2rem;
+}
+
+.footer:after {
+    background-image: linear-gradient(90deg, #34beed 0, #34ed90 25%, #edd134 50%, #ed349f 75%);
+    content: "";
+    display: block;
+    height: 10px;
+    left: 0;
+    position: absolute;
+    right: 0
+}

@@ -12,6 +12,8 @@
 
     <link rel="icon" type="image/png" href="/static/images/blacklogo.png"/>
 
+    <link rel="stylesheet" type="text/css" href="/static/css/osc.css">
+
     <link rel="stylesheet" type="text/css" href="/static/css/bulma.css">
 
     <link rel="stylesheet" type="text/css" href="/static/css/bulma-timeline.min.css">
