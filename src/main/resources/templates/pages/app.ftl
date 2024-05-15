@@ -22,7 +22,6 @@
 
 <body>
 <#include "../includes/navigation.ftl">
-<#include "../includes/alert.ftl">
 <div class="section">
     <div class="container">
         <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">

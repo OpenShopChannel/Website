@@ -28,6 +28,12 @@ public abstract class BaseController
     @Autowired
     private OSCWebConfig config;
 
+    @ModelAttribute("announcements")
+    private String[] getAnnouncements()
+    {
+        return config.announcements();
+    }
+
     @ModelAttribute("request")
     protected HttpServletRequest getRequest(HttpServletRequest request)
     {

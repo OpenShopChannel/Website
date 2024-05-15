@@ -5,7 +5,6 @@
 
 <body>
 <#include "../includes/navigation.ftl">
-<#include "../includes/alert.ftl">
 <section class="section">
     <div class="container">
         <h1 class="title">

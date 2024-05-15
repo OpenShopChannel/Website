@@ -56,7 +56,8 @@ public class WebsiteApp
     @GetMapping("/")
     public String home(Model model, HttpServletRequest request)
     {
-        model.addAttribute("apiHost", config.repoManHost())
+        model.addAttribute("announcements", config.announcements())
+                .addAttribute("apiHost", config.repoManHost())
                 .addAttribute("enabledEvents", config.enableEvents())
                 .addAttribute("events", events)
                 .addAttribute("featuredPackage", api.getFeaturedApp())

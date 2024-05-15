@@ -18,5 +18,5 @@ package org.oscwii.website.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "osc-web")
-public record OSCWebConfig(String baseUrl, boolean enableEvents, String repoManHost)
+public record OSCWebConfig(String[] announcements, String baseUrl, boolean enableEvents, String repoManHost)
 {}

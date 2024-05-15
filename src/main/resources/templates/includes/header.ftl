@@ -1,3 +1,5 @@
+<#import "../includes/announcer.ftl" as announcer>
+
 <#macro header title="">
 <head>
     <meta charset="utf-8">
@@ -58,5 +60,9 @@
     <meta name="keywords" content="Wii, Homebrew, Shop, Browser, OSC">
     <meta name="classification" content="Official website for the Open Shop Channel open source homebrew apps repository.">
     <#nested>
+
+    <#list announcements as text>
+        <@announcer.announcement text/>
+    </#list>
 </head>
 </#macro>
