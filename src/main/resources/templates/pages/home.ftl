@@ -209,7 +209,7 @@
                             </div>
                             <div class="media-content">
                                 <p class="title is-4">LibreShop</p>
-                                <p class="subtitle is-6">Wii</p>
+                                <p class="subtitle is-6">Wii <a href="/help/libreshop-install-guide">(LibreShop Installation Guide)</a></p>
                             </div>
                         </div>
 
