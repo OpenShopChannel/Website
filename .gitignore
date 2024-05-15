@@ -26,6 +26,8 @@ hs_err_pid*
 *.iml
 .idea/
 
+application.yml
 application-staging.yml
 application-dev.yml
+settings/
 target/
