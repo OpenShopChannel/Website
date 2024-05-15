@@ -18,6 +18,19 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="${packageIcon.url()}">
     <meta name="description" content="Download ${package.name()} from the Open Shop Channel applications repository. ${package.description().shortDesc()}">
+
+    <script src="/static/js/app_toolbar.js" defer></script>
+    <style type="text/css">
+        .webix_secondary .webix_button {
+            background: #12b658;
+            color: #FFFFFF;
+        }
+        .webix_secondary .webix_button:hover,
+        .webix_secondary .webix_button:focus,
+        .webix_secondary .webix_button:active {
+            background: #0e9747;
+        }
+    </style>
 </@header.header>
 
 <body>
@@ -52,68 +65,9 @@
         </div>
         <article class="message is-${color}">
             <div class="message-body" style="padding: unset;">
-                <div id="content"></div>
+                <div id="toolbar"></div>
             </div>
         </article>
-        <script type="text/javascript" charset="utf-8">
-            toolbar = webix.ui({
-                margin: 10,
-                container: "content",
-                responsive: true,
-                rows: [
-                    {
-                        view: "toolbar",
-                        css: {"background-color": "unset !important"},
-                        borderless: true,
-                        responsive: true,
-                        cols: [
-                            {
-                                view: "label",
-                                label: "Hello! Interested in seeing how Open Shop Channel obtains and distributes this application? Press \"View Manifest\"!",
-                                hidden: ($(window).width() < 1380),
-                            },
-                            {
-                                hidden: !($(window).width() < 1380)
-                            },
-                            {
-                                view: "button",
-                                id: "view_manifest",
-                                label: '<span style="color: white;"><i class="fas fa-file-contract" aria-hidden="true"></i> View Manifest</span>',
-                                tooltip: "View app manifest on GitHub",
-                                css: "webix_primary",
-                                click: function () {
-                                    window.open("https://github.com/OpenShopChannel/Apps/blob/master/contents/" + encodeURIComponent("${package.slug()}") + ".oscmeta", '_blank');
-                                },
-                                width: 145
-                            },
-                            {
-                                view: "button",
-                                id: "report_outdated",
-                                label: '<i class="fas fa-stopwatch" aria-hidden="true"></i> Report Outdated',
-                                tooltip: "Report this application as outdated. Requires a GitHub account.",
-                                css: "webix_danger",
-                                click: function () {
-                                    window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("${package.version()}") + "&title=" + encodeURIComponent("${package.name()}"), '_blank');
-                                },
-                                width: 160
-                            },
-                            {
-                                view: "template",
-                                id: "danbo_icon",
-                                css: {"background-color": "unset !important"},
-                                hidden: ($(window).width() < 480),
-                                template: "<picture><source srcset='/static/images/danbobar-dark.png' media='(prefers-color-scheme: dark)'> <img src='/static/images/danbobar-light.png'></picture>",
-                                width: 140,
-                                borderless: true
-                            },
-                        ]
-                    }
-                ]
-            });
-            webix.event(window, "resize", function () {
-                toolbar.adjust();
-            })
-        </script>
         <div class="columns" style="padding-top: 10px;">
             <div class="column is-one-third">
                 <article class="message is-${color}">
@@ -244,7 +198,7 @@
                     <pre style="white-space: pre-wrap">${package.description().longDesc()}</pre>
                 </#if>
 
-                <div class="divider is-left">Recommended Download</div>
+                <div class="divider is-left" id="download">Recommended Download</div>
 
                 <div class="card mb-4">
                     <header class="card-header">
