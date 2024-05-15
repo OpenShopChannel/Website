@@ -33,9 +33,9 @@
                         <#if ticker.first()>
                             <div>
                                 <li>
-                                    <span class="ticker-item tag is-light is-medium"><b>
-                                            <i class="fas ${ticker.icon()}" aria-hidden="true" style="margin-right: .5em"></i>
-                                            ${ticker.title()}:&nbsp;</b>${ticker.content()}&nbsp;
+                                    <span class="ticker-item tag is-light is-medium">
+                                        <b><i class="fas ${ticker.icon()}" aria-hidden="true" style="margin-right: .5em"></i>${ticker.title()}:&nbsp;</b>
+                                        ${ticker.content()}&nbsp;
                                         <a href="${ticker.link().address()}">${ticker.link().text()}</a>
                                     </span>
                                 </li>
@@ -45,11 +45,10 @@
                     <#if newestPackages["newest"]??>
                         <div>
                             <li>
-                                <span class="ticker-item tag is-light is-medium"><b>
-                                        <i class="fas fa-newspaper" aria-hidden="true" style="margin-right: .5em"></i>
-                                        Latest update / addition:&nbsp;</b>"${newestPackages["newest"].name()}
-                                        ${newestPackages["newest"].version()}" by ${newestPackages["newest"].author()} -
-                                        ${FormatUtil.date(newestPackages["newest"].releaseDate())} - ${newestPackages["newest"].description().shortDesc()} -&nbsp;
+                                <span class="ticker-item tag is-light is-medium">
+                                    <b><i class="fas fa-newspaper" aria-hidden="true" style="margin-right: .5em"></i>Latest update / addition:&nbsp;</b>
+                                    "${newestPackages["newest"].name()} ${newestPackages["newest"].version()}" by ${newestPackages["newest"].author()} -
+                                    ${FormatUtil.date(newestPackages["newest"].releaseDate())} - ${newestPackages["newest"].description().shortDesc()} -&nbsp;
                                     <a href="/library/app/${newestPackages["newest"].slug()}">Download Now!</a>
                                 </span>
                             </li>
@@ -57,11 +56,10 @@
                         <#if newestPackages["games"]?? && newestPackages["newest"].category() != "games">
                         <div>
                             <li>
-                                <span class="ticker-item tag is-danger is-medium"><b>
-                                        <i class="fas fa-gamepad" aria-hidden="true" style="margin-right: .5em"></i>
-                                        Latest update in Games:&nbsp;</b>"${newestPackages["games"].name()}" by
-                                        ${newestPackages["games"].author()} - Version ${newestPackages["games"].version()}
-                                        - ${FormatUtil.date(newestPackages["games"].releaseDate())} - ${newestPackages["games"].description().shortDesc()} -&nbsp;
+                                <span class="ticker-item tag is-danger is-medium">
+                                    <b><i class="fas fa-gamepad" aria-hidden="true" style="margin-right: .5em"></i>Latest update in Games:&nbsp;</b>
+                                    "${newestPackages["games"].name()}" by ${newestPackages["games"].author()} - Version ${newestPackages["games"].version()} -
+                                    ${FormatUtil.date(newestPackages["games"].releaseDate())} - ${newestPackages["games"].description().shortDesc()} -&nbsp;
                                     <a href="/library/app/${newestPackages["games"].slug()}">Download Now!</a>
                                 </span>
                             </li>
@@ -70,11 +68,10 @@
                         <#if newestPackages["utilities"]?? && newestPackages["newest"].category() != "utilities">
                         <div>
                             <li>
-                                <span class="ticker-item tag is-info is-medium"><b>
-                                        <i class="fas fa-cog" aria-hidden="true" style="margin-right: .5em"></i>
-                                        Latest update in Utilities:&nbsp;</b>"${newestPackages["utilities"].name()}" by
-                                        ${newestPackages["utilities"].author()} - Version ${newestPackages["utilities"].version()}
-                                        - ${FormatUtil.date(newestPackages["utilities"].releaseDate())} - ${newestPackages["utilities"].description().shortDesc()} -&nbsp;
+                                <span class="ticker-item tag is-info is-medium" style="color: #000000B2">
+                                    <b><i class="fas fa-cog" aria-hidden="true" style="margin-right: .5em"></i>Latest update in Utilities:&nbsp;
+                                    </b>"${newestPackages["utilities"].name()}" by ${newestPackages["utilities"].author()} - Version ${newestPackages["utilities"].version()} -
+                                    ${FormatUtil.date(newestPackages["utilities"].releaseDate())} - ${newestPackages["utilities"].description().shortDesc()} -&nbsp;
                                     <a href="/library/app/${newestPackages["utilities"].slug()}">Download Now!</a>
                                 </span>
                             </li>
@@ -82,22 +79,22 @@
                         </#if>
                         <#if newestPackages["emulators"]?? && newestPackages["newest"].category() != "emulators">
                         <div>
-                            <span class="ticker-item tag is-success is-medium"><b>
-                                    <i class="fas fa-microchip" aria-hidden="true" style="margin-right: .5em"></i>
-                                    Latest update in Emulators:&nbsp;</b>"${newestPackages["emulators"].name()}" by
-                                    ${newestPackages["emulators"].author()} - Version ${newestPackages["emulators"].version()}
-                                    - ${FormatUtil.date(newestPackages["emulators"].releaseDate())} - ${newestPackages["emulators"].description().shortDesc()} -&nbsp;
-                                <a href="/library/app/${newestPackages["emulators"].slug()}">Download Now!</a>
-                            </span>
+                            <li>
+                                <span class="ticker-item tag is-success is-medium" style="color: #000000B2">
+                                    <b><i class="fas fa-microchip" aria-hidden="true" style="margin-right: .5em"></i>Latest update in Emulators:&nbsp;</b>
+                                    "${newestPackages["emulators"].name()}" by ${newestPackages["emulators"].author()} - Version ${newestPackages["emulators"].version()} -
+                                    ${FormatUtil.date(newestPackages["emulators"].releaseDate())} - ${newestPackages["emulators"].description().shortDesc()} -&nbsp;
+                                    <a href="/library/app/${newestPackages["emulators"].slug()}">Download Now!</a>
+                                </span>
+                            </li>
                         </div>
                         </#if>
                     </#if>
                     <div>
                         <li>
-                            <span class="ticker-item tag is-warning is-medium"><b>
-                                    <i class="fas fa-star" aria-hidden="true" style="margin-right: .5em"></i>
-                                    App of the Day:&nbsp;</b> "${featuredPackage.name()}" (${featuredPackage.category()?capitalize})
-                                    by ${featuredPackage.author()} - ${featuredPackage.description().shortDesc()} -&nbsp;
+                            <span class="ticker-item tag is-warning is-medium"><b><i class="fas fa-star" aria-hidden="true" style="margin-right: .5em"></i>App of the Day:&nbsp;</b>
+                                "${featuredPackage.name()}" (${featuredPackage.category()?capitalize}) by ${featuredPackage.author()} -
+                                ${featuredPackage.description().shortDesc()} -&nbsp;
                                 <a href="/library/app/${featuredPackage.slug()}">Download Now!</a>
                             </span>
                         </li>
