@@ -46,6 +46,7 @@ public class OSCAPI
     private String featuredApp;
     private List<Category> categories;
     private List<Package> packages;
+    private Map<String, String> newestApps;
 
     @Autowired
     public OSCAPI(Gson gson, OkHttpClient httpClient, OSCWebConfig config)
@@ -76,10 +77,8 @@ public class OSCAPI
     public Map<String, Package> getNewestPackages()
     {
         Map<String, Package> packages = new HashMap<>();
-        packages.put("newest", getNewest(getPackages()));
-
-        for(Category category : categories)
-            packages.put(category.name(), getNewest(filterPackages(category.name(), null)));
+        for(Map.Entry<String, String> entry : newestApps.entrySet())
+            packages.put(entry.getKey(), getBySlug(entry.getValue()));
         return packages;
     }
 
@@ -119,6 +118,7 @@ public class OSCAPI
             .build();
 
         this.packages = doRequest(request, new TypeToken<>(){});
+        this.newestApps = calculateNewestPackages();
     }
 
     public void retrieveFeaturedApp()
@@ -131,7 +131,22 @@ public class OSCAPI
         this.featuredApp = doRequest(request, TypeToken.get(Package.class)).slug();
     }
 
-    private Package getNewest(List<Package> selection)
+    private Map<String, String> calculateNewestPackages()
+    {
+        Map<String, String> packages = new HashMap<>();
+        packages.put("newest", getNewest(getPackages()));
+
+        for(Category category : categories)
+        {
+            String newest = getNewest(filterPackages(category.name(), null));
+            if(newest != null)
+                packages.put(category.name(), newest);
+        }
+
+        return packages;
+    }
+
+    private String getNewest(List<Package> selection)
     {
         long date = 0;
         Package selected = null;
@@ -145,7 +160,7 @@ public class OSCAPI
             }
         }
 
-        return selected;
+        return selected != null ? selected.slug() : null;
     }
 
     private <T> T doRequest(Request request, TypeToken<T> type)
