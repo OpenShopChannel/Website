@@ -22,13 +22,13 @@
     <script src="/static/js/app_toolbar.js" defer></script>
     <style type="text/css">
         .webix_secondary .webix_button {
-            background: #12b658;
-            color: #FFFFFF;
+            background: #12b658 !important;
+            color: #FFFFFF !important;
         }
         .webix_secondary .webix_button:hover,
         .webix_secondary .webix_button:focus,
         .webix_secondary .webix_button:active {
-            background: #0e9747;
+            background: #0e9747 !important;
         }
     </style>
 </@header.header>
