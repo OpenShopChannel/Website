@@ -6,7 +6,7 @@
     </a>
 </#macro>
 
-<nav class="navbar is-spaced is-light" role="navigation" aria-label="main navigation">
+<nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
             <#if enabledEvents && events.isEventRunning()>
