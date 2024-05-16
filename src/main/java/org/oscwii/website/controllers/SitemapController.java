@@ -19,21 +19,13 @@ import cz.jiripinkas.jsitemapgenerator.ChangeFreq;
 import cz.jiripinkas.jsitemapgenerator.WebPage;
 import cz.jiripinkas.jsitemapgenerator.generator.SitemapGenerator;
 import org.oscwii.website.OSCAPI;
-import org.oscwii.website.model.Package;
 import org.oscwii.website.config.OSCWebConfig;
+import org.oscwii.website.model.Package;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE)
@@ -50,12 +42,12 @@ public class SitemapController
     }
 
     @GetMapping("/sitemap.xml")
-    public String sitemap() throws URISyntaxException
+    public String sitemap()
     {
         return buildSitemap();
     }
 
-    private String buildSitemap() throws URISyntaxException
+    private String buildSitemap()
     {
         SitemapGenerator generator = SitemapGenerator.of(config.baseUrl())
                 .defaultChangeFreqWeekly()
@@ -68,7 +60,7 @@ public class SitemapController
                 .addPage(page("library"));
 
         // Add all help articles
-        for(String article : getHelpArticles())
+        for(String article : HELP_ARTICLES)
             generator.addPage("help/" + article);
 
         // Add all packages
@@ -78,15 +70,6 @@ public class SitemapController
         return generator.toString();
     }
 
-    private List<String> getHelpArticles() throws URISyntaxException
-    {
-        URL folder = getClass().getResource("/templates/pages/help/articles/");
-        Assert.notNull(folder, "Help articles folder not found");
-        return Arrays.stream(Objects.requireNonNull(Path.of(folder.toURI()).toFile().listFiles()))
-                .map(file -> file.getName().replace(".ftl", ""))
-                .toList();
-    }
-
     private WebPage page(String name)
     {
         return WebPage.builder()
@@ -94,4 +77,15 @@ public class SitemapController
                 .changeFreq(ChangeFreq.DAILY)
                 .build();
     }
+
+    private static final String[] HELP_ARTICLES = {
+            "appoftheday",
+            "badges",
+            "faq",
+            "hbb-install-guide",
+            "libreshop-install-guide",
+            "readerror-6",
+            "vwii-support",
+            "welcome"
+    };
 }
