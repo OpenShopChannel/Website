@@ -70,7 +70,7 @@ public class OSCAPI
     {
         return packages.stream()
             .filter(pkg -> category == null || pkg.category().equals(category))
-            .filter(pkg -> name == null || pkg.name().contains(name))
+            .filter(pkg -> name == null || pkg.name().toLowerCase().contains(name.toLowerCase()))
             .toList();
     }
 
@@ -85,7 +85,7 @@ public class OSCAPI
     public Package getFeaturedApp()
     {
         return packages.stream()
-            .filter(pkg -> pkg.slug().equals(featuredApp))
+            .filter(pkg -> pkg.slug().equalsIgnoreCase(featuredApp))
             .findFirst()
             .orElseThrow(() -> new IllegalStateException("Featured app not found!"));
     }
@@ -93,7 +93,7 @@ public class OSCAPI
     public Package getBySlug(String slug)
     {
         return packages.stream()
-            .filter(pkg -> pkg.slug().equals(slug))
+            .filter(pkg -> pkg.slug().equalsIgnoreCase(slug))
             .findFirst()
             .orElse(null);
     }
