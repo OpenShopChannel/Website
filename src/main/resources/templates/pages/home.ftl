@@ -42,7 +42,8 @@
                             </div>
                         </#if>
                     </#list>
-                    <#if newestPackages["newest"]??>
+                    <#if newestPackages??>
+                        <#if newestPackages["newest"]??>
                         <div>
                             <li>
                                 <span class="ticker-item tag is-light is-medium">
@@ -53,6 +54,7 @@
                                 </span>
                             </li>
                         </div>
+                        </#if>
                         <#if newestPackages["games"]?? && newestPackages["newest"].category() != "games">
                         <div>
                             <li>
@@ -90,6 +92,7 @@
                         </div>
                         </#if>
                     </#if>
+                    <#if featuredPackage??>
                     <div>
                         <li>
                             <span class="ticker-item tag is-warning is-medium"><b><i class="fas fa-star" aria-hidden="true" style="margin-right: .5em"></i>App of the Day:&nbsp;</b>
@@ -99,6 +102,7 @@
                             </span>
                         </li>
                     </div>
+                    </#if>
                     <#list tickers as ticker>
                         <#if !ticker.first()>
                             <div>
@@ -123,6 +127,7 @@
             <div class="column">
                 <img src="/static/images/RainbowOpenLogo.png" alt="Open Shop Channel Logo" width="448" height="224">
             </div>
+            <#if featuredPackage??>
             <div class="column is-one-half is-hidden-mobile">
                 <a href="/library/app/${featuredPackage.slug()}">
                     <article class="message is-warning">
@@ -152,6 +157,7 @@
                 </a>
                 <small>How is the app of the day determined? <a href="/help/appoftheday">Find out here.</a></small>
             </div>
+            </#if>
         </div>
         <h1 class="title">
             Open Shop Channel

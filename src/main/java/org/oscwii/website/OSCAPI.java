@@ -32,6 +32,7 @@ import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,10 @@ public class OSCAPI
         this.gson = gson;
         this.httpClient = httpClient;
         this.apiHost = config.repoManHost();
+
+        this.categories = new ArrayList<>();
+        this.packages = new ArrayList<>();
+        this.newestApps = new HashMap<>();
     }
 
     public List<Category> getCategories()
@@ -82,8 +87,11 @@ public class OSCAPI
         return packages;
     }
 
+    @Nullable
     public Package getFeaturedApp()
     {
+        if(featuredApp == null)
+            return null;
         return packages.stream()
             .filter(pkg -> pkg.slug().equalsIgnoreCase(featuredApp))
             .findFirst()
