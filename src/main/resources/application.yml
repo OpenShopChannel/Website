@@ -18,6 +18,13 @@ osc-web:
   enable-events: false
   repoman-host: "https://hbb1.oscwii.org"
 
+management:
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+
 logging:
   level:
     root: INFO
