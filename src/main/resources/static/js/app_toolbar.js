@@ -20,7 +20,7 @@ const toolbar = webix.ui({
                     tooltip: "View app manifest on GitHub",
                     css: "webix_primary",
                     click: function () {
-                        window.open("https://github.com/OpenShopChannel/Apps/blob/master/contents/" + encodeURIComponent("${package.slug()}") + ".oscmeta", '_blank');
+                        window.open("https://github.com/OpenShopChannel/Apps/blob/master/contents/" + encodeURIComponent(pkgSlug) + ".oscmeta", '_blank');
                     },
                     width: 145
                 },
@@ -31,7 +31,7 @@ const toolbar = webix.ui({
                     tooltip: "Report this application as outdated. Requires a GitHub account.",
                     css: "webix_danger",
                     click: function () {
-                        window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent("${package.version()}") + "&title=" + encodeURIComponent("${package.name()}"), '_blank');
+                        window.open("https://github.com/OpenShopChannel/outdated-apps/issues/new?template=outdated.yml&current-version=" + encodeURIComponent(pkgVers) + "&title=" + encodeURIComponent(pkgName), '_blank');
                     },
                     width: 160
                 },

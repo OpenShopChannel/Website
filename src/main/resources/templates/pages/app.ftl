@@ -19,6 +19,11 @@
     <meta property="og:image" content="${packageIcon.url()}">
     <meta name="description" content="Download ${package.name()} from the Open Shop Channel applications repository. ${package.description().shortDesc()}">
 
+    <script type="text/javascript">
+        const pkgSlug = "${package.slug()}";
+        const pkgName = "${package.name()}";
+        const pkgVers = "${package.version()}";
+    </script>
     <script src="/static/js/app_toolbar.js" defer></script>
     <style type="text/css">
         .webix_secondary .webix_button {
