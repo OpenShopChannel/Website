@@ -40,7 +40,7 @@ public class PageController extends BaseController implements ErrorController
     }
 
     @GetMapping("/beta")
-    public String beta(@RequestParam(required = false) String redirect, Model model)
+    public String beta(@RequestParam(required = false, defaultValue = "") String redirect, Model model)
     {
         if(!List.of("betasite", "oscdlbrowser", "theme").contains(redirect))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
