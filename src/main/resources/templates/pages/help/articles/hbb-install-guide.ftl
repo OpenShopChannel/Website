@@ -26,6 +26,8 @@
         </li>
         <li>Connect your SD Card to your computer and extract the contents of the .ZIP file you just downloaded into
             the <a href="/static/images/guide/wherestheroot.png" target="_blank">root</a> folder.</li>
+        <li>Make sure to change your dns to one that isn't str2hks (if you used it) (ie: 1.1.1.1/6.6.6.6, CloudFlare/Google).
+        </li>
         <li>
             Extract the SD Card from your computer and insert it into the Wii, load the Homebrew Channel and
             you should see the Homebrew Browser.
