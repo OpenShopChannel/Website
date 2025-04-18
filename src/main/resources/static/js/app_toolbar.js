@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Open Shop Channel - All rights reserved.
+ * Copyright (c) 2021-2025 Open Shop Channel - All rights reserved.
  */
 
 const toolbar = webix.ui({

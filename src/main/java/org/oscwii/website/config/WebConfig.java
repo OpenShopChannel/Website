@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Open Shop Channel
+ * Copyright (c) 2021-2025 Open Shop Channel
  *
  * This program is free software: you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -15,6 +15,7 @@
 
 package org.oscwii.website.config;
 
+import freemarker.core.HTMLOutputFormat;
 import freemarker.template.TemplateException;
 import no.api.freemarker.java8.Java8ObjectWrapper;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import java.io.IOException;
 
+import static freemarker.template.Configuration.FORCE_AUTO_ESCAPING_POLICY;
 import static freemarker.template.Configuration.VERSION_2_3_32;
 
 @Configuration
@@ -44,6 +46,8 @@ public class WebConfig implements WebMvcConfigurer
 
         freeMarkerConfigurer.afterPropertiesSet();
         freeMarkerConfigurer.getConfiguration().setObjectWrapper(objectWrapper);
+        freeMarkerConfigurer.getConfiguration().setOutputFormat(HTMLOutputFormat.INSTANCE);
+        freeMarkerConfigurer.getConfiguration().setAutoEscapingPolicy(FORCE_AUTO_ESCAPING_POLICY);
         freeMarkerConfigurer.getConfiguration().setSharedVariable("statics", objectWrapper.getStaticModels());
         return freeMarkerConfigurer;
     }
