@@ -54,7 +54,7 @@
                     <div class="message-body">
                         Managed to solve this issue in a different way? Contribute to this page on GitHub:<br>
                         <a class="level-item" style="text-decoration: none"
-                           href="https://github.com/OpenShopChannel/Website/tree/master/src/main/resources/templates/pages/help/articles/${name}.html"
+                           href="https://github.com/OpenShopChannel/Website/tree/master/src/main/resources/templates/pages/help/articles/${name}.ftl"
                            target=”_blank”>
                             <span class="icon is-small">
                                 <i class="fas fa-file-pen" aria-hidden="true" style="margin-right: .75em"></i>
