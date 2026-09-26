@@ -75,21 +75,21 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-hidden-widescreen-only is-hidden-desktop-only" style="color: #00ACEE"
+                    <a class="button is-hidden-fullhd is-hidden-widescreen-only is-hidden-desktop-only" style="color: #00ACEE"
                        href="https://twitter.com/openshopwii">
                         <span class="icon">
                             <i class="fab fa-twitter"></i>
                         </span>
                         <span>Follow on Twitter!</span>
                     </a>
-                    <a class="button is-hidden-widescreen-only is-hidden-desktop-only" style="color: #5865F2"
+                    <a class="button is-hidden-fullhd is-hidden-widescreen-only is-hidden-desktop-only" style="color: #5865F2"
                        href="https://discord.gg/osc">
                         <span class="icon">
                             <i class="fab fa-discord"></i>
                         </span>
                         <span>Join our Discord!</span>
                     </a>
-                    <a class="button is-hidden-widescreen-only is-hidden-desktop-only"
+                    <a class="button is-hidden-fullhd is-hidden-widescreen-only is-hidden-desktop-only"
                        href="https://github.com/OpenShopChannel">
                         <span class="icon">
                             <i class="fab fa-github"></i>
