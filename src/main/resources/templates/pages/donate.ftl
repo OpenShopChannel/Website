@@ -15,7 +15,7 @@
             We accept donations to be able to fund the upkeep costs of the Open Shop Channel open source projects, and
             dedicate more time to it.
             We appreciate every donation and patron, who take an active part in keeping the project running.
-            You can donate through Open Collective, right here:
+            You can donate through Open Collective or Patreon, right here:
         </p>
 
         <div class="buttons is-centered">
@@ -23,8 +23,12 @@
                href="https://opencollective.com/OpenShopChannel/contribute" target="_blank">
                 Donate through Open Collective
             </a>
-        </div>
 
+            <a class="button is-medium" style="color: #7FADF2; margin-top: 12px;"
+               href="https://www.patreon.com/c/openshopchannel" target="_blank">
+                Donate through Patreon
+            </a>
+        </div>
 
         <h2 class="subtitle" style="display: none; text-align: center">
             Tier 3 Patrons
