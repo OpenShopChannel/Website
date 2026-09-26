@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
+        <version>4.1.1</version>
         <relativePath/>
     </parent>
 
@@ -32,8 +32,10 @@
 
     <properties>
         <java.version>21</java.version>
-        <log4j2.version>2.23.1</log4j2.version>
-        <sentry.version>7.8.0</sentry.version>
+        <log4j2.version>2.26.1</log4j2.version>
+        <sentry.version>8.57.0</sentry.version>
+        <freemarker.version>2.3.35</freemarker.version>
+        <freemarker-java8.version>3.0.3</freemarker-java8.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -72,6 +74,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -88,13 +97,13 @@
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.34</version>
+            <version>${freemarker.version}</version>
         </dependency>
 
         <dependency>
             <groupId>no.api.freemarker</groupId>
             <artifactId>freemarker-java8</artifactId>
-            <version>2.1.0</version>
+            <version>${freemarker-java8.version}</version>
         </dependency>
 
         <!-- OkHttp -->
@@ -111,6 +120,11 @@
 
         <!-- Logging -->
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <!--<dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j2.version}</version>
@@ -126,7 +140,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-jul</artifactId>
             <version>${log4j2.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- Sentry -->
         <dependency>
@@ -136,7 +150,7 @@
 
         <dependency>
             <groupId>io.sentry</groupId>
-            <artifactId>sentry-spring-boot-starter-jakarta</artifactId>
+            <artifactId>sentry-spring-boot-4</artifactId>
         </dependency>
 
         <dependency>
